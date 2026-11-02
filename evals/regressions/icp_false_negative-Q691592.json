@@ -1,0 +1,42 @@
+{
+ "id": "icp_false_negative-Q691592",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "icp_false_negative",
+ "company": "GlobalFoundries",
+ "detail": "industries=['semiconductor industry'] reason=outside ICP country or headcount band",
+ "rows": [
+  {
+   "crm_id": "CRM-0026",
+   "account_name": "GLOBALFOUNDRIES",
+   "website": "http://gf.com",
+   "employee_count": "14600",
+   "hq_country": "Cayman Islands",
+   "last_updated": "2021-12-31"
+  },
+  {
+   "crm_id": "CRM-0220",
+   "account_name": "globalfoundries",
+   "website": "",
+   "employee_count": "14600",
+   "hq_country": "United States",
+   "last_updated": "2021-12-31"
+  }
+ ],
+ "expect": {
+  "company_id": "Q691592",
+  "single_account": true,
+  "domain": [
+   "gf.com"
+  ],
+  "employees": [
+   14600
+  ],
+  "country": [
+   "United States",
+   "Cayman Islands"
+  ],
+  "icp_fit": true,
+  "allow_review": false
+ }
+}

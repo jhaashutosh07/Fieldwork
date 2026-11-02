@@ -1,0 +1,33 @@
+{
+ "id": "stale_headcount-Q1127536",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "stale_headcount",
+ "company": "Consolidated Edison",
+ "detail": "source=crm as_of=2010-01-01",
+ "rows": [
+  {
+   "crm_id": "CRM-0201",
+   "account_name": "Consolidated Edison, Inc.",
+   "website": "",
+   "employee_count": "15541",
+   "hq_country": "United States",
+   "last_updated": "2010-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q1127536",
+  "single_account": true,
+  "domain": [
+   "coned.com"
+  ],
+  "employees": [
+   15591
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": false,
+  "allow_review": false
+ }
+}

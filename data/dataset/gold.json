@@ -1,0 +1,11000 @@
+{
+ "rows": {
+  "CRM-0001": "Q1630431",
+  "CRM-0002": "Q17061030",
+  "CRM-0003": "Q1329463",
+  "CRM-0004": "Q173395",
+  "CRM-0005": "Q1418",
+  "CRM-0006": "Q219635",
+  "CRM-0007": "Q144617",
+  "CRM-0008": "Q478214",
+  "CRM-0009": "Q214763",
+  "CRM-0010": "Q212235",
+  "CRM-0011": "Q541076",
+  "CRM-0012": "Q1329463",
+  "CRM-0013": "Q806215",
+  "CRM-0014": "Q47120756",
+  "CRM-0015": "Q459965",
+  "CRM-0016": "Q661845",
+  "CRM-0017": "Q5272601",
+  "CRM-0018": "Q1206980",
+  "CRM-0019": "Q1760641",
+  "CRM-0020": "Q20486917",
+  "CRM-0021": "Q27893",
+  "CRM-0022": "Q334204",
+  "CRM-0023": "Q715583",
+  "CRM-0024": "Q6703279",
+  "CRM-0025": "Q642271",
+  "CRM-0026": "Q691592",
+  "CRM-0027": "Q72539",
+  "CRM-0028": "Q30873",
+  "CRM-0029": "Q663596",
+  "CRM-0030": "Q5028383",
+  "CRM-0031": "Q152057",
+  "CRM-0032": "Q174310",
+  "CRM-0033": "Q7880250",
+  "CRM-0034": "Q642271",
+  "CRM-0035": "Q17109731",
+  "CRM-0036": "Q8072594",
+  "CRM-0037": "Q2047336",
+  "CRM-0038": "Q1073540",
+  "CRM-0039": "Q65056153",
+  "CRM-0040": "Q926806",
+  "CRM-0041": "Q1045842",
+  "CRM-0042": "Q910866",
+  "CRM-0043": "Q111821048",
+  "CRM-0044": "Q157062",
+  "CRM-0045": "Q282997",
+  "CRM-0046": "Q7083862",
+  "CRM-0047": "Q214763",
+  "CRM-0048": "Q128896",
+  "CRM-0049": "Q503182",
+  "CRM-0050": "Q212322",
+  "CRM-0051": "Q644289",
+  "CRM-0052": "Q156238",
+  "CRM-0053": "Q2945643",
+  "CRM-0054": "Q1389504",
+  "CRM-0055": "Q245343",
+  "CRM-0056": "Q27893",
+  "CRM-0057": "Q9584",
+  "CRM-0058": "Q7414",
+  "CRM-0059": "Q204727",
+  "CRM-0060": "Q1066858",
+  "CRM-0061": "Q624375",
+  "CRM-0062": "Q8093",
+  "CRM-0063": "Q135187635",
+  "CRM-0064": "Q17460900",
+  "CRM-0065": "Q4546965",
+  "CRM-0066": "Q1030096",
+  "CRM-0067": "Q16959074",
+  "CRM-0068": "Q552581",
+  "CRM-0069": "Q642271",
+  "CRM-0070": "Q941127",
+  "CRM-0071": "Q3295867",
+  "CRM-0072": "Q41187",
+  "CRM-0073": "Q124795355",
+  "CRM-0074": "Q3344170",
+  "CRM-0075": "Q459477",
+  "CRM-0076": "Q1542175",
+  "CRM-0077": "Q28782856",
+  "CRM-0078": "Q739518",
+  "CRM-0079": "Q182477",
+  "CRM-0080": "Q632694",
+  "CRM-0081": "Q248",
+  "CRM-0082": "Q160229",
+  "CRM-0083": "Q662095",
+  "CRM-0084": "Q1347782",
+  "CRM-0085": "Q16959074",
+  "CRM-0086": "Q713418",
+  "CRM-0087": "Q8085893",
+  "CRM-0088": "Q852787",
+  "CRM-0089": "Q124461238",
+  "CRM-0090": "Q55633597",
+  "CRM-0091": "Q170416",
+  "CRM-0092": "Q898208",
+  "CRM-0093": "Q63197674",
+  "CRM-0094": "Q7687819",
+  "CRM-0095": "Q1322011",
+  "CRM-0096": "Q28782856",
+  "CRM-0097": "Q2357515",
+  "CRM-0098": "Q1545076",
+  "CRM-0099": "Q818846",
+  "CRM-0100": "Q483915",
+  "CRM-0101": "Q1138291",
+  "CRM-0102": "Q1345971",
+  "CRM-0103": "Q784022",
+  "CRM-0104": "Q467752",
+  "CRM-0105": "Q470517",
+  "CRM-0106": "Q212900",
+  "CRM-0107": "Q1416215",
+  "CRM-0108": "Q5412010",
+  "CRM-0109": "Q757489",
+  "CRM-0110": "Q1514221",
+  "CRM-0111": "Q5373589",
+  "CRM-0112": "Q1852556",
+  "CRM-0113": "Q663596",
+  "CRM-0114": "Q17085620",
+  "CRM-0115": "Q193326",
+  "CRM-0116": "Q7937913",
+  "CRM-0117": "Q11159866",
+  "CRM-0118": "Q66",
+  "CRM-0119": "Q492747",
+  "CRM-0120": "Q66048",
+  "CRM-0121": "Q1075788",
+  "CRM-0122": "Q60269744",
+  "CRM-0123": "Q80978",
+  "CRM-0124": "Q300120",
+  "CRM-0125": "Q3884",
+  "CRM-0126": "Q1318049",
+  "CRM-0127": "Q155026",
+  "CRM-0128": "Q2357515",
+  "CRM-0129": "Q332477",
+  "CRM-0130": "Q1431486",
+  "CRM-0131": "Q116452644",
+  "CRM-0132": "Q63327",
+  "CRM-0133": "Q380",
+  "CRM-0134": "Q880942",
+  "CRM-0135": "Q1591889",
+  "CRM-0136": "Q15678788",
+  "CRM-0137": "Q1022711",
+  "CRM-0138": "Q96574719",
+  "CRM-0139": "Q2079243",
+  "CRM-0140": "Q5373589",
+  "CRM-0141": "Q282997",
+  "CRM-0142": "Q212405",
+  "CRM-0143": "Q572948",
+  "CRM-0144": "Q1671509",
+  "CRM-0145": "Q733482",
+  "CRM-0146": "Q217583",
+  "CRM-0147": "Q7893816",
+  "CRM-0148": "Q7937913",
+  "CRM-0149": "Q790060",
+  "CRM-0150": "Q8034666",
+  "CRM-0151": "Q329953",
+  "CRM-0152": "Q15401349",
+  "CRM-0153": "Q502121",
+  "CRM-0154": "Q16972754",
+  "CRM-0155": "Q28027517",
+  "CRM-0156": "Q2945643",
+  "CRM-0157": "Q898750",
+  "CRM-0158": "Q160229",
+  "CRM-0159": "Q18124524",
+  "CRM-0160": "Q486737",
+  "CRM-0161": "Q2466256",
+  "CRM-0162": "Q791285",
+  "CRM-0163": "Q565594",
+  "CRM-0164": "Q470517",
+  "CRM-0165": "Q1144929",
+  "CRM-0166": "Q5453752",
+  "CRM-0167": "Q1045842",
+  "CRM-0168": "Q156238",
+  "CRM-0169": "Q53268",
+  "CRM-0170": "Q1534597",
+  "CRM-0171": "Q1325987",
+  "CRM-0172": "Q1507642",
+  "CRM-0173": "Q1472929",
+  "CRM-0174": "Q210047",
+  "CRM-0175": "Q21177770",
+  "CRM-0176": "Q111839764",
+  "CRM-0177": "Q1420513",
+  "CRM-0178": "Q19681433",
+  "CRM-0179": "Q4816569",
+  "CRM-0180": "Q1420513",
+  "CRM-0181": "Q868587",
+  "CRM-0182": "Q1192211",
+  "CRM-0183": "Q11463",
+  "CRM-0184": "Q30645592",
+  "CRM-0185": "Q20165",
+  "CRM-0186": "Q898208",
+  "CRM-0187": "Q634815",
+  "CRM-0188": "Q4652575",
+  "CRM-0189": "Q306764",
+  "CRM-0190": "Q1852556",
+  "CRM-0191": "Q89368734",
+  "CRM-0192": "Q1391599",
+  "CRM-0193": "Q55633597",
+  "CRM-0194": "Q632240",
+  "CRM-0195": "Q5926631",
+  "CRM-0196": "Q2299611",
+  "CRM-0197": "Q214346",
+  "CRM-0198": "Q778126",
+  "CRM-0199": "Q1049080",
+  "CRM-0200": "Q5122694",
+  "CRM-0201": "Q1127536",
+  "CRM-0202": "Q736091",
+  "CRM-0203": "Q11463",
+  "CRM-0204": "Q98608948",
+  "CRM-0205": "Q312",
+  "CRM-0206": "Q7501150",
+  "CRM-0207": "Q1107035",
+  "CRM-0208": "Q7833614",
+  "CRM-0209": "Q459965",
+  "CRM-0210": "Q28027517",
+  "CRM-0211": "Q15678788",
+  "CRM-0212": "Q19900",
+  "CRM-0213": "Q8034666",
+  "CRM-0214": "Q979690",
+  "CRM-0215": "Q501476",
+  "CRM-0216": "Q96574614",
+  "CRM-0217": "Q2037125",
+  "CRM-0218": "Q1107035",
+  "CRM-0219": "Q7280388",
+  "CRM-0220": "Q691592",
+  "CRM-0221": "Q1140680",
+  "CRM-0222": "Q7234777",
+  "CRM-0223": "Q193412",
+  "CRM-0224": "Q297879",
+  "CRM-0225": "Q1127536",
+  "CRM-0226": "Q7280957",
+  "CRM-0227": "Q4652575",
+  "CRM-0228": "Q106219885",
+  "CRM-0229": "Q524989",
+  "CRM-0230": "Q1275613",
+  "CRM-0231": "Q65056153",
+  "CRM-0232": "Q334800",
+  "CRM-0233": "Q3344170",
+  "CRM-0234": "Q7455653",
+  "CRM-0235": "Q194360",
+  "CRM-0236": "Q5842736",
+  "CRM-0237": "Q8034666",
+  "CRM-0238": "Q851641",
+  "CRM-0239": "Q1073540",
+  "CRM-0240": "Q656165",
+  "CRM-0241": "Q1425316",
+  "CRM-0242": "Q853958",
+  "CRM-0243": "Q2241604",
+  "CRM-0244": "Q1144473",
+  "CRM-0245": "Q15678788",
+  "CRM-0246": "Q20800404",
+  "CRM-0247": "Q621592",
+  "CRM-0248": "Q140772884",
+  "CRM-0249": "Q653581",
+  "CRM-0250": "Q780442",
+  "CRM-0251": "Q315287",
+  "CRM-0252": "Q1630431",
+  "CRM-0253": "Q174310",
+  "CRM-0254": "Q96095585",
+  "CRM-0255": "Q2079243",
+  "CRM-0256": "Q642189",
+  "CRM-0257": "Q1138291",
+  "CRM-0258": "Q661845",
+  "CRM-0259": "Q194360",
+  "CRM-0260": "Q645525",
+  "CRM-0261": "Q159433",
+  "CRM-0262": "Q2037125",
+  "CRM-0263": "Q5370909",
+  "CRM-0264": "Q18124524",
+  "CRM-0265": "Q482267",
+  "CRM-0266": "Q312",
+  "CRM-0267": "Q1770710",
+  "CRM-0268": "Q190464",
+  "CRM-0269": "Q970695",
+  "CRM-0270": "Q2759586",
+  "CRM-0271": "Q193701",
+  "CRM-0272": "Q1645081",
+  "CRM-0273": "Q247489",
+  "CRM-0274": "Q415598",
+  "CRM-0275": "Q420506",
+  "CRM-0276": "Q1770710",
+  "CRM-0277": "Q10605824",
+  "CRM-0278": "Q582418",
+  "CRM-0279": "Q128738",
+  "CRM-0280": "Q16972754",
+  "CRM-0281": "Q645525",
+  "CRM-0282": "Q334204",
+  "CRM-0283": "Q2904022",
+  "CRM-0284": "Q30324333",
+  "CRM-0285": "Q5427196",
+  "CRM-0286": "Q7083862",
+  "CRM-0287": "Q668737",
+  "CRM-0288": "Q20711490",
+  "CRM-0289": "Q7020906",
+  "CRM-0290": "Q7876533",
+  "CRM-0291": "Q544847",
+  "CRM-0292": "Q2931412",
+  "CRM-0293": "Q694872",
+  "CRM-0294": "Q17085620",
+  "CRM-0295": "Q825943",
+  "CRM-0296": "Q20711490",
+  "CRM-0297": "Q37156",
+  "CRM-0298": "Q5926631",
+  "CRM-0299": "Q2299611",
+  "CRM-0300": "Q1107035",
+  "CRM-0301": "Q1022711",
+  "CRM-0302": "Q2901365",
+  "CRM-0303": "Q30632958",
+  "CRM-0304": "Q221062",
+  "CRM-0305": "Q135325",
+  "CRM-0306": "Q2047336",
+  "CRM-0307": "Q880942",
+  "CRM-0308": "Q18151094",
+  "CRM-0309": "Q502940",
+  "CRM-0310": "Q192314",
+  "CRM-0311": "Q717093",
+  "CRM-0312": "Q20711490",
+  "CRM-0313": "Q50038825",
+  "CRM-0314": "Q2034659",
+  "CRM-0315": "Q190464",
+  "CRM-0316": "Q11407",
+  "CRM-0317": "Q570473",
+  "CRM-0318": "Q1410137",
+  "CRM-0319": "Q66",
+  "CRM-0320": "Q1347782",
+  "CRM-0321": "Q96574751",
+  "CRM-0322": "Q415598",
+  "CRM-0323": "Q864407",
+  "CRM-0324": "Q4778915",
+  "CRM-0325": "Q2749364",
+  "CRM-0326": "Q2283",
+  "CRM-0327": "Q7128508",
+  "CRM-0328": "Q2287759",
+  "CRM-0329": "Q2376711",
+  "CRM-0330": "Q3277465",
+  "CRM-0331": "Q21404084",
+  "CRM-0332": "Q880942",
+  "CRM-0333": "Q831445",
+  "CRM-0334": "Q7257522",
+  "CRM-0335": "Q17081612",
+  "CRM-0336": "Q63327",
+  "CRM-0337": "Q7414",
+  "CRM-0338": "Q174310",
+  "CRM-0339": "Q3157622",
+  "CRM-0340": "Q144617",
+  "CRM-0341": "Q5133094",
+  "CRM-0342": "Q1144929",
+  "CRM-0343": "Q214763",
+  "CRM-0344": "Q153417",
+  "CRM-0345": "Q974846",
+  "CRM-0346": "Q58024",
+  "CRM-0347": "Q173941",
+  "CRM-0348": "Q17109731",
+  "CRM-0349": "Q2140077",
+  "CRM-0350": "Q338825",
+  "CRM-0351": "Q717531",
+  "CRM-0352": "Q7455653",
+  "CRM-0353": "Q1389504",
+  "CRM-0354": "Q154037",
+  "CRM-0355": "Q1472929",
+  "CRM-0356": "Q156238",
+  "CRM-0357": "Q20800404",
+  "CRM-0358": "Q182477",
+  "CRM-0359": "Q28782856",
+  "CRM-0360": "Q795454",
+  "CRM-0361": "Q852787",
+  "CRM-0362": "Q1413997",
+  "CRM-0363": "Q22078063",
+  "CRM-0364": "Q17538813",
+  "CRM-0365": "Q806206",
+  "CRM-0366": "Q76846862",
+  "CRM-0367": "Q4687934",
+  "CRM-0368": "Q629998",
+  "CRM-0369": "Q1138291",
+  "CRM-0370": "Q1146061",
+  "CRM-0371": "Q21404084",
+  "CRM-0372": "Q979690",
+  "CRM-0373": "Q916196",
+  "CRM-0374": "Q8064381",
+  "CRM-0375": "Q631047",
+  "CRM-0376": "Q582418",
+  "CRM-0377": "Q1641437",
+  "CRM-0378": "Q757307",
+  "CRM-0379": "Q7414",
+  "CRM-0380": "Q328840",
+  "CRM-0381": "Q63152908",
+  "CRM-0382": "Q778126",
+  "CRM-0383": "Q861042",
+  "CRM-0384": "Q52618",
+  "CRM-0385": "Q811857",
+  "CRM-0386": "Q3146975",
+  "CRM-0387": "Q668737",
+  "CRM-0388": "Q5324516",
+  "CRM-0389": "Q582418",
+  "CRM-0390": "Q5370909",
+  "CRM-0391": "Q1416215",
+  "CRM-0392": "Q27346385",
+  "CRM-0393": "Q1543874",
+  "CRM-0394": "Q158205",
+  "CRM-0395": "Q282997",
+  "CRM-0396": "Q8072594",
+  "CRM-0397": "Q946713",
+  "CRM-0398": "Q645708",
+  "CRM-0399": "Q7800873",
+  "CRM-0400": "Q182477",
+  "CRM-0401": "Q1022711",
+  "CRM-0402": "Q5373589",
+  "CRM-0403": "Q7280388",
+  "CRM-0404": "Q637440",
+  "CRM-0405": "Q223127",
+  "CRM-0406": "Q37158",
+  "CRM-0407": "Q26989",
+  "CRM-0408": "Q98139925",
+  "CRM-0409": "Q21189883",
+  "CRM-0410": "Q1545076",
+  "CRM-0411": "Q165858",
+  "CRM-0412": "Q65062134",
+  "CRM-0413": "Q159433",
+  "CRM-0414": "Q97439162",
+  "CRM-0415": "Q94933",
+  "CRM-0416": "Q804353",
+  "CRM-0417": "Q212235",
+  "CRM-0418": "Q106219885",
+  "CRM-0419": "Q795454",
+  "CRM-0420": "Q21404084",
+  "CRM-0421": "Q38076",
+  "CRM-0422": "Q1359568",
+  "CRM-0423": "Q65062134",
+  "CRM-0424": "Q15238661",
+  "CRM-0425": "Q29469208",
+  "CRM-0426": "Q1359568",
+  "CRM-0427": "Q739084",
+  "CRM-0428": "Q266423",
+  "CRM-0429": "Q152433",
+  "CRM-0430": "Q48872",
+  "CRM-0431": "Q489921",
+  "CRM-0432": "Q24890758",
+  "CRM-0433": "Q1057464",
+  "CRM-0434": "Q2552219",
+  "CRM-0435": "Q1520122",
+  "CRM-0436": "Q111839764",
+  "CRM-0437": "Q111821048",
+  "CRM-0438": "Q193412",
+  "CRM-0439": "Q7360089",
+  "CRM-0440": "Q98139925",
+  "CRM-0441": "Q5289230",
+  "CRM-0442": "Q292292",
+  "CRM-0443": "Q44294",
+  "CRM-0444": "Q1046951",
+  "CRM-0445": "Q1424293",
+  "CRM-0446": "Q140772884",
+  "CRM-0447": "Q565594",
+  "CRM-0448": "Q294721",
+  "CRM-0449": "Q63035278",
+  "CRM-0450": "Q19923099",
+  "CRM-0451": "Q713418",
+  "CRM-0452": "Q1347782",
+  "CRM-0453": "Q648458",
+  "CRM-0454": "Q4652575",
+  "CRM-0455": "Q103793759",
+  "CRM-0456": "Q24834296",
+  "CRM-0457": "Q52618",
+  "CRM-0458": "Q2895117",
+  "CRM-0459": "Q245343",
+  "CRM-0460": "Q1424962",
+  "CRM-0461": "Q94933",
+  "CRM-0462": "Q7240",
+  "CRM-0463": "Q18124524",
+  "CRM-0464": "Q901262",
+  "CRM-0465": "Q1776022",
+  "CRM-0466": "Q1485061",
+  "CRM-0467": "Q7616390",
+  "CRM-0468": "Q1141267",
+  "CRM-0469": "Q487907",
+  "CRM-0470": "Q7893816",
+  "CRM-0471": "Q20165",
+  "CRM-0472": "Q1374135",
+  "CRM-0473": "Q734338",
+  "CRM-0474": "Q503308",
+  "CRM-0475": "Q65062134",
+  "CRM-0476": "Q193701",
+  "CRM-0477": "Q926806",
+  "CRM-0478": "Q111839764",
+  "CRM-0479": "Q570473",
+  "CRM-0480": "Q334204",
+  "CRM-0481": "Q7234777",
+  "CRM-0482": "Q55633597",
+  "CRM-0483": "Q1534597",
+  "CRM-0484": "Q1192805",
+  "CRM-0485": "Q193326",
+  "CRM-0486": "Q5133094",
+  "CRM-0487": "Q941127",
+  "CRM-0488": "Q27346385",
+  "CRM-0489": "Q918208",
+  "CRM-0490": "Q170416",
+  "CRM-0491": "Q27893",
+  "CRM-0492": "Q1424293",
+  "CRM-0493": "Q11463",
+  "CRM-0494": "Q81965",
+  "CRM-0495": "Q1329463",
+  "CRM-0496": "Q496302",
+  "CRM-0497": "Q898750",
+  "CRM-0498": "Q212900",
+  "CRM-0499": "Q739518",
+  "CRM-0500": "Q319642",
+  "CRM-0501": "Q221062",
+  "CRM-0502": "Q1073540",
+  "CRM-0503": "Q30256699",
+  "CRM-0504": "Q682759",
+  "CRM-0505": "Q451476",
+  "CRM-0506": "Q1325369",
+  "CRM-0507": "Q643674",
+  "CRM-0508": "Q4816569",
+  "CRM-0509": "Q4546965",
+  "CRM-0510": "Q7257522",
+  "CRM-0511": "Q7020906",
+  "CRM-0512": "Q7616390",
+  "CRM-0513": "Q501476",
+  "CRM-0514": "Q2114414",
+  "CRM-0515": "Q21077",
+  "CRM-0516": "Q806215",
+  "CRM-0517": "Q918208",
+  "CRM-0518": "Q631047",
+  "CRM-0519": "Q66",
+  "CRM-0520": "Q731938",
+  "CRM-0521": "Q1335585",
+  "CRM-0522": "Q15238661",
+  "CRM-0523": "Q484930",
+  "CRM-0524": "Q37156",
+  "CRM-0525": "Q856411",
+  "CRM-0526": "Q393762",
+  "CRM-0527": "Q825943",
+  "CRM-0528": "Q3388421",
+  "CRM-0529": "Q931354",
+  "CRM-0530": "Q7248721",
+  "CRM-0531": "Q35476",
+  "CRM-0532": "Q572948",
+  "CRM-0533": "Q6955139",
+  "CRM-0534": "Q206921",
+  "CRM-0535": "Q910866",
+  "CRM-0536": "Q7538146",
+  "CRM-0537": "Q133042901",
+  "CRM-0538": "Q1345971",
+  "CRM-0539": "Q5063137",
+  "CRM-0540": "Q926806",
+  "CRM-0541": "Q806693",
+  "CRM-0542": "Q111821048",
+  "CRM-0543": "Q96574614",
+  "CRM-0544": "Q154950",
+  "CRM-0545": "Q14772",
+  "CRM-0546": "Q1325987",
+  "CRM-0547": "Q248",
+  "CRM-0548": "Q50038825",
+  "CRM-0549": "Q470156",
+  "CRM-0550": "Q212322",
+  "CRM-0551": "Q694872",
+  "CRM-0552": "Q713418",
+  "CRM-0553": "Q470156",
+  "CRM-0554": "Q6702957",
+  "CRM-0555": "Q117169721",
+  "CRM-0556": "Q851641",
+  "CRM-0557": "Q165858",
+  "CRM-0558": "Q4045079",
+  "CRM-0559": "Q18387139",
+  "CRM-0560": "Q4742937",
+  "CRM-0561": "Q127324768",
+  "CRM-0562": "Q465751",
+  "CRM-0563": "Q831445",
+  "CRM-0564": "Q2299611",
+  "CRM-0565": "Q161140",
+  "CRM-0566": "Q898750",
+  "CRM-0567": "Q650259",
+  "CRM-0568": "Q5317253",
+  "CRM-0569": "Q44294",
+  "CRM-0570": "Q7687819",
+  "CRM-0571": "Q261288",
+  "CRM-0572": "Q334800",
+  "CRM-0573": "Q17109731",
+  "CRM-0574": "Q18387139",
+  "CRM-0575": "Q122141",
+  "CRM-0576": "Q245343",
+  "CRM-0577": "Q60238941",
+  "CRM-0578": "Q1057464",
+  "CRM-0579": "Q217583",
+  "CRM-0580": "Q1534597",
+  "CRM-0581": "Q30256699",
+  "CRM-0582": "Q52825",
+  "CRM-0583": "Q55632076",
+  "CRM-0584": "Q486269",
+  "CRM-0585": "Q52618",
+  "CRM-0586": "Q333718",
+  "CRM-0587": "Q5028383",
+  "CRM-0588": "Q28154806",
+  "CRM-0589": "Q393762",
+  "CRM-0590": "Q219508",
+  "CRM-0591": "Q44294",
+  "CRM-0592": "Q11407",
+  "CRM-0593": "Q1144473",
+  "CRM-0594": "Q265286",
+  "CRM-0595": "Q105557",
+  "CRM-0596": "Q4742937",
+  "CRM-0597": "Q96095585",
+  "CRM-0598": "Q221062",
+  "CRM-0599": "Q1009458",
+  "CRM-0600": "Q127324768",
+  "CRM-0601": "Q631047",
+  "CRM-0602": "Q19923099"
+ },
+ "companies": {
+  "Q1009458": {
+   "id": "Q1009458",
+   "name": "Bunge Limited",
+   "tickers": [
+    "BG"
+   ],
+   "domains": [
+    "bunge.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    22706
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "food industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1022711": {
+   "id": "Q1022711",
+   "name": "CACI",
+   "tickers": [
+    "CACI"
+   ],
+   "domains": [
+    "caci.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    20000
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "professional services industry",
+    "information technology industry"
+   ],
+   "icp_fit": true
+  },
+  "Q1030096": {
+   "id": "Q1030096",
+   "name": "Orbital Sciences Corporation",
+   "tickers": [
+    "ORB"
+   ],
+   "domains": [
+    "orbital.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    3300
+   ],
+   "employees_as_of": "2014-02-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "aerospace industry"
+   ],
+   "icp_fit": false
+  },
+  "Q103793759": {
+   "id": "Q103793759",
+   "name": "Cardlytics",
+   "tickers": [
+    "CDLX"
+   ],
+   "domains": [
+    "cardlytics.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    432
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "loyalty marketing"
+   ],
+   "icp_fit": false
+  },
+  "Q1045842": {
+   "id": "Q1045842",
+   "name": "The Cheesecake Factory",
+   "tickers": [
+    "CAKE"
+   ],
+   "domains": [
+    "thecheesecakefactory.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    38800
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "gastronomy"
+   ],
+   "icp_fit": false
+  },
+  "Q1046951": {
+   "id": "Q1046951",
+   "name": "Target Corporation",
+   "tickers": [
+    "TGT"
+   ],
+   "domains": [
+    "target.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    400000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "retail chain",
+    "big-box store"
+   ],
+   "icp_fit": false
+  },
+  "Q1049080": {
+   "id": "Q1049080",
+   "name": "Juniper Networks",
+   "tickers": [
+    "JNPR"
+   ],
+   "domains": [
+    "juniper.net"
+   ],
+   "old_domains": [],
+   "employees": [
+    9419
+   ],
+   "employees_as_of": "2019-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "technology",
+    "networking hardware",
+    "Photographic and Photocopying Equipment Manufacturing [2012–2022 definition]"
+   ],
+   "icp_fit": true
+  },
+  "Q105557": {
+   "id": "Q105557",
+   "name": "Embraer",
+   "tickers": [
+    "ERJ"
+   ],
+   "domains": [
+    "embraer.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    19179
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "Brazil"
+   ],
+   "industries": [
+    "arms industry",
+    "aircraft construction",
+    "aerospace industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1057464": {
+   "id": "Q1057464",
+   "name": "Hilton Worldwide",
+   "tickers": [
+    "HLT"
+   ],
+   "domains": [
+    "hilton.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    182000
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "hospitality industry"
+   ],
+   "icp_fit": false
+  },
+  "Q10605824": {
+   "id": "Q10605824",
+   "name": "Oatly AB",
+   "tickers": [
+    "OTLY"
+   ],
+   "domains": [
+    "oatly.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2009
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "Sweden"
+   ],
+   "industries": [
+    "beverage industry"
+   ],
+   "icp_fit": false
+  },
+  "Q106219885": {
+   "id": "Q106219885",
+   "name": "Kaspi.kz Joint Stock Company",
+   "tickers": [
+    "KSPI"
+   ],
+   "domains": [
+    "kaspi.kz"
+   ],
+   "old_domains": [],
+   "employees": [
+    3621
+   ],
+   "employees_as_of": "2006-01-01",
+   "countries": [
+    "Kazakhstan"
+   ],
+   "industries": [
+    "fintech"
+   ],
+   "icp_fit": false
+  },
+  "Q1066858": {
+   "id": "Q1066858",
+   "name": "Tiffany & Co.",
+   "tickers": [
+    "TIF"
+   ],
+   "domains": [
+    "tiffany.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    10600
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "jewelry",
+    "jewelry design",
+    "jewelry industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1073540": {
+   "id": "Q1073540",
+   "name": "China Telecommunications Corporation",
+   "tickers": [
+    "CHA"
+   ],
+   "domains": [
+    "189.cn",
+    "chinatelecom.com.cn",
+    "ctexcel.ca",
+    "ctexcel.com",
+    "ctexcel.com.hk"
+   ],
+   "old_domains": [],
+   "employees": [
+    309799
+   ],
+   "employees_as_of": "2012-01-01",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "terrestrial television",
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1075788": {
+   "id": "Q1075788",
+   "name": "Choice Hotels",
+   "tickers": [
+    "CHH"
+   ],
+   "domains": [
+    "choicehotels.com"
+   ],
+   "old_domains": [
+    "comfortsuites.com"
+   ],
+   "employees": [
+    1789
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "hospitality industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1107035": {
+   "id": "Q1107035",
+   "name": "Cognizant Technology Solutions",
+   "tickers": [
+    "CTSH"
+   ],
+   "domains": [
+    "cognizant.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    266200
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information technology industry",
+    "consulting industry"
+   ],
+   "icp_fit": false
+  },
+  "Q11159866": {
+   "id": "Q11159866",
+   "name": "Gilat Satellite Networks Ltd.",
+   "tickers": [
+    "GILT"
+   ],
+   "domains": [
+    "gilat.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    864
+   ],
+   "employees_as_of": "2020-07-07",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "telecommunications"
+   ],
+   "icp_fit": false
+  },
+  "Q111821048": {
+   "id": "Q111821048",
+   "name": "Argo Blockchain",
+   "tickers": [
+    "ARBK"
+   ],
+   "domains": [
+    "argoblockchain.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    85
+   ],
+   "employees_as_of": "2022-05-01",
+   "countries": [],
+   "industries": [
+    "blockchain",
+    "cryptocurrency mining"
+   ],
+   "icp_fit": false
+  },
+  "Q111839764": {
+   "id": "Q111839764",
+   "name": "SVB Financial Group",
+   "tickers": [
+    "SIVB",
+    "SIVBP"
+   ],
+   "domains": [
+    "svb.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8553
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q1127536": {
+   "id": "Q1127536",
+   "name": "Consolidated Edison",
+   "tickers": [
+    "ED"
+   ],
+   "domains": [
+    "coned.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    15591
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "energy industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1138291": {
+   "id": "Q1138291",
+   "name": "Curtiss-Wright",
+   "tickers": [
+    "CW"
+   ],
+   "domains": [
+    "curtisswright.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    10000
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "arms industry",
+    "aerospace industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1140680": {
+   "id": "Q1140680",
+   "name": "Flex Ltd.",
+   "tickers": [
+    "FLEX"
+   ],
+   "domains": [
+    "flex.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    147979
+   ],
+   "employees_as_of": "2025-03-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "electronics"
+   ],
+   "icp_fit": false
+  },
+  "Q11407": {
+   "id": "Q11407",
+   "name": "VMware",
+   "tickers": [
+    "VMW"
+   ],
+   "domains": [
+    "vmware.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    34000
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q1141267": {
+   "id": "Q1141267",
+   "name": "Thomson Reuters",
+   "tickers": [
+    "TRI"
+   ],
+   "domains": [
+    "thomsonreuters.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    24000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "media industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1144473": {
+   "id": "Q1144473",
+   "name": "CureVac",
+   "tickers": [
+    "CVAC"
+   ],
+   "domains": [
+    "curevac.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    600
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "Germany"
+   ],
+   "industries": [
+    "biotechnology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1144929": {
+   "id": "Q1144929",
+   "name": "Lafarge",
+   "tickers": [
+    "LG",
+    "LR"
+   ],
+   "domains": [
+    "lafarge.ca",
+    "lafarge.fr"
+   ],
+   "old_domains": [
+    "lafarge.com"
+   ],
+   "employees": [
+    63000
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "France"
+   ],
+   "industries": [
+    "cement industry",
+    "manufacture of cement, lime and plaster",
+    "activities of head offices"
+   ],
+   "icp_fit": false
+  },
+  "Q1146061": {
+   "id": "Q1146061",
+   "name": "Cushman & Wakefield",
+   "tickers": [
+    "CWK"
+   ],
+   "domains": [
+    "cushmanwakefield.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    15000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "commercial property",
+    "real estate industry"
+   ],
+   "icp_fit": false
+  },
+  "Q11463": {
+   "id": "Q11463",
+   "name": "Adobe",
+   "tickers": [
+    "ADBE"
+   ],
+   "domains": [
+    "adobe.com"
+   ],
+   "old_domains": [
+    "business.adobe.com"
+   ],
+   "employees": [
+    25988
+   ],
+   "employees_as_of": "2021-12-03",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "artificial intelligence",
+    "information technology",
+    "software development",
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q116452644": {
+   "id": "Q116452644",
+   "name": "Netflix, Inc.",
+   "tickers": [
+    "NFLX"
+   ],
+   "domains": [
+    "ir.netflix.net"
+   ],
+   "old_domains": [],
+   "employees": [
+    16000
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "streaming media",
+    "film production",
+    "television production",
+    "film distribution",
+    "DVD-by-mail"
+   ],
+   "icp_fit": false
+  },
+  "Q117169721": {
+   "id": "Q117169721",
+   "name": "Azenta Life Sciences",
+   "tickers": [
+    "AZTA"
+   ],
+   "domains": [
+    "azenta.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1176
+   ],
+   "employees_as_of": "2023-03-16",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "biotechnology"
+   ],
+   "icp_fit": false
+  },
+  "Q1192211": {
+   "id": "Q1192211",
+   "name": "Strategy",
+   "tickers": [
+    "MSTR"
+   ],
+   "domains": [
+    "microstrategy.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1539
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "analytics",
+    "software development",
+    "software industry",
+    "business intelligence",
+    "data visualization",
+    "technology industry"
+   ],
+   "icp_fit": true
+  },
+  "Q1192805": {
+   "id": "Q1192805",
+   "name": "Krispy Kreme",
+   "tickers": [
+    "DNUT"
+   ],
+   "domains": [
+    "krispykreme.com"
+   ],
+   "old_domains": [
+    "krispykreme.co.kr",
+    "krispykreme.co.uk",
+    "krispykreme.mx",
+    "krispykremesa.com"
+   ],
+   "employees": [
+    4000
+   ],
+   "employees_as_of": "2011-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "gastronomy"
+   ],
+   "icp_fit": false
+  },
+  "Q1206980": {
+   "id": "Q1206980",
+   "name": "Devon Energy",
+   "tickers": [
+    "DVN"
+   ],
+   "domains": [
+    "devonenergy.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5900
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q122141": {
+   "id": "Q122141",
+   "name": "Vodafone",
+   "tickers": [
+    "VOD"
+   ],
+   "domains": [
+    "vodafone.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    96506
+   ],
+   "employees_as_of": "2021-03-31",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q124461238": {
+   "id": "Q124461238",
+   "name": "PDD Holdings",
+   "tickers": [
+    "PDD"
+   ],
+   "domains": [
+    "pddholdings.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    12992
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "Ireland",
+    "Cayman Islands"
+   ],
+   "industries": [
+    "e-commerce"
+   ],
+   "icp_fit": false
+  },
+  "Q124795355": {
+   "id": "Q124795355",
+   "name": "Solventum",
+   "tickers": [
+    "SOLV"
+   ],
+   "domains": [
+    "solventum.com"
+   ],
+   "old_domains": [
+    "investors.solventum.com"
+   ],
+   "employees": [
+    20000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "health care",
+    "health information technology",
+    "medical technology industry"
+   ],
+   "icp_fit": true
+  },
+  "Q127324768": {
+   "id": "Q127324768",
+   "name": "Six Flags",
+   "tickers": [
+    "FUN"
+   ],
+   "domains": [
+    "sixflags.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    95255
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "hospitality industry",
+    "entertainment industry",
+    "leisure park industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1275613": {
+   "id": "Q1275613",
+   "name": "EPAM Systems",
+   "tickers": [
+    "EPAM"
+   ],
+   "domains": [
+    "epam.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    52650
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "outsourcing",
+    "consultation",
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q128738": {
+   "id": "Q128738",
+   "name": "Anheuser-Busch InBev",
+   "tickers": [
+    "BUD"
+   ],
+   "domains": [
+    "ab-inbev.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    136805
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "Belgium"
+   ],
+   "industries": [
+    "brewing industry"
+   ],
+   "icp_fit": false
+  },
+  "Q128896": {
+   "id": "Q128896",
+   "name": "AMD",
+   "tickers": [
+    "AMD"
+   ],
+   "domains": [
+    "amd.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    28000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer industry",
+    "electrical industry",
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q1318049": {
+   "id": "Q1318049",
+   "name": "WPP plc",
+   "tickers": [
+    "WPP"
+   ],
+   "domains": [
+    "wpp.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    109000
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "marketing"
+   ],
+   "icp_fit": false
+  },
+  "Q1322011": {
+   "id": "Q1322011",
+   "name": "Waters Corporation",
+   "tickers": [
+    "WAT"
+   ],
+   "domains": [
+    "waters.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    7262
+   ],
+   "employees_as_of": "2023-04-05",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "manufacturing of scientific and technical instrumentation"
+   ],
+   "icp_fit": false
+  },
+  "Q1325369": {
+   "id": "Q1325369",
+   "name": "Elbit Systems Ltd.",
+   "tickers": [
+    "ESLT"
+   ],
+   "domains": [
+    "elbitsystems.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    20000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "arms industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1325987": {
+   "id": "Q1325987",
+   "name": "Tyson Foods",
+   "tickers": [
+    "TSN"
+   ],
+   "domains": [
+    "tyson.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    133000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "agriculture",
+    "meatpacking industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1329463": {
+   "id": "Q1329463",
+   "name": "Quiksilver",
+   "tickers": [
+    "ZQK"
+   ],
+   "domains": [
+    "quiksilver.com",
+    "quiksilver.fr"
+   ],
+   "old_domains": [],
+   "employees": [
+    7500
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States",
+    "France"
+   ],
+   "industries": [
+    "textile industry"
+   ],
+   "icp_fit": false
+  },
+  "Q133042901": {
+   "id": "Q133042901",
+   "name": "Bitdeer",
+   "tickers": [
+    "BTDR"
+   ],
+   "domains": [
+    "bitdeer.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    211
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "Singapore",
+    "Cayman Islands"
+   ],
+   "industries": [
+    "cloud computing",
+    "data center",
+    "cryptocurrency mining"
+   ],
+   "icp_fit": false
+  },
+  "Q1335585": {
+   "id": "Q1335585",
+   "name": "Emerson Electric",
+   "tickers": [
+    "EMR"
+   ],
+   "domains": [
+    "emerson.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    134900
+   ],
+   "employees_as_of": "2012-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "electrical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1345971": {
+   "id": "Q1345971",
+   "name": "USA Today Co.",
+   "tickers": [
+    "GCI"
+   ],
+   "domains": [
+    "usatodayco.com"
+   ],
+   "old_domains": [
+    "gannett.com"
+   ],
+   "employees": [
+    11202
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "mass media"
+   ],
+   "icp_fit": false
+  },
+  "Q1347782": {
+   "id": "Q1347782",
+   "name": "Marvell Technology",
+   "tickers": [
+    "MRVL"
+   ],
+   "domains": [
+    "marvell.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    7480
+   ],
+   "employees_as_of": "2026-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q135187635": {
+   "id": "Q135187635",
+   "name": "CTW Inc.",
+   "tickers": [
+    "CTW"
+   ],
+   "domains": [
+    "ctw.inc"
+   ],
+   "old_domains": [],
+   "employees": [
+    350
+   ],
+   "employees_as_of": "2026-06-01",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "video game industry",
+    "anime industry"
+   ],
+   "icp_fit": false
+  },
+  "Q135325": {
+   "id": "Q135325",
+   "name": "Alcoa",
+   "tickers": [
+    "AA"
+   ],
+   "domains": [
+    "alcoa.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    61000
+   ],
+   "employees_as_of": "2012-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "aluminium industry",
+    "Aluminium production"
+   ],
+   "icp_fit": false
+  },
+  "Q1359568": {
+   "id": "Q1359568",
+   "name": "Alibaba Group",
+   "tickers": [
+    "BABA"
+   ],
+   "domains": [
+    "alibabagroup.com"
+   ],
+   "old_domains": [
+    "alibaba.com"
+   ],
+   "employees": [
+    251462
+   ],
+   "employees_as_of": "2021-03-31",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "e-commerce"
+   ],
+   "icp_fit": false
+  },
+  "Q1374135": {
+   "id": "Q1374135",
+   "name": "Prudential plc",
+   "tickers": [
+    "PUK"
+   ],
+   "domains": [
+    "prudentialplc.com"
+   ],
+   "old_domains": [
+    "prudential.co.uk"
+   ],
+   "employees": [
+    22308
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "insurance",
+    "insurance industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1389504": {
+   "id": "Q1389504",
+   "name": "Morningstar, Inc.",
+   "tickers": [
+    "MORN"
+   ],
+   "domains": [
+    "morningstar.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    9556
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q1391599": {
+   "id": "Q1391599",
+   "name": "Mercer",
+   "tickers": [
+    "MERC"
+   ],
+   "domains": [
+    "mercer.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    25000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [],
+   "industries": [
+    "risk management",
+    "professional service",
+    "consulting company"
+   ],
+   "icp_fit": false
+  },
+  "Q140772884": {
+   "id": "Q140772884",
+   "name": "Grid Dynamics Holdings",
+   "tickers": [
+    "GDYN"
+   ],
+   "domains": [
+    "griddynamics.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4838
+   ],
+   "employees_as_of": "2026-06-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information technology",
+    "information technology consulting",
+    "Prepackaged Software"
+   ],
+   "icp_fit": true
+  },
+  "Q1410137": {
+   "id": "Q1410137",
+   "name": "Houlihan Lokey",
+   "tickers": [
+    "HLI"
+   ],
+   "domains": [
+    "hl.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2700
+   ],
+   "employees_as_of": "2026-02-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "mergers and acquisitions",
+    "financial services",
+    "corporate finance",
+    "restructuring",
+    "valuation",
+    "investment banking"
+   ],
+   "icp_fit": false
+  },
+  "Q1413997": {
+   "id": "Q1413997",
+   "name": "Quantum Corporation",
+   "tickers": [
+    "QMCO"
+   ],
+   "domains": [
+    "quantum.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    800
+   ],
+   "employees_as_of": "2020-04-22",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "data storage medium",
+    "computer storage media"
+   ],
+   "icp_fit": false
+  },
+  "Q1416215": {
+   "id": "Q1416215",
+   "name": "GoDaddy",
+   "tickers": [
+    "GDDY"
+   ],
+   "domains": [
+    "godaddy.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5990
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "commerce",
+    "e-commerce",
+    "payment terminal",
+    "payment processing",
+    "web hosting service",
+    "fintech"
+   ],
+   "icp_fit": true
+  },
+  "Q1418": {
+   "id": "Q1418",
+   "name": "Nokia",
+   "tickers": [
+    "NOK"
+   ],
+   "domains": [
+    "nokia.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    103083
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "Finland"
+   ],
+   "industries": [
+    "computer network",
+    "networking hardware",
+    "International Standard Industrial Classification",
+    "telecommunications device",
+    "telecommunications industry",
+    "electrical appliance"
+   ],
+   "icp_fit": false
+  },
+  "Q1420513": {
+   "id": "Q1420513",
+   "name": "Fiserv",
+   "tickers": [
+    "FISV"
+   ],
+   "domains": [
+    "fiserv.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    21000
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q1424293": {
+   "id": "Q1424293",
+   "name": "Itaú Unibanco",
+   "tickers": [
+    "ITUB"
+   ],
+   "domains": [
+    "itau.com.br"
+   ],
+   "old_domains": [],
+   "employees": [
+    96219
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "Brazil"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q1424962": {
+   "id": "Q1424962",
+   "name": "IHG Hotels & Resorts",
+   "tickers": [
+    "IHG"
+   ],
+   "domains": [
+    "ihgplc.com"
+   ],
+   "old_domains": [
+    "ichotelsgroup.com",
+    "ihg.com"
+   ],
+   "employees": [
+    12899
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "hotel industry",
+    "beverage industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1425316": {
+   "id": "Q1425316",
+   "name": "SLB",
+   "tickers": [
+    "SLB"
+   ],
+   "domains": [
+    "slb.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    100000
+   ],
+   "employees_as_of": "2019-03-04",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1431486": {
+   "id": "Q1431486",
+   "name": "Orange",
+   "tickers": [
+    "ORAN"
+   ],
+   "domains": [
+    "orange.com"
+   ],
+   "old_domains": [
+    "agence.orange.fr",
+    "francetelecom.com",
+    "orange.fr"
+   ],
+   "employees": [
+    127000
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "France"
+   ],
+   "industries": [],
+   "icp_fit": false
+  },
+  "Q144617": {
+   "id": "Q144617",
+   "name": "TIM Group",
+   "tickers": [
+    "TI"
+   ],
+   "domains": [
+    "gruppotim.it"
+   ],
+   "old_domains": [
+    "telecomitalia.com"
+   ],
+   "employees": [
+    26874
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "Italy"
+   ],
+   "industries": [
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1472929": {
+   "id": "Q1472929",
+   "name": "Nasdaq, Inc.",
+   "tickers": [
+    "NDAQ"
+   ],
+   "domains": [
+    "business.nasdaq.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8809
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services",
+    "fintech"
+   ],
+   "icp_fit": false
+  },
+  "Q14772": {
+   "id": "Q14772",
+   "name": "Baidu",
+   "tickers": [
+    "BIDU"
+   ],
+   "domains": [
+    "baidu.com"
+   ],
+   "old_domains": [
+    "百度网站.中国"
+   ],
+   "employees": [
+    31000
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "Internet"
+   ],
+   "icp_fit": false
+  },
+  "Q1485061": {
+   "id": "Q1485061",
+   "name": "GE Aerospace",
+   "tickers": [
+    "GE"
+   ],
+   "domains": [
+    "geaerospace.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    174000
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "aerospace industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1507642": {
+   "id": "Q1507642",
+   "name": "Huaneng Power International",
+   "tickers": [
+    "HNP"
+   ],
+   "domains": [
+    "hpi.com.cn"
+   ],
+   "old_domains": [],
+   "employees": [
+    42210
+   ],
+   "employees_as_of": "2016-12-31",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "electric power industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1514221": {
+   "id": "Q1514221",
+   "name": "Kubota",
+   "tickers": [
+    "KUBTY"
+   ],
+   "domains": [
+    "kubota.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    41605
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "manufacture of machinery and equipment"
+   ],
+   "icp_fit": false
+  },
+  "Q1520122": {
+   "id": "Q1520122",
+   "name": "Getty Images",
+   "tickers": [
+    "GETY"
+   ],
+   "domains": [
+    "gettyimages.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1700
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "publishing"
+   ],
+   "icp_fit": false
+  },
+  "Q152057": {
+   "id": "Q152057",
+   "name": "BP",
+   "tickers": [
+    "BP"
+   ],
+   "domains": [
+    "bp.com"
+   ],
+   "old_domains": [
+    "bp.co.za",
+    "bp.com.au",
+    "bp.com.tr",
+    "bp.nl",
+    "bp.pl",
+    "mybpstation.com"
+   ],
+   "employees": [
+    70100
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q15238661": {
+   "id": "Q15238661",
+   "name": "CNH Industrial",
+   "tickers": [
+    "CNHI"
+   ],
+   "domains": [
+    "cnh.com",
+    "cnhindustrial.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    62828
+   ],
+   "employees_as_of": "2016-12-31",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q152433": {
+   "id": "Q152433",
+   "name": "Xerox",
+   "tickers": [
+    "XRX"
+   ],
+   "domains": [
+    "xerox.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    136500
+   ],
+   "employees_as_of": "2010-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer industry"
+   ],
+   "icp_fit": false
+  },
+  "Q153417": {
+   "id": "Q153417",
+   "name": "Kroger",
+   "tickers": [
+    "KR"
+   ],
+   "domains": [
+    "kroger.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    453000
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "manufacture of bakery and farinaceous products"
+   ],
+   "icp_fit": false
+  },
+  "Q1534597": {
+   "id": "Q1534597",
+   "name": "Gold Fields",
+   "tickers": [
+    "GFI"
+   ],
+   "domains": [
+    "goldfields.co.za"
+   ],
+   "old_domains": [],
+   "employees": [
+    49715
+   ],
+   "employees_as_of": "2010-01-01",
+   "countries": [
+    "United Kingdom",
+    "South Africa"
+   ],
+   "industries": [
+    "gold mining"
+   ],
+   "icp_fit": false
+  },
+  "Q15401349": {
+   "id": "Q15401349",
+   "name": "Zendesk",
+   "tickers": [
+    "zen"
+   ],
+   "domains": [
+    "zendesk.co.jp",
+    "zendesk.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    3830
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q154037": {
+   "id": "Q154037",
+   "name": "TotalEnergies",
+   "tickers": [
+    "TTE"
+   ],
+   "domains": [
+    "totalenergies.com"
+   ],
+   "old_domains": [
+    "total.com",
+    "totalfina.com",
+    "totalfinaelf.com"
+   ],
+   "employees": [
+    101513
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "France"
+   ],
+   "industries": [
+    "petroleum industry",
+    "energy industry",
+    "extraction of crude petroleum and natural gas",
+    "activities of head offices"
+   ],
+   "icp_fit": false
+  },
+  "Q1542175": {
+   "id": "Q1542175",
+   "name": "Mitsubishi UFJ Financial Group",
+   "tickers": [
+    "MTU"
+   ],
+   "domains": [
+    "mufg.jp"
+   ],
+   "old_domains": [],
+   "employees": [
+    104900
+   ],
+   "employees_as_of": "2016-03-31",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q1543874": {
+   "id": "Q1543874",
+   "name": "The Hertz Corporation",
+   "tickers": [
+    "HTZ"
+   ],
+   "domains": [
+    "hertz.com"
+   ],
+   "old_domains": [
+    "hertz.ca",
+    "hertz.co.uk",
+    "hertz.com.ar",
+    "hertz.de",
+    "hertz.es",
+    "hertz.fr",
+    "hertz.it",
+    "hertz.se",
+    "hertzequip.com"
+   ],
+   "employees": [
+    38000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "tourism industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1545076": {
+   "id": "Q1545076",
+   "name": "Microchip Technology",
+   "tickers": [
+    "MCHP"
+   ],
+   "domains": [
+    "microchip.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    19500
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "electronics",
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q154950": {
+   "id": "Q154950",
+   "name": "Shell",
+   "tickers": [
+    "SHEL"
+   ],
+   "domains": [
+    "shell.com"
+   ],
+   "old_domains": [
+    "kosovo.shell.com",
+    "ru.shell",
+    "shell.bg",
+    "shell.com.hk",
+    "shell.com.ro",
+    "shell.com.tr",
+    "shell.dk",
+    "shell.es",
+    "shell.fi",
+    "shell.fr",
+    "shell.gr",
+    "shell.hu",
+    "shell.it",
+    "shell.nl",
+    "shell.no",
+    "shell.pl",
+    "shell.pt",
+    "shell.rs",
+    "shell.se",
+    "shell.si"
+   ],
+   "employees": [
+    90000
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "petroleum industry",
+    "extraction of crude petroleum and natural gas"
+   ],
+   "icp_fit": false
+  },
+  "Q155026": {
+   "id": "Q155026",
+   "name": "United Parcel Service",
+   "tickers": [
+    "UPS"
+   ],
+   "domains": [
+    "ups.com"
+   ],
+   "old_domains": [
+    "kiala.fr",
+    "ups.com.tr"
+   ],
+   "employees": [
+    434000
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "logistics",
+    "delivery"
+   ],
+   "icp_fit": false
+  },
+  "Q156238": {
+   "id": "Q156238",
+   "name": "ExxonMobil",
+   "tickers": [
+    "XOM"
+   ],
+   "domains": [
+    "corporate.exxonmobil.com"
+   ],
+   "old_domains": [
+    "essoymobil.com.co",
+    "exxonmobil.com",
+    "exxonmobil.no",
+    "exxonmobilstations.com",
+    "mobil.com.mx"
+   ],
+   "employees": [
+    74900
+   ],
+   "employees_as_of": "2019-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q15678788": {
+   "id": "Q15678788",
+   "name": "Fiat Chrysler Automobiles",
+   "tickers": [
+    "FCAU"
+   ],
+   "domains": [
+    "fcagroup.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    198545
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q157062": {
+   "id": "Q157062",
+   "name": "Unilever",
+   "tickers": [
+    "UL"
+   ],
+   "domains": [
+    "unilever.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    148000
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United Kingdom",
+    "Kingdom of the Netherlands"
+   ],
+   "industries": [
+    "food industry",
+    "fast-moving consumer goods",
+    "perfumery",
+    "personal care product",
+    "dairy industry",
+    "manufacture of vegetable and animal oils and fats",
+    "manufacture of grain mill products, starches and starch products",
+    "manufacture of bakery and farinaceous products",
+    "manufacture of soap and detergents, cleaning and polishing preparations, perfumes and toilet preparations"
+   ],
+   "icp_fit": false
+  },
+  "Q158205": {
+   "id": "Q158205",
+   "name": "Sanofi",
+   "tickers": [
+    "SNY"
+   ],
+   "domains": [
+    "sanofi.com"
+   ],
+   "old_domains": [
+    "sanofi.us"
+   ],
+   "employees": [
+    106566
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "France"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1591889": {
+   "id": "Q1591889",
+   "name": "Walgreens",
+   "tickers": [
+    "WAG"
+   ],
+   "domains": [
+    "walgreens.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    210500
+   ],
+   "employees_as_of": "2011-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q159433": {
+   "id": "Q159433",
+   "name": "3M",
+   "tickers": [
+    "MMM"
+   ],
+   "domains": [
+    "3m.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    94987
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "mining industry",
+    "occupational safety",
+    "consumer goods industry"
+   ],
+   "icp_fit": false
+  },
+  "Q160229": {
+   "id": "Q160229",
+   "name": "Telefónica",
+   "tickers": [
+    "TEF"
+   ],
+   "domains": [
+    "telefonica.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    104124
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "Spain"
+   ],
+   "industries": [
+    "telecommunications",
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q161140": {
+   "id": "Q161140",
+   "name": "Diageo",
+   "tickers": [
+    "DEO"
+   ],
+   "domains": [
+    "diageo.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    29860
+   ],
+   "employees_as_of": "2025-06-30",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "beverage industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1630431": {
+   "id": "Q1630431",
+   "name": "HCA Healthcare",
+   "tickers": [
+    "HCA"
+   ],
+   "domains": [
+    "careers.hcahealthcare.com",
+    "hcahealthcare.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    204000
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "health care"
+   ],
+   "icp_fit": false
+  },
+  "Q1641437": {
+   "id": "Q1641437",
+   "name": "Ralph Lauren Corporation",
+   "tickers": [
+    "RL"
+   ],
+   "domains": [
+    "ralphlauren.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    23400
+   ],
+   "employees_as_of": "2025-03-29",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "clothing industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1645081": {
+   "id": "Q1645081",
+   "name": "Nucor",
+   "tickers": [
+    "NUE"
+   ],
+   "domains": [
+    "nucor.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    31400
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "iron and steel industry"
+   ],
+   "icp_fit": false
+  },
+  "Q165858": {
+   "id": "Q165858",
+   "name": "Telus Communications",
+   "tickers": [
+    "TU"
+   ],
+   "domains": [
+    "telus.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    28000
+   ],
+   "employees_as_of": "2017-10-30",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "mobile phone industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1671509": {
+   "id": "Q1671509",
+   "name": "onsemi",
+   "tickers": [
+    "ON"
+   ],
+   "domains": [
+    "onsemi.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    26400
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q16959074": {
+   "id": "Q16959074",
+   "name": "United Financial Bancorp",
+   "tickers": [
+    "UBNK"
+   ],
+   "domains": [
+    "bankatunited.com",
+    "unitedfinancialinc.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    675
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q16972754": {
+   "id": "Q16972754",
+   "name": "Coinbase",
+   "tickers": [
+    "COIN"
+   ],
+   "domains": [
+    "coinbase.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1249
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "Bitcoin",
+    "fintech",
+    "cryptocurrency exchange",
+    "cryptocurrency industry"
+   ],
+   "icp_fit": false
+  },
+  "Q170416": {
+   "id": "Q170416",
+   "name": "Koninklijke Philips NV",
+   "tickers": [
+    "PHG"
+   ],
+   "domains": [
+    "philips.com"
+   ],
+   "old_domains": [
+    "centralamerica.philips.com",
+    "philips.ae",
+    "philips.am",
+    "philips.at",
+    "philips.az",
+    "philips.be",
+    "philips.bg",
+    "philips.by",
+    "philips.ca",
+    "philips.ch",
+    "philips.cl",
+    "philips.co.id",
+    "philips.co.il",
+    "philips.co.in",
+    "philips.co.jp",
+    "philips.co.ke",
+    "philips.co.kr",
+    "philips.co.nz",
+    "philips.co.th",
+    "philips.co.uk",
+    "philips.co.za",
+    "philips.com.ar",
+    "philips.com.au",
+    "philips.com.bh",
+    "philips.com.br",
+    "philips.com.cn",
+    "philips.com.co",
+    "philips.com.eg",
+    "philips.com.ge",
+    "philips.com.gh",
+    "philips.com.hk",
+    "philips.com.kw",
+    "philips.com.lb",
+    "philips.com.mx",
+    "philips.com.my",
+    "philips.com.om",
+    "philips.com.pe",
+    "philips.com.ph",
+    "philips.com.pk",
+    "philips.com.qa",
+    "philips.com.sg",
+    "philips.com.tr",
+    "philips.com.uy",
+    "philips.com.vn",
+    "philips.cz",
+    "philips.de",
+    "philips.dk",
+    "philips.ee",
+    "philips.es",
+    "philips.fi",
+    "philips.fr",
+    "philips.gr",
+    "philips.hr",
+    "philips.hu",
+    "philips.ie",
+    "philips.iq",
+    "philips.it",
+    "philips.jo",
+    "philips.kz",
+    "philips.lt",
+    "philips.lv",
+    "philips.ma",
+    "philips.ng",
+    "philips.nl",
+    "philips.no",
+    "philips.pl",
+    "philips.pt",
+    "philips.ro",
+    "philips.rs",
+    "philips.ru",
+    "philips.sa",
+    "philips.se",
+    "philips.si",
+    "philips.sk",
+    "philips.ua",
+    "philips.uz",
+    "usa.philips.com"
+   ],
+   "employees": [
+    81592
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "electrical industry",
+    "electronics industry",
+    "consumer electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q17061030": {
+   "id": "Q17061030",
+   "name": "Jumià",
+   "tickers": [
+    "JMIA"
+   ],
+   "domains": [
+    "group.jumia.com"
+   ],
+   "old_domains": [
+    "jumia.ci",
+    "jumia.co.ke",
+    "jumia.com.eg",
+    "jumia.com.ng",
+    "jumia.ma"
+   ],
+   "employees": [
+    4000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "Egypt",
+    "Kenya",
+    "Ghana",
+    "Algeria",
+    "Tunisia",
+    "Ivory Coast",
+    "Cameroon",
+    "Morocco",
+    "Mozambique",
+    "Nigeria",
+    "Uganda",
+    "Rwanda",
+    "Senegal"
+   ],
+   "industries": [
+    "online shop"
+   ],
+   "icp_fit": false
+  },
+  "Q17081612": {
+   "id": "Q17081612",
+   "name": "Moderna",
+   "tickers": [
+    "MRNA"
+   ],
+   "domains": [
+    "modernatx.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5800
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry",
+    "biotechnology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q17085620": {
+   "id": "Q17085620",
+   "name": "Planet Labs",
+   "tickers": [
+    "PL"
+   ],
+   "domains": [
+    "planet.com"
+   ],
+   "old_domains": [
+    "planet-labs.com"
+   ],
+   "employees": [
+    600
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "space industry"
+   ],
+   "icp_fit": false
+  },
+  "Q17109731": {
+   "id": "Q17109731",
+   "name": "NextGen Healthcare Information Systems",
+   "tickers": [
+    "NXGN"
+   ],
+   "domains": [
+    "nextgen.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1500,
+    2900
+   ],
+   "employees_as_of": "2018-09-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "health information technology"
+   ],
+   "icp_fit": true
+  },
+  "Q173395": {
+   "id": "Q173395",
+   "name": "Cisco",
+   "tickers": [
+    "CSCO"
+   ],
+   "domains": [
+    "cisco.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    86200
+   ],
+   "employees_as_of": "2025-07-26",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "networking hardware",
+    "telecommunications industry",
+    "infrastructure platform"
+   ],
+   "icp_fit": true
+  },
+  "Q173941": {
+   "id": "Q173941",
+   "name": "Electronic Arts",
+   "tickers": [
+    "EA"
+   ],
+   "domains": [
+    "ea.com"
+   ],
+   "old_domains": [
+    "help.ea.com"
+   ],
+   "employees": [
+    11000
+   ],
+   "employees_as_of": "2021-03-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "video game industry"
+   ],
+   "icp_fit": false
+  },
+  "Q174310": {
+   "id": "Q174310",
+   "name": "Nordstrom",
+   "tickers": [
+    "JWN"
+   ],
+   "domains": [
+    "nordstrom.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    72501
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q17460900": {
+   "id": "Q17460900",
+   "name": "Zoom Communications",
+   "tickers": [
+    "ZM"
+   ],
+   "domains": [
+    "zoom.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "video conference"
+   ],
+   "icp_fit": true
+  },
+  "Q17538813": {
+   "id": "Q17538813",
+   "name": "Similarweb",
+   "tickers": [
+    "SMWB"
+   ],
+   "domains": [
+    "similarweb.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1017
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States",
+    "Israel"
+   ],
+   "industries": [
+    "information technology"
+   ],
+   "icp_fit": true
+  },
+  "Q1760641": {
+   "id": "Q1760641",
+   "name": "Parametric Technology Corporation",
+   "tickers": [
+    "PTC"
+   ],
+   "domains": [
+    "ptc.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8000
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q1770710": {
+   "id": "Q1770710",
+   "name": "Tripadvisor",
+   "tickers": [
+    "TRIP"
+   ],
+   "domains": [
+    "tripadvisor.com"
+   ],
+   "old_domains": [
+    "th.tripadvisor.com",
+    "tripadvisor.ca",
+    "tripadvisor.co.uk",
+    "tripadvisor.com.br",
+    "tripadvisor.com.gr",
+    "tripadvisor.com.mx",
+    "tripadvisor.fr",
+    "tripadvisor.it"
+   ],
+   "employees": [
+    2
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "tourism",
+    "publishing",
+    "tourism industry"
+   ],
+   "icp_fit": false
+  },
+  "Q1776022": {
+   "id": "Q1776022",
+   "name": "Equinor ASA",
+   "tickers": [
+    "EQNR"
+   ],
+   "domains": [
+    "equinor.ar",
+    "equinor.co.kr",
+    "equinor.com",
+    "equinor.com.br",
+    "equinor.de",
+    "equinor.jp",
+    "equinor.no",
+    "equinor.pl",
+    "equinorcelticsea.co.uk",
+    "equinorstorage.de"
+   ],
+   "old_domains": [],
+   "employees": [
+    20000
+   ],
+   "employees_as_of": "2019-10-01",
+   "countries": [
+    "Norway"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q18124524": {
+   "id": "Q18124524",
+   "name": "EHang",
+   "tickers": [
+    "EH"
+   ],
+   "domains": [
+    "ehang.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    230
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "aerospace industry",
+    "aerospace engineering"
+   ],
+   "icp_fit": false
+  },
+  "Q18151094": {
+   "id": "Q18151094",
+   "name": "Kirby Corporation",
+   "tickers": [
+    "KEX"
+   ],
+   "domains": [
+    "kirbycorp.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5200
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "water transport"
+   ],
+   "icp_fit": false
+  },
+  "Q182477": {
+   "id": "Q182477",
+   "name": "Nvidia",
+   "tickers": [
+    "NVDA"
+   ],
+   "domains": [
+    "nvidia.com"
+   ],
+   "old_domains": [
+    "nvidia.cn"
+   ],
+   "employees": [
+    42000
+   ],
+   "employees_as_of": "2026-01-25",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q18387139": {
+   "id": "Q18387139",
+   "name": "Synchrony Financial",
+   "tickers": [
+    "SYF"
+   ],
+   "domains": [
+    "synchronybank.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    15000
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q1852556": {
+   "id": "Q1852556",
+   "name": "Philip Morris International",
+   "tickers": [
+    "PM"
+   ],
+   "domains": [
+    "pmi.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    79800
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States",
+    "Switzerland"
+   ],
+   "industries": [
+    "tobacco industry",
+    "fast-moving consumer goods"
+   ],
+   "icp_fit": false
+  },
+  "Q190464": {
+   "id": "Q190464",
+   "name": "HSBC",
+   "tickers": [
+    "HSBC"
+   ],
+   "domains": [
+    "hsbc.com"
+   ],
+   "old_domains": [
+    "hsbc.ca",
+    "hsbc.co.uk",
+    "hsbc.com.ar",
+    "hsbc.com.br",
+    "hsbc.com.hk",
+    "hsbc.com.mx",
+    "hsbc.com.tr",
+    "hsbc.fr"
+   ],
+   "employees": [
+    219697
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "insurance",
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q192314": {
+   "id": "Q192314",
+   "name": "JPMorgan Chase",
+   "tickers": [
+    "JPM"
+   ],
+   "domains": [
+    "jpmorganchase.com"
+   ],
+   "old_domains": [
+    "homelendingadvisor.chase.com",
+    "jpmorgan.com"
+   ],
+   "employees": [
+    271025
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q193326": {
+   "id": "Q193326",
+   "name": "Goldman Sachs",
+   "tickers": [
+    "GS"
+   ],
+   "domains": [
+    "goldmansachs.com"
+   ],
+   "old_domains": [
+    "gs.com"
+   ],
+   "employees": [
+    34400
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services",
+    "International Standard Industrial Classification",
+    "financial service activities, except insurance and pension funding",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q193412": {
+   "id": "Q193412",
+   "name": "Texas Instruments",
+   "tickers": [
+    "TXN"
+   ],
+   "domains": [
+    "ti.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    31000
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "electronics",
+    "calculator",
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q193701": {
+   "id": "Q193701",
+   "name": "SpaceX",
+   "tickers": [
+    "SPCX"
+   ],
+   "domains": [
+    "spacex.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    22000
+   ],
+   "employees_as_of": "2026-03-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "space industry"
+   ],
+   "icp_fit": false
+  },
+  "Q194360": {
+   "id": "Q194360",
+   "name": "American Express",
+   "tickers": [
+    "AXP"
+   ],
+   "domains": [
+    "americanexpress.com"
+   ],
+   "old_domains": [
+    "americanexpress.ae",
+    "americanexpress.ch",
+    "americanexpress.com.bh",
+    "americanexpress.com.qa",
+    "americanexpress.com.tr"
+   ],
+   "employees": [
+    64000
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services",
+    "payment card industry",
+    "financial service activities, except insurance and pension funding"
+   ],
+   "icp_fit": false
+  },
+  "Q19681433": {
+   "id": "Q19681433",
+   "name": "Kraft Heinz",
+   "tickers": [
+    "KHC"
+   ],
+   "domains": [
+    "kraftheinzcompany.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    36000
+   ],
+   "employees_as_of": "2021-12-25",
+   "countries": [
+    "United States",
+    "United Kingdom"
+   ],
+   "industries": [
+    "food industry",
+    "fast-moving consumer goods"
+   ],
+   "icp_fit": false
+  },
+  "Q19900": {
+   "id": "Q19900",
+   "name": "Oracle Corporation",
+   "tickers": [
+    "ORCL"
+   ],
+   "domains": [
+    "oracle.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    162000
+   ],
+   "employees_as_of": "2025-05-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software development",
+    "information technology consulting"
+   ],
+   "icp_fit": false
+  },
+  "Q19923099": {
+   "id": "Q19923099",
+   "name": "Hewlett Packard Enterprise",
+   "tickers": [
+    "HPE"
+   ],
+   "domains": [
+    "hpe.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    60000
+   ],
+   "employees_as_of": "2018-10-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry",
+    "information and communications industry",
+    "information technology industry",
+    "computer hardware industry"
+   ],
+   "icp_fit": true
+  },
+  "Q20165": {
+   "id": "Q20165",
+   "name": "Nissan",
+   "tickers": [
+    "NSANY"
+   ],
+   "domains": [
+    "nissan-global.com"
+   ],
+   "old_domains": [
+    "nissan.co.id",
+    "nissan.co.jp",
+    "nissan.com.br",
+    "nissan.com.mx",
+    "nissan.de",
+    "nissan.fr",
+    "nissan.in",
+    "nissanusa.com"
+   ],
+   "employees": [
+    136134
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2034659": {
+   "id": "Q2034659",
+   "name": "Extreme Networks",
+   "tickers": [
+    "EXTR"
+   ],
+   "domains": [
+    "extremenetworks.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2713
+   ],
+   "employees_as_of": "2018-06-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "networking hardware"
+   ],
+   "icp_fit": true
+  },
+  "Q2037125": {
+   "id": "Q2037125",
+   "name": "State Street Corporation",
+   "tickers": [
+    "STT"
+   ],
+   "domains": [
+    "statestreet.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    33783
+   ],
+   "employees_as_of": "2016-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q204727": {
+   "id": "Q204727",
+   "name": "Alexion Pharmaceuticals",
+   "tickers": [
+    "ALXN"
+   ],
+   "domains": [
+    "alexion.com"
+   ],
+   "old_domains": [
+    "alxn.com"
+   ],
+   "employees": [
+    3837
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2047336": {
+   "id": "Q2047336",
+   "name": "Palantir Technologies",
+   "tickers": [
+    "PLTR"
+   ],
+   "domains": [
+    "palantir.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4429
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer and network surveillance",
+    "open-source intelligence",
+    "mass surveillance",
+    "data analytics software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q20486917": {
+   "id": "Q20486917",
+   "name": "Welltower",
+   "tickers": [
+    "WELL"
+   ],
+   "domains": [
+    "welltower.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    685
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "real estate investment trust"
+   ],
+   "icp_fit": false
+  },
+  "Q206921": {
+   "id": "Q206921",
+   "name": "Pfizer",
+   "tickers": [
+    "PFE"
+   ],
+   "domains": [
+    "pfizer.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    78500
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q20711490": {
+   "id": "Q20711490",
+   "name": "LKQ Corporation",
+   "tickers": [
+    "LKQ"
+   ],
+   "domains": [
+    "lkqcorp.com"
+   ],
+   "old_domains": [
+    "lkqpickyourpart.com"
+   ],
+   "employees": [
+    29500
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2079243": {
+   "id": "Q2079243",
+   "name": "TIM Brasil",
+   "tickers": [
+    "TIMB"
+   ],
+   "domains": [
+    "tim.com.br"
+   ],
+   "old_domains": [],
+   "employees": [
+    9337
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "Brazil"
+   ],
+   "industries": [
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q20800404": {
+   "id": "Q20800404",
+   "name": "Alphabet Inc.",
+   "tickers": [
+    "GOOGL",
+    "GOOG"
+   ],
+   "domains": [
+    "abc.xyz"
+   ],
+   "old_domains": [],
+   "employees": [
+    190234
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information technology"
+   ],
+   "icp_fit": false
+  },
+  "Q210047": {
+   "id": "Q210047",
+   "name": "Petrobras",
+   "tickers": [
+    "PBR"
+   ],
+   "domains": [
+    "petrobras.com.br"
+   ],
+   "old_domains": [
+    "petrobraschile.cl",
+    "petrobrasdistribucion.cl"
+   ],
+   "employees": [
+    52000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "Brazil"
+   ],
+   "industries": [
+    "petroleum industry",
+    "gas industry"
+   ],
+   "icp_fit": false
+  },
+  "Q21077": {
+   "id": "Q21077",
+   "name": "Warner Music Group",
+   "tickers": [
+    "WMG"
+   ],
+   "domains": [
+    "wmg.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4520
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "music industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2114414": {
+   "id": "Q2114414",
+   "name": "Prudential Financial",
+   "tickers": [
+    "PRU"
+   ],
+   "domains": [
+    "prudential.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    41671
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "life insurance",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q21177770": {
+   "id": "Q21177770",
+   "name": "CYNGN Inc.",
+   "tickers": [
+    "CYN"
+   ],
+   "domains": [
+    "cyngn.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    62
+   ],
+   "employees_as_of": "2026-04-11",
+   "countries": [],
+   "industries": [
+    "software development"
+   ],
+   "icp_fit": false
+  },
+  "Q21189883": {
+   "id": "Q21189883",
+   "name": "Willis Towers Watson",
+   "tickers": [
+    "WTW"
+   ],
+   "domains": [
+    "wtwco.com"
+   ],
+   "old_domains": [
+    "willis.com",
+    "willistowerswatson.com"
+   ],
+   "employees": [
+    46100
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States",
+    "United Kingdom"
+   ],
+   "industries": [
+    "consulting company",
+    "risk management",
+    "insurance broker"
+   ],
+   "icp_fit": false
+  },
+  "Q212235": {
+   "id": "Q212235",
+   "name": "American International Group",
+   "tickers": [
+    "AIG"
+   ],
+   "domains": [
+    "aig.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    26200
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q212322": {
+   "id": "Q212322",
+   "name": "GSK",
+   "tickers": [
+    "GSK"
+   ],
+   "domains": [
+    "gsk.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    99300
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "biotechnology",
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q212405": {
+   "id": "Q212405",
+   "name": "Procter & Gamble",
+   "tickers": [
+    "PG"
+   ],
+   "domains": [
+    "pg.com"
+   ],
+   "old_domains": [
+    "in.pg.com"
+   ],
+   "employees": [
+    105000
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry",
+    "fast-moving consumer goods"
+   ],
+   "icp_fit": false
+  },
+  "Q212900": {
+   "id": "Q212900",
+   "name": "Lehman Brothers",
+   "tickers": [
+    "LEH"
+   ],
+   "domains": [
+    "lehman.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    26200
+   ],
+   "employees_as_of": "2008-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "investment",
+    "financial services",
+    "financial service activities, except insurance and pension funding"
+   ],
+   "icp_fit": false
+  },
+  "Q2140077": {
+   "id": "Q2140077",
+   "name": "Tribune Media",
+   "tickers": [
+    "TRCO"
+   ],
+   "domains": [
+    "tribunemedia.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8200
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "media industry"
+   ],
+   "icp_fit": false
+  },
+  "Q21404084": {
+   "id": "Q21404084",
+   "name": "HP Inc.",
+   "tickers": [
+    "HPQ"
+   ],
+   "domains": [
+    "hp.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    55000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry",
+    "information and communications industry",
+    "information technology industry",
+    "computer hardware industry"
+   ],
+   "icp_fit": true
+  },
+  "Q214346": {
+   "id": "Q214346",
+   "name": "Viacom",
+   "tickers": [
+    "VIAB",
+    "VIA"
+   ],
+   "domains": [
+    "viacom.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    11200
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "media industry"
+   ],
+   "icp_fit": false
+  },
+  "Q214763": {
+   "id": "Q214763",
+   "name": "ConocoPhillips",
+   "tickers": [
+    "COP"
+   ],
+   "domains": [
+    "conocophillips.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    10800
+   ],
+   "employees_as_of": "2018-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q217583": {
+   "id": "Q217583",
+   "name": "Berkshire Hathaway",
+   "tickers": [
+    "BRK.B",
+    "BRK.A"
+   ],
+   "domains": [
+    "berkshirehathaway.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    360000
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "insurance",
+    "conglomerate",
+    "aircraft industry"
+   ],
+   "icp_fit": false
+  },
+  "Q219508": {
+   "id": "Q219508",
+   "name": "Citigroup",
+   "tickers": [
+    "C"
+   ],
+   "domains": [
+    "citigroup.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    219000
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "bank",
+    "financial services",
+    "International Standard Industrial Classification",
+    "financial service activities, except insurance and pension funding"
+   ],
+   "icp_fit": false
+  },
+  "Q219635": {
+   "id": "Q219635",
+   "name": "BlackRock",
+   "tickers": [
+    "BLK"
+   ],
+   "domains": [
+    "blackrock.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    19800
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "asset management"
+   ],
+   "icp_fit": false
+  },
+  "Q22078063": {
+   "id": "Q22078063",
+   "name": "Snowflake Inc.",
+   "tickers": [
+    "SNOW"
+   ],
+   "domains": [
+    "snowflake.com"
+   ],
+   "old_domains": [
+    "snowflake.net"
+   ],
+   "employees": [
+    1400
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "cloud computing"
+   ],
+   "icp_fit": true
+  },
+  "Q221062": {
+   "id": "Q221062",
+   "name": "DuPont",
+   "tickers": [
+    "DD"
+   ],
+   "domains": [
+    "dupont.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    98000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "chemical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q223127": {
+   "id": "Q223127",
+   "name": "Logitech",
+   "tickers": [
+    "LOGI"
+   ],
+   "domains": [
+    "logitech.com"
+   ],
+   "old_domains": [
+    "logicool.co.jp"
+   ],
+   "employees": [
+    7300
+   ],
+   "employees_as_of": "2024-03-31",
+   "countries": [
+    "United States",
+    "Switzerland"
+   ],
+   "industries": [
+    "software industry",
+    "electronics industry",
+    "consumer electronics industry",
+    "computer hardware industry"
+   ],
+   "icp_fit": true
+  },
+  "Q2241604": {
+   "id": "Q2241604",
+   "name": "Pandora",
+   "tickers": [
+    "PANDORA"
+   ],
+   "domains": [
+    "pandoragroup.com"
+   ],
+   "old_domains": [
+    "de.pandora.net",
+    "fr.pandora.net",
+    "it.pandora.net",
+    "jp.pandora.net",
+    "pandora.kz",
+    "pandora.net",
+    "tr.pandora.net",
+    "uk.pandora.net",
+    "us.pandora.net"
+   ],
+   "employees": [
+    26985
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "Denmark"
+   ],
+   "industries": [
+    "retail",
+    "jewelry"
+   ],
+   "icp_fit": false
+  },
+  "Q2283": {
+   "id": "Q2283",
+   "name": "Microsoft",
+   "tickers": [
+    "MSFT"
+   ],
+   "domains": [
+    "microsoft.com"
+   ],
+   "old_domains": [
+    "microsoft.cz"
+   ],
+   "employees": [
+    228000
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software development",
+    "software industry",
+    "International Standard Industrial Classification",
+    "technology industry",
+    "consumer electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2287759": {
+   "id": "Q2287759",
+   "name": "Simon Property Group",
+   "tickers": [
+    "SPG"
+   ],
+   "domains": [
+    "simon.com"
+   ],
+   "old_domains": [
+    "business.simon.com"
+   ],
+   "employees": [
+    3300
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "real estate investment trust"
+   ],
+   "icp_fit": false
+  },
+  "Q2299611": {
+   "id": "Q2299611",
+   "name": "Yelp",
+   "tickers": [
+    "YELP"
+   ],
+   "domains": [
+    "yelp.co.uk",
+    "yelp.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4350
+   ],
+   "employees_as_of": "2017-05-09",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information technology"
+   ],
+   "icp_fit": true
+  },
+  "Q2357515": {
+   "id": "Q2357515",
+   "name": "Stryker Corporation",
+   "tickers": [
+    "SYK"
+   ],
+   "domains": [
+    "stryker.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    22000
+   ],
+   "employees_as_of": "2012-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "medical technology"
+   ],
+   "icp_fit": false
+  },
+  "Q2376711": {
+   "id": "Q2376711",
+   "name": "Sysco",
+   "tickers": [
+    "SYY"
+   ],
+   "domains": [
+    "sysco.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    67001
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "wholesale"
+   ],
+   "icp_fit": false
+  },
+  "Q245343": {
+   "id": "Q245343",
+   "name": "Barclays",
+   "tickers": [
+    "BCS"
+   ],
+   "domains": [
+    "barclays.co.uk",
+    "home.barclays"
+   ],
+   "old_domains": [],
+   "employees": [
+    79900
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial service activities, except insurance and pension funding",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q2466256": {
+   "id": "Q2466256",
+   "name": "U.S. Cellular",
+   "tickers": [
+    "USM"
+   ],
+   "domains": [
+    "uscellular.com"
+   ],
+   "old_domains": [
+    "local.uscellular.com"
+   ],
+   "employees": [
+    6700
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "mobile phone industry"
+   ],
+   "icp_fit": false
+  },
+  "Q247489": {
+   "id": "Q247489",
+   "name": "Merck & Co.",
+   "tickers": [
+    "MRK"
+   ],
+   "domains": [
+    "merck.com",
+    "msd.no"
+   ],
+   "old_domains": [],
+   "employees": [
+    70000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q248": {
+   "id": "Q248",
+   "name": "Intel",
+   "tickers": [
+    "INTC"
+   ],
+   "domains": [
+    "intel.com"
+   ],
+   "old_domains": [
+    "intel.cn"
+   ],
+   "employees": [
+    121100
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "electrical industry",
+    "semiconductor industry"
+   ],
+   "icp_fit": false
+  },
+  "Q24834296": {
+   "id": "Q24834296",
+   "name": "China Telecom",
+   "tickers": [
+    "CHA"
+   ],
+   "domains": [
+    "chinatelecom-h.com"
+   ],
+   "old_domains": [
+    "chinatelecomglobal.com"
+   ],
+   "employees": [
+    280747
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q24890758": {
+   "id": "Q24890758",
+   "name": "CrowdStrike",
+   "tickers": [
+    "CRWD"
+   ],
+   "domains": [
+    "crowdstrike.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    7925
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer security"
+   ],
+   "icp_fit": true
+  },
+  "Q2552219": {
+   "id": "Q2552219",
+   "name": "Waste Management, Inc",
+   "tickers": [
+    "WM"
+   ],
+   "domains": [
+    "wm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    43000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "waste management industry"
+   ],
+   "icp_fit": false
+  },
+  "Q261288": {
+   "id": "Q261288",
+   "name": "Dolby",
+   "tickers": [
+    "DLB"
+   ],
+   "domains": [
+    "dolby.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1667
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "audio signal processing"
+   ],
+   "icp_fit": false
+  },
+  "Q265286": {
+   "id": "Q265286",
+   "name": "Trivago",
+   "tickers": [
+    "TRVG"
+   ],
+   "domains": [
+    "trivago.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    709
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "Germany"
+   ],
+   "industries": [
+    "tourism",
+    "e-commerce"
+   ],
+   "icp_fit": false
+  },
+  "Q266423": {
+   "id": "Q266423",
+   "name": "Bristol-Myers Squibb",
+   "tickers": [
+    "BMY"
+   ],
+   "domains": [
+    "bms.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    30000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q26989": {
+   "id": "Q26989",
+   "name": "Infosys limited",
+   "tickers": [
+    "INFY"
+   ],
+   "domains": [
+    "infosys.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    328594
+   ],
+   "employees_as_of": "2026-01-01",
+   "countries": [
+    "India"
+   ],
+   "industries": [
+    "IT service management"
+   ],
+   "icp_fit": false
+  },
+  "Q27346385": {
+   "id": "Q27346385",
+   "name": "Manchester United plc",
+   "tickers": [
+    "MANU"
+   ],
+   "domains": [
+    "ir.manutd.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    940
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United Kingdom",
+    "Cayman Islands"
+   ],
+   "industries": [
+    "sports industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2749364": {
+   "id": "Q2749364",
+   "name": "Fortinet",
+   "tickers": [
+    "FTNT"
+   ],
+   "domains": [
+    "fortinet.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    15109
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer security"
+   ],
+   "icp_fit": true
+  },
+  "Q2759586": {
+   "id": "Q2759586",
+   "name": "Papa John's",
+   "tickers": [
+    "PZZA"
+   ],
+   "domains": [
+    "papajohns.com"
+   ],
+   "old_domains": [
+    "papajohns.cl",
+    "papajohns.co.uk",
+    "papajohns.es",
+    "papajohns.pt",
+    "papajohns.ru",
+    "papajohnschina.com",
+    "pji.co.kr"
+   ],
+   "employees": [
+    20700
+   ],
+   "employees_as_of": "2013-12-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "restaurant"
+   ],
+   "icp_fit": false
+  },
+  "Q27893": {
+   "id": "Q27893",
+   "name": "ArcelorMittal",
+   "tickers": [
+    "MT"
+   ],
+   "domains": [
+    "corporate.arcelormittal.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    125416
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "Spain",
+    "Luxembourg"
+   ],
+   "industries": [
+    "mining industry",
+    "iron and steel industry"
+   ],
+   "icp_fit": false
+  },
+  "Q28027517": {
+   "id": "Q28027517",
+   "name": "Lucid Motors",
+   "tickers": [
+    "LCID"
+   ],
+   "domains": [
+    "lucidmotors.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    6500
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automotive industry",
+    "battery",
+    "automotive battery",
+    "electric vehicle"
+   ],
+   "icp_fit": false
+  },
+  "Q28154806": {
+   "id": "Q28154806",
+   "name": "MINDBODY",
+   "tickers": [
+    "MB"
+   ],
+   "domains": [
+    "mindbodyonline.com"
+   ],
+   "old_domains": [
+    "clients.mindbodyonline.com",
+    "de.mindbodyonline.com",
+    "es.mindbodyonline.com",
+    "uk.mindbodyonline.com"
+   ],
+   "employees": [
+    1337
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q282997": {
+   "id": "Q282997",
+   "name": "Fox Factory",
+   "tickers": [
+    "FOXF"
+   ],
+   "domains": [
+    "ridefox.com",
+    "shop.foxracingshox.de",
+    "shop.ridefox.ca"
+   ],
+   "old_domains": [
+    "foxracingshox.com"
+   ],
+   "employees": [
+    4300
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automotive industry",
+    "sports industry",
+    "bicycle industry"
+   ],
+   "icp_fit": false
+  },
+  "Q28782856": {
+   "id": "Q28782856",
+   "name": "DXC Technology",
+   "tickers": [
+    "DXC"
+   ],
+   "domains": [
+    "dxc.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    170500
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "quaternary sector of the economy"
+   ],
+   "icp_fit": false
+  },
+  "Q2895117": {
+   "id": "Q2895117",
+   "name": "Audiocodes Ltd.",
+   "tickers": [
+    "AUDC"
+   ],
+   "domains": [
+    "audiocodes.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    728
+   ],
+   "employees_as_of": "2019-12-31",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "telecommunications",
+    "technology",
+    "communication",
+    "Voice over IP",
+    "information security",
+    "communications media",
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2901365": {
+   "id": "Q2901365",
+   "name": "Mobileye",
+   "tickers": [
+    "MBLY"
+   ],
+   "domains": [
+    "mobileye.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    3200
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2904022": {
+   "id": "Q2904022",
+   "name": "Bio-Rad Laboratories",
+   "tickers": [
+    "BIO"
+   ],
+   "domains": [
+    "bio-rad.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8300
+   ],
+   "employees_as_of": "2023-03-16",
+   "countries": [
+    "United States",
+    "Switzerland"
+   ],
+   "industries": [
+    "biotechnology"
+   ],
+   "icp_fit": false
+  },
+  "Q292292": {
+   "id": "Q292292",
+   "name": "AGCO",
+   "tickers": [
+    "AGCO"
+   ],
+   "domains": [
+    "agcocorp.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    22000
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "industrial manufacturing"
+   ],
+   "icp_fit": false
+  },
+  "Q2931412": {
+   "id": "Q2931412",
+   "name": "Viridien",
+   "tickers": [
+    "CGG"
+   ],
+   "domains": [
+    "viridiengroup.com"
+   ],
+   "old_domains": [
+    "cgg.com"
+   ],
+   "employees": [
+    4600
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "France"
+   ],
+   "industries": [
+    "petroleum industry",
+    "various specialized, scientific and technical activities",
+    "geospatial industry"
+   ],
+   "icp_fit": false
+  },
+  "Q2945643": {
+   "id": "Q2945643",
+   "name": "Skechers",
+   "tickers": [
+    "SKX"
+   ],
+   "domains": [
+    "skechers.com"
+   ],
+   "old_domains": [
+    "ba.skechers.com",
+    "br.skechers.com",
+    "co.skechers.com",
+    "hr.skechers.com",
+    "mk.skechers.com",
+    "pa.skechers.com",
+    "pe.skechers.com",
+    "ph.skechers.com",
+    "ro.skechers.com",
+    "rs.skechers.com",
+    "si.skechers.com",
+    "sk.skechers.com",
+    "skechers-chile.cl",
+    "skechers.at",
+    "skechers.be",
+    "skechers.ca",
+    "skechers.ch",
+    "skechers.co.il",
+    "skechers.co.nz",
+    "skechers.co.th",
+    "skechers.co.uk",
+    "skechers.com.au",
+    "skechers.com.dz",
+    "skechers.com.hk",
+    "skechers.com.mx",
+    "skechers.com.my",
+    "skechers.com.sg",
+    "skechers.com.tr",
+    "skechers.cz",
+    "skechers.de",
+    "skechers.dk",
+    "skechers.ee",
+    "skechers.es",
+    "skechers.fi",
+    "skechers.fr",
+    "skechers.gr",
+    "skechers.hu",
+    "skechers.id",
+    "skechers.ie",
+    "skechers.in",
+    "skechers.it",
+    "skechers.jp",
+    "skechers.ma",
+    "skechers.nl",
+    "skechers.no",
+    "skechers.pl",
+    "skechers.pt",
+    "skechers.se",
+    "skecherskorea.co.kr",
+    "skechersvn.vn"
+   ],
+   "employees": [
+    9800
+   ],
+   "employees_as_of": "2017-01-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "clothing industry"
+   ],
+   "icp_fit": false
+  },
+  "Q29469208": {
+   "id": "Q29469208",
+   "name": "Simpson Manufacturing Company",
+   "tickers": [
+    "SSD"
+   ],
+   "domains": [
+    "simpsonmfg.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2500
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "construction",
+    "building materials trade"
+   ],
+   "icp_fit": false
+  },
+  "Q294721": {
+   "id": "Q294721",
+   "name": "AMC Theatres",
+   "tickers": [
+    "AMC"
+   ],
+   "domains": [
+    "amctheatres.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    34000
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "entertainment"
+   ],
+   "icp_fit": false
+  },
+  "Q297879": {
+   "id": "Q297879",
+   "name": "ASML Holding",
+   "tickers": [
+    "ASML"
+   ],
+   "domains": [
+    "asml.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    43520
+   ],
+   "employees_as_of": "2026-03-10",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": false
+  },
+  "Q300120": {
+   "id": "Q300120",
+   "name": "AUO Corporation",
+   "tickers": [
+    "AUO"
+   ],
+   "domains": [
+    "auo.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    38000
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "Taiwan"
+   ],
+   "industries": [
+    "electronics"
+   ],
+   "icp_fit": false
+  },
+  "Q30256699": {
+   "id": "Q30256699",
+   "name": "BioNTech",
+   "tickers": [
+    "BNTX"
+   ],
+   "domains": [
+    "biontech.de"
+   ],
+   "old_domains": [],
+   "employees": [
+    1300
+   ],
+   "employees_as_of": "2019-12-31",
+   "countries": [
+    "Germany"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q30324333": {
+   "id": "Q30324333",
+   "name": "TechnipFMC",
+   "tickers": [
+    "FTI"
+   ],
+   "domains": [
+    "technipfmc.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    37000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q30632958": {
+   "id": "Q30632958",
+   "name": "Exar Corporation",
+   "tickers": [
+    "EXAR"
+   ],
+   "domains": [
+    "exar.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    269
+   ],
+   "employees_as_of": "2016-03-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "semiconductor",
+    "electronics"
+   ],
+   "icp_fit": false
+  },
+  "Q30645592": {
+   "id": "Q30645592",
+   "name": "Yum China",
+   "tickers": [
+    "YUMC"
+   ],
+   "domains": [
+    "yumchina.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    420000
+   ],
+   "employees_as_of": "2016-12-31",
+   "countries": [
+    "United States",
+    "People's Republic of China"
+   ],
+   "industries": [
+    "fast food"
+   ],
+   "icp_fit": false
+  },
+  "Q306764": {
+   "id": "Q306764",
+   "name": "Abbott Laboratories",
+   "tickers": [
+    "ABT"
+   ],
+   "domains": [
+    "abbott.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    73000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "medical technology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q30873": {
+   "id": "Q30873",
+   "name": "Dell",
+   "tickers": [
+    "DELL"
+   ],
+   "domains": [
+    "dell.com"
+   ],
+   "old_domains": [
+    "dell.co.in",
+    "dellretailstores.in"
+   ],
+   "employees": [
+    165000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry",
+    "computer hardware industry"
+   ],
+   "icp_fit": false
+  },
+  "Q312": {
+   "id": "Q312",
+   "name": "Apple Inc.",
+   "tickers": [
+    "AAPL"
+   ],
+   "domains": [
+    "apple.com",
+    "apple.com.cn"
+   ],
+   "old_domains": [
+    "mac.com"
+   ],
+   "employees": [
+    164000
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "digital distribution",
+    "software development",
+    "software industry",
+    "electronics industry",
+    "mobile phone industry",
+    "consumer electronics industry",
+    "information technology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q3146975": {
+   "id": "Q3146975",
+   "name": "Xylem Inc.",
+   "tickers": [
+    "XYL"
+   ],
+   "domains": [
+    "xylem.com"
+   ],
+   "old_domains": [
+    "xyleminc.com"
+   ],
+   "employees": [
+    17800
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "industrial manufacturing"
+   ],
+   "icp_fit": false
+  },
+  "Q315287": {
+   "id": "Q315287",
+   "name": "Qiagen",
+   "tickers": [
+    "QGEN"
+   ],
+   "domains": [
+    "qiagen.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4910
+   ],
+   "employees_as_of": "2023-03-16",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "biotechnology"
+   ],
+   "icp_fit": false
+  },
+  "Q3157622": {
+   "id": "Q3157622",
+   "name": "Jacobs Engineering Group",
+   "tickers": [
+    "J"
+   ],
+   "domains": [
+    "jacobs.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    55000
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "engineering",
+    "professional services industry"
+   ],
+   "icp_fit": false
+  },
+  "Q319642": {
+   "id": "Q319642",
+   "name": "Chevron Corporation",
+   "tickers": [
+    "CVX"
+   ],
+   "domains": [
+    "chevron.com"
+   ],
+   "old_domains": [
+    "chevron.parkland.ca",
+    "chevroncontechron.com",
+    "chevronwithtechron.ca",
+    "chevronwithtechron.com"
+   ],
+   "employees": [
+    48600
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q3277465": {
+   "id": "Q3277465",
+   "name": "Sirius XM Rad",
+   "tickers": [
+    "SIRI"
+   ],
+   "domains": [
+    "siriusxm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5515
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "radio broadcasting"
+   ],
+   "icp_fit": false
+  },
+  "Q328840": {
+   "id": "Q328840",
+   "name": "Visa Inc.",
+   "tickers": [
+    "V"
+   ],
+   "domains": [
+    "corporate.visa.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    31600
+   ],
+   "employees_as_of": "2024-09-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q3295867": {
+   "id": "Q3295867",
+   "name": "The Coca-Cola Company",
+   "tickers": [
+    "KO"
+   ],
+   "domains": [
+    "coca-colacompany.com"
+   ],
+   "old_domains": [
+    "coca-cola.com",
+    "coca-cola.com.br",
+    "cokesolutions.com"
+   ],
+   "employees": [
+    69700
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "fast-moving consumer goods",
+    "beverage industry"
+   ],
+   "icp_fit": false
+  },
+  "Q329953": {
+   "id": "Q329953",
+   "name": "Northrop Grumman Corporation",
+   "tickers": [
+    "NOC"
+   ],
+   "domains": [
+    "northropgrumman.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    65600
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "arms industry",
+    "shipbuilding",
+    "aircraft industry",
+    "aerospace industry",
+    "electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q332477": {
+   "id": "Q332477",
+   "name": "Victoria’s Secret",
+   "tickers": [
+    "VSXY"
+   ],
+   "domains": [
+    "victoriassecret.com"
+   ],
+   "old_domains": [
+    "victoriassecret.co.uk",
+    "victoriassecretandco.com"
+   ],
+   "employees": [
+    31000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "clothing industry"
+   ],
+   "icp_fit": false
+  },
+  "Q333718": {
+   "id": "Q333718",
+   "name": "Johnson & Johnson",
+   "tickers": [
+    "JNJ"
+   ],
+   "domains": [
+    "jnj.com"
+   ],
+   "old_domains": [
+    "jjmt.com.tw",
+    "jnj.com.cn"
+   ],
+   "employees": [
+    136400
+   ],
+   "employees_as_of": "2021-01-03",
+   "countries": [
+    "United States",
+    "United Kingdom"
+   ],
+   "industries": [
+    "pharmaceutical industry",
+    "medical technology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q334204": {
+   "id": "Q334204",
+   "name": "Morgan Stanley",
+   "tickers": [
+    "MS"
+   ],
+   "domains": [
+    "morganstanley.com"
+   ],
+   "old_domains": [
+    "ms.com"
+   ],
+   "employees": [
+    80006
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States",
+    "United Kingdom"
+   ],
+   "industries": [
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q3344170": {
+   "id": "Q3344170",
+   "name": "Upwork",
+   "tickers": [
+    "UPWK"
+   ],
+   "domains": [
+    "upwork.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    630
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computing platform",
+    "online marketplace"
+   ],
+   "icp_fit": false
+  },
+  "Q334800": {
+   "id": "Q334800",
+   "name": "PepsiCo",
+   "tickers": [
+    "PEP"
+   ],
+   "domains": [
+    "pepsico.com"
+   ],
+   "old_domains": [
+    "pepsico.com.mx"
+   ],
+   "employees": [
+    309000
+   ],
+   "employees_as_of": "2021-12-25",
+   "countries": [
+    "United States",
+    "Belgium"
+   ],
+   "industries": [
+    "food industry",
+    "fast-moving consumer goods",
+    "beverage industry"
+   ],
+   "icp_fit": false
+  },
+  "Q338825": {
+   "id": "Q338825",
+   "name": "Accenture",
+   "tickers": [
+    "ACN"
+   ],
+   "domains": [
+    "accenture.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    779000
+   ],
+   "employees_as_of": "2025-08-31",
+   "countries": [
+    "Ireland"
+   ],
+   "industries": [
+    "information technology",
+    "management consulting industry",
+    "professional services industry"
+   ],
+   "icp_fit": false
+  },
+  "Q3388421": {
+   "id": "Q3388421",
+   "name": "Pilgrim's Corp",
+   "tickers": [
+    "PPC"
+   ],
+   "domains": [
+    "pilgrims.com",
+    "pilgrimspride.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    63000
+   ],
+   "employees_as_of": "2025-12-28",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "meatpacking industry"
+   ],
+   "icp_fit": false
+  },
+  "Q35476": {
+   "id": "Q35476",
+   "name": "AT&T",
+   "tickers": [
+    "T"
+   ],
+   "domains": [
+    "att.com"
+   ],
+   "old_domains": [
+    "about.att.com",
+    "attvip.mx"
+   ],
+   "employees": [
+    202600
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "postal and telecommunications services"
+   ],
+   "icp_fit": false
+  },
+  "Q37156": {
+   "id": "Q37156",
+   "name": "IBM",
+   "tickers": [
+    "IBM"
+   ],
+   "domains": [
+    "ibm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    352600
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry",
+    "computer industry",
+    "IT service management",
+    "information technology consulting",
+    "computer hardware industry"
+   ],
+   "icp_fit": false
+  },
+  "Q37158": {
+   "id": "Q37158",
+   "name": "Starbucks",
+   "tickers": [
+    "SBUX"
+   ],
+   "domains": [
+    "starbucks.com"
+   ],
+   "old_domains": [
+    "fr.starbucks.ca",
+    "istarbucks.co.kr",
+    "starbucks.ca",
+    "starbucks.co.id",
+    "starbucks.co.jp",
+    "starbucks.co.kr",
+    "starbucks.co.th",
+    "starbucks.co.uk",
+    "starbucks.co.za",
+    "starbucks.com.ar",
+    "starbucks.com.br",
+    "starbucks.com.cn",
+    "starbucks.com.hk",
+    "starbucks.com.mx",
+    "starbucks.com.my",
+    "starbucks.com.tr",
+    "starbucks.com.tw",
+    "starbucks.de",
+    "starbucks.es",
+    "starbucks.fr",
+    "starbucks.hu",
+    "starbucks.in",
+    "starbucks.ph",
+    "th.starbucks.co.th"
+   ],
+   "employees": [
+    383000
+   ],
+   "employees_as_of": "2021-10-03",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "coffee industry"
+   ],
+   "icp_fit": false
+  },
+  "Q380": {
+   "id": "Q380",
+   "name": "Meta Platforms",
+   "tickers": [
+    "META"
+   ],
+   "domains": [
+    "meta.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    58604
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information technology"
+   ],
+   "icp_fit": true
+  },
+  "Q38076": {
+   "id": "Q38076",
+   "name": "McDonald's",
+   "tickers": [
+    "MCD"
+   ],
+   "domains": [
+    "mcdonalds.com"
+   ],
+   "old_domains": [
+    "mccafe.mcdonalds.pl",
+    "mcdelivery.co.in",
+    "mcdelivery.com.ph",
+    "mcdelivery.com.sg",
+    "mcdelivery.mcthai.co.th",
+    "mcdonalds-mcdelivery.es",
+    "mcdonalds.ad",
+    "mcdonalds.at",
+    "mcdonalds.be",
+    "mcdonalds.ca",
+    "mcdonalds.ch",
+    "mcdonalds.cl",
+    "mcdonalds.co.id",
+    "mcdonalds.co.jp",
+    "mcdonalds.co.kr",
+    "mcdonalds.co.nz",
+    "mcdonalds.co.th",
+    "mcdonalds.co.uk",
+    "mcdonalds.co.za",
+    "mcdonalds.com.ar",
+    "mcdonalds.com.au",
+    "mcdonalds.com.br",
+    "mcdonalds.com.cn",
+    "mcdonalds.com.hk",
+    "mcdonalds.com.mt",
+    "mcdonalds.com.mx",
+    "mcdonalds.com.my",
+    "mcdonalds.com.ph",
+    "mcdonalds.com.sg",
+    "mcdonalds.com.tr",
+    "mcdonalds.com.tw",
+    "mcdonalds.cz",
+    "mcdonalds.de",
+    "mcdonalds.es",
+    "mcdonalds.fr",
+    "mcdonalds.ge",
+    "mcdonalds.gr",
+    "mcdonalds.hr",
+    "mcdonalds.hu",
+    "mcdonalds.ie",
+    "mcdonalds.it",
+    "mcdonalds.pl",
+    "mcdonalds.pt",
+    "mcdonalds.ro",
+    "mcdonalds.se",
+    "mcdonalds.vn",
+    "mcdonaldsarabia.com",
+    "mcdonaldsindia.com",
+    "mcdonaldsrestaurant.nl",
+    "riyadh.mcdelivery.com.sa",
+    "www4.mcdonalds.ca"
+   ],
+   "employees": [
+    200000
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "food service",
+    "quick service restaurant sector",
+    "accommodation and food service activities",
+    "food and tobacco industry"
+   ],
+   "icp_fit": false
+  },
+  "Q3884": {
+   "id": "Q3884",
+   "name": "Amazon",
+   "tickers": [
+    "AMZN"
+   ],
+   "domains": [
+    "amazon.com"
+   ],
+   "old_domains": [
+    "amazon.co.jp",
+    "amazon.co.uk",
+    "amazon.com.au",
+    "amazon.com.br",
+    "amazon.com.mx",
+    "amazon.com.tr",
+    "amazon.de",
+    "amazon.es",
+    "amazon.in",
+    "amazon.it",
+    "amazon.nl",
+    "amazon.sa"
+   ],
+   "employees": [
+    1500000
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "web service",
+    "e-commerce",
+    "web hosting service"
+   ],
+   "icp_fit": false
+  },
+  "Q393762": {
+   "id": "Q393762",
+   "name": "Agilent Technologies",
+   "tickers": [
+    "A"
+   ],
+   "domains": [
+    "agilent.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    17671
+   ],
+   "employees_as_of": "2023-03-16",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "high-performance liquid chromatography",
+    "measurement tool",
+    "electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q4045079": {
+   "id": "Q4045079",
+   "name": "Nature's Sunshine Products",
+   "tickers": [
+    "NATR"
+   ],
+   "domains": [
+    "naturessunshine.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    901
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "food industry",
+    "personal care product"
+   ],
+   "icp_fit": false
+  },
+  "Q41187": {
+   "id": "Q41187",
+   "name": "Sony Group",
+   "tickers": [
+    "SONY"
+   ],
+   "domains": [
+    "sony.co.in",
+    "sony.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    112300
+   ],
+   "employees_as_of": "2025-03-31",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "video game industry",
+    "electrical industry",
+    "electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q415598": {
+   "id": "Q415598",
+   "name": "Akamai Technologies",
+   "tickers": [
+    "AKAM"
+   ],
+   "domains": [
+    "akamai.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8368
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "web hosting service",
+    "Internet industry"
+   ],
+   "icp_fit": true
+  },
+  "Q420506": {
+   "id": "Q420506",
+   "name": "Wix.com",
+   "tickers": [
+    "WIX"
+   ],
+   "domains": [
+    "wix.com"
+   ],
+   "old_domains": [
+    "editor.wix.com"
+   ],
+   "employees": [
+    5929
+   ],
+   "employees_as_of": "2024-03-01",
+   "countries": [
+    "United States",
+    "Israel"
+   ],
+   "industries": [
+    "Internet",
+    "e-commerce",
+    "website builder",
+    "web hosting service",
+    "Internet industry"
+   ],
+   "icp_fit": true
+  },
+  "Q44294": {
+   "id": "Q44294",
+   "name": "Ford Motor Company",
+   "tickers": [
+    "F"
+   ],
+   "domains": [
+    "ford.com"
+   ],
+   "old_domains": [
+    "caribe.ford.com",
+    "centroamerica.ford.com",
+    "corporate.ford.com",
+    "de.ford.ch",
+    "dealer.india.ford.com",
+    "en.fordegypt.com",
+    "ford.am",
+    "ford.ao",
+    "ford.at",
+    "ford.ba",
+    "ford.be",
+    "ford.bg",
+    "ford.ch",
+    "ford.cl",
+    "ford.co.il",
+    "ford.co.ke",
+    "ford.co.kr",
+    "ford.co.th",
+    "ford.com.al",
+    "ford.com.co",
+    "ford.com.ec",
+    "ford.com.ge",
+    "ford.com.kh",
+    "ford.com.mt",
+    "ford.com.pr",
+    "ford.com.tn",
+    "ford.com.tr",
+    "ford.com.uy",
+    "ford.com.ve",
+    "ford.cz",
+    "ford.dk",
+    "ford.ee",
+    "ford.fi",
+    "ford.gr",
+    "ford.hr",
+    "ford.hu",
+    "ford.lt",
+    "ford.lu",
+    "ford.lv",
+    "ford.md",
+    "ford.mk",
+    "ford.nc",
+    "ford.no",
+    "ford.pe",
+    "ford.pl",
+    "ford.pt",
+    "ford.rs",
+    "ford.ru",
+    "ford.se",
+    "ford.si",
+    "ford.sk",
+    "ford.sn",
+    "ford.ua",
+    "ford.ug",
+    "fordcyprus.com",
+    "fordguinee.com",
+    "fordpng.com",
+    "fordsrilanka.com",
+    "fr.ford.be",
+    "fr.ford.ch",
+    "fr.ford.ma",
+    "india.ford.com",
+    "it.ford.ch",
+    "me.ford.com",
+    "nl.ford.be"
+   ],
+   "employees": [
+    186000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q451476": {
+   "id": "Q451476",
+   "name": "Scotiabank",
+   "tickers": [
+    "BNS"
+   ],
+   "domains": [
+    "scotiabank.com"
+   ],
+   "old_domains": [
+    "scotiabank.ca",
+    "scotiabank.com.mx",
+    "scotiabank.com.pe"
+   ],
+   "employees": [
+    89000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "financial services",
+    "financial sector",
+    "economics of banking"
+   ],
+   "icp_fit": false
+  },
+  "Q4546965": {
+   "id": "Q4546965",
+   "name": "MongoDB Inc.",
+   "tickers": [
+    "MDB"
+   ],
+   "domains": [
+    "mongodb.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5640
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry",
+    "business software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q459477": {
+   "id": "Q459477",
+   "name": "FedEx",
+   "tickers": [
+    "FDX"
+   ],
+   "domains": [
+    "fedex.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    400000
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "Canada",
+    "United States"
+   ],
+   "industries": [
+    "logistics",
+    "transport industry"
+   ],
+   "icp_fit": false
+  },
+  "Q459965": {
+   "id": "Q459965",
+   "name": "Caterpillar Inc.",
+   "tickers": [
+    "CAT"
+   ],
+   "domains": [
+    "caterpillar.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    104000
+   ],
+   "employees_as_of": "2018-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "mechanical engineering"
+   ],
+   "icp_fit": false
+  },
+  "Q4652575": {
+   "id": "Q4652575",
+   "name": "AMC Global Media",
+   "tickers": [
+    "AMCX"
+   ],
+   "domains": [
+    "amcglobalmedia.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2197
+   ],
+   "employees_as_of": "2013-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "independent film",
+    "specialty channel"
+   ],
+   "icp_fit": false
+  },
+  "Q465751": {
+   "id": "Q465751",
+   "name": "Chipotle Mexican Grill",
+   "tickers": [
+    "CMG"
+   ],
+   "domains": [
+    "chipotle.com"
+   ],
+   "old_domains": [
+    "chipotle.ca",
+    "chipotleme.com"
+   ],
+   "employees": [
+    45200
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "fast food"
+   ],
+   "icp_fit": false
+  },
+  "Q467752": {
+   "id": "Q467752",
+   "name": "Verizon",
+   "tickers": [
+    "VZ"
+   ],
+   "domains": [
+    "verizon.com",
+    "verizon.net"
+   ],
+   "old_domains": [],
+   "employees": [
+    132200
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q4687934": {
+   "id": "Q4687934",
+   "name": "AerCap",
+   "tickers": [
+    "AER"
+   ],
+   "domains": [
+    "aercap.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    390
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "Ireland",
+    "Netherlands"
+   ],
+   "industries": [
+    "financial services",
+    "aerospace industry"
+   ],
+   "icp_fit": false
+  },
+  "Q470156": {
+   "id": "Q470156",
+   "name": "Cencora",
+   "tickers": [
+    "COR"
+   ],
+   "domains": [
+    "cencora.com"
+   ],
+   "old_domains": [
+    "amerisourcebergen.com"
+   ],
+   "employees": [
+    44000
+   ],
+   "employees_as_of": "2022-09-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q470517": {
+   "id": "Q470517",
+   "name": "Amgen",
+   "tickers": [
+    "AMGN"
+   ],
+   "domains": [
+    "amgen.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    17900
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q47120756": {
+   "id": "Q47120756",
+   "name": "Nebius Group",
+   "tickers": [
+    "NBIS"
+   ],
+   "domains": [
+    "nebius.group"
+   ],
+   "old_domains": [],
+   "employees": [
+    1371
+   ],
+   "employees_as_of": "2025-03-31",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "artificial intelligence",
+    "information technology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q4742937": {
+   "id": "Q4742937",
+   "name": "American Airlines Group",
+   "tickers": [
+    "AAL"
+   ],
+   "domains": [
+    "aa.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    132100
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "aviation",
+    "air transport"
+   ],
+   "icp_fit": false
+  },
+  "Q4778915": {
+   "id": "Q4778915",
+   "name": "Cloudflare",
+   "tickers": [
+    "NET"
+   ],
+   "domains": [
+    "cloudflare.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    3217
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information and communications technology",
+    "Software Publishers"
+   ],
+   "icp_fit": true
+  },
+  "Q478214": {
+   "id": "Q478214",
+   "name": "Tesla",
+   "tickers": [
+    "TSLA"
+   ],
+   "domains": [
+    "tesla.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    140473
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automotive industry",
+    "solar industry",
+    "battery industry"
+   ],
+   "icp_fit": false
+  },
+  "Q4816569": {
+   "id": "Q4816569",
+   "name": "Atlantic Tele-Network",
+   "tickers": [
+    "ATNI"
+   ],
+   "domains": [
+    "atni.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1000
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "mobile phone industry"
+   ],
+   "icp_fit": false
+  },
+  "Q482267": {
+   "id": "Q482267",
+   "name": "América Móvil",
+   "tickers": [
+    "AMX",
+    "AMOV"
+   ],
+   "domains": [
+    "americamovil.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    176083
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "Mexico"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "mobile phone industry"
+   ],
+   "icp_fit": false
+  },
+  "Q483915": {
+   "id": "Q483915",
+   "name": "Nike",
+   "tickers": [
+    "NKE"
+   ],
+   "domains": [
+    "nike.com"
+   ],
+   "old_domains": [
+    "nike.co.kr",
+    "nike.com.cn"
+   ],
+   "employees": [
+    76700
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "industry",
+    "retail",
+    "clothing industry"
+   ],
+   "icp_fit": false
+  },
+  "Q484930": {
+   "id": "Q484930",
+   "name": "Analog Devices",
+   "tickers": [
+    "ADI"
+   ],
+   "domains": [
+    "analog.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    9200
+   ],
+   "employees_as_of": "2011-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q486269": {
+   "id": "Q486269",
+   "name": "Kodak",
+   "tickers": [
+    "KODK"
+   ],
+   "domains": [
+    "kodak.com",
+    "kodakmoments.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    97222
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "chemical industry",
+    "photo industry",
+    "Precision engineering and optical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q486737": {
+   "id": "Q486737",
+   "name": "Korea Electric Power Corporation",
+   "tickers": [
+    "KEP"
+   ],
+   "domains": [
+    "home.kepco.co.kr",
+    "kepco.co.kr"
+   ],
+   "old_domains": [],
+   "employees": [
+    20957
+   ],
+   "employees_as_of": "2016-12-31",
+   "countries": [
+    "South Korea"
+   ],
+   "industries": [
+    "electricity supply company"
+   ],
+   "icp_fit": false
+  },
+  "Q487907": {
+   "id": "Q487907",
+   "name": "Bank of America",
+   "tickers": [
+    "BAC"
+   ],
+   "domains": [
+    "bankofamerica.com"
+   ],
+   "old_domains": [
+    "bofaml.com",
+    "private.bankofamerica.com",
+    "privatebank.bankofamerica.com"
+   ],
+   "employees": [
+    213000
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services",
+    "International Standard Industrial Classification",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q48872": {
+   "id": "Q48872",
+   "name": "Eaton Corporation",
+   "tickers": [
+    "ETN"
+   ],
+   "domains": [
+    "eaton.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    92000
+   ],
+   "employees_as_of": "2022-12-01",
+   "countries": [
+    "Ireland",
+    "United States"
+   ],
+   "industries": [
+    "industrial manufacturing"
+   ],
+   "icp_fit": false
+  },
+  "Q489921": {
+   "id": "Q489921",
+   "name": "Mastercard",
+   "tickers": [
+    "MA"
+   ],
+   "domains": [
+    "mastercard.com"
+   ],
+   "old_domains": [
+    "cam.mastercard.com",
+    "caribbean.mastercard.com",
+    "latam.mastercard.com",
+    "mastercard.am",
+    "mastercard.at",
+    "mastercard.az",
+    "mastercard.ba",
+    "mastercard.bg",
+    "mastercard.by",
+    "mastercard.ca",
+    "mastercard.ch",
+    "mastercard.cl",
+    "mastercard.co.id",
+    "mastercard.co.il",
+    "mastercard.co.in",
+    "mastercard.co.jp",
+    "mastercard.co.kr",
+    "mastercard.co.nz",
+    "mastercard.co.th",
+    "mastercard.co.ve",
+    "mastercard.co.za",
+    "mastercard.com.ar",
+    "mastercard.com.au",
+    "mastercard.com.br",
+    "mastercard.com.cn",
+    "mastercard.com.co",
+    "mastercard.com.cy",
+    "mastercard.com.ge",
+    "mastercard.com.hk",
+    "mastercard.com.mx",
+    "mastercard.com.my",
+    "mastercard.com.pe",
+    "mastercard.com.ph",
+    "mastercard.com.sg",
+    "mastercard.com.tr",
+    "mastercard.com.tw",
+    "mastercard.com.vn",
+    "mastercard.cz",
+    "mastercard.de",
+    "mastercard.dk",
+    "mastercard.es",
+    "mastercard.fi",
+    "mastercard.fr",
+    "mastercard.gr",
+    "mastercard.hr",
+    "mastercard.hu",
+    "mastercard.ie",
+    "mastercard.it",
+    "mastercard.kz",
+    "mastercard.lu",
+    "mastercard.md",
+    "mastercard.me",
+    "mastercard.mt",
+    "mastercard.nl",
+    "mastercard.no",
+    "mastercard.pl",
+    "mastercard.pt",
+    "mastercard.ro",
+    "mastercard.rs",
+    "mastercard.ru",
+    "mastercard.se",
+    "mastercard.si",
+    "mastercard.sk",
+    "mastercard.ua",
+    "mastercard.us",
+    "mastercard.uz",
+    "mea.mastercard.com",
+    "mojmastercard.sk",
+    "mujmastercard.cz",
+    "sea.mastercard.com"
+   ],
+   "employees": [
+    39800
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services",
+    "financial service activities, except insurance and pension funding"
+   ],
+   "icp_fit": false
+  },
+  "Q492747": {
+   "id": "Q492747",
+   "name": "Dole plc",
+   "tickers": [
+    "DOLE"
+   ],
+   "domains": [
+    "dole.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    35371
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "Ireland"
+   ],
+   "industries": [
+    "agribusiness"
+   ],
+   "icp_fit": false
+  },
+  "Q496302": {
+   "id": "Q496302",
+   "name": "Deere & Company",
+   "tickers": [
+    "DE"
+   ],
+   "domains": [
+    "deere.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    67000
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "manufacture of machinery and equipment"
+   ],
+   "icp_fit": false
+  },
+  "Q50038825": {
+   "id": "Q50038825",
+   "name": "Itamar Medical Ltd",
+   "tickers": [
+    "ITMR"
+   ],
+   "domains": [
+    "itamar-medical.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    184
+   ],
+   "employees_as_of": "2020-07-07",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "medical technology"
+   ],
+   "icp_fit": false
+  },
+  "Q501476": {
+   "id": "Q501476",
+   "name": "Hasbro",
+   "tickers": [
+    "HAS"
+   ],
+   "domains": [
+    "corporate.hasbro.com",
+    "shop.hasbro.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5000
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "game industry"
+   ],
+   "icp_fit": false
+  },
+  "Q502121": {
+   "id": "Q502121",
+   "name": "BlackBerry",
+   "tickers": [
+    "BB"
+   ],
+   "domains": [
+    "blackberry.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    3647
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "information technology",
+    "Internet of Things"
+   ],
+   "icp_fit": false
+  },
+  "Q5028383": {
+   "id": "Q5028383",
+   "name": "Camping World",
+   "tickers": [
+    "CWH"
+   ],
+   "domains": [
+    "campingworld.com"
+   ],
+   "old_domains": [
+    "rv.campingworld.com"
+   ],
+   "employees": [
+    7221
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q502940": {
+   "id": "Q502940",
+   "name": "General Dynamics",
+   "tickers": [
+    "GD"
+   ],
+   "domains": [
+    "gd.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    83500
+   ],
+   "employees_as_of": "2007-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "mechanical engineering",
+    "shipbuilding",
+    "aerospace industry",
+    "defence industry"
+   ],
+   "icp_fit": false
+  },
+  "Q503182": {
+   "id": "Q503182",
+   "name": "PetroChina Company Limited",
+   "tickers": [
+    "PTR"
+   ],
+   "domains": [
+    "petrochina.com.cn",
+    "petrochinaintl.com.hk"
+   ],
+   "old_domains": [],
+   "employees": [
+    521566
+   ],
+   "employees_as_of": "2015-12-31",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q503308": {
+   "id": "Q503308",
+   "name": "Southwest Airlines",
+   "tickers": [
+    "LUV"
+   ],
+   "domains": [
+    "espanol.southwest.com",
+    "southwest.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    59793
+   ],
+   "employees_as_of": "2019-06-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "air transport"
+   ],
+   "icp_fit": false
+  },
+  "Q5063137": {
+   "id": "Q5063137",
+   "name": "Century Casinos",
+   "tickers": [
+    "CNTY"
+   ],
+   "domains": [
+    "cnty.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1910
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "gambling"
+   ],
+   "icp_fit": false
+  },
+  "Q5122694": {
+   "id": "Q5122694",
+   "name": "Citizens Financial Group",
+   "tickers": [
+    "CFG"
+   ],
+   "domains": [
+    "citizensbank.com"
+   ],
+   "old_domains": [
+    "fa.citizensbank.com",
+    "lo.citizensbank.com"
+   ],
+   "employees": [
+    17398
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q5133094": {
+   "id": "Q5133094",
+   "name": "Cleveland-Cliffs",
+   "tickers": [
+    "CLF"
+   ],
+   "domains": [
+    "clevelandcliffs.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    30000
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "iron and steel industry"
+   ],
+   "icp_fit": false
+  },
+  "Q524989": {
+   "id": "Q524989",
+   "name": "NCR Corporation",
+   "tickers": [
+    "VYX"
+   ],
+   "domains": [
+    "ncrvoyix.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    21500
+   ],
+   "employees_as_of": "2009-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information and communications technology"
+   ],
+   "icp_fit": true
+  },
+  "Q52618": {
+   "id": "Q52618",
+   "name": "Ericsson",
+   "tickers": [
+    "ERIC"
+   ],
+   "domains": [
+    "ericsson.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    101322
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "Sweden"
+   ],
+   "industries": [
+    "information and communications technology"
+   ],
+   "icp_fit": false
+  },
+  "Q5272601": {
+   "id": "Q5272601",
+   "name": "Dick's Sporting Goods",
+   "tickers": [
+    "DKS"
+   ],
+   "domains": [
+    "dickssportinggoods.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    37600
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q52825": {
+   "id": "Q52825",
+   "name": "ABB Group",
+   "tickers": [
+    "ABB"
+   ],
+   "domains": [
+    "global.abb"
+   ],
+   "old_domains": [],
+   "employees": [
+    110000
+   ],
+   "employees_as_of": "2024-12-31",
+   "countries": [
+    "Switzerland"
+   ],
+   "industries": [
+    "electrical engineering",
+    "robotics"
+   ],
+   "icp_fit": false
+  },
+  "Q5289230": {
+   "id": "Q5289230",
+   "name": "Dollar Tree",
+   "tickers": [
+    "DLTR"
+   ],
+   "domains": [
+    "dollartree.com"
+   ],
+   "old_domains": [
+    "dollartreecanada.com"
+   ],
+   "employees": [
+    145000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "Canada",
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q5317253": {
+   "id": "Q5317253",
+   "name": "Dutch Bros. Coffee",
+   "tickers": [
+    "BROS"
+   ],
+   "domains": [
+    "dutchbros.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    23000
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q5324516": {
+   "id": "Q5324516",
+   "name": "eToro",
+   "tickers": [
+    "ETOR"
+   ],
+   "domains": [
+    "etoro.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1700
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United Kingdom",
+    "Cyprus",
+    "Israel"
+   ],
+   "industries": [
+    "information technology",
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q53268": {
+   "id": "Q53268",
+   "name": "Toyota",
+   "tickers": [
+    "TM"
+   ],
+   "domains": [
+    "global.toyota"
+   ],
+   "old_domains": [
+    "autohaus.toyota.de",
+    "de.toyota.ch",
+    "fr.toyota.be",
+    "fr.toyota.ch",
+    "garage.toyota.ch",
+    "it.toyota.ch",
+    "nl.toyota.be",
+    "scion.com",
+    "toyota-africa.com",
+    "toyota-bishkek.kg",
+    "toyota-centralasia.com",
+    "toyota-europe.com",
+    "toyota-gabon.com",
+    "toyota-indus.com",
+    "toyota-kosovo.com",
+    "toyota-mauritanie.com",
+    "toyota-mongolia.mn",
+    "toyota-rdc.com",
+    "toyota.ae",
+    "toyota.at",
+    "toyota.az",
+    "toyota.ba",
+    "toyota.bf",
+    "toyota.bg",
+    "toyota.bj",
+    "toyota.bo",
+    "toyota.cg",
+    "toyota.ci",
+    "toyota.cl",
+    "toyota.co.il",
+    "toyota.co.kr",
+    "toyota.co.ma",
+    "toyota.co.mz",
+    "toyota.co.nz",
+    "toyota.co.th",
+    "toyota.co.tz",
+    "toyota.co.ug",
+    "toyota.co.uk",
+    "toyota.co.za",
+    "toyota.co.zw",
+    "toyota.com",
+    "toyota.com.ar",
+    "toyota.com.au",
+    "toyota.com.bd",
+    "toyota.com.bh",
+    "toyota.com.br",
+    "toyota.com.cn",
+    "toyota.com.co",
+    "toyota.com.cy",
+    "toyota.com.eg",
+    "toyota.com.gt",
+    "toyota.com.jo",
+    "toyota.com.mk",
+    "toyota.com.my",
+    "toyota.com.ph",
+    "toyota.com.py",
+    "toyota.com.sa",
+    "toyota.com.sv",
+    "toyota.com.tn",
+    "toyota.com.tr",
+    "toyota.com.tw",
+    "toyota.com.uy",
+    "toyota.com.ve",
+    "toyota.com.vn",
+    "toyota.cz",
+    "toyota.de",
+    "toyota.dk",
+    "toyota.ee",
+    "toyota.es",
+    "toyota.fi",
+    "toyota.fr",
+    "toyota.ge",
+    "toyota.gm",
+    "toyota.gr",
+    "toyota.hr",
+    "toyota.hu",
+    "toyota.ie",
+    "toyota.iq",
+    "toyota.is",
+    "toyota.it",
+    "toyota.jp",
+    "toyota.lt",
+    "toyota.lu",
+    "toyota.lv",
+    "toyota.ly",
+    "toyota.md",
+    "toyota.mx",
+    "toyota.nl",
+    "toyota.no",
+    "toyota.pl",
+    "toyota.pt",
+    "toyota.re",
+    "toyota.ro",
+    "toyota.rs",
+    "toyota.ru",
+    "toyota.se",
+    "toyota.si",
+    "toyota.sk",
+    "toyota.sn",
+    "toyota.tg",
+    "toyota.ua",
+    "toyotaalbania.al",
+    "toyotaalgerie.com",
+    "toyotabharat.com",
+    "toyotacg.me",
+    "toyotacr.com",
+    "toyotaghana.com",
+    "toyotairan.com",
+    "toyotajamaica.com",
+    "toyotakenya.ke",
+    "toyotakz.com",
+    "toyotalebanon.com",
+    "toyotamalawi.com",
+    "toyotamauritius.com",
+    "toyotanigeria.com",
+    "toyotaoman.com",
+    "toyotaperu.com.pe",
+    "toyotapr.com",
+    "toyotaqatar.com",
+    "toyotarp.com",
+    "toyotarwanda.com",
+    "toyotayemen.com",
+    "toyotazambia.co.zm",
+    "weins-toyota-kanagawa.co.jp"
+   ],
+   "employees": [
+    359542
+   ],
+   "employees_as_of": "2020-03-31",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q5370909": {
+   "id": "Q5370909",
+   "name": "Vertiv",
+   "tickers": [
+    "VRT"
+   ],
+   "domains": [
+    "vertiv.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    34000
+   ],
+   "employees_as_of": "2025-12-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "industrial manufacturing",
+    "electrical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q5373589": {
+   "id": "Q5373589",
+   "name": "Emmis Communications",
+   "tickers": [
+    "EMMS"
+   ],
+   "domains": [
+    "emmis.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    350
+   ],
+   "employees_as_of": "2019-02-28",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "broadcasting"
+   ],
+   "icp_fit": false
+  },
+  "Q541076": {
+   "id": "Q541076",
+   "name": "AngloGold Ashanti",
+   "tickers": [
+    "AU"
+   ],
+   "domains": [
+    "anglogoldashanti.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    62046
+   ],
+   "employees_as_of": "2011-01-01",
+   "countries": [
+    "South Africa"
+   ],
+   "industries": [
+    "mining"
+   ],
+   "icp_fit": false
+  },
+  "Q5412010": {
+   "id": "Q5412010",
+   "name": "Euronet Worldwide",
+   "tickers": [
+    "EEFT"
+   ],
+   "domains": [
+    "euronet.com"
+   ],
+   "old_domains": [
+    "euronet.pl",
+    "euronetatms.com",
+    "euronetatms.es",
+    "euronetatms.lt",
+    "euronetworldwide.com",
+    "geldautomat.de"
+   ],
+   "employees": [
+    10800
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services",
+    "ATM operator"
+   ],
+   "icp_fit": false
+  },
+  "Q5427196": {
+   "id": "Q5427196",
+   "name": "FTI Consulting",
+   "tickers": [
+    "FCN"
+   ],
+   "domains": [
+    "fticonsulting.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4400
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "professional services industry"
+   ],
+   "icp_fit": false
+  },
+  "Q544847": {
+   "id": "Q544847",
+   "name": "Qualcomm",
+   "tickers": [
+    "QCOM"
+   ],
+   "domains": [
+    "qualcomm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    45000
+   ],
+   "employees_as_of": "2021-09-26",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "telecommunications",
+    "radio",
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q5453752": {
+   "id": "Q5453752",
+   "name": "First Republic Bank",
+   "tickers": [
+    "FRC"
+   ],
+   "domains": [
+    "firstrepublic.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    7213
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q552581": {
+   "id": "Q552581",
+   "name": "SAP",
+   "tickers": [
+    "SAP"
+   ],
+   "domains": [
+    "sap.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    106043
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "Germany"
+   ],
+   "industries": [
+    "software development",
+    "software industry"
+   ],
+   "icp_fit": false
+  },
+  "Q55632076": {
+   "id": "Q55632076",
+   "name": "Rubrik",
+   "tickers": [
+    "RBRK"
+   ],
+   "domains": [
+    "rubrik.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2500
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer security"
+   ],
+   "icp_fit": true
+  },
+  "Q55633597": {
+   "id": "Q55633597",
+   "name": "SouthState Bank",
+   "tickers": [
+    "SSB"
+   ],
+   "domains": [
+    "southstatebank.com"
+   ],
+   "old_domains": [
+    "centerstatebank.com"
+   ],
+   "employees": [
+    2602
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q565594": {
+   "id": "Q565594",
+   "name": "Eni",
+   "tickers": [
+    "E"
+   ],
+   "domains": [
+    "eni.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    32349
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "Italy"
+   ],
+   "industries": [
+    "petroleum industry",
+    "energy industry"
+   ],
+   "icp_fit": false
+  },
+  "Q570473": {
+   "id": "Q570473",
+   "name": "McKesson Corporation",
+   "tickers": [
+    "MCK"
+   ],
+   "domains": [
+    "mckesson.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    43000
+   ],
+   "employees_as_of": "2026-03-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "product distribution",
+    "health care industry"
+   ],
+   "icp_fit": false
+  },
+  "Q572948": {
+   "id": "Q572948",
+   "name": "Herbalife",
+   "tickers": [
+    "HLF"
+   ],
+   "domains": [
+    "herbalife.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    7800
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "food industry"
+   ],
+   "icp_fit": false
+  },
+  "Q58024": {
+   "id": "Q58024",
+   "name": "eBay",
+   "tickers": [
+    "EBAY"
+   ],
+   "domains": [
+    "ebay.com"
+   ],
+   "old_domains": [
+    "ebay.co.uk",
+    "ebay.com.au",
+    "ebay.de",
+    "ebay.es",
+    "ebay.fr",
+    "ebay.it",
+    "ebayinc.com"
+   ],
+   "employees": [
+    12600
+   ],
+   "employees_as_of": "2016-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "e-commerce"
+   ],
+   "icp_fit": false
+  },
+  "Q582418": {
+   "id": "Q582418",
+   "name": "ITT Corporation",
+   "tickers": [
+    "ITT"
+   ],
+   "domains": [
+    "itt.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    10600
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "industrial manufacturing"
+   ],
+   "icp_fit": false
+  },
+  "Q5842736": {
+   "id": "Q5842736",
+   "name": "Corning Inc.",
+   "tickers": [
+    "GLW"
+   ],
+   "domains": [
+    "corning.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    46200
+   ],
+   "employees_as_of": "2017-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "biotechnology",
+    "industrial manufacturing"
+   ],
+   "icp_fit": false
+  },
+  "Q5926631": {
+   "id": "Q5926631",
+   "name": "HubSpot",
+   "tickers": [
+    "HUBS"
+   ],
+   "domains": [
+    "hubspot.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8246
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software as a service",
+    "marketing",
+    "automation",
+    "cloud computing",
+    "analytics",
+    "customer relationship management",
+    "software industry",
+    "email marketing"
+   ],
+   "icp_fit": true
+  },
+  "Q60238941": {
+   "id": "Q60238941",
+   "name": "Fox Corporation",
+   "tickers": [
+    "FOXA",
+    "FOX"
+   ],
+   "domains": [
+    "foxcorporation.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    9000
+   ],
+   "employees_as_of": "http://www",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "media industry"
+   ],
+   "icp_fit": false
+  },
+  "Q60269744": {
+   "id": "Q60269744",
+   "name": "Spotify Technology",
+   "tickers": [
+    "SPOT"
+   ],
+   "domains": [
+    "investors.spotify.com",
+    "spotify.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    6617
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "Luxembourg"
+   ],
+   "industries": [
+    "streaming media",
+    "software development"
+   ],
+   "icp_fit": false
+  },
+  "Q621592": {
+   "id": "Q621592",
+   "name": "Discovery, Inc.",
+   "tickers": [
+    "DISCB",
+    "DISCA",
+    "DISCK"
+   ],
+   "domains": [
+    "discovery.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    11000
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "mass media",
+    "broadcasting"
+   ],
+   "icp_fit": false
+  },
+  "Q624375": {
+   "id": "Q624375",
+   "name": "CVS Health",
+   "tickers": [
+    "CVS"
+   ],
+   "domains": [
+    "cvshealth.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    300000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q629998": {
+   "id": "Q629998",
+   "name": "General Mills",
+   "tickers": [
+    "GIS"
+   ],
+   "domains": [
+    "generalmills.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    35000
+   ],
+   "employees_as_of": "2011-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "food industry"
+   ],
+   "icp_fit": false
+  },
+  "Q63035278": {
+   "id": "Q63035278",
+   "name": "XPeng",
+   "tickers": [
+    "XPEV"
+   ],
+   "domains": [
+    "xpeng-auto.es"
+   ],
+   "old_domains": [
+    "heyxpeng.co.il",
+    "xiaopeng.com",
+    "xpeng.com"
+   ],
+   "employees": [
+    13550
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q631047": {
+   "id": "Q631047",
+   "name": "HDFC Bank",
+   "tickers": [
+    "HDB"
+   ],
+   "domains": [
+    "hdfc.bank.in"
+   ],
+   "old_domains": [
+    "v.hdfcbank.com",
+    "v1.hdfcbank.com"
+   ],
+   "employees": [
+    177000
+   ],
+   "employees_as_of": "2003-01-01",
+   "countries": [
+    "India"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q63152908": {
+   "id": "Q63152908",
+   "name": "Argenx SE",
+   "tickers": [
+    "ARGX"
+   ],
+   "domains": [
+    "argenx.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1863
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "Belgium",
+    "Kingdom of the Netherlands"
+   ],
+   "industries": [
+    "biotechnology"
+   ],
+   "icp_fit": false
+  },
+  "Q63197674": {
+   "id": "Q63197674",
+   "name": "Corteva",
+   "tickers": [
+    "CTVA"
+   ],
+   "domains": [
+    "corteva.com"
+   ],
+   "old_domains": [
+    "corteva.us"
+   ],
+   "employees": [
+    21000
+   ],
+   "employees_as_of": "2022-07-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "Pesticide and Other Agricultural Chemical Manufacturing",
+    "Soil Preparation, Planting, and Cultivating"
+   ],
+   "icp_fit": false
+  },
+  "Q632240": {
+   "id": "Q632240",
+   "name": "Eli Lilly and Company",
+   "tickers": [
+    "LLY"
+   ],
+   "domains": [
+    "lilly.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    38350
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q632694": {
+   "id": "Q632694",
+   "name": "Archer Daniels Midland",
+   "tickers": [
+    "ADM"
+   ],
+   "domains": [
+    "adm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    31600
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "food processing"
+   ],
+   "icp_fit": false
+  },
+  "Q63327": {
+   "id": "Q63327",
+   "name": "Airbnb",
+   "tickers": [
+    "ABNB"
+   ],
+   "domains": [
+    "airbnb.com"
+   ],
+   "old_domains": [
+    "airbnb.am",
+    "airbnb.at",
+    "airbnb.be",
+    "airbnb.ca",
+    "airbnb.ch",
+    "airbnb.co.id",
+    "airbnb.co.uk",
+    "airbnb.com.br",
+    "airbnb.com.ph",
+    "airbnb.es",
+    "airbnb.fr",
+    "airbnb.gr",
+    "airbnb.hu",
+    "airbnb.it",
+    "airbnb.jp",
+    "airbnb.lu",
+    "airbnb.mx",
+    "airbnb.pt",
+    "de.airbnb.lu",
+    "fr.airbnb.be",
+    "fr.airbnb.ca",
+    "fr.airbnb.ch",
+    "it.airbnb.ch",
+    "mt.airbnb.com.mt"
+   ],
+   "employees": [
+    5597
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "tourism industry"
+   ],
+   "icp_fit": false
+  },
+  "Q634815": {
+   "id": "Q634815",
+   "name": "Motorola Solutions",
+   "tickers": [
+    "MSI"
+   ],
+   "domains": [
+    "motorolasolutions.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    18000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "public security industry"
+   ],
+   "icp_fit": false
+  },
+  "Q637440": {
+   "id": "Q637440",
+   "name": "Lazard",
+   "tickers": [
+    "LAZ"
+   ],
+   "domains": [
+    "lazard.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    3291
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "Canada",
+    "Japan",
+    "Ireland",
+    "Spain",
+    "United States",
+    "Belgium",
+    "Luxembourg",
+    "Sweden",
+    "Italy",
+    "Switzerland",
+    "Austria",
+    "Netherlands",
+    "France",
+    "United Kingdom",
+    "Brazil",
+    "Germany",
+    "Singapore",
+    "Australia",
+    "Saudi Arabia",
+    "United Arab Emirates",
+    "South Korea",
+    "Hong Kong"
+   ],
+   "industries": [
+    "asset management",
+    "investment banking",
+    "financial service activities, except insurance and pension funding",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q642189": {
+   "id": "Q642189",
+   "name": "Medtronic plc",
+   "tickers": [
+    "MDT"
+   ],
+   "domains": [
+    "medtronic.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    86000
+   ],
+   "employees_as_of": "2018-04-01",
+   "countries": [
+    "Ireland"
+   ],
+   "industries": [
+    "medical technology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q642271": {
+   "id": "Q642271",
+   "name": "The Cigna Group",
+   "tickers": [
+    "CI"
+   ],
+   "domains": [
+    "cigna.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    73800
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "managed care"
+   ],
+   "icp_fit": false
+  },
+  "Q643674": {
+   "id": "Q643674",
+   "name": "Thermo Fisher Scientific Inc.",
+   "tickers": [
+    "TMO"
+   ],
+   "domains": [
+    "thermofisher.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    67816
+   ],
+   "employees_as_of": "2023-03-16",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "biotechnology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q644289": {
+   "id": "Q644289",
+   "name": "Optimum Communications",
+   "tickers": [
+    "ATUS"
+   ],
+   "domains": [
+    "alticeusa.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    13656
+   ],
+   "employees_as_of": "2015-09-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q645525": {
+   "id": "Q645525",
+   "name": "SunPower",
+   "tickers": [
+    "SPWR"
+   ],
+   "domains": [
+    "us.sunpower.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8309
+   ],
+   "employees_as_of": "2016-01-03",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "photovoltaics"
+   ],
+   "icp_fit": false
+  },
+  "Q645708": {
+   "id": "Q645708",
+   "name": "ING Group",
+   "tickers": [
+    "ING"
+   ],
+   "domains": [
+    "ing.com"
+   ],
+   "old_domains": [
+    "ing.be",
+    "ing.com.tr",
+    "ing.de",
+    "ing.nl"
+   ],
+   "employees": [
+    64298
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q648458": {
+   "id": "Q648458",
+   "name": "Birkenstock",
+   "tickers": [
+    "BIRK"
+   ],
+   "domains": [
+    "birkenstock.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5500
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "Germany"
+   ],
+   "industries": [
+    "footwear industry"
+   ],
+   "icp_fit": false
+  },
+  "Q650259": {
+   "id": "Q650259",
+   "name": "Fresenius Medical Care",
+   "tickers": [
+    "FMS"
+   ],
+   "domains": [
+    "fmcna.com"
+   ],
+   "old_domains": [
+    "fmc-ag.com"
+   ],
+   "employees": [
+    125364
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "Germany"
+   ],
+   "industries": [
+    "health care",
+    "pharmaceutical industry",
+    "medical technology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q65056153": {
+   "id": "Q65056153",
+   "name": "Pony.ai",
+   "tickers": [
+    "PONY"
+   ],
+   "domains": [
+    "pony.ai"
+   ],
+   "old_domains": [],
+   "employees": [
+    1300
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "autonomous car"
+   ],
+   "icp_fit": false
+  },
+  "Q65062134": {
+   "id": "Q65062134",
+   "name": "Bally's Corporation",
+   "tickers": [
+    "BALY"
+   ],
+   "domains": [
+    "ballys.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    11500
+   ],
+   "employees_as_of": "2026-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "gambling industry"
+   ],
+   "icp_fit": false
+  },
+  "Q653581": {
+   "id": "Q653581",
+   "name": "Fluor Corporation",
+   "tickers": [
+    "FLR"
+   ],
+   "domains": [
+    "fluor.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    43717
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "construction"
+   ],
+   "icp_fit": false
+  },
+  "Q656165": {
+   "id": "Q656165",
+   "name": "Halliburton",
+   "tickers": [
+    "HAL"
+   ],
+   "domains": [
+    "halliburton.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    70000
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "petroleum"
+   ],
+   "icp_fit": false
+  },
+  "Q66": {
+   "id": "Q66",
+   "name": "Boeing",
+   "tickers": [
+    "BA"
+   ],
+   "domains": [
+    "boeing.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    171000
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "arms industry",
+    "aircraft construction",
+    "aircraft industry",
+    "space industry",
+    "aerospace industry",
+    "space-based economy"
+   ],
+   "icp_fit": false
+  },
+  "Q66048": {
+   "id": "Q66048",
+   "name": "Deutsche Bank",
+   "tickers": [
+    "DB"
+   ],
+   "domains": [
+    "db.com"
+   ],
+   "old_domains": [
+    "db-finanzberatung.de",
+    "deutsche-bank.de",
+    "deutsche-bank.es"
+   ],
+   "employees": [
+    90130
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "Germany"
+   ],
+   "industries": [
+    "financial services",
+    "financial service activities, except insurance and pension funding",
+    "other monetary intermediation",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q661845": {
+   "id": "Q661845",
+   "name": "STMicroelectronics",
+   "tickers": [
+    "STM"
+   ],
+   "domains": [
+    "st.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    51370
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "Switzerland",
+    "Netherlands"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": false
+  },
+  "Q662095": {
+   "id": "Q662095",
+   "name": "Edison International",
+   "tickers": [
+    "EIX"
+   ],
+   "domains": [
+    "edison.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    16677
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "electricity generation"
+   ],
+   "icp_fit": false
+  },
+  "Q663596": {
+   "id": "Q663596",
+   "name": "Gilead Sciences",
+   "tickers": [
+    "GILD"
+   ],
+   "domains": [
+    "gilead.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    17000
+   ],
+   "employees_as_of": "2026-07-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q668737": {
+   "id": "Q668737",
+   "name": "Yum! Brands",
+   "tickers": [
+    "YUM"
+   ],
+   "domains": [
+    "yum.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    90000
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "system catering",
+    "fast food industry"
+   ],
+   "icp_fit": false
+  },
+  "Q6702957": {
+   "id": "Q6702957",
+   "name": "Lululemon Athletica",
+   "tickers": [
+    "LULU"
+   ],
+   "domains": [
+    "shop.lululemon.com"
+   ],
+   "old_domains": [
+    "lululemon.cn",
+    "lululemon.co.uk",
+    "lululemon.com",
+    "lululemon.fr",
+    "lululemon.me"
+   ],
+   "employees": [
+    13400
+   ],
+   "employees_as_of": "2018-01-28",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q6703279": {
+   "id": "Q6703279",
+   "name": "Luminex",
+   "tickers": [
+    "LMNX"
+   ],
+   "domains": [
+    "luminexcorp.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1080
+   ],
+   "employees_as_of": "2023-03-29",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "biotechnology",
+    "biotechnology industry"
+   ],
+   "icp_fit": false
+  },
+  "Q682759": {
+   "id": "Q682759",
+   "name": "Linde Group",
+   "tickers": [
+    "LIN"
+   ],
+   "domains": [
+    "linde.com"
+   ],
+   "old_domains": [
+    "forsaljningsstallen.linde.se",
+    "linde-gas.se",
+    "linde.mx",
+    "myyntipisteet.linde-gas.fi",
+    "utsalgssted.linde.no"
+   ],
+   "employees": [
+    66323
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "Ireland",
+    "United Kingdom"
+   ],
+   "industries": [
+    "chemical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q691592": {
+   "id": "Q691592",
+   "name": "GlobalFoundries",
+   "tickers": [
+    "GFS"
+   ],
+   "domains": [
+    "gf.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    14600
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States",
+    "Cayman Islands"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q694872": {
+   "id": "Q694872",
+   "name": "TORM",
+   "tickers": [
+    "TRMD"
+   ],
+   "domains": [
+    "torm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4000
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "Denmark"
+   ],
+   "industries": [
+    "shipping line"
+   ],
+   "icp_fit": false
+  },
+  "Q6955139": {
+   "id": "Q6955139",
+   "name": "NRG Energy",
+   "tickers": [
+    "NRG"
+   ],
+   "domains": [
+    "nrg.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    9806
+   ],
+   "employees_as_of": "2014-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "electricity supply company"
+   ],
+   "icp_fit": false
+  },
+  "Q7020906": {
+   "id": "Q7020906",
+   "name": "Nexstar Media Group",
+   "tickers": [
+    "NXST"
+   ],
+   "domains": [
+    "nexstar.tv"
+   ],
+   "old_domains": [],
+   "employees": [
+    12832
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "broadcasting",
+    "media industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7083862": {
+   "id": "Q7083862",
+   "name": "Old Dominion Freight Line",
+   "tickers": [
+    "ODFL"
+   ],
+   "domains": [
+    "odfl.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    21279
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "freight transport industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7128508": {
+   "id": "Q7128508",
+   "name": "Palo Alto Networks",
+   "tickers": [
+    "PANW"
+   ],
+   "domains": [
+    "paloaltonetworks.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    13900
+   ],
+   "employees_as_of": "2024-08-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer security"
+   ],
+   "icp_fit": true
+  },
+  "Q713418": {
+   "id": "Q713418",
+   "name": "TSMC",
+   "tickers": [
+    "TSM"
+   ],
+   "domains": [
+    "tsmc.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    65152
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "Taiwan"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": false
+  },
+  "Q715583": {
+   "id": "Q715583",
+   "name": "Costco",
+   "tickers": [
+    "COST"
+   ],
+   "domains": [
+    "costco.com"
+   ],
+   "old_domains": [
+    "costco.ca",
+    "costco.co.jp",
+    "costco.co.kr",
+    "costco.co.nz",
+    "costco.co.uk",
+    "costco.com.au",
+    "costco.com.cn",
+    "costco.com.mx",
+    "costco.com.tw",
+    "costco.es",
+    "costco.fr",
+    "costco.is",
+    "costco.se",
+    "mobility.costco.ca",
+    "tires.costco.com"
+   ],
+   "employees": [
+    316000
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q717093": {
+   "id": "Q717093",
+   "name": "Itochu",
+   "tickers": [
+    "ITOCY"
+   ],
+   "domains": [
+    "itochu.co.jp"
+   ],
+   "old_domains": [],
+   "employees": [
+    62500
+   ],
+   "employees_as_of": "2010-01-01",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "trade",
+    "sōgō shōsha"
+   ],
+   "icp_fit": false
+  },
+  "Q717531": {
+   "id": "Q717531",
+   "name": "Chunghwa Telecom",
+   "tickers": [
+    "CHT"
+   ],
+   "domains": [
+    "cht.com.tw"
+   ],
+   "old_domains": [],
+   "employees": [
+    20008
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "Taiwan"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "mobile phone industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7234777": {
+   "id": "Q7234777",
+   "name": "Potbelly Sandwich Shop",
+   "tickers": [
+    "PBPB"
+   ],
+   "domains": [
+    "potbelly.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    6000
+   ],
+   "employees_as_of": "2019-12-29",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "fast casual restaurant"
+   ],
+   "icp_fit": false
+  },
+  "Q7240": {
+   "id": "Q7240",
+   "name": "Lockheed Martin",
+   "tickers": [
+    "LMT"
+   ],
+   "domains": [
+    "lockheedmartin.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    114000
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "information security",
+    "arms industry",
+    "aerospace industry",
+    "electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7248721": {
+   "id": "Q7248721",
+   "name": "Progressive Corporation",
+   "tickers": [
+    "PGR"
+   ],
+   "domains": [
+    "progressive.com"
+   ],
+   "old_domains": [
+    "progressiveagent.com"
+   ],
+   "employees": [
+    27250
+   ],
+   "employees_as_of": "2010-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "vehicle insurance"
+   ],
+   "icp_fit": false
+  },
+  "Q72539": {
+   "id": "Q72539",
+   "name": "U.S. Steel",
+   "tickers": [
+    "X"
+   ],
+   "domains": [
+    "ussteel.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    85000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "iron and steel industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7257522": {
+   "id": "Q7257522",
+   "name": "Huntington Ingalls Industries",
+   "tickers": [
+    "HII"
+   ],
+   "domains": [
+    "hii.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    44000
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "shipbuilding"
+   ],
+   "icp_fit": false
+  },
+  "Q7280388": {
+   "id": "Q7280388",
+   "name": "Radica Games",
+   "tickers": [
+    "RADA"
+   ],
+   "domains": [
+    "radicagames.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2500
+   ],
+   "employees_as_of": "1998-01-01",
+   "countries": [
+    "Hong Kong"
+   ],
+   "industries": [
+    "game industry",
+    "electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7280957": {
+   "id": "Q7280957",
+   "name": "Urban One",
+   "tickers": [
+    "UONEK",
+    "UONE"
+   ],
+   "domains": [
+    "urban1.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1011
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "broadcasting",
+    "media industry"
+   ],
+   "icp_fit": false
+  },
+  "Q731938": {
+   "id": "Q731938",
+   "name": "AstraZeneca",
+   "tickers": [
+    "AZN"
+   ],
+   "domains": [
+    "astrazeneca.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    70600
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "Sweden",
+    "United Kingdom"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q733482": {
+   "id": "Q733482",
+   "name": "GoPro",
+   "tickers": [
+    "GPRO"
+   ],
+   "domains": [
+    "gopro.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    963
+   ],
+   "employees_as_of": "2014-09-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "photography",
+    "electrical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q734338": {
+   "id": "Q734338",
+   "name": "Verisign",
+   "tickers": [
+    "VRSN"
+   ],
+   "domains": [
+    "verisign.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1019
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "Internet",
+    "telecommunications"
+   ],
+   "icp_fit": false
+  },
+  "Q7360089": {
+   "id": "Q7360089",
+   "name": "Roku, Inc.",
+   "tickers": [
+    "ROKU"
+   ],
+   "domains": [
+    "roku.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    817
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "broadcasting",
+    "consumer electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q736091": {
+   "id": "Q736091",
+   "name": "AspenTech Corp.",
+   "tickers": [
+    "AZPN"
+   ],
+   "domains": [
+    "aspentech.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1466
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software development"
+   ],
+   "icp_fit": true
+  },
+  "Q739084": {
+   "id": "Q739084",
+   "name": "U.S. Bancorp",
+   "tickers": [
+    "USB"
+   ],
+   "domains": [
+    "usbank.com"
+   ],
+   "old_domains": [
+    "ir.usbank.com",
+    "mortgage.usbank.com",
+    "usbancorp.com"
+   ],
+   "employees": [
+    68108
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q739518": {
+   "id": "Q739518",
+   "name": "Aon plc",
+   "tickers": [
+    "AON"
+   ],
+   "domains": [
+    "aon.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    65000
+   ],
+   "employees_as_of": "2012-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "professional service"
+   ],
+   "icp_fit": false
+  },
+  "Q7414": {
+   "id": "Q7414",
+   "name": "The Walt Disney Company",
+   "tickers": [
+    "DIS"
+   ],
+   "domains": [
+    "disney.com",
+    "thewaltdisneycompany.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    223000
+   ],
+   "employees_as_of": "2019-09-28",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "animation",
+    "amusement park",
+    "film industry",
+    "tourism industry",
+    "entertainment industry",
+    "media industry",
+    "leisure park industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7455653": {
+   "id": "Q7455653",
+   "name": "ServiceNow",
+   "tickers": [
+    "NOW"
+   ],
+   "domains": [
+    "servicenow.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    10371
+   ],
+   "employees_as_of": "2019-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "enterprise software"
+   ],
+   "icp_fit": true
+  },
+  "Q7501150": {
+   "id": "Q7501150",
+   "name": "Shopify",
+   "tickers": [
+    "SHOP"
+   ],
+   "domains": [
+    "shopify.com"
+   ],
+   "old_domains": [
+    "en.shopify.nl",
+    "es.shopify.com",
+    "pt.shopify.com"
+   ],
+   "employees": [
+    8300
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "e-commerce",
+    "online marketplace"
+   ],
+   "icp_fit": false
+  },
+  "Q7538146": {
+   "id": "Q7538146",
+   "name": "Skyworks Solutions",
+   "tickers": [
+    "SWKS"
+   ],
+   "domains": [
+    "skyworksinc.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4400
+   ],
+   "employees_as_of": "2011-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q757307": {
+   "id": "Q757307",
+   "name": "Atlassian",
+   "tickers": [
+    "TEAM"
+   ],
+   "domains": [
+    "atlassian.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    13301
+   ],
+   "employees_as_of": "2026-03-01",
+   "countries": [
+    "Australia"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": false
+  },
+  "Q757489": {
+   "id": "Q757489",
+   "name": "Atmel",
+   "tickers": [
+    "ATML"
+   ],
+   "domains": [
+    "microchip.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5100
+   ],
+   "employees_as_of": "2012-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q7616390": {
+   "id": "Q7616390",
+   "name": "Stifel",
+   "tickers": [
+    "SF"
+   ],
+   "domains": [
+    "stifel.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8500
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "investment",
+    "finance",
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q76846862": {
+   "id": "Q76846862",
+   "name": "Paramount Global",
+   "tickers": [
+    "PARA"
+   ],
+   "domains": [
+    "web.archive.org"
+   ],
+   "old_domains": [],
+   "employees": [
+    18600
+   ],
+   "employees_as_of": "2024-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "mass media",
+    "media conglomerate"
+   ],
+   "icp_fit": false
+  },
+  "Q7687819": {
+   "id": "Q7687819",
+   "name": "Tata Motors Passenger Vehicles",
+   "tickers": [
+    "TTM"
+   ],
+   "domains": [
+    "tata.cars"
+   ],
+   "old_domains": [
+    "nexonev.tatamotors.com",
+    "tatacars.com"
+   ],
+   "employees": [
+    27948
+   ],
+   "employees_as_of": "2014-03-31",
+   "countries": [
+    "India"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q778126": {
+   "id": "Q778126",
+   "name": "Intelsat",
+   "tickers": [
+    "I"
+   ],
+   "domains": [
+    "intelsat.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1789
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "Luxembourg"
+   ],
+   "industries": [
+    "telecommunications industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7800873": {
+   "id": "Q7800873",
+   "name": "Tidewater",
+   "tickers": [
+    "TDW"
+   ],
+   "domains": [
+    "tdw.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4513
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "water transport"
+   ],
+   "icp_fit": false
+  },
+  "Q780442": {
+   "id": "Q780442",
+   "name": "Uber",
+   "tickers": [
+    "UBER"
+   ],
+   "domains": [
+    "uber.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    12000
+   ],
+   "employees_as_of": "2017-12-01",
+   "countries": [
+    "United States",
+    "Netherlands"
+   ],
+   "industries": [
+    "information technology",
+    "passenger transport"
+   ],
+   "icp_fit": true
+  },
+  "Q7833614": {
+   "id": "Q7833614",
+   "name": "TFI International",
+   "tickers": [
+    "TFII"
+   ],
+   "domains": [
+    "tfiintl.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    16753
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "logistics",
+    "freight transport"
+   ],
+   "icp_fit": false
+  },
+  "Q784022": {
+   "id": "Q784022",
+   "name": "Renren",
+   "tickers": [
+    "RENN"
+   ],
+   "domains": [
+    "renren.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1570
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "social networking service"
+   ],
+   "icp_fit": false
+  },
+  "Q7876533": {
+   "id": "Q7876533",
+   "name": "Ubiquiti",
+   "tickers": [
+    "UI"
+   ],
+   "domains": [
+    "ui.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1377
+   ],
+   "employees_as_of": "2022-06-30",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "computer network"
+   ],
+   "icp_fit": true
+  },
+  "Q7880250": {
+   "id": "Q7880250",
+   "name": "Ultimate Software",
+   "tickers": [
+    "ULTI"
+   ],
+   "domains": [
+    "ultimatesoftware.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4877
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q7893816": {
+   "id": "Q7893816",
+   "name": "Unity Technologies",
+   "tickers": [
+    "U"
+   ],
+   "domains": [
+    "unity.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2000
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "video game industry",
+    "media industry"
+   ],
+   "icp_fit": false
+  },
+  "Q790060": {
+   "id": "Q790060",
+   "name": "Broadcom",
+   "tickers": [
+    "AVGO"
+   ],
+   "domains": [
+    "broadcom.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    20000
+   ],
+   "employees_as_of": "2023-10-29",
+   "countries": [
+    "United States",
+    "Singapore"
+   ],
+   "industries": [
+    "semiconductor industry"
+   ],
+   "icp_fit": true
+  },
+  "Q791285": {
+   "id": "Q791285",
+   "name": "Avon Products Inc.",
+   "tickers": [
+    "AVP"
+   ],
+   "domains": [
+    "avonworldwide.com"
+   ],
+   "old_domains": [
+    "avon.ca",
+    "avon.com",
+    "avon.it",
+    "my.avon.ru",
+    "youravon.com"
+   ],
+   "employees": [
+    36700
+   ],
+   "employees_as_of": "2013-12-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "cosmetics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q7937913": {
+   "id": "Q7937913",
+   "name": "Vivint Solar",
+   "tickers": [
+    "VSLR"
+   ],
+   "domains": [
+    "vivintsolar.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    5000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "solar panel",
+    "solar power"
+   ],
+   "icp_fit": false
+  },
+  "Q795454": {
+   "id": "Q795454",
+   "name": "Barnes & Noble",
+   "tickers": [
+    "BKS"
+   ],
+   "domains": [
+    "barnesandnoble.com"
+   ],
+   "old_domains": [
+    "bn.com"
+   ],
+   "employees": [
+    40000
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "bookselling"
+   ],
+   "icp_fit": false
+  },
+  "Q8034666": {
+   "id": "Q8034666",
+   "name": "Workday, Inc.",
+   "tickers": [
+    "WDAY"
+   ],
+   "domains": [
+    "workday.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    20000
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q804353": {
+   "id": "Q804353",
+   "name": "Baker Hughes",
+   "tickers": [
+    "BKR"
+   ],
+   "domains": [
+    "bakerhughes.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    59400
+   ],
+   "employees_as_of": "2013-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q806206": {
+   "id": "Q806206",
+   "name": "Bancolombia",
+   "tickers": [
+    "CIB"
+   ],
+   "domains": [
+    "bancolombia.com"
+   ],
+   "old_domains": [
+    "bam.com.gt",
+    "grupobancolombia.com"
+   ],
+   "employees": [
+    29731
+   ],
+   "employees_as_of": "2019-01-08",
+   "countries": [
+    "Colombia"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q806215": {
+   "id": "Q806215",
+   "name": "Santander Group",
+   "tickers": [
+    "SAN"
+   ],
+   "domains": [
+    "santander.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    194000
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "Spain"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q8064381": {
+   "id": "Q8064381",
+   "name": "Zagg",
+   "tickers": [
+    "ZAGG"
+   ],
+   "domains": [
+    "zagg.com"
+   ],
+   "old_domains": [
+    "zaggfranchise.com"
+   ],
+   "employees": [
+    628
+   ],
+   "employees_as_of": "2019-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "consumer electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q806693": {
+   "id": "Q806693",
+   "name": "Bank of Montreal",
+   "tickers": [
+    "BMO"
+   ],
+   "domains": [
+    "bmo.com"
+   ],
+   "old_domains": [
+    "nesbittburns.bmo.com",
+    "privatewealth.bmo.com",
+    "wwwbankofthewest.com"
+   ],
+   "employees": [
+    46778
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "Canada"
+   ],
+   "industries": [
+    "economics of banking",
+    "financial services",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q8072594": {
+   "id": "Q8072594",
+   "name": "ZipRecruiter",
+   "tickers": [
+    "ZIP"
+   ],
+   "domains": [
+    "ziprecruiter.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1000
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q8085893": {
+   "id": "Q8085893",
+   "name": "Expedia Group",
+   "tickers": [
+    "EXPE"
+   ],
+   "domains": [
+    "expediagroup.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    16000
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "Travel technology"
+   ],
+   "icp_fit": true
+  },
+  "Q8093": {
+   "id": "Q8093",
+   "name": "Nintendo",
+   "tickers": [
+    "NTDOY"
+   ],
+   "domains": [
+    "nintendo.com"
+   ],
+   "old_domains": [
+    "nintendo.de"
+   ],
+   "employees": [
+    7317
+   ],
+   "employees_as_of": "2023-03-31",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "video game industry"
+   ],
+   "icp_fit": false
+  },
+  "Q80978": {
+   "id": "Q80978",
+   "name": "Hewlett-Packard",
+   "tickers": [
+    "HPQ"
+   ],
+   "domains": [
+    "hp.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    48000
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "software industry",
+    "information and communications industry",
+    "information technology industry",
+    "computer hardware industry"
+   ],
+   "icp_fit": true
+  },
+  "Q811857": {
+   "id": "Q811857",
+   "name": "Bausch & Lomb",
+   "tickers": [
+    "BLCO"
+   ],
+   "domains": [
+    "bausch.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    12900
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q818846": {
+   "id": "Q818846",
+   "name": "Novo",
+   "tickers": [
+    "NVO"
+   ],
+   "domains": [
+    "novonordisk.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    69505
+   ],
+   "employees_as_of": "2025-12-31",
+   "countries": [
+    "Denmark"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q81965": {
+   "id": "Q81965",
+   "name": "General Motors",
+   "tickers": [
+    "GM"
+   ],
+   "domains": [
+    "gm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    164000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q825943": {
+   "id": "Q825943",
+   "name": "BorgWarner",
+   "tickers": [
+    "BWA"
+   ],
+   "domains": [
+    "borgwarner.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    49000
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q831445": {
+   "id": "Q831445",
+   "name": "Sinopec",
+   "tickers": [
+    "SNP"
+   ],
+   "domains": [
+    "sinopecgroup.com",
+    "sinopechongkong.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    351019
+   ],
+   "employees_as_of": "2015-01-01",
+   "countries": [
+    "People's Republic of China"
+   ],
+   "industries": [
+    "petroleum industry"
+   ],
+   "icp_fit": false
+  },
+  "Q851641": {
+   "id": "Q851641",
+   "name": "Equinix",
+   "tickers": [
+    "EQIX"
+   ],
+   "domains": [
+    "equinix.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8378
+   ],
+   "employees_as_of": "2019-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "Internet"
+   ],
+   "icp_fit": false
+  },
+  "Q852787": {
+   "id": "Q852787",
+   "name": "Groupon",
+   "tickers": [
+    "GRPN"
+   ],
+   "domains": [
+    "groupon.com"
+   ],
+   "old_domains": [
+    "groo.co.il",
+    "groupon.be",
+    "groupon.ca",
+    "groupon.cl",
+    "groupon.co.uk",
+    "groupon.com.au",
+    "groupon.com.mx",
+    "groupon.de",
+    "groupon.es",
+    "groupon.fr",
+    "groupon.it",
+    "groupon.jp",
+    "groupon.nl",
+    "groupon.pl",
+    "grouponnz.co.nz"
+   ],
+   "employees": [
+    3675
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "e-commerce"
+   ],
+   "icp_fit": false
+  },
+  "Q853958": {
+   "id": "Q853958",
+   "name": "NTT DoCoMo",
+   "tickers": [
+    "DCM"
+   ],
+   "domains": [
+    "docomo.ne.jp"
+   ],
+   "old_domains": [],
+   "employees": [
+    27558
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "telecommunications industry",
+    "mobile phone industry"
+   ],
+   "icp_fit": false
+  },
+  "Q856411": {
+   "id": "Q856411",
+   "name": "British American Tobacco",
+   "tickers": [
+    "BTI"
+   ],
+   "domains": [
+    "bat.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    55000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United Kingdom"
+   ],
+   "industries": [
+    "tobacco industry",
+    "food and tobacco industry"
+   ],
+   "icp_fit": false
+  },
+  "Q861042": {
+   "id": "Q861042",
+   "name": "Western Union",
+   "tickers": [
+    "WU"
+   ],
+   "domains": [
+    "westernunion.com"
+   ],
+   "old_domains": [
+    "westernunion.co.id",
+    "westernunion.com.ph",
+    "westernunion.it",
+    "westernunion.pl",
+    "westernunion.ru",
+    "wu.com"
+   ],
+   "employees": [
+    11000
+   ],
+   "employees_as_of": "2020-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services",
+    "telecommunications industry",
+    "financial sector"
+   ],
+   "icp_fit": false
+  },
+  "Q864407": {
+   "id": "Q864407",
+   "name": "The Home Depot",
+   "tickers": [
+    "HD"
+   ],
+   "domains": [
+    "homedepot.com"
+   ],
+   "old_domains": [
+    "compactpowerrents.com",
+    "homedepot.ca",
+    "homedepot.com.mx"
+   ],
+   "employees": [
+    400000
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "hardware store"
+   ],
+   "icp_fit": false
+  },
+  "Q868587": {
+   "id": "Q868587",
+   "name": "S&P Global",
+   "tickers": [
+    "SPGI"
+   ],
+   "domains": [
+    "spglobal.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    35000
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q880942": {
+   "id": "Q880942",
+   "name": "Blackstone Inc.",
+   "tickers": [
+    "BX"
+   ],
+   "domains": [
+    "blackstone.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    4735
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [
+    "United States",
+    "United Kingdom"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q89368734": {
+   "id": "Q89368734",
+   "name": "RTX",
+   "tickers": [
+    "RTX"
+   ],
+   "domains": [
+    "rtx.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    182000
+   ],
+   "employees_as_of": "2022-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "arms industry",
+    "aerospace industry"
+   ],
+   "icp_fit": false
+  },
+  "Q898208": {
+   "id": "Q898208",
+   "name": "Honeywell",
+   "tickers": [
+    "HON"
+   ],
+   "domains": [
+    "honeywell.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    99000
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail",
+    "chemical industry",
+    "supply chain",
+    "aerospace industry",
+    "manufacturing industry",
+    "health care industry",
+    "industrial safety"
+   ],
+   "icp_fit": false
+  },
+  "Q898750": {
+   "id": "Q898750",
+   "name": "Teva Pharmaceutical Industries Ltd.",
+   "tickers": [
+    "TEVA"
+   ],
+   "domains": [
+    "teva.co.il",
+    "tevapharm.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    42535
+   ],
+   "employees_as_of": "2018-01-01",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q901262": {
+   "id": "Q901262",
+   "name": "Grifols",
+   "tickers": [
+    "GRFS"
+   ],
+   "domains": [
+    "grifols.com"
+   ],
+   "old_domains": [
+    "grifolsplasma.com"
+   ],
+   "employees": [
+    23234
+   ],
+   "employees_as_of": "2021-01-01",
+   "countries": [
+    "Spain"
+   ],
+   "industries": [
+    "pharmaceutical industry"
+   ],
+   "icp_fit": false
+  },
+  "Q910866": {
+   "id": "Q910866",
+   "name": "Humana",
+   "tickers": [
+    "HUM"
+   ],
+   "domains": [
+    "humana.com"
+   ],
+   "old_domains": [
+    "centerwellprimarycare.com",
+    "convivacarecenters.com",
+    "medicareagent.humana.com"
+   ],
+   "employees": [
+    51600
+   ],
+   "employees_as_of": "2016-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "insurance industry"
+   ],
+   "icp_fit": false
+  },
+  "Q916196": {
+   "id": "Q916196",
+   "name": "Citrix Systems",
+   "tickers": [
+    "CTXS"
+   ],
+   "domains": [
+    "citrix.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    8400
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "technology",
+    "software industry"
+   ],
+   "icp_fit": true
+  },
+  "Q918208": {
+   "id": "Q918208",
+   "name": "Ternium",
+   "tickers": [
+    "TX"
+   ],
+   "domains": [
+    "ternium.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    16600
+   ],
+   "employees_as_of": "2013-12-31",
+   "countries": [
+    "Argentina"
+   ],
+   "industries": [
+    "iron and steel industry"
+   ],
+   "icp_fit": false
+  },
+  "Q926806": {
+   "id": "Q926806",
+   "name": "Carlyle Group",
+   "tickers": [
+    "CG"
+   ],
+   "domains": [
+    "carlyle.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    2400
+   ],
+   "employees_as_of": "2025-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q931354": {
+   "id": "Q931354",
+   "name": "Bath & Body Works, Inc.",
+   "tickers": [
+    "LB"
+   ],
+   "domains": [
+    "lb.com"
+   ],
+   "old_domains": [
+    "limitedbrands.com"
+   ],
+   "employees": [
+    94600
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "retail"
+   ],
+   "icp_fit": false
+  },
+  "Q941127": {
+   "id": "Q941127",
+   "name": "Salesforce",
+   "tickers": [
+    "CRM"
+   ],
+   "domains": [
+    "salesforce.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    35000
+   ],
+   "employees_as_of": "2019-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "automation",
+    "cloud computing",
+    "analytics",
+    "customer relationship management",
+    "software industry",
+    "intelligent agent",
+    "email marketing",
+    "software as a service",
+    "enterprise software"
+   ],
+   "icp_fit": true
+  },
+  "Q946713": {
+   "id": "Q946713",
+   "name": "SunEdison",
+   "tickers": [
+    "SUNE"
+   ],
+   "domains": [
+    "sunedison.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    7300
+   ],
+   "employees_as_of": "2014-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "energy sector"
+   ],
+   "icp_fit": false
+  },
+  "Q94933": {
+   "id": "Q94933",
+   "name": "Take-Two Interactive",
+   "tickers": [
+    "TTWO"
+   ],
+   "domains": [
+    "take2games.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    6495
+   ],
+   "employees_as_of": "2021-03-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "video game industry"
+   ],
+   "icp_fit": false
+  },
+  "Q9584": {
+   "id": "Q9584",
+   "name": "Honda",
+   "tickers": [
+    "HMC"
+   ],
+   "domains": [
+    "global.honda"
+   ],
+   "old_domains": [
+    "honda.ca",
+    "honda.co.th",
+    "honda.co.uk",
+    "honda.com",
+    "honda.com.co",
+    "honda.com.tr",
+    "honda.com.vn",
+    "honda.es",
+    "honda.it",
+    "hondacarindia.com",
+    "hondaph.com"
+   ],
+   "employees": [
+    204035
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "Japan"
+   ],
+   "industries": [
+    "industrial manufacturing",
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q96095585": {
+   "id": "Q96095585",
+   "name": "Pinterest Inc.",
+   "tickers": [
+    "PINS"
+   ],
+   "domains": [
+    "pinterest.de"
+   ],
+   "old_domains": [],
+   "employees": [
+    3225
+   ],
+   "employees_as_of": "2021-12-31",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "social media"
+   ],
+   "icp_fit": false
+  },
+  "Q96574614": {
+   "id": "Q96574614",
+   "name": "Safe-T Group",
+   "tickers": [
+    "SFET"
+   ],
+   "domains": [
+    "safetgroup.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    36
+   ],
+   "employees_as_of": "2020-06-22",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "technology"
+   ],
+   "icp_fit": false
+  },
+  "Q96574719": {
+   "id": "Q96574719",
+   "name": "PowerFleet",
+   "tickers": [
+    "PWFL"
+   ],
+   "domains": [
+    "powerfleet.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    840
+   ],
+   "employees_as_of": "2020-06-22",
+   "countries": [
+    "United States",
+    "Israel"
+   ],
+   "industries": [
+    "technology"
+   ],
+   "icp_fit": false
+  },
+  "Q96574751": {
+   "id": "Q96574751",
+   "name": "foresight automotive LTD",
+   "tickers": [
+    "FRSX"
+   ],
+   "domains": [
+    "foresightauto.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    61
+   ],
+   "employees_as_of": "2020-06-22",
+   "countries": [
+    "Israel"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q970695": {
+   "id": "Q970695",
+   "name": "Northern Trust",
+   "tickers": [
+    "NTRS"
+   ],
+   "domains": [
+    "northerntrust.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    20900
+   ],
+   "employees_as_of": "2020-01-01",
+   "countries": [
+    "United States",
+    "Switzerland"
+   ],
+   "industries": [
+    "financial services"
+   ],
+   "icp_fit": false
+  },
+  "Q97439162": {
+   "id": "Q97439162",
+   "name": "Stellantis",
+   "tickers": [
+    "STLA"
+   ],
+   "domains": [
+    "stellantis.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    258275
+   ],
+   "employees_as_of": "2023-12-31",
+   "countries": [
+    "Netherlands"
+   ],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q974846": {
+   "id": "Q974846",
+   "name": "People Incorporated",
+   "tickers": [
+    "IAC"
+   ],
+   "domains": [
+    "ir.people-incorporated.com"
+   ],
+   "old_domains": [
+    "iac.com"
+   ],
+   "employees": [
+    6800
+   ],
+   "employees_as_of": "2017-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "media industry",
+    "Internet industry"
+   ],
+   "icp_fit": false
+  },
+  "Q979690": {
+   "id": "Q979690",
+   "name": "Netgear",
+   "tickers": [
+    "NTGR"
+   ],
+   "domains": [
+    "netgear.com"
+   ],
+   "old_domains": [
+    "netgear.co.uk",
+    "netgear.de",
+    "netgear.fr",
+    "netgear.it"
+   ],
+   "employees": [
+    791
+   ],
+   "employees_as_of": "2011-01-01",
+   "countries": [
+    "United States"
+   ],
+   "industries": [
+    "consumer electronics industry"
+   ],
+   "icp_fit": false
+  },
+  "Q98139925": {
+   "id": "Q98139925",
+   "name": "Li Auto",
+   "tickers": [
+    "LI"
+   ],
+   "domains": [
+    "lixiang.com"
+   ],
+   "old_domains": [
+    "liautoofficial.ru"
+   ],
+   "employees": [
+    31591
+   ],
+   "employees_as_of": "2023-01-01",
+   "countries": [],
+   "industries": [
+    "automotive industry"
+   ],
+   "icp_fit": false
+  },
+  "Q98608948": {
+   "id": "Q98608948",
+   "name": "JFrog Ltd",
+   "tickers": [
+    "FROG"
+   ],
+   "domains": [
+    "jfrog.com"
+   ],
+   "old_domains": [],
+   "employees": [
+    1300
+   ],
+   "employees_as_of": "2022-01-01",
+   "countries": [
+    "United States",
+    "Israel"
+   ],
+   "industries": [
+    "development and operations"
+   ],
+   "icp_fit": true
+  }
+ },
+ "icp": {
+  "industries": [
+   "IT service management",
+   "Internet of Things",
+   "Prepackaged Software",
+   "Software Publishers",
+   "Travel technology",
+   "analytics",
+   "artificial intelligence",
+   "business intelligence",
+   "business software industry",
+   "cloud computing",
+   "computer and network surveillance",
+   "computer hardware industry",
+   "computer industry",
+   "computer network",
+   "computer security",
+   "computer storage media",
+   "computing platform",
+   "customer relationship management",
+   "data analytics software industry",
+   "data center",
+   "data storage medium",
+   "data visualization",
+   "development and operations",
+   "email marketing",
+   "enterprise software",
+   "health information technology",
+   "information and communications industry",
+   "information and communications technology",
+   "information security",
+   "information technology",
+   "information technology consulting",
+   "information technology industry",
+   "infrastructure platform",
+   "intelligent agent",
+   "networking hardware",
+   "open-source intelligence",
+   "semiconductor",
+   "semiconductor industry",
+   "software as a service",
+   "software development",
+   "software industry",
+   "technology",
+   "technology industry",
+   "video conference",
+   "web hosting service",
+   "web service",
+   "website builder"
+  ],
+  "country": "United States",
+  "min": 1000,
+  "max": 100000
+ }
+}

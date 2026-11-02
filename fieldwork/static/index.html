@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldwork</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #14171f; --muted: #5d6576; --line: #e3e6ec;
+    --accent: #2f5bea; --good: #138a52; --bad: #c2352b; --warn: #a86a00; --chip: #eef1f7;
+    --mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0e1117; --panel: #161a22; --ink: #e8ebf1; --muted: #98a1b3; --line: #262c38;
+            --accent: #7b9bff; --good: #3ccf8e; --bad: #ff7b72; --warn: #e3b341; --chip: #1f2531; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 "Segoe UI", system-ui, sans-serif; }
+  header { padding: 22px 28px 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; }
+  h1 { margin: 0; font-size: 22px; letter-spacing: -0.3px; }
+  header p { margin: 0; color: var(--muted); }
+  main { padding: 8px 28px 40px; display: grid; gap: 18px; max-width: 1280px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+  .kpi, section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  .kpi { padding: 14px 16px; }
+  .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  .kpi .value { font-size: 26px; font-weight: 650; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .kpi .sub { color: var(--muted); font-size: 12px; }
+  section { padding: 16px 18px; }
+  section h2 { margin: 0 0 12px; font-size: 15px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  section h2 .hint { color: var(--muted); font-weight: 400; font-size: 12.5px; }
+  .grid2 { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; }
+  @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } main, header { padding-left: 16px; padding-right: 16px; } }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--muted); font-weight: 600; font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr.click { cursor: pointer; } tr.click:hover td { background: var(--chip); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .chip { display: inline-block; background: var(--chip); border-radius: 999px; padding: 1px 8px; font-size: 12px; }
+  .good { color: var(--good); } .bad { color: var(--bad); } .muted { color: var(--muted); }
+  .bars { display: grid; gap: 6px; }
+  .bar { display: grid; grid-template-columns: 210px 1fr 40px; gap: 10px; align-items: center; cursor: pointer;
+         padding: 3px 6px; border-radius: 6px; }
+  .bar:hover, .bar.active { background: var(--chip); }
+  .bar .track { height: 10px; background: var(--chip); border-radius: 5px; overflow: hidden; }
+  .bar .fill { height: 100%; background: var(--accent); border-radius: 5px; }
+  .bar .name { font-family: var(--mono); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  select, button { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line);
+                   border-radius: 7px; padding: 5px 9px; }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); cursor: pointer; }
+  button.small { padding: 2px 8px; font-size: 12px; cursor: pointer; }
+  button:disabled { opacity: .55; cursor: default; }
+  .scroll { max-height: 420px; overflow: auto; }
+  .trace { font-family: var(--mono); font-size: 12px; display: grid; gap: 6px; }
+  .ev { border-left: 3px solid var(--line); padding: 4px 10px; }
+  .ev.tool { border-color: var(--accent); } .ev.llm { border-color: var(--warn); } .ev.decision { border-color: var(--good); }
+  .ev .head { font-weight: 600; } .ev pre { margin: 3px 0 0; white-space: pre-wrap; word-break: break-word; color: var(--muted); }
+  .empty { color: var(--muted); padding: 10px 0; }
+  canvas { max-height: 260px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Fieldwork</h1>
+  <p>Account-research agent with a trace-to-eval flywheel. All results are scored against real Wikidata gold.</p>
+</header>
+<main>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid2">
+    <section>
+      <h2>Version history <span class="hint">held-out test split; every change was driven by failure clusters triaged on the dev split</span></h2>
+      <canvas id="chart"></canvas>
+    </section>
+    <section>
+      <h2>Releases</h2>
+      <div class="scroll"><table id="versions"></table></div>
+    </section>
+  </div>
+
+  <section>
+    <h2>Run explorer
+      <select id="runSel"></select>
+      <span class="hint">new run:</span>
+      <select id="newVersion"></select>
+      <select id="newSplit"><option>test</option><option>dev</option></select>
+      <button class="primary" id="runBtn">Run</button>
+    </h2>
+    <div class="grid2">
+      <div>
+        <div class="muted" style="margin-bottom:8px">Failure clusters. Click one to see its failures.</div>
+        <div class="bars" id="clusters"></div>
+      </div>
+      <div>
+        <div class="muted" style="margin-bottom:8px">Run metrics</div>
+        <table id="runMetrics"></table>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section>
+      <h2 id="failTitle">Failures <span class="hint">promote a failure to freeze it as a regression test</span></h2>
+      <div class="scroll"><table id="failures"></table></div>
+    </section>
+    <section>
+      <h2 id="traceTitle">Trace <span class="hint">click a failure to replay what the agent did</span></h2>
+      <div class="scroll"><div class="trace" id="trace"><div class="empty">No failure selected.</div></div></div>
+    </section>
+  </div>
+
+  <section>
+    <h2>Regression suite <span class="hint">every case must pass in CI before a version ships</span></h2>
+    <div class="scroll"><table id="cases"></table></div>
+  </section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pct = (x) => (x == null ? "-" : (100 * x).toFixed(1) + "%");
+const api = async (path, opts) => { const r = await fetch(path, opts); if (!r.ok) throw new Error(await r.text()); return r.json(); };
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+let state = { run: null, failures: [], trace: null, accounts: null, signature: null };
+
+async function loadHistory() {
+  const hist = await api("/api/history");
+  const cases = await api("/api/regressions");
+  // headline = newest version whose numbers are real (an LLM version counts only once its answers are recorded)
+  const last = [...hist].reverse().find((h) => !h.uses_llm || h.llm_recorded) || hist[hist.length - 1];
+  const first = hist[0];
+  const kpi = (label, value, sub, cls = "") =>
+    `<div class="kpi"><div class="label">${label}</div><div class="value ${cls}">${value}</div><div class="sub">${sub}</div></div>`;
+  $("kpis").innerHTML = last ? [
+    kpi("Verified accuracy", pct(last.test.verified_accuracy), `${last.version} on held-out test; ${pct(first.test.verified_accuracy)} at ${first.version}`, "good"),
+    kpi("Silent error rate", pct(last.test.silent_error_rate), `wrong but unflagged; ${pct(first.test.silent_error_rate)} at ${first.version}`),
+    kpi("Sent to review", pct(last.test.review_rate), "rows the agent refused to guess"),
+    kpi("Regression cases", last.regression_cases, `${cases.length} promoted from real failures`),
+    kpi("ICP precision", pct(last.test.icp_precision), `recall ${pct(last.test.icp_recall)}`),
+  ].join("") : `<div class="kpi"><div class="label">No history yet</div><div class="sub">run: python -m fieldwork history</div></div>`;
+
+  $("versions").innerHTML = "<tr><th>Version</th><th>Change</th><th class='num'>Verified</th><th class='num'>Silent err.</th><th class='num'>Cases</th></tr>" +
+    hist.map((h) => `<tr><td><span class="chip">${h.version}</span></td><td>${esc(h.summary)}${h.uses_llm ? (h.llm_recorded ? ` <span class="muted">(${esc(h.model)}, replayed)</span>` : ` <span class="bad">(LLM not recorded yet: rules fallback)</span>`) : ""}</td>
+      <td class="num">${pct(h.test.verified_accuracy)}</td><td class="num">${pct(h.test.silent_error_rate)}</td><td class="num">${h.regression_cases}</td></tr>`).join("");
+
+  if (window.Chart && hist.length) {
+    new Chart($("chart"), {
+      type: "line",
+      data: { labels: hist.map((h) => h.version), datasets: [
+        { label: "Verified accuracy", data: hist.map((h) => 100 * h.test.verified_accuracy), borderColor: css("--good"), backgroundColor: css("--good"), tension: .25 },
+        { label: "Silent error rate", data: hist.map((h) => 100 * h.test.silent_error_rate), borderColor: css("--bad"), backgroundColor: css("--bad"), tension: .25 },
+        { label: "Sent to review", data: hist.map((h) => 100 * h.test.review_rate), borderColor: css("--warn"), backgroundColor: css("--warn"), borderDash: [4, 4], tension: .25 },
+      ]},
+      options: { responsive: true, maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+        scales: { y: { min: 0, max: 100, ticks: { callback: (v) => v + "%", color: css("--muted") }, grid: { color: css("--line") } },
+                  x: { ticks: { color: css("--muted") }, grid: { display: false } } },
+        plugins: { legend: { labels: { color: css("--ink") } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.y.toFixed(1)}%` } } } },
+    });
+    $("chart").parentElement.style.height = "300px";
+  }
+  $("cases").innerHTML = "<tr><th>Case</th><th>Company</th><th>Why it was promoted</th><th>Added</th></tr>" +
+    cases.map((c) => `<tr><td><span class="chip">${esc(c.signature)}</span></td><td>${esc(c.company)}</td><td class="muted">${esc(c.detail)}</td><td>${esc(c.created)}</td></tr>`).join("");
+}
+
+async function loadRuns(select) {
+  const runs = await api("/api/runs");
+  $("runSel").innerHTML = runs.map((r) => `<option value="${r.id}">${r.version} · ${r.split} · ${pct(r.metrics.verified_accuracy)} · ${r.started_at.replace("T", " ")}</option>`).join("");
+  if (runs.length) { $("runSel").value = select || runs[0].id; await openRun($("runSel").value); }
+}
+
+async function openRun(id) {
+  const run = await api(`/api/runs/${id}`);
+  state = { run, failures: await api(`/api/runs/${id}/failures`), trace: null, accounts: null, signature: null };
+  const m = run.metrics;
+  const rows = [["Verified accuracy", pct(m.verified_accuracy)], ["Silent error rate", pct(m.silent_error_rate)],
+    ["Sent to review", pct(m.review_rate)], ["Entity accuracy", pct(m.entity_accuracy)], ["Dedup F1", pct(m.dedup_f1)],
+    ["ICP precision / recall", `${pct(m.icp_precision)} / ${pct(m.icp_recall)}`], ["Precision@25", pct(m.precision_at_25)],
+    ["LLM calls / cost", `${m.llm_calls} / $${(m.cost_usd || 0).toFixed(4)}`], ["Tool calls / wall time", `${run.tool_calls} / ${Math.round(run.duration_ms)} ms`]];
+  $("runMetrics").innerHTML = rows.map(([k, v]) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`).join("");
+  const max = Math.max(1, ...run.clusters.map((c) => c.count));
+  $("clusters").innerHTML = run.clusters.length ? run.clusters.map((c) =>
+    `<div class="bar" data-sig="${esc(c.signature)}"><span class="name" title="${esc(c.signature)}">${esc(c.signature)}</span>
+     <span class="track"><span class="fill" style="display:block;width:${(100 * c.count / max).toFixed(1)}%"></span></span><span class="num">${c.count}</span></div>`).join("")
+    : `<div class="empty">No failures in this run.</div>`;
+  document.querySelectorAll(".bar").forEach((b) => b.onclick = () => showFailures(b.dataset.sig));
+  showFailures(run.clusters[0]?.signature);
+}
+
+function showFailures(sig) {
+  state.signature = sig;
+  document.querySelectorAll(".bar").forEach((b) => b.classList.toggle("active", b.dataset.sig === sig));
+  const list = state.failures.filter((f) => f.signature === sig);
+  $("failTitle").innerHTML = `Failures <span class="chip">${esc(sig || "none")}</span> <span class="hint">promote a failure to freeze it as a regression test</span>`;
+  $("failures").innerHTML = "<tr><th>Company</th><th>CRM rows</th><th>Expected → got</th><th></th></tr>" + list.map((f, i) =>
+    `<tr class="click" data-i="${i}"><td>${esc(f.company)}</td><td class="muted">${f.rows.map((r) => esc(r.account_name)).join("<br>")}</td>
+     <td>${f.field ? `<span class="good">${esc(JSON.stringify(f.expected))}</span> → <span class="bad">${esc(JSON.stringify(f.got))}</span>` : `<span class="muted">${esc(f.detail)}</span>`}</td>
+     <td>${f.promoted_case ? `<span class="chip">case</span>` : `<button class="small" data-promote="${f.id}">Promote</button>`}</td></tr>`).join("");
+  document.querySelectorAll("#failures tr.click").forEach((tr) => tr.onclick = (e) => {
+    if (e.target.dataset.promote) return promote(e.target);
+    showTrace(list[+tr.dataset.i]);
+  });
+}
+
+async function promote(btn) {
+  btn.disabled = true;
+  const res = await api(`/api/failures/${btn.dataset.promote}/promote`, { method: "POST" });
+  const f = state.failures.find((x) => x.id === btn.dataset.promote); f.promoted_case = res.case;
+  btn.outerHTML = `<span class="chip">case</span>`;
+  loadCases();
+}
+
+async function loadCases() {
+  const cases = await api("/api/regressions");
+  $("cases").innerHTML = "<tr><th>Case</th><th>Company</th><th>Why it was promoted</th><th>Added</th></tr>" +
+    cases.map((c) => `<tr><td><span class="chip">${esc(c.signature)}</span></td><td>${esc(c.company)}</td><td class="muted">${esc(c.detail)}</td><td>${esc(c.created)}</td></tr>`).join("");
+}
+
+async function showTrace(f) {
+  const id = state.run.id;
+  state.trace = state.trace || await api(`/api/runs/${id}/trace`);
+  state.accounts = state.accounts || await api(`/api/runs/${id}/accounts`);
+  const keys = new Set(f.crm_ids);
+  state.accounts.filter((a) => a.crm_ids.some((c) => keys.has(c))).forEach((a) => keys.add(a.key));
+  const evs = state.trace.filter((e) => keys.has(e.account));
+  $("traceTitle").innerHTML = `Trace <span class="chip">${esc(f.company)}</span> <span class="hint">${evs.length} steps</span>`;
+  $("trace").innerHTML = evs.length ? evs.map((e) =>
+    `<div class="ev ${e.kind}"><div class="head">${e.kind} · ${esc(e.name)} <span class="muted">${esc(e.account)}${e.ms != null ? " · " + e.ms + " ms" : ""}</span></div>
+     ${e.args ? `<pre>args ${esc(JSON.stringify(e.args))}</pre>` : ""}<pre>${esc(typeof e.result === "string" ? e.result : JSON.stringify(e.result))}</pre></div>`).join("")
+    : `<div class="empty">No trace events for this failure.</div>`;
+}
+
+$("runSel").onchange = (e) => openRun(e.target.value);
+$("runBtn").onclick = async () => {
+  $("runBtn").disabled = true; $("runBtn").textContent = "Running…";
+  try { const r = await api("/api/runs", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ version: $("newVersion").value, split: $("newSplit").value, llm: "replay" }) });
+        await loadRuns(r.id); }
+  finally { $("runBtn").disabled = false; $("runBtn").textContent = "Run"; }
+};
+(async () => {
+  const vs = await api("/api/versions");
+  $("newVersion").innerHTML = vs.map((v) => `<option>${v.version}</option>`).join("");
+  $("newVersion").value = vs[vs.length - 1].version;
+  await loadHistory();
+  await loadRuns(new URLSearchParams(location.search).get("run"));
+})();
+</script>
+</body>
+</html>

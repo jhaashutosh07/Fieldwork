@@ -1,0 +1,33 @@
+{
+ "id": "wrong_entity-Q1645081",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "wrong_entity:alias_or_variant",
+ "company": "Nucor",
+ "detail": "matched 'Nuclear Corporation of America' to Reinsurance Group of America",
+ "rows": [
+  {
+   "crm_id": "CRM-0272",
+   "account_name": "Nuclear Corporation of America",
+   "website": "",
+   "employee_count": "",
+   "hq_country": "United States",
+   "last_updated": "2022-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q1645081",
+  "single_account": true,
+  "domain": [
+   "nucor.com"
+  ],
+  "employees": [
+   31400
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": false,
+  "allow_review": true
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "id": "split_duplicate-Q11463",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "split_duplicate",
+ "company": "Adobe",
+ "detail": "2 accounts",
+ "rows": [
+  {
+   "crm_id": "CRM-0183",
+   "account_name": "adobe",
+   "website": "business.adobe.com",
+   "employee_count": "11144",
+   "hq_country": "United States",
+   "last_updated": "2012-01-01"
+  },
+  {
+   "crm_id": "CRM-0203",
+   "account_name": "ADBE",
+   "website": "business.adobe.com",
+   "employee_count": "11847",
+   "hq_country": "United States",
+   "last_updated": "2013-11-01"
+  },
+  {
+   "crm_id": "CRM-0493",
+   "account_name": "adobe",
+   "website": "",
+   "employee_count": "22569",
+   "hq_country": "United States",
+   "last_updated": "2019-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q11463",
+  "single_account": true,
+  "domain": [
+   "adobe.com"
+  ],
+  "employees": [
+   25988
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": true,
+  "allow_review": false
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "id": "split_duplicate-Q1347782",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "split_duplicate",
+ "company": "Marvell Technology",
+ "detail": "2 accounts",
+ "rows": [
+  {
+   "crm_id": "CRM-0084",
+   "account_name": "MARVELL TECHNOLOGY",
+   "website": "",
+   "employee_count": "",
+   "hq_country": "United States",
+   "last_updated": "2026-01-01"
+  },
+  {
+   "crm_id": "CRM-0320",
+   "account_name": "Marvell",
+   "website": "",
+   "employee_count": "7000",
+   "hq_country": "United States",
+   "last_updated": "2025-01-01"
+  },
+  {
+   "crm_id": "CRM-0452",
+   "account_name": "MARVELL TECHNOLOGY",
+   "website": "",
+   "employee_count": "",
+   "hq_country": "",
+   "last_updated": "2026-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q1347782",
+  "single_account": true,
+  "domain": [
+   "marvell.com"
+  ],
+  "employees": [
+   7480
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": true,
+  "allow_review": false
+ }
+}

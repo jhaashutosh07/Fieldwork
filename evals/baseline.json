@@ -1,0 +1,23 @@
+{
+ "version": "v5",
+ "llm_mode": "replay",
+ "metrics": {
+  "companies": 158,
+  "rows": 242,
+  "accounts": 169,
+  "verified_accuracy": 0.8924,
+  "entity_accuracy": 0.9132,
+  "dedup_f1": 0.913,
+  "domain_accuracy": 1.0,
+  "employees_accuracy": 1.0,
+  "country_accuracy": 1.0,
+  "icp_accuracy": 1.0,
+  "icp_precision": 1.0,
+  "icp_recall": 1.0,
+  "precision_at_25": 1.0,
+  "silent_error_rate": 0.0,
+  "review_rate": 0.0868,
+  "cost_usd": 0.0,
+  "llm_calls": 0
+ }
+}

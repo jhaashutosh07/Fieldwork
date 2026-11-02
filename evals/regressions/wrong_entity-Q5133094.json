@@ -1,0 +1,33 @@
+{
+ "id": "wrong_entity-Q5133094",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "wrong_entity:similar_name",
+ "company": "Cleveland-Cliffs",
+ "detail": "matched 'Cliffs Natural Resources' to Alpha Natural Resources",
+ "rows": [
+  {
+   "crm_id": "CRM-0486",
+   "account_name": "Cliffs Natural Resources",
+   "website": "",
+   "employee_count": "30000",
+   "hq_country": "United States",
+   "last_updated": "2024-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q5133094",
+  "single_account": true,
+  "domain": [
+   "clevelandcliffs.com"
+  ],
+  "employees": [
+   30000
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": false,
+  "allow_review": true
+ }
+}

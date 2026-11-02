@@ -1,0 +1,603 @@
+crm_id,account_name,website,employee_count,hq_country,last_updated
+CRM-0001,HCA Healthcare,,204000,,2014-01-01
+CRM-0002,JUMIÀ,https://www.group.jumia.com/,4000,Ghana,2020-01-01
+CRM-0003,Quiksilver,www.quiksilver.com,7500,,2021-01-01
+CRM-0004,Cisco,,75900,United States,2019-07-27
+CRM-0005,nokia,,102687,,2016-01-01
+CRM-0006,BlackRock,,13411,United States,2018-01-01
+CRM-0007,TIM,,26874,Italy,2024-01-01
+CRM-0008,Tesla,,5859,United States,2013-12-31
+CRM-0009,ConocoPhillips,http://conocophillips.com,10800,United States,2018-12-31
+CRM-0010,american international,,26200,United States,2022-12-31
+CRM-0011,AngloGold Ashanti plc,anglogoldashanti.com,62046,South Africa,2011-01-01
+CRM-0012,quiksilver,www.quiksilver.com,7500,United States,2021-01-01
+CRM-0013,Santander,santander.com,185405,Spain,2014-12-31
+CRM-0014,NEBIUS,,1371,Netherlands,2025-03-31
+CRM-0015,caterpillar,,95400,United States,2016-01-01
+CRM-0016,STMicroelectronics,,51370,,2022-01-01
+CRM-0017,DICK'S SPORTING GOODS,,,United States,2015-01-01
+CRM-0018,Devon Energy,,,United States,2013-01-01
+CRM-0019,Parametric Technology,ptc.com,,United States,2024-01-01
+CRM-0020,welltower,,685,United States,2024-12-31
+CRM-0021,ArcelorMittal,,125416,Luxembourg,2024-12-31
+CRM-0022,Morgan Stanley,,68000,United States,2020-12-31
+CRM-0023,Costco Wholesale,costco.com,254000,United States,2019-01-01
+CRM-0024,Luminex,,1080,,2023-03-29
+CRM-0025,THE CIGNA,,73800,United States,2021-01-01
+CRM-0026,GLOBALFOUNDRIES,http://gf.com,14600,Cayman Islands,2021-12-31
+CRM-0027,U.S. STEEL,www.ussteel.com,42000,United States,2010-01-01
+CRM-0028,Dell,dell.co.in,165000,United States,2020-01-01
+CRM-0029,Gilead Sciences,,17000,United States,2026-07-01
+CRM-0030,CAMPING WORLD,rv.campingworld.com,7221,United States,2016-01-01
+CRM-0031,BP plc,bp.pl,,United Kingdom,2019-01-01
+CRM-0032,Nordstrom,,72501,United States,2015-01-01
+CRM-0033,ultimate software,ultimatesoftware.com,,,2018-01-01
+CRM-0034,THE CIGNA,,73800,,2021-01-01
+CRM-0035,NextGen Healthcare Information Systems,,1500,,2018-09-01
+CRM-0036,ZipRecruiter,,1000,United States,2018-01-01
+CRM-0037,Palantir,http://palantir.com,313,United States,2010-12-31
+CRM-0038,china telecommunications,,309799,People's Republic of China,2012-01-01
+CRM-0039,Pony.ai,,1300,,2024-01-01
+CRM-0040,The Carlyle Group,www.carlyle.com,2400,United States,2025-01-01
+CRM-0041,Cheesecake Factory,,,United States,2016-01-01
+CRM-0042,Humana,centerwellprimarycare.com,,United States,2016-01-01
+CRM-0043,Argo Blockchain,,85,,2022-05-01
+CRM-0044,UNILEVER,www.unilever.com,304000,United Kingdom,1990-01-01
+CRM-0045,FOX FACTORY,foxracingshox.com,4300,United States,2023-01-01
+CRM-0046,Old Dominion Freight Line,,74,,1944-01-01
+CRM-0047,Continental Oil Company,,10800,United States,2018-12-31
+CRM-0048,Advanced Micro Devices,,15500,United States,2021-01-01
+CRM-0049,PetroChina,,521566,People's Republic of China,2015-12-31
+CRM-0050,GSK,gsk.com,99541,United Kingdom,2013-01-01
+CRM-0051,Optimum Communications,alticeusa.com,13656,United States,2015-09-01
+CRM-0052,Exxon Mobil Corp.,corporate.exxonmobil.com,69600,United States,2017-12-31
+CRM-0053,Skechers Incorporated,skechers.co.th,9200,,2016-01-01
+CRM-0054,"Morningstar, Inc.",,9556,United States,2021-12-31
+CRM-0055,Barclays PLC,https://www.home.barclays/,79900,United Kingdom,2017-01-01
+CRM-0056,ArcelorMittal,https://www.corporate.arcelormittal.com/,157909,Luxembourg,2021-12-31
+CRM-0057,"Honda Motor Co., Ltd. (Tokyo)",http://global.honda,204035,Japan,2022-01-01
+CRM-0058,The Walt Disney,,,United States,2019-09-28
+CRM-0059,Alexion Pharmaceuticals,alxn.com,3837,,2020-12-31
+CRM-0060,TIFFANY &,,10600,United States,2014-01-01
+CRM-0061,CVS Health,https://www.cvshealth.com/,300000,United States,2019-01-01
+CRM-0062,nintendo,nintendo.de,6413,,2020-09-30
+CRM-0063,ctw,,350,Japan,2026-06-01
+CRM-0064,Zoom Communications,http://zoom.com,2000,United States,2019-01-01
+CRM-0065,MongoDB Inc.,www.mongodb.com,5640,United States,2025-01-01
+CRM-0066,OSC,orbital.com,3300,United States,2014-02-01
+CRM-0067,United Bank,https://www.bankatunited.com/,675,United States,2015-01-01
+CRM-0068,sap,,106043,Germany,2023-12-31
+CRM-0069,Cigna,www.cigna.com,73800,United States,2021-01-01
+CRM-0070,Salesforce,http://salesforce.com,2606,,2008-01-01
+CRM-0071,Coca-Cola,,90500,United States,2007-01-01
+CRM-0072,Totsuko,,113000,Japan,2023-03-31
+CRM-0073,Solventum Corp.,http://solventum.com,22000,United States,2024-01-01
+CRM-0074,upwork,,630,,2024-01-01
+CRM-0075,FedEx,www.fedex.com,400000,United States,2016-01-01
+CRM-0076,MITSUBISHI UFJ FINANCIAL,,104900,Japan,2016-03-31
+CRM-0077,DXC TECHNOLOGY,,,United States,2017-01-01
+CRM-0078,Aon Corporation,aon.com,65000,United Kingdom,2012-01-01
+CRM-0079,nVidia,nvidia.cn,36000,United States,2025-01-26
+CRM-0080,ADM,www.adm.com,31600,United States,2018-01-01
+CRM-0081,INTEL,intel.cn,121100,United States,2021-01-01
+CRM-0082,TELEFÓNICA,,102563,,2022-01-01
+CRM-0083,Edison International,,16677,United States,2013-01-01
+CRM-0084,MARVELL TECHNOLOGY,,,United States,2026-01-01
+CRM-0085,united financial bancorp,https://www.bankatunited.com/,,United States,2015-01-01
+CRM-0086,tsmc,,56831,Taiwan,2020-01-01
+CRM-0087,EXPEDIA,,16000,United States,2025-12-31
+CRM-0088,Groupon,www.groupon.com,,United States,2021-12-31
+CRM-0089,PDD,,,,2022-12-31
+CRM-0090,SouthState Bank,www.southstatebank.com,2602,,2018-01-01
+CRM-0091,Koninklijke Philips Electronics N.V.,philips.com,77400,Netherlands,2018-01-01
+CRM-0092,HONEYWELL,http://honeywell.com,,United States,2021-12-31
+CRM-0093,Corteva,www.corteva.com,21000,United States,2022-07-01
+CRM-0094,TELCO,,,,2014-03-31
+CRM-0095,Waters Corporation,http://waters.com,7262,United States,2023-04-05
+CRM-0096,DXC TECHNOLOGY,https://www.dxc.com/,170500,United States,2017-01-01
+CRM-0097,Stryker,http://stryker.com,22000,United States,2012-01-01
+CRM-0098,MICROCHIP TECHNOLOGY,,19500,United States,2021-01-01
+CRM-0099,Novo Nordisk,,42,Denmark,2016-12-31
+CRM-0100,Nike Inc.,nike.com.cn,76700,United States,2019-01-01
+CRM-0101,Curtiss-Wright Corporation,http://curtisswright.com,10000,United States,2013-01-01
+CRM-0102,USA TODAY,http://usatodayco.com,11202,United States,2022-01-01
+CRM-0103,renren.com,,1570,People's Republic of China,2013-01-01
+CRM-0104,Verizon Communications,,177700,United States,2015-01-01
+CRM-0105,Applied Molecular Genetics,,17900,United States,2014-01-01
+CRM-0106,Lehman Brothers,lehman.com,28556,United States,2007-11-30
+CRM-0107,godaddy,http://godaddy.com,5990,United States,2017-01-01
+CRM-0108,euronet worldwide,http://euronet.com,10600,United States,2024-01-01
+CRM-0109,Atmel,,5100,,2012-01-01
+CRM-0110,kubota,http://kubota.com,41605,Japan,2020-12-31
+CRM-0111,emmis communications,https://www.emmis.com/,,,2019-02-28
+CRM-0112,Philip Morris International,,77000,United States,2009-01-01
+CRM-0113,Gilead Sciences,,17000,,2026-07-01
+CRM-0114,Planet,planet-labs.com,600,United States,2023-01-01
+CRM-0115,goldman sachs,www.goldmansachs.com,34400,United States,2016-01-01
+CRM-0116,Vivint Solar,,5000,United States,2015-01-01
+CRM-0117,Gilat Satellite Networks,gilat.com,864,Israel,2020-07-07
+CRM-0118,Boeing,www.boeing.com,,United States,2023-12-31
+CRM-0119,Dole,https://www.dole.com/,35371,Ireland,2024-01-01
+CRM-0120,DEUTSCHE BANK,www.db.com,97535,Germany,2017-12-31
+CRM-0121,CHOICE HOTELS,www.choicehotels.com,1789,United States,2022-01-01
+CRM-0122,Spotify,www.investors.spotify.com,6617,Luxembourg,2021-12-31
+CRM-0123,Hewlett-Packard,,302000,United States,2014-01-01
+CRM-0124,AUO Corporation,www.auo.com,,Taiwan,2022-01-01
+CRM-0125,"Amazon.com, Inc.",amazon.co.uk,675500,United States,2018-12-31
+CRM-0126,WPP,http://wpp.com,109000,United Kingdom,2022-01-01
+CRM-0127,United Parcel Service,kiala.fr,434000,United States,2016-01-01
+CRM-0128,stryker,,22000,United States,2012-01-01
+CRM-0129,Victoria’s Secret,victoriassecretandco.com,30000,United States,2024-01-01
+CRM-0130,ORANGE,http://orange.com,156000,France,2014-01-01
+CRM-0131,Netflix,ir.netflix.net,3500,,2015-01-01
+CRM-0132,AIRBNB,https://www.airbnb.com/,,United States,2020-12-31
+CRM-0133,Meta Platforms,,9199,United States,2014-12-31
+CRM-0134,Blackstone Inc.,www.blackstone.com,4735,United Kingdom,2023-01-01
+CRM-0135,Walgreens,www.walgreens.com,210500,United States,2011-01-01
+CRM-0136,Fiat Chrysler Automobiles,,236559,Netherlands,2015-01-01
+CRM-0137,CACI International,,20000,United States,2018-01-01
+CRM-0138,PowerFleet,,,,2020-06-22
+CRM-0139,TIM BRASIL,,9337,Brazil,2021-01-01
+CRM-0140,Emmis Communications,,350,United States,2019-02-28
+CRM-0141,Fox Factory,foxracingshox.com,4400,United States,2022-01-01
+CRM-0142,Procter & Gamble,https://www.pg.com/,105000,United States,2016-01-01
+CRM-0143,Herbalife International,,7800,,2014-01-01
+CRM-0144,AMI Semiconductor,,26400,United States,2024-12-31
+CRM-0145,"Woodman Labs, Inc.",,963,United States,2014-09-30
+CRM-0146,Valley Falls Company,,361270,United States,2015-01-01
+CRM-0147,Unity,,2000,United States,2018-01-01
+CRM-0148,Vivint Solar,,,United States,2015-01-01
+CRM-0149,Broadcom,https://www.broadcom.com/,20000,Singapore,2023-10-29
+CRM-0150,Workday,workday.com,20000,United States,2025-01-01
+CRM-0151,Northrop Grumman,,,United States,2015-01-01
+CRM-0152,Zendesk,zendesk.com,3830,United States,2020-01-01
+CRM-0153,Research In Motion,blackberry.com,3647,Canada,2020-01-01
+CRM-0154,Coinbase,,1123,United States,2018-09-01
+CRM-0155,Atieva,,6500,United States,2023-01-01
+CRM-0156,skechers,https://www.skechers.com/,6868,,2014-01-01
+CRM-0157,"Teva Branded Pharmaceutical Products R&D, Inc.",,43000,Israel,2014-01-01
+CRM-0158,telefónica,,107776,Spain,2021-01-01
+CRM-0159,EHang,,230,People's Republic of China,2020-01-01
+CRM-0160,Korea Electric Power Corporation,home.kepco.co.kr,,South Korea,2016-12-31
+CRM-0161,U.S. Cellular,local.uscellular.com,6700,,2014-01-01
+CRM-0162,Avon Products Inc.,avonworldwide.com,36700,United States,2013-12-01
+CRM-0163,eni,,32349,Italy,2025-01-01
+CRM-0164,Amgen,amgen.com,17900,,2014-01-01
+CRM-0165,Lafarge,https://www.lafarge.ca/,,,2014-01-01
+CRM-0166,first republic bank,,4480,United States,2018-01-01
+CRM-0167,the cheesecake factory,,38800,United States,2016-01-01
+CRM-0168,Exxon Mobil Corp.,http://corporate.exxonmobil.com,74900,United States,2019-12-31
+CRM-0169,Toyota,http://global.toyota,359542,Japan,2020-03-31
+CRM-0170,gold fields,http://goldfields.co.za,49715,South Africa,2010-01-01
+CRM-0171,Tyson Foods,,133000,United States,2025-01-01
+CRM-0172,HUANENG POWER INTERNATIONAL,www.hpi.com.cn,42210,People's Republic of China,2016-12-31
+CRM-0173,"The NASDAQ OMX Group, Inc.",www.business.nasdaq.com,4325,United States,2016-01-01
+CRM-0174,Petróleo Brasileiro S.A.,petrobrasdistribucion.cl,52000,Brazil,2020-01-01
+CRM-0175,CYNGN,https://www.cyngn.com/,62,,2026-04-11
+CRM-0176,SVB Financial,http://svb.com,,United States,2022-12-31
+CRM-0177,fiserv,,21000,,2013-01-01
+CRM-0178,Kraft Heinz,,38757,United Kingdom,2020-01-01
+CRM-0179,atlantic tele-network,,,,2014-01-01
+CRM-0180,First Data Processing,,21000,,2013-01-01
+CRM-0181,s&p global,,17000,,2014-01-01
+CRM-0182,Strategy,,1539,United States,2025-12-31
+CRM-0183,adobe,business.adobe.com,11144,United States,2012-01-01
+CRM-0184,Yum China,yumchina.com,420000,United States,2016-12-31
+CRM-0185,Nissan Motor Co. Ltd.,nissanusa.com,138910,Japan,2018-01-01
+CRM-0186,Minneapolis Heat Regulator Company,,99000,,2021-12-31
+CRM-0187,Motorola Solutions,,18000,United States,2020-01-01
+CRM-0188,AMC Global Media,,,United States,2013-12-31
+CRM-0189,Abbott Laboratories,,73000,United States,2015-01-01
+CRM-0190,Philip Morris International,http://pmi.com,80600,United States,2017-01-01
+CRM-0191,RTX,https://www.rtx.com/,,United States,2022-12-31
+CRM-0192,MERCER,,25000,,2019-01-01
+CRM-0193,SOUTHSTATE BANK,https://www.southstatebank.com/,2602,United States,2018-01-01
+CRM-0194,ELI LILLY AND,www.lilly.com,38350,United States,2018-01-01
+CRM-0195,HubSpot,http://hubspot.com,8246,,2024-01-01
+CRM-0196,yelp,yelp.co.uk,4350,,2017-05-09
+CRM-0197,Viacom (2006–2019),,11200,,2017-01-01
+CRM-0198,International Telecommunications Satellite Corporation,intelsat.com,,Luxembourg,2021-01-01
+CRM-0199,Juniper Networks,https://www.juniper.net/,9419,United States,2019-12-31
+CRM-0200,"Citizens Financial Group, Inc. (Providence, RI)",lo.citizensbank.com,17398,United States,2025-01-01
+CRM-0201,"Consolidated Edison, Inc.",,15541,United States,2010-01-01
+CRM-0202,AspenTech Corp.,,1466,United States,2018-01-01
+CRM-0203,ADBE,business.adobe.com,11847,United States,2013-11-01
+CRM-0204,JFROG,,1300,,2022-01-01
+CRM-0205,Apple,www.apple.com.cn,164000,United States,2022-01-01
+CRM-0206,Shopify Inc.,pt.shopify.com,10000,Canada,2021-01-01
+CRM-0207,Cognizant Technology Solutions,,266200,,2016-01-01
+CRM-0208,TFI International,tfiintl.com,16753,Canada,2020-01-01
+CRM-0209,Caterpillar,www.caterpillar.com,85116,United States,2005-01-01
+CRM-0210,Lucid Motors,lucidmotors.com,6500,United States,2023-01-01
+CRM-0211,Fiat Chrysler Automobiles,www.fcagroup.com,236559,Netherlands,2015-01-01
+CRM-0212,ORCL,http://oracle.com,135000,United States,2020-05-31
+CRM-0213,"Workday, Inc.",http://workday.com,20000,United States,2025-01-01
+CRM-0214,Netgear,,307,United States,2005-01-01
+CRM-0215,Hassenfeld Brothers and Hasbro Bradley,www.corporate.hasbro.com,5000,,2017-01-01
+CRM-0216,Safe-T Data A.R LTD,,,,2020-06-22
+CRM-0217,STT,statestreet.com,33783,United States,2016-12-31
+CRM-0218,cognizant technology solutions,,266200,United States,2016-01-01
+CRM-0219,Radica Games Ltd.,http://radicagames.com,2500,Hong Kong,1998-01-01
+CRM-0220,globalfoundries,,14600,United States,2021-12-31
+CRM-0221,Flex,,147979,,2025-03-31
+CRM-0222,potbelly sandwich shop,http://potbelly.com,6000,,2019-12-29
+CRM-0223,texas instruments,,31000,United States,2021-12-31
+CRM-0224,ASML Holding,asml.com,43520,Netherlands,2026-03-10
+CRM-0225,Con Edison,http://coned.com,,United States,2017-01-01
+CRM-0226,Urban One,,,United States,2015-01-01
+CRM-0227,AMC Global Media,www.amcglobalmedia.com,2197,United States,2013-12-31
+CRM-0228,Kaspi.kz Joint Stock Company,,3621,Kazakhstan,2006-01-01
+CRM-0229,NCR,,,United States,2009-01-01
+CRM-0230,"EPAM Systems, Inc.",www.epam.com,52650,United States,2021-01-01
+CRM-0231,Pony.ai,pony.ai,,People's Republic of China,2024-01-01
+CRM-0232,"PepsiCo, Inc. (Purchase, NY)",pepsico.com.mx,263000,United States,2015-01-01
+CRM-0233,Upwork,,630,United States,2024-01-01
+CRM-0234,SERVICENOW,,10371,United States,2019-12-31
+CRM-0235,American Express,https://www.americanexpress.com/,62800,United States,2013-01-01
+CRM-0236,corning,corning.com,46200,United States,2017-12-31
+CRM-0237,Workday,,20000,United States,2025-01-01
+CRM-0238,EQUINIX,http://equinix.com,8378,United States,2019-12-31
+CRM-0239,china telecommunications,,309799,People's Republic of China,2012-01-01
+CRM-0240,Halliburton,,,United States,2014-01-01
+CRM-0241,SLB,,100000,United States,2019-03-04
+CRM-0242,NTT DoCoMo,www.docomo.ne.jp,27558,Japan,2019-01-01
+CRM-0243,Pandora,https://www.pandoragroup.com/,26985,Denmark,2022-01-01
+CRM-0244,CureVac,,600,Germany,2021-01-01
+CRM-0245,Fiat Chrysler Automobiles,http://fcagroup.com,235481,Netherlands,2016-01-01
+CRM-0246,Alphabet,,118899,United States,2019-12-31
+CRM-0247,"Discovery, Inc.",,7000,,2017-12-31
+CRM-0248,Grid Dynamics,,,United States,2026-06-30
+CRM-0249,fluor,fluor.com,43717,United States,2020-01-01
+CRM-0250,UberCab,,12000,Netherlands,2017-12-01
+CRM-0251,Qiagen,,,,2023-03-16
+CRM-0252,HCA Healthcare,,204000,United States,2014-01-01
+CRM-0253,Nordstrom,www.nordstrom.com,,United States,2015-01-01
+CRM-0254,Pinterest,,3225,United States,2021-12-31
+CRM-0255,TIM Brasil,,9337,Brazil,2021-01-01
+CRM-0256,Medtronic - MITG,,,,2018-04-01
+CRM-0257,Curtiss-Wright Corporation,,,United States,2013-01-01
+CRM-0258,STMicroelectronics,,51370,Netherlands,2022-01-01
+CRM-0259,American Express Bank,americanexpress.ae,64000,United States,2021-01-01
+CRM-0260,sunpower,,8309,United States,2016-01-03
+CRM-0261,3M corporation,3m.com,,,2020-12-31
+CRM-0262,State Street,www.statestreet.com,33783,United States,2016-12-31
+CRM-0263,Vertiv,vertiv.com,,United States,2025-12-01
+CRM-0264,EHang,https://www.ehang.com/,230,People's Republic of China,2020-01-01
+CRM-0265,America Movil,http://americamovil.com,189448,Mexico,2018-01-01
+CRM-0266,Apple (company),https://www.apple.com/,147000,United States,2020-09-26
+CRM-0267,Tripadvisor,http://tripadvisor.com,2691,United States,2021-12-31
+CRM-0268,HSBC,hsbc.com.mx,,United Kingdom,2021-12-31
+CRM-0269,Northern Trust,,20900,Switzerland,2020-01-01
+CRM-0270,Papa Johns Pizza,http://papajohns.com,,United States,2013-12-30
+CRM-0271,SpaceX,spacex.com,6000,,2017-04-01
+CRM-0272,Nuclear Corporation of America,,,United States,2022-01-01
+CRM-0273,Merck &,www.merck.com,70000,United States,2015-01-01
+CRM-0274,Akamai,akamai.com,8368,United States,2020-01-01
+CRM-0275,wix.com,,5929,Israel,2024-03-01
+CRM-0276,Tripadvisor,tripadvisor.com,2691,United States,2021-12-31
+CRM-0277,Oatly Group AB,oatly.com,2009,Sweden,2022-01-01
+CRM-0278,ITT Corporation,www.itt.com,10000,,2022-01-01
+CRM-0279,ANHEUSER-BUSCH INBEV,,166632,Belgium,2022-01-01
+CRM-0280,coinbase,https://www.coinbase.com/,1123,United States,2018-09-01
+CRM-0281,SunPower,,,United States,2016-01-03
+CRM-0282,morgan stanley,www.morganstanley.com,68000,United Kingdom,2020-12-31
+CRM-0283,Bio-Rad Laboratories,,8300,United States,2023-03-16
+CRM-0284,TECHNIPFMC,www.technipfmc.com,44000,United Kingdom,2017-01-01
+CRM-0285,fti consulting,www.fticonsulting.com,4400,,2015-01-01
+CRM-0286,old dominion freight line,,,United States,2018-01-01
+CRM-0287,yum! brands,www.yum.com,90000,United States,2016-01-01
+CRM-0288,LKQ,lkqcorp.com,29500,United States,2014-01-01
+CRM-0289,Nexstar Media,www.nexstar.tv,4527,United States,2016-01-01
+CRM-0290,UBIQUITI,ui.com,843,United States,2018-06-30
+CRM-0291,qualcomm,qualcomm.com,41000,United States,2020-01-01
+CRM-0292,viridien,cgg.com,4600,France,2020-01-01
+CRM-0293,TRMD A,,,Denmark,2024-01-01
+CRM-0294,PLANET LABS,https://www.planet.com/,600,United States,2023-01-01
+CRM-0295,BorgWarner,http://borgwarner.com,49000,United States,2022-01-01
+CRM-0296,LKQ,,29500,,2014-01-01
+CRM-0297,IBM,,352600,,2019-01-01
+CRM-0298,hubspot,,8246,United States,2024-01-01
+CRM-0299,"Yelp, Inc.",http://yelp.co.uk,,,2017-05-09
+CRM-0300,cognizant technology solutions,,,,2016-01-01
+CRM-0301,caci,,20000,United States,2018-01-01
+CRM-0302,Mobileye,mobileye.com,3200,Israel,2023-01-01
+CRM-0303,Exar Corporation,exar.com,269,United States,2016-03-01
+CRM-0304,dupont,https://www.dupont.com/,70000,United States,2012-01-01
+CRM-0305,Alcoa,,61000,United States,2012-01-01
+CRM-0306,Palantir,,313,United States,2010-12-31
+CRM-0307,Blackstone Inc.,,4735,,2023-01-01
+CRM-0308,Kirby,,5200,United States,2022-12-31
+CRM-0309,General Dynamics,,83500,,2007-01-01
+CRM-0310,JPMC,jpmorgan.com,235000,United States,2015-01-01
+CRM-0311,C. Itoh & Co,,62500,Japan,2010-01-01
+CRM-0312,LKQ,lkqcorp.com,,United States,2014-01-01
+CRM-0313,itamar medical,,184,,2020-07-07
+CRM-0314,extreme networks,,,,2018-06-30
+CRM-0315,Bital,hsbc.com.ar,,United Kingdom,2021-12-31
+CRM-0316,VMware,,,United States,2021-01-01
+CRM-0317,MCKESSON,,68000,United States,2016-03-31
+CRM-0318,houlihan lokey,,2700,United States,2026-02-01
+CRM-0319,boeing,,158750,,2016-05-01
+CRM-0320,Marvell,,7000,United States,2025-01-01
+CRM-0321,Foresight Autonomous Holdings Ltd,,,Israel,2020-06-22
+CRM-0322,Akamai,,2654,United States,2012-01-01
+CRM-0323,"The Home Depot, Inc.",www.homedepot.com,,,2020-01-01
+CRM-0324,Cloudflare,,2440,United States,2021-12-31
+CRM-0325,fortinet,http://fortinet.com,,United States,2025-01-01
+CRM-0326,microsoft.com,http://microsoft.com,228000,United States,2024-01-01
+CRM-0327,Palo Alto Networks,,13900,United States,2024-08-01
+CRM-0328,SIMON PROPERTY,,3300,United States,2020-01-01
+CRM-0329,Sysco Corporation,,67001,United States,2020-01-01
+CRM-0330,SIRIUS XM RAD,,4534,United States,2019-01-01
+CRM-0331,HP,http://hp.com,,United States,2025-01-01
+CRM-0332,Blackstone Group,blackstone.com,4735,,2023-01-01
+CRM-0333,Sinopec,,,People's Republic of China,2015-01-01
+CRM-0334,Huntington Ingalls Industries,www.hii.com,,United States,2024-01-01
+CRM-0335,Moderna,,760,,2018-01-01
+CRM-0336,Airbnb,airbnb.com,5597,United States,2020-12-31
+CRM-0337,The Walt Disney,http://thewaltdisneycompany.com,,,2019-09-28
+CRM-0338,Nordstrom,,,United States,2015-01-01
+CRM-0339,jacobs engineering,www.jacobs.com,55000,United States,2021-01-01
+CRM-0340,TIM,telecomitalia.com,26874,Italy,2024-01-01
+CRM-0341,Cleveland Iron Mining Company,clevelandcliffs.com,30000,United States,2024-01-01
+CRM-0342,Lafarge S.A.,lafarge.com,63000,France,2014-01-01
+CRM-0343,Conoco Phillips,,10800,United States,2018-12-31
+CRM-0344,Kroger,kroger.com,,United States,2018-01-01
+CRM-0345,People Incorporated,www.ir.people-incorporated.com,6800,United States,2017-01-01
+CRM-0346,ebay,ebay.it,34600,United States,2015-01-01
+CRM-0347,ELECTRONIC ARTS,http://ea.com,11000,,2021-03-31
+CRM-0348,NextGen Healthcare Information Systems,,1500,United States,2018-09-01
+CRM-0349,TRIBUNE MEDIA,http://tribunemedia.com,8200,United States,2016-01-01
+CRM-0350,Accenture,http://accenture.com,721000,Ireland,2022-08-31
+CRM-0351,CHUNGHWA TELECOM,cht.com.tw,20008,Taiwan,2023-01-01
+CRM-0352,ServiceNow,http://servicenow.com,10371,,2019-12-31
+CRM-0353,Morningstar,http://morningstar.com,9556,,2021-12-31
+CRM-0354,CFP,totalenergies.com,101513,France,2025-12-31
+CRM-0355,National Association of Securities Dealers Automated Quotations,,,United States,2025-01-01
+CRM-0356,ExxonMobil,https://www.corporate.exxonmobil.com/,71100,United States,2016-12-31
+CRM-0357,Alphabet,https://www.abc.xyz/,156500,United States,2021-12-31
+CRM-0358,Nvidia,nvidia.cn,11528,,2018-01-28
+CRM-0359,DXC TECHNOLOGY,,170500,United States,2017-01-01
+CRM-0360,Barnes & Noble,https://www.barnesandnoble.com/,40000,United States,2018-01-01
+CRM-0361,"Groupon, Inc.",groupon.ca,3675,United States,2021-12-31
+CRM-0362,Quantum,,,United States,2020-04-22
+CRM-0363,Snowflake Computing,https://www.snowflake.com/,,United States,2019-01-01
+CRM-0364,Similarweb.com,https://www.similarweb.com/,,United States,2022-12-31
+CRM-0365,Bancolombia,bam.com.gt,29731,Colombia,2019-01-08
+CRM-0366,Paramount Global,www.web.archive.org,18600,,2024-01-01
+CRM-0367,aercap,,407,Ireland,2016-01-01
+CRM-0368,General Mills,,,United States,2011-01-01
+CRM-0369,Curtiss-Wright,,10000,United States,2013-01-01
+CRM-0370,CUSHMAN & WAKEFIELD,https://www.cushmanwakefield.com/,15000,,2015-01-01
+CRM-0371,HP Inc.,http://hp.com,55000,United States,2025-01-01
+CRM-0372,Netgear,http://netgear.com,307,United States,2005-01-01
+CRM-0373,"Citrix Systems, Inc.     (Fort Lauderdale, FL)",www.citrix.com,,United States,2019-01-01
+CRM-0374,ZAGG Inc,zaggfranchise.com,,United States,2019-12-31
+CRM-0375,HDFC Bank,hdfc.bank.in,177000,India,2003-01-01
+CRM-0376,ITT CANNON LLC,,10000,United States,2022-01-01
+CRM-0377,Ralph Lauren,,23400,United States,2025-03-29
+CRM-0378,Atlassian,,1800,Australia,2017-08-01
+CRM-0379,The Walt Disney,http://thewaltdisneycompany.com,,,2019-09-28
+CRM-0380,Visa,,,United States,2024-09-30
+CRM-0381,argenx,,1863,Belgium,2025-12-31
+CRM-0382,International Telecommunications Satellite Organization,,,Luxembourg,2021-01-01
+CRM-0383,WesternUnion,westernunion.it,,United States,2020-12-31
+CRM-0384,LM Ericsson,ericsson.com,104525,Sweden,2011-01-01
+CRM-0385,Bausch & Lomb Optical Co.,,12000,United States,2018-01-01
+CRM-0386,Xylem,,17800,United States,2022-12-31
+CRM-0387,yum! brands,https://www.yum.com/,90000,United States,2016-01-01
+CRM-0388,eToro,,,Cyprus,2025-01-01
+CRM-0389,ITT CANNON LLC,http://itt.com,10000,,2022-01-01
+CRM-0390,Vertiv,vertiv.com,31000,United States,2024-12-01
+CRM-0391,GoDaddy Inc.,,5990,United States,2017-01-01
+CRM-0392,Manchester United Ltd.,www.ir.manutd.com,940,Cayman Islands,2019-01-01
+CRM-0393,The Hertz,hertz.it,29350,United States,2009-01-01
+CRM-0394,Sanofi,sanofi.us,,France,2017-01-01
+CRM-0395,fox factory,www.ridefox.com,4400,United States,2022-01-01
+CRM-0396,ZipRecruiter,www.ziprecruiter.com,1000,United States,2018-01-01
+CRM-0397,sunedison,,7300,United States,2014-01-01
+CRM-0398,ING,ing.nl,57660,Netherlands,2021-01-01
+CRM-0399,Tidewater,tdw.com,4513,United States,2020-12-31
+CRM-0400,NVIDIA,nvidia.cn,,United States,2026-01-25
+CRM-0401,"California Analysis Center, Incorporated",,20000,United States,2018-01-01
+CRM-0402,Emmis Communications,www.emmis.com,350,United States,2019-02-28
+CRM-0403,Radica Games,,2500,Hong Kong,1998-01-01
+CRM-0404,Lazard,,2523,Hong Kong,2014-12-31
+CRM-0405,LOGITECH,www.logitech.com,7300,Switzerland,2024-03-31
+CRM-0406,Starbucks Coffee,starbucks.com.mx,245000,United States,2016-01-01
+CRM-0407,Infosys limited,,200364,India,2017-03-01
+CRM-0408,Li Auto Inc.,,,,2023-01-01
+CRM-0409,WTW,,46100,,2020-12-31
+CRM-0410,Microchip Technology Inc.,microchip.com,19500,,2021-01-01
+CRM-0411,Telus Communications,,28000,Canada,2017-10-30
+CRM-0412,Bally's Corporation,,10500,United States,2023-01-01
+CRM-0413,3M corporation,,,United States,2020-12-31
+CRM-0414,stellantis,stellantis.com,281595,Netherlands,2021-12-31
+CRM-0415,Take-Two,,6495,United States,2021-03-31
+CRM-0416,Baker Hughes,,59400,United States,2013-01-01
+CRM-0417,american international,,26200,United States,2022-12-31
+CRM-0418,Kaspi.kz Joint Stock,,3621,Kazakhstan,2006-01-01
+CRM-0419,barnes & noble,www.barnesandnoble.com,26000,United States,2017-01-01
+CRM-0420,HP Inc.,,55000,United States,2025-01-01
+CRM-0421,McDonald's,mcdonalds.fr,210000,United States,2018-12-31
+CRM-0422,ALIBABA,alibaba.com,150000,People's Republic of China,2020-01-01
+CRM-0423,Twin River Worldwide Holdings,https://www.ballys.com/,,United States,2026-01-01
+CRM-0424,CNH Industrial N.V.,https://www.cnh.com/,62828,Netherlands,2016-12-31
+CRM-0425,Simpson Manufacturing,,2500,,2016-01-01
+CRM-0426,Alibaba,alibaba.com,,People's Republic of China,2021-03-31
+CRM-0427,U.S. Bancorp,http://usbank.com,68108,United States,2020-01-01
+CRM-0428,Bristol-Myers Squibb,bms.com,30000,United States,2019-01-01
+CRM-0429,Xerox,,136500,United States,2010-01-01
+CRM-0430,eaton,,92000,United States,2022-12-01
+CRM-0431,Mastercard,www.mastercard.com,33400,United States,2023-12-31
+CRM-0432,CROWDSTRIKE,,7925,,2024-01-01
+CRM-0433,hilton worldwide,,182000,United States,2025-12-31
+CRM-0434,"Waste Management, Inc",https://www.wm.com/,43000,United States,2015-01-01
+CRM-0435,Getty Images,http://gettyimages.com,1600,,2012-12-05
+CRM-0436,svb financial,,8553,,2022-12-31
+CRM-0437,Argo Blockchain,,9,,2017-01-01
+CRM-0438,TI Inc.,https://www.ti.com/,,United States,2021-12-31
+CRM-0439,"Roku, Inc.",,,United States,2017-01-01
+CRM-0440,li auto,liautoofficial.ru,,,2023-01-01
+CRM-0441,Dollar Tree,dollartree.com,,United States,2015-01-01
+CRM-0442,AGCO,,,United States,2021-01-01
+CRM-0443,Ford Motor Company,www.ford.com,201000,United States,2016-01-01
+CRM-0444,Target Store,,400000,,2025-01-01
+CRM-0445,itaú unibanco,,96500,Brazil,2020-12-31
+CRM-0446,grid dynamics,http://griddynamics.com,4838,United States,2026-06-30
+CRM-0447,Eni,,32349,,2025-01-01
+CRM-0448,AMC THEATRES,,,United States,2017-01-01
+CRM-0449,xpeng,https://www.xpeng-auto.es/,13550,People's Republic of China,2023-12-31
+CRM-0450,Hewlett Packard Enterprise,https://www.hpe.com/,60000,United States,2018-10-31
+CRM-0451,tsmc,www.tsmc.com,56831,Taiwan,2020-01-01
+CRM-0452,MARVELL TECHNOLOGY,,,,2026-01-01
+CRM-0453,Birkenstock,,5500,Germany,2022-01-01
+CRM-0454,AMC GLOBAL MEDIA,https://www.amcglobalmedia.com/,2197,United States,2013-12-31
+CRM-0455,Cardlytics,,432,United States,2019-01-01
+CRM-0456,CHINA TELECOM,chinatelecom-h.com,280747,,2018-01-01
+CRM-0457,Ericsson,,104525,Sweden,2011-01-01
+CRM-0458,Audiocodes Ltd.,,,Israel,2019-12-31
+CRM-0459,Barclays PLC,barclays.co.uk,79900,United Kingdom,2017-01-01
+CRM-0460,IHG HOTELS & RESORTS,http://ihgplc.com,12899,United Kingdom,2022-12-31
+CRM-0461,Take-Two Interactive,,6495,United States,2021-03-31
+CRM-0462,Lockheed,,105000,,2018-01-01
+CRM-0463,EHang,,,People's Republic of China,2020-01-01
+CRM-0464,GRIFOLS,https://www.grifols.com/,23234,Spain,2021-01-01
+CRM-0465,EQUINOR ASA,,20000,Norway,2019-10-01
+CRM-0466,GE Aerospace,,313000,United States,2018-06-06
+CRM-0467,stifel,http://stifel.com,8300,United States,2019-12-31
+CRM-0468,Thomson Reuters,,24000,Canada,2020-01-01
+CRM-0469,BofA,bankofamerica.com,204000,United States,2018-01-01
+CRM-0470,Unity,unity.com,2000,,2018-01-01
+CRM-0471,Nissan,,,Japan,2020-01-01
+CRM-0472,The Pru,prudential.co.uk,22308,United Kingdom,2013-01-01
+CRM-0473,Verisign,www.verisign.com,1019,,2015-01-01
+CRM-0474,Southwest Airlines,https://www.espanol.southwest.com/,57674,,2018-01-01
+CRM-0475,BALLY'S,,11500,United States,2026-01-01
+CRM-0476,SPACEX,,1800,United States,2012-01-01
+CRM-0477,CARLYLE,,2400,United States,2025-01-01
+CRM-0478,SVB FINANCIAL,svb.com,454,United States,1997-12-31
+CRM-0479,mckesson,www.mckesson.com,68000,United States,2016-03-31
+CRM-0480,morgan stanley,www.morganstanley.com,68000,United States,2020-12-31
+CRM-0481,POTBELLY SANDWICH SHOP,,6000,United States,2019-12-29
+CRM-0482,South State Bank,centerstatebank.com,2602,,2018-01-01
+CRM-0483,Gold Fields,https://www.goldfields.co.za/,49715,United Kingdom,2010-01-01
+CRM-0484,"Krispy Kreme Doughnuts, Inc.",www.krispykreme.com,4000,,2011-01-01
+CRM-0485,GOLDMAN SACHS,,34000,United States,2014-01-01
+CRM-0486,Cliffs Natural Resources,,30000,United States,2024-01-01
+CRM-0487,SFDC,salesforce.com,2606,United States,2008-01-01
+CRM-0488,Manchester,,940,United Kingdom,2019-01-01
+CRM-0489,Ternium,ternium.com,16600,Argentina,2013-12-31
+CRM-0490,Koninklijke Philips,philips.iq,77400,,2018-01-01
+CRM-0491,"ArcelorMittal, S.A.",,126756,Luxembourg,2023-12-31
+CRM-0492,itaú unibanco,,96219,Brazil,2024-12-31
+CRM-0493,adobe,,22569,United States,2019-01-01
+CRM-0494,General Motors,,216000,United States,2015-01-01
+CRM-0495,Quiksilver,quiksilver.com,7500,United States,2021-01-01
+CRM-0496,John Deere,https://www.deere.com/,,United States,2013-01-01
+CRM-0497,Teva Branded Pharmaceutical Products,,43000,,2014-01-01
+CRM-0498,Lehman Brothers,lehman.com,28556,United States,2007-11-30
+CRM-0499,Aon plc,,65000,United Kingdom,2012-01-01
+CRM-0500,chevron,chevroncontechron.com,48600,United States,2018-01-01
+CRM-0501,DuPont,dupont.com,70000,United States,2012-01-01
+CRM-0502,China Telecommunications Corporation,http://189.cn,,People's Republic of China,2012-01-01
+CRM-0503,Biopharmaceutical New Technologies,,1300,Germany,2019-12-31
+CRM-0504,linde,linde.mx,,Ireland,2023-12-31
+CRM-0505,Bank of Nova Scotia,scotiabank.com,,Canada,2015-01-01
+CRM-0506,Elbit Systems,,,,2025-01-01
+CRM-0507,THERMO FISHER SCIENTIFIC,,67816,United States,2023-03-16
+CRM-0508,Atlantic Tele-Network,https://www.atni.com/,,United States,2014-01-01
+CRM-0509,mongodb,,5640,United States,2025-01-01
+CRM-0510,huntington ingalls industries,http://hii.com,44000,United States,2024-01-01
+CRM-0511,Nexstar Media,www.nexstar.tv,4527,United States,2016-01-01
+CRM-0512,Stifel,http://stifel.com,8300,United States,2019-12-31
+CRM-0513,Hasbro,,,United States,2017-01-01
+CRM-0514,Prudential Financial,,41671,,2020-01-01
+CRM-0515,Warner Music Group,www.wmg.com,4520,United States,2017-01-01
+CRM-0516,santander,,,Spain,2015-01-01
+CRM-0517,Ternium,,16600,,2013-12-31
+CRM-0518,HDFC Bank,v1.hdfcbank.com,177000,,2003-01-01
+CRM-0519,Boeing,,171000,,2023-12-31
+CRM-0520,ASTRAZENECA,,61100,Sweden,2016-01-01
+CRM-0521,EMERSON ELECTRIC,emerson.com,134900,United States,2012-01-01
+CRM-0522,cnh industrial,,62828,Netherlands,2016-12-31
+CRM-0523,Analog Devices,,9200,United States,2011-01-01
+CRM-0524,IBM,ibm.com,352600,United States,2019-01-01
+CRM-0525,british american tobacco,,55000,United Kingdom,2020-01-01
+CRM-0526,Agilent,www.agilent.com,17671,,2023-03-16
+CRM-0527,BorgWarner,,49000,United States,2022-01-01
+CRM-0528,Pilgrim's Corp,,63000,United States,2025-12-28
+CRM-0529,Limited Brands,www.lb.com,,United States,2014-01-01
+CRM-0530,Progressive,progressive.com,,United States,2010-01-01
+CRM-0531,AT&T,att.com,230000,,2021-01-31
+CRM-0532,herbalife,,7800,United States,2014-01-01
+CRM-0533,NRG Energy,https://www.nrg.com/,9806,,2014-12-31
+CRM-0534,Pfizer,,88300,United States,2019-01-01
+CRM-0535,Humana,https://www.humana.com/,51600,United States,2016-01-01
+CRM-0536,Skyworks Solutions,,4400,United States,2011-01-01
+CRM-0537,bitdeer,bitdeer.com,211,Singapore,2023-01-01
+CRM-0538,USA Today,https://www.usatodayco.com/,11202,,2022-01-01
+CRM-0539,CENTURY CASINOS,https://www.cnty.com/,1910,United States,2017-01-01
+CRM-0540,The Carlyle Group,,2400,United States,2025-01-01
+CRM-0541,Bank of Montreal,wwwbankofthewest.com,46778,Canada,2015-01-01
+CRM-0542,Argo Blockchain,www.argoblockchain.com,,,2022-05-01
+CRM-0543,SAFE-T,safetgroup.com,36,Israel,2020-06-22
+CRM-0544,Shell,www.shell.com,83000,United Kingdom,2019-01-01
+CRM-0545,baidu,,31000,,2024-01-01
+CRM-0546,Tyson Foods,tyson.com,133000,United States,2025-01-01
+CRM-0547,Intel,intel.cn,,,2021-01-01
+CRM-0548,Itamar Medical,itamar-medical.com,184,Israel,2020-07-07
+CRM-0549,cencora,www.cencora.com,,United States,2022-09-30
+CRM-0550,GSK plc,,99300,United Kingdom,2016-01-01
+CRM-0551,TORM,http://torm.com,4000,,2024-01-01
+CRM-0552,Táiwān Jītǐ Diànlù Zhìzào Gōngsī,http://tsmc.com,65152,Taiwan,2021-12-31
+CRM-0553,cencora,amerisourcebergen.com,44000,,2022-09-30
+CRM-0554,Lululemon Athletica,lululemon.cn,13400,,2018-01-28
+CRM-0555,azenta life sciences,http://azenta.com,1176,,2023-03-16
+CRM-0556,Equinix,,8378,,2019-12-31
+CRM-0557,Telus Communications,,,Canada,2017-10-30
+CRM-0558,Nature's Sunshine Products,http://naturessunshine.com,,United States,2015-01-01
+CRM-0559,Synchrony Financial,synchronybank.com,15000,United States,2016-01-01
+CRM-0560,"American Airlines Group, Inc.",,132100,United States,2023-01-01
+CRM-0561,six flags,www.sixflags.com,,United States,2025-12-31
+CRM-0562,Chipotle Mexican Grill,https://www.chipotle.com/,45200,United States,2013-01-01
+CRM-0563,China Petroleum & Chemical Corporation,www.sinopechongkong.com,351019,People's Republic of China,2015-01-01
+CRM-0564,Yelp,https://www.yelp.com/,4350,United States,2017-05-09
+CRM-0565,Diageo plc,http://diageo.com,30367,,2024-06-30
+CRM-0566,TEVA PHARMACEUTICAL INDUSTRIES,,43000,Israel,2014-01-01
+CRM-0567,Fresenius Medical Care,fmc-ag.com,,,2020-01-01
+CRM-0568,dutch bros. coffee,,,,2025-12-31
+CRM-0569,FORD MOTOR,ford.com.ge,201000,United States,2016-01-01
+CRM-0570,Tata Motors Passenger Vehicles,https://www.tata.cars/,27948,India,2014-03-31
+CRM-0571,DOLBY,dolby.com,1667,United States,2014-01-01
+CRM-0572,PepsiCo,pepsico.com,264000,,2016-01-01
+CRM-0573,NextGen Healthcare,,1500,United States,2018-09-01
+CRM-0574,Synchrony Financial,,15000,United States,2016-01-01
+CRM-0575,Racal Strategic Radio,vodafone.com,107667,United Kingdom,2016-01-01
+CRM-0576,BARCLAYS,barclays.co.uk,79900,United Kingdom,2017-01-01
+CRM-0577,fox,foxcorporation.com,9000,United States,http://www
+CRM-0578,HILTON WORLDWIDE,,182000,United States,2025-12-31
+CRM-0579,Berkshire Hathaway Inc.,,,United States,2020-12-31
+CRM-0580,GOLD FIELDS,www.goldfields.co.za,,South Africa,2010-01-01
+CRM-0581,BioNTech,,1300,,2019-12-31
+CRM-0582,ABB,https://www.global.abb/,104400,Switzerland,2021-01-01
+CRM-0583,rubrik.com,rubrik.com,2500,United States,2022-01-01
+CRM-0584,Kodak,https://www.kodak.com/,97222,United States,2019-01-01
+CRM-0585,Ericsson,,,Sweden,2021-01-01
+CRM-0586,Johnson & Johnson,jnj.com.cn,136400,,2021-01-03
+CRM-0587,Camping World,rv.campingworld.com,,United States,2016-01-01
+CRM-0588,MINDBODY,,1337,,2016-01-01
+CRM-0589,"Agilent Technologies, Inc.",,17671,United States,2023-03-16
+CRM-0590,Citigroup,,,United States,2016-01-01
+CRM-0591,FORD MOTOR,ford.ru,201000,,2016-01-01
+CRM-0592,VMware,vmware.com,34000,United States,2021-01-01
+CRM-0593,CureVac GmbH,,600,Germany,2021-01-01
+CRM-0594,trivago.com,,,Germany,2022-12-31
+CRM-0595,Embraer S.A.,,19179,Brazil,2023-01-01
+CRM-0596,American Airlines Group Inc.,,132100,United States,2023-01-01
+CRM-0597,PINTEREST,,3225,United States,2021-12-31
+CRM-0598,E.I. DuPont de Nemours Company,,98000,United States,2020-01-01
+CRM-0599,Bunge International,,22706,United States,2021-01-01
+CRM-0600,SIX FLAGS,sixflags.com,95255,United States,2025-12-31
+CRM-0601,PayZapp,www.hdfc.bank.in,177000,,2003-01-01
+CRM-0602,hewlett packard enterprise,www.hpe.com,195000,United States,2016-01-01

@@ -1,0 +1,33 @@
+{
+ "id": "icp_false_negative-Q17460900",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "icp_false_negative",
+ "company": "Zoom Communications",
+ "detail": "industries=['video conference'] reason=keywords_v1: []",
+ "rows": [
+  {
+   "crm_id": "CRM-0064",
+   "account_name": "Zoom Communications",
+   "website": "http://zoom.com",
+   "employee_count": "2000",
+   "hq_country": "United States",
+   "last_updated": "2019-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q17460900",
+  "single_account": true,
+  "domain": [
+   "zoom.com"
+  ],
+  "employees": [
+   2000
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": true,
+  "allow_review": false
+ }
+}

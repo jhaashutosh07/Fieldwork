@@ -1,0 +1,41 @@
+{
+ "id": "icp_false_positive-Q2357515",
+ "created": "2026-11-02",
+ "from_run": "ce397f1bdea8",
+ "signature": "icp_false_positive",
+ "company": "Stryker Corporation",
+ "detail": "industries=['medical technology'] reason=keywords_v1: ['medical technology']",
+ "rows": [
+  {
+   "crm_id": "CRM-0097",
+   "account_name": "Stryker",
+   "website": "http://stryker.com",
+   "employee_count": "22000",
+   "hq_country": "United States",
+   "last_updated": "2012-01-01"
+  },
+  {
+   "crm_id": "CRM-0128",
+   "account_name": "stryker",
+   "website": "",
+   "employee_count": "22000",
+   "hq_country": "United States",
+   "last_updated": "2012-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q2357515",
+  "single_account": true,
+  "domain": [
+   "stryker.com"
+  ],
+  "employees": [
+   22000
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": false,
+  "allow_review": false
+ }
+}

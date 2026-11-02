@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: fieldwork
+      POSTGRES_PASSWORD: fieldwork
+      POSTGRES_DB: fieldwork
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fieldwork"]
+      interval: 3s
+      retries: 10
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      FIELDWORK_DB: postgresql+psycopg://fieldwork:fieldwork@db:5432/fieldwork
+    ports:
+      - "8000:8000"
+    command: sh -c "fieldwork history --llm replay && fieldwork serve --host 0.0.0.0 --port 8000"
