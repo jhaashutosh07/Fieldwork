@@ -58,6 +58,13 @@
   .ev .head { font-weight: 600; } .ev pre { margin: 3px 0 0; white-space: pre-wrap; word-break: break-word; color: var(--muted); }
   .empty { color: var(--muted); padding: 10px 0; }
   canvas { max-height: 260px; }
+  .note { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
+  .note b { color: var(--ink); }
+  .chip.ok { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+  .chip.no { background: color-mix(in srgb, var(--bad) 16%, transparent); color: var(--bad); }
+  .chip.meh { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+  .chartbox { position: relative; height: 270px; }
+  .chartbox canvas { max-height: none; }
 </style>
 </head>
 <body>
@@ -76,6 +83,33 @@
     <section>
       <h2>Releases</h2>
       <div class="scroll"><table id="versions"></table></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section>
+      <h2>Is each gain real? <span class="hint">paired bootstrap on the same held-out companies; silent errors use a Wilson interval</span></h2>
+      <div class="scroll"><table id="sig"></table></div>
+      <div class="note" id="sigNote"></div>
+    </section>
+    <section>
+      <h2>How much can run unattended? <span class="hint">automate the accounts the agent is surest about first</span></h2>
+      <div class="chartbox"><canvas id="riskChart"></canvas></div>
+      <div class="note" id="riskNote"></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section>
+      <h2>What if the CRM gets messier? <span class="hint">stress test: websites removed from a growing share of rows</span></h2>
+      <div class="chartbox"><canvas id="stressChart"></canvas></div>
+      <div class="note" id="stressNote"></div>
+    </section>
+    <section>
+      <h2>Experiments and cost <span class="hint">a new version ships only if it beats the shipped one on held-out test</span></h2>
+      <table id="experiments"></table>
+      <table id="cost" style="margin-top:16px"></table>
+      <div class="note" id="costNote"></div>
     </section>
   </div>
 
@@ -126,9 +160,11 @@ let state = { run: null, failures: [], trace: null, accounts: null, signature: n
 async function loadHistory() {
   const hist = await api("/api/history");
   const cases = await api("/api/regressions");
-  // headline = newest version whose numbers are real (an LLM version counts only once its answers are recorded)
-  const last = [...hist].reverse().find((h) => !h.uses_llm || h.llm_recorded) || hist[hist.length - 1];
+  const released = hist.filter((h) => h.status !== "experiment");
+  // headline = newest released version whose numbers are real (an LLM version counts once its answers are recorded)
+  const last = [...released].reverse().find((h) => !h.uses_llm || h.llm_recorded) || released[released.length - 1];
   const first = hist[0];
+  state.defaultRun = last && last.test_run;
   const kpi = (label, value, sub, cls = "") =>
     `<div class="kpi"><div class="label">${label}</div><div class="value ${cls}">${value}</div><div class="sub">${sub}</div></div>`;
   $("kpis").innerHTML = last ? [
@@ -140,16 +176,16 @@ async function loadHistory() {
   ].join("") : `<div class="kpi"><div class="label">No history yet</div><div class="sub">run: python -m fieldwork history</div></div>`;
 
   $("versions").innerHTML = "<tr><th>Version</th><th>Change</th><th class='num'>Verified</th><th class='num'>Silent err.</th><th class='num'>Cases</th></tr>" +
-    hist.map((h) => `<tr><td><span class="chip">${h.version}</span></td><td>${esc(h.summary)}${h.uses_llm ? (h.llm_recorded ? ` <span class="muted">(${esc(h.model)}, replayed)</span>` : ` <span class="bad">(LLM not recorded yet: rules fallback)</span>`) : ""}</td>
+    hist.map((h) => `<tr><td><span class="chip">${h.version}</span>${h.status === "experiment" ? `<br><span class="chip meh" style="margin-top:3px">experiment</span>` : h.version === last.version ? `<br><span class="chip ok" style="margin-top:3px">shipped</span>` : ""}</td><td>${esc(h.summary)}${h.uses_llm ? (h.llm_recorded ? ` <span class="muted">(${esc(h.model)}, replayed)</span>` : ` <span class="bad">(LLM not recorded yet: rules fallback)</span>`) : ""}</td>
       <td class="num">${pct(h.test.verified_accuracy)}</td><td class="num">${pct(h.test.silent_error_rate)}</td><td class="num">${h.regression_cases}</td></tr>`).join("");
 
-  if (window.Chart && hist.length) {
+  if (window.Chart && released.length) {
     new Chart($("chart"), {
       type: "line",
-      data: { labels: hist.map((h) => h.version), datasets: [
-        { label: "Verified accuracy", data: hist.map((h) => 100 * h.test.verified_accuracy), borderColor: css("--good"), backgroundColor: css("--good"), tension: .25 },
-        { label: "Silent error rate", data: hist.map((h) => 100 * h.test.silent_error_rate), borderColor: css("--bad"), backgroundColor: css("--bad"), tension: .25 },
-        { label: "Sent to review", data: hist.map((h) => 100 * h.test.review_rate), borderColor: css("--warn"), backgroundColor: css("--warn"), borderDash: [4, 4], tension: .25 },
+      data: { labels: released.map((h) => h.version), datasets: [
+        { label: "Verified accuracy", data: released.map((h) => 100 * h.test.verified_accuracy), borderColor: css("--good"), backgroundColor: css("--good"), tension: .25 },
+        { label: "Silent error rate", data: released.map((h) => 100 * h.test.silent_error_rate), borderColor: css("--bad"), backgroundColor: css("--bad"), tension: .25 },
+        { label: "Sent to review", data: released.map((h) => 100 * h.test.review_rate), borderColor: css("--warn"), backgroundColor: css("--warn"), borderDash: [4, 4], tension: .25 },
       ]},
       options: { responsive: true, maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
         scales: { y: { min: 0, max: 100, ticks: { callback: (v) => v + "%", color: css("--muted") }, grid: { color: css("--line") } },
@@ -162,15 +198,74 @@ async function loadHistory() {
     cases.map((c) => `<tr><td><span class="chip">${esc(c.signature)}</span></td><td>${esc(c.company)}</td><td class="muted">${esc(c.detail)}</td><td>${esc(c.created)}</td></tr>`).join("");
 }
 
+const pp = (x) => (x == null ? "-" : (x >= 0 ? "+" : "") + (100 * x).toFixed(1));
+const axes = (xLabel, yMin, yMax) => ({
+  x: { type: "linear", min: 0, max: 100, title: { display: true, text: xLabel, color: css("--muted") }, ticks: { callback: (v) => v + "%", color: css("--muted") }, grid: { color: css("--line") } },
+  y: { min: yMin, max: yMax, ticks: { callback: (v) => v + "%", color: css("--muted") }, grid: { color: css("--line") } } });
+const lineOpts = (xLabel, yMin, yMax, yName) => ({ responsive: true, maintainAspectRatio: false, interaction: { mode: "nearest", intersect: false },
+  scales: axes(xLabel, yMin, yMax),
+  plugins: { legend: { labels: { color: css("--ink") } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${yName} ${c.parsed.y.toFixed(1)}% at ${c.parsed.x.toFixed(0)}%` } } } });
+const palette = { v1: "--muted", v3: "--warn", v4: "--accent", v5: "--good" };
+
+async function loadInsights() {
+  let ins;
+  try { ins = await api("/api/insights"); } catch { return; }
+  if (!ins || !ins.versions) return;
+  const sigChip = (d, lowerIsBetter) => {
+    if (!d) return "";
+    const good = lowerIsBetter ? d.ci[1] < 0 : d.ci[0] > 0, bad = lowerIsBetter ? d.ci[0] > 0 : d.ci[1] < 0;
+    return `${pp(d.delta)} pts <span class="muted">[${pp(d.ci[0])}, ${pp(d.ci[1])}]</span> <span class="chip ${good ? "ok" : bad ? "no" : "meh"}">${good ? "real" : bad ? "worse" : "not significant"}</span>`;
+  };
+  $("sig").innerHTML = "<tr><th>Version</th><th>Verified (95% CI)</th><th>Gain vs previous</th><th>Silent errors (95% CI)</th></tr>" +
+    ins.versions.map((v) => `<tr><td><span class="chip">${v.version}</span></td>
+      <td>${pct(v.verified_accuracy)} <span class="muted">[${pct(v.ci.verified_accuracy[0])}, ${pct(v.ci.verified_accuracy[1])}]</span></td>
+      <td>${v.vs_prev ? sigChip(v.vs_prev.verified_accuracy, false) : "<span class='muted'>baseline</span>"}</td>
+      <td>${pct(v.silent_error_rate)} <span class="muted">[${pct(v.ci.silent_error_rate[0])}, ${pct(v.ci.silent_error_rate[1])}]</span></td></tr>`).join("");
+  const shipped = ins.versions[ins.versions.length - 1];
+  $("sigNote").innerHTML = `${ins.companies} held-out companies, ${ins.bootstrap_resamples.toLocaleString()} bootstrap resamples. ` +
+    `${shipped.version} made <b>0 silent errors</b>; with this sample size the true rate is at most <b>${pct(shipped.ci.silent_error_rate[1])}</b> (95%).`;
+
+  if (window.Chart) {
+    const rc = ins.risk_coverage;
+    new Chart($("riskChart"), { type: "line", data: { datasets: Object.entries(rc).map(([v, c]) => ({
+        label: v, data: c.points.map((p) => ({ x: 100 * p.coverage, y: 100 * p.error })), borderColor: css(palette[v]), backgroundColor: css(palette[v]),
+        pointRadius: c.points.map((p) => (c.operating && p.coverage === c.operating.coverage && p.error === c.operating.error ? 6 : 0)), tension: .15 })) },
+      options: lineOpts("rows handled automatically", 0, 12, "error") });
+    const cur = rc[shipped.version] || Object.values(rc).pop();
+    $("riskNote").innerHTML = `Dots mark where each version stops and hands off to review. <b>${shipped.version}</b> handles <b>${pct(cur.operating.coverage)}</b> of rows unattended at <b>${pct(cur.operating.error)}</b> error; ` +
+      `forcing 100% automation would cost <b>${pct(cur.full_automation_error)}</b> errors.`;
+
+    const st = ins.stress;
+    new Chart($("stressChart"), { type: "line", data: { datasets: Object.entries(st.series).map(([v, s]) => ({
+        label: v, data: s.verified_accuracy.map((y, i) => ({ x: 100 * st.rates[i], y: 100 * y })), borderColor: css(palette[v]), backgroundColor: css(palette[v]), tension: .2 })) },
+      options: lineOpts("CRM rows with the website removed", 40, 100, "verified") });
+    const s5 = st.series[shipped.version], s4 = st.series.v4, s1 = st.series.v1, n = st.rates.length - 1;
+    $("stressNote").innerHTML = `With every website removed, <b>${shipped.version} still verifies ${pct(s5.verified_accuracy[n])}</b> (rules-only v4: ${pct(s4.verified_accuracy[n])}) ` +
+      `with ${pct(s5.silent_error_rate[n])} silent errors. (v3 and v4 overlap: same accuracy, but v4 sends doubtful rows to review instead of getting them wrong.) v1 <i>improves</i> as websites disappear (${pct(s1.verified_accuracy[0])} → ${pct(s1.verified_accuracy[n])}): its CRM websites were often stale, so trusting old data was worse than having none.`;
+  }
+
+  $("experiments").innerHTML = "<tr><th>Experiment</th><th>Verified vs shipped</th><th>Decision</th></tr>" +
+    ins.experiments.map((x) => `<tr><td><span class="chip">${x.version}</span><div class="muted" style="font-size:12px;margin-top:3px">${esc(x.summary)}</div></td>
+      <td>${sigChip(x.vs_shipped.verified_accuracy, false)}</td>
+      <td><span class="chip ${x.decision === "ship" ? "ok" : x.decision === "rejected" ? "no" : "meh"}">${esc(x.decision)}</span><div class="muted" style="font-size:12px;margin-top:3px">${esc(x.reason)}</div></td></tr>`).join("");
+  const money = (x) => (x == null ? "-" : "$" + x.toFixed(x > 0 && x < 0.01 ? 5 : 3));
+  $("cost").innerHTML = "<tr><th>Version</th><th class='num'>LLM calls / 1k rows</th><th class='num'>$ / 1k rows</th><th class='num'>$ / verified account</th></tr>" +
+    ins.versions.filter((v) => ["v1", "v4", shipped.version].includes(v.version)).map((v) => `<tr><td><span class="chip">${v.version}</span></td>
+      <td class="num">${v.cost.llm_calls_per_1k_rows}</td><td class="num">${money(v.cost.usd_per_1k_rows)}</td><td class="num">${money(v.cost.usd_per_verified_account)}</td></tr>`).join("");
+  $("costNote").innerHTML = `LLM: <b>${esc(ins.llm.model)}</b>; median live call ${ins.llm.median_live_ms ? (ins.llm.median_live_ms / 1000).toFixed(2) + " s" : "-"} (${ins.llm.timed_calls} timed calls). ` +
+    `Rules run first, so the model only sees the cases they can't settle.`;
+}
+
 async function loadRuns(select) {
   const runs = await api("/api/runs");
   $("runSel").innerHTML = runs.map((r) => `<option value="${r.id}">${r.version} · ${r.split} · ${pct(r.metrics.verified_accuracy)} · ${r.started_at.replace("T", " ")}</option>`).join("");
-  if (runs.length) { $("runSel").value = select || runs[0].id; await openRun($("runSel").value); }
+  const pick = [select, state.defaultRun].find((id) => id && runs.some((r) => r.id === id)) || (runs[0] && runs[0].id);
+  if (pick) { $("runSel").value = pick; await openRun(pick); }
 }
 
 async function openRun(id) {
   const run = await api(`/api/runs/${id}`);
-  state = { run, failures: await api(`/api/runs/${id}/failures`), trace: null, accounts: null, signature: null };
+  state = { ...state, run, failures: await api(`/api/runs/${id}/failures`), trace: null, accounts: null, signature: null };
   const m = run.metrics;
   const rows = [["Verified accuracy", pct(m.verified_accuracy)], ["Silent error rate", pct(m.silent_error_rate)],
     ["Sent to review", pct(m.review_rate)], ["Entity accuracy", pct(m.entity_accuracy)], ["Dedup F1", pct(m.dedup_f1)],
@@ -242,6 +337,7 @@ $("runBtn").onclick = async () => {
   $("newVersion").innerHTML = vs.map((v) => `<option>${v.version}</option>`).join("");
   $("newVersion").value = vs[vs.length - 1].version;
   await loadHistory();
+  await loadInsights();
   await loadRuns(new URLSearchParams(location.search).get("run"));
 })();
 </script>

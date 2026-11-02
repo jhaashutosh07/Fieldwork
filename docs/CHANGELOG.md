@@ -6,11 +6,13 @@ fix was tuned on. Each fixed failure was promoted into `evals/regressions/` so i
 
 | Version | Test: verified accuracy | Test: silent error rate | Test: sent to review | Regression cases |
 |---|---|---|---|---|
-| v1 | 55.7% | 37.4% | 5.4% | 0/9 |
-| v2 | 60.1% | 37.1% | 2.5% | 0/9 |
-| v3 | 89.2% | 6.9% | 2.5% | 4/9 |
-| v4 | 89.2% | **0.0%** | 8.7% | 9/9 |
-| v5 | **95.6%** | **0.0%** | 3.7% | 9/9 |
+| v1 | 55.7% | 37.4% | 5.4% | 0/10 |
+| v2 | 60.1% | 37.1% | 2.5% | 0/10 |
+| v3 | 89.2% | 6.9% | 2.5% | 5/10 |
+| v4 | 89.2% | **0.0%** | 8.7% | 10/10 |
+| v5 (shipped) | **95.6%** | **0.0%** | 3.7% | 10/10 |
+| v6 (rejected) | 91.1% | 0.7% | 6.2% | 10/10 |
+| v7 (not shipped) | 95.6% | 0.0% | 3.7% | 10/10 |
 
 ## v1: baseline
 Match each CRM row to the registry on name alone, merge rows with identical normalized names, trust the values the
@@ -55,7 +57,23 @@ also go to the model.
 Model: `openai/gpt-oss-120b` on Groq, temperature 0, answers recorded to `data/llm_cache.jsonl` and replayed in CI.
 Test: verified accuracy 89.2% → **95.6%**, review rate 8.7% → **3.7%**, silent errors still **0.0%**; 71 LLM calls,
 about $0.01.
-Dev surfaced one new silent error worth watching: `TELCO` (Tata Motors' old nickname) was resolved to Telefónica,
-because the model's suggestion matched a real listed company. Registry verification checks that the suggestion
-exists, not that it is the right company, so the next step is to require a second signal (country or ticker)
-before accepting a model-suggested name.
+Dev surfaced one silent error: `TELCO` (Tata Motors' old nickname) was resolved to Telefónica. The trace shows why:
+shown a candidate list, the model reasoned "TELCO suggests a telecom company" and picked the telecom candidate. That
+is a guess, not knowledge.
+
+## v6: name it from knowledge (experiment, rejected)
+Fix attempted for TELCO: no candidate list to anchor on. The model names the company from its own knowledge, must state
+a basis (`former_name`, `abbreviation`, `same_name`; `guess` is refused) and a ticker, and the ticker and the name must
+land on the same registry entry. On dev it removed TELCO and found ConocoPhillips, Uber and BioNTech, but traces also
+showed the model confidently wrong when it claimed `subsidiary` (trivago → Expedia, AMI Semiconductor → Amkor), so
+that basis was refused too.
+On held-out test it lost **4.4 pts [−7.6, −1.3]** and added a silent error (Viacom → Paramount Global). The traces
+explain why: the registry has shared tickers (two entities on `HPQ`, two on `AAL`), so "ticker must be unique" rejects
+correct answers v5's candidate pick handled; and some "subsidiary" names really are old names of the parent
+(First Data → Fiserv). **The CI gate fails it, so it never ships.** A fix tuned on dev that fails on held-out data is
+exactly what the gate is for.
+
+## v7: hybrid (experiment, not shipped)
+v5's candidate pick first; v6's verified proposal only when the pick finds nothing. Dev +0.8 pts; held-out test
+**+0.0 pts [0.0, 0.0]**, not significant, at 11% higher LLM cost. Not shipped: an experiment has to beat the shipped
+version on held-out data, not just tie it.

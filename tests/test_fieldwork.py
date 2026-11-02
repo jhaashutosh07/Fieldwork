@@ -88,3 +88,27 @@ def test_api_run_roundtrip():
     detail = c.get(f"/api/runs/{run_id}").json()
     assert detail["metrics"]["verified_accuracy"] > 0.8
     assert c.get(f"/api/runs/{run_id}/trace").json()
+
+
+def test_wilson_interval_is_honest_at_zero_errors():
+    from fieldwork.insights import wilson_ci
+    lo, hi = wilson_ci(0, 150)
+    assert lo == 0.0 and 0.015 < hi < 0.03
+
+
+def test_paired_delta_detects_a_real_gain_and_ignores_noise():
+    from fieldwork.insights import paired_delta
+    a = {f"c{i}": {"verified": int(i % 2 == 0), "asserted": 1, "wrong": 0, "review_rows": 0, "rows": 1} for i in range(200)}
+    better = {k: {**v, "verified": 1} for k, v in a.items()}
+    assert paired_delta(a, better, "verified_accuracy")["ci"][0] > 0
+    assert paired_delta(a, a, "verified_accuracy")["p"] == 1.0
+
+
+def test_stress_strip_rate_is_stable():
+    from fieldwork.insights import strip_websites
+    rows = rows_for("test")
+    half = strip_websites(rows, 0.5)
+    assert strip_websites(rows, 0.5) == half
+    assert all(r["website"] == "" for r in strip_websites(rows, 1.0))
+    with_site = sum(1 for r in rows if r["website"])
+    assert 0.3 * with_site < sum(1 for r in half if r["website"]) < 0.7 * with_site

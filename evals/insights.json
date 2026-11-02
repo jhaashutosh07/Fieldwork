@@ -1,0 +1,846 @@
+{
+ "generated": "2026-11-03",
+ "split": "test",
+ "shipped": "v5",
+ "companies": 158,
+ "rows": 242,
+ "bootstrap_resamples": 2000,
+ "versions": [
+  {
+   "version": "v1",
+   "summary": "Baseline: match on name, trust CRM values, keyword ICP",
+   "verified_accuracy": 0.557,
+   "silent_error_rate": 0.3742,
+   "review_rate": 0.0537,
+   "ci": {
+    "verified_accuracy": [
+     0.4747,
+     0.6329
+    ],
+    "silent_error_rate": [
+     0.3036,
+     0.4506
+    ],
+    "review_rate": [
+     0.0256,
+     0.0855
+    ]
+   },
+   "cost": {
+    "llm_calls_per_1k_rows": 0.0,
+    "usd_per_1k_rows": 0.0,
+    "usd_per_verified_account": 0.0,
+    "compute_ms_per_1k_rows": 2111.2
+   }
+  },
+  {
+   "version": "v2",
+   "summary": "Resolve by website first; merge rows on the resolved company",
+   "verified_accuracy": 0.6013,
+   "silent_error_rate": 0.3711,
+   "review_rate": 0.0248,
+   "ci": {
+    "verified_accuracy": [
+     0.5253,
+     0.6772
+    ],
+    "silent_error_rate": [
+     0.2998,
+     0.4484
+    ],
+    "review_rate": [
+     0.0082,
+     0.0455
+    ]
+   },
+   "cost": {
+    "llm_calls_per_1k_rows": 0.0,
+    "usd_per_1k_rows": 0.0,
+    "usd_per_verified_account": 0.0,
+    "compute_ms_per_1k_rows": 906.2
+   },
+   "vs_prev": {
+    "verified_accuracy": {
+     "delta": 0.0443,
+     "ci": [
+      0.0127,
+      0.0759
+     ],
+     "p": 0.001
+    },
+    "silent_error_rate": {
+     "delta": -0.0032,
+     "ci": [
+      -0.0293,
+      0.0214
+     ],
+     "p": 0.793
+    }
+   }
+  },
+  {
+   "version": "v3",
+   "summary": "Reconcile fields by freshness with provenance instead of trusting the CRM",
+   "verified_accuracy": 0.8924,
+   "silent_error_rate": 0.0692,
+   "review_rate": 0.0248,
+   "ci": {
+    "verified_accuracy": [
+     0.8418,
+     0.9367
+    ],
+    "silent_error_rate": [
+     0.0391,
+     0.1196
+    ],
+    "review_rate": [
+     0.0082,
+     0.0455
+    ]
+   },
+   "cost": {
+    "llm_calls_per_1k_rows": 0.0,
+    "usd_per_1k_rows": 0.0,
+    "usd_per_verified_account": 0.0,
+    "compute_ms_per_1k_rows": 843.8
+   },
+   "vs_prev": {
+    "verified_accuracy": {
+     "delta": 0.2911,
+     "ci": [
+      0.2215,
+      0.3671
+     ],
+     "p": 0.0
+    },
+    "silent_error_rate": {
+     "delta": -0.3019,
+     "ci": [
+      -0.3774,
+      -0.2312
+     ],
+     "p": 0.0
+    }
+   }
+  },
+  {
+   "version": "v4",
+   "summary": "Guardrail: weak name-only matches go to human review; ICP rules fixed from triage",
+   "verified_accuracy": 0.8924,
+   "silent_error_rate": 0.0,
+   "review_rate": 0.0868,
+   "ci": {
+    "verified_accuracy": [
+     0.8418,
+     0.9367
+    ],
+    "silent_error_rate": [
+     0.0,
+     0.025
+    ],
+    "review_rate": [
+     0.0476,
+     0.1304
+    ]
+   },
+   "cost": {
+    "llm_calls_per_1k_rows": 0.0,
+    "usd_per_1k_rows": 0.0,
+    "usd_per_verified_account": 0.0,
+    "compute_ms_per_1k_rows": 998.8
+   },
+   "vs_prev": {
+    "verified_accuracy": {
+     "delta": 0.0,
+     "ci": [
+      -0.0443,
+      0.0506
+     ],
+     "p": 1.0
+    },
+    "silent_error_rate": {
+     "delta": -0.0692,
+     "ci": [
+      -0.1083,
+      -0.0316
+     ],
+     "p": 0.0
+    }
+   }
+  },
+  {
+   "version": "v5",
+   "summary": "LLM resolves former names and ambiguous matches (registry-verified) and judges ICP industry",
+   "verified_accuracy": 0.9557,
+   "silent_error_rate": 0.0,
+   "review_rate": 0.0372,
+   "ci": {
+    "verified_accuracy": [
+     0.9177,
+     0.981
+    ],
+    "silent_error_rate": [
+     0.0,
+     0.0242
+    ],
+    "review_rate": [
+     0.0122,
+     0.0708
+    ]
+   },
+   "cost": {
+    "llm_calls_per_1k_rows": 293.4,
+    "usd_per_1k_rows": 0.0391,
+    "usd_per_verified_account": 6.3e-05,
+    "compute_ms_per_1k_rows": 879.8
+   },
+   "vs_prev": {
+    "verified_accuracy": {
+     "delta": 0.0633,
+     "ci": [
+      0.0253,
+      0.1013
+     ],
+     "p": 0.0
+    },
+    "silent_error_rate": {
+     "delta": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "p": 1.0
+    }
+   }
+  }
+ ],
+ "experiments": [
+  {
+   "version": "v6",
+   "summary": "LLM names the company from knowledge with a stated basis; ticker and name must agree in the registry",
+   "verified_accuracy": 0.9114,
+   "silent_error_rate": 0.0066,
+   "review_rate": 0.062,
+   "vs_shipped": {
+    "verified_accuracy": {
+     "delta": -0.0443,
+     "ci": [
+      -0.0759,
+      -0.0127
+     ],
+     "p": 0.003
+    },
+    "silent_error_rate": {
+     "delta": 0.0066,
+     "ci": [
+      0.0,
+      0.0201
+     ],
+     "p": 0.736
+    }
+   },
+   "cost_ratio": 1.069,
+   "decision": "rejected",
+   "reason": "fails the CI eval gate against the shipped version"
+  },
+  {
+   "version": "v7",
+   "summary": "Hybrid: v5's candidate pick first; v6's verified knowledge proposal only when the pick finds nothing",
+   "verified_accuracy": 0.9557,
+   "silent_error_rate": 0.0,
+   "review_rate": 0.0372,
+   "vs_shipped": {
+    "verified_accuracy": {
+     "delta": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "p": 1.0
+    },
+    "silent_error_rate": {
+     "delta": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "p": 1.0
+    }
+   },
+   "cost_ratio": 1.114,
+   "decision": "not shipped",
+   "reason": "no significant gain on held-out test and 11% higher LLM cost"
+  }
+ ],
+ "risk_coverage": {
+  "v3": {
+   "points": [
+    {
+     "coverage": 0.0248,
+     "error": 0.4
+    },
+    {
+     "coverage": 0.0661,
+     "error": 0.2
+    },
+    {
+     "coverage": 0.095,
+     "error": 0.2
+    },
+    {
+     "coverage": 0.1157,
+     "error": 0.25
+    },
+    {
+     "coverage": 0.1446,
+     "error": 0.2
+    },
+    {
+     "coverage": 0.1694,
+     "error": 0.2
+    },
+    {
+     "coverage": 0.2149,
+     "error": 0.1714
+    },
+    {
+     "coverage": 0.2521,
+     "error": 0.15
+    },
+    {
+     "coverage": 0.2769,
+     "error": 0.1333
+    },
+    {
+     "coverage": 0.3058,
+     "error": 0.12
+    },
+    {
+     "coverage": 0.3388,
+     "error": 0.1091
+    },
+    {
+     "coverage": 0.376,
+     "error": 0.1
+    },
+    {
+     "coverage": 0.4008,
+     "error": 0.0923
+    },
+    {
+     "coverage": 0.4298,
+     "error": 0.0857
+    },
+    {
+     "coverage": 0.4752,
+     "error": 0.08
+    },
+    {
+     "coverage": 0.5041,
+     "error": 0.075
+    },
+    {
+     "coverage": 0.5248,
+     "error": 0.0706
+    },
+    {
+     "coverage": 0.562,
+     "error": 0.0667
+    },
+    {
+     "coverage": 0.5868,
+     "error": 0.0632
+    },
+    {
+     "coverage": 0.6116,
+     "error": 0.06
+    },
+    {
+     "coverage": 0.6364,
+     "error": 0.0571
+    },
+    {
+     "coverage": 0.6777,
+     "error": 0.0545
+    },
+    {
+     "coverage": 0.7107,
+     "error": 0.0522
+    },
+    {
+     "coverage": 0.7397,
+     "error": 0.0583
+    },
+    {
+     "coverage": 0.781,
+     "error": 0.064
+    },
+    {
+     "coverage": 0.814,
+     "error": 0.0615
+    },
+    {
+     "coverage": 0.843,
+     "error": 0.0593
+    },
+    {
+     "coverage": 0.8719,
+     "error": 0.0571
+    },
+    {
+     "coverage": 0.8967,
+     "error": 0.0552
+    },
+    {
+     "coverage": 0.9339,
+     "error": 0.0533
+    },
+    {
+     "coverage": 0.9545,
+     "error": 0.0516
+    },
+    {
+     "coverage": 0.9752,
+     "error": 0.0692
+    },
+    {
+     "coverage": 0.9793,
+     "error": 0.075
+    },
+    {
+     "coverage": 1.0,
+     "error": 0.097
+    }
+   ],
+   "operating": {
+    "coverage": 0.9752,
+    "error": 0.0692
+   },
+   "full_automation_error": 0.097
+  },
+  "v4": {
+   "points": [
+    {
+     "coverage": 0.0331,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.0702,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.0909,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.124,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.1488,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.1901,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.2273,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.2562,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.2851,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.3182,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.3554,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.376,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.405,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.4463,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.4752,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.5,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.5331,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.562,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.5868,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.6116,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.6446,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.6736,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.7107,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.7397,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.781,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.814,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.8347,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.8636,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.8884,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.9132,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.9421,
+     "error": 0.0194
+    },
+    {
+     "coverage": 0.9628,
+     "error": 0.0187
+    },
+    {
+     "coverage": 0.9835,
+     "error": 0.0303
+    },
+    {
+     "coverage": 1.0,
+     "error": 0.0533
+    }
+   ],
+   "operating": {
+    "coverage": 0.9132,
+    "error": 0.0
+   },
+   "full_automation_error": 0.0533
+  },
+  "v5": {
+   "points": [
+    {
+     "coverage": 0.0372,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.0744,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.095,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.1281,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.1529,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.1942,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.2314,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.2603,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.2893,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.3223,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.3595,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.3802,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.4091,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.4504,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.4876,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.5124,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.5455,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.5744,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.5992,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.624,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.657,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.6901,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.7314,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.7603,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.8017,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.8347,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.8554,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.8843,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.9091,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.9421,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.9628,
+     "error": 0.0
+    },
+    {
+     "coverage": 0.9917,
+     "error": 0.0187
+    },
+    {
+     "coverage": 1.0,
+     "error": 0.0309
+    }
+   ],
+   "operating": {
+    "coverage": 0.9628,
+    "error": 0.0
+   },
+   "full_automation_error": 0.0309
+  }
+ },
+ "stress": {
+  "rates": [
+   0.0,
+   0.25,
+   0.5,
+   0.75,
+   1.0
+  ],
+  "series": {
+   "v1": {
+    "verified_accuracy": [
+     0.557,
+     0.5759,
+     0.5949,
+     0.6076,
+     0.6139
+    ],
+    "silent_error_rate": [
+     0.3742,
+     0.3558,
+     0.3374,
+     0.3252,
+     0.319
+    ],
+    "review_rate": [
+     0.0537,
+     0.0537,
+     0.0537,
+     0.0537,
+     0.0537
+    ],
+    "llm_calls": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "v3": {
+    "verified_accuracy": [
+     0.8924,
+     0.8861,
+     0.8671,
+     0.8608,
+     0.8291
+    ],
+    "silent_error_rate": [
+     0.0692,
+     0.0701,
+     0.0764,
+     0.0828,
+     0.0903
+    ],
+    "review_rate": [
+     0.0248,
+     0.0331,
+     0.0413,
+     0.0413,
+     0.0537
+    ],
+    "llm_calls": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "v4": {
+    "verified_accuracy": [
+     0.8924,
+     0.8861,
+     0.8671,
+     0.8608,
+     0.8291
+    ],
+    "silent_error_rate": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "review_rate": [
+     0.0868,
+     0.095,
+     0.1074,
+     0.1116,
+     0.1322
+    ],
+    "llm_calls": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "v5": {
+    "verified_accuracy": [
+     0.9557,
+     0.9557,
+     0.9557,
+     0.9494,
+     0.9367
+    ],
+    "silent_error_rate": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "review_rate": [
+     0.0372,
+     0.0372,
+     0.0372,
+     0.0413,
+     0.0496
+    ],
+    "llm_calls": [
+     71,
+     73,
+     76,
+     77,
+     81
+    ]
+   }
+  }
+ },
+ "llm": {
+  "model": "openai/gpt-oss-120b",
+  "recorded_calls": 181,
+  "median_live_ms": 859.2,
+  "timed_calls": 11
+ },
+ "build_seconds": 15.0
+}

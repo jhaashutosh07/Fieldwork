@@ -45,6 +45,12 @@ def history():
     return json.loads(flywheel.HISTORY.read_text()) if flywheel.HISTORY.exists() else []
 
 
+@app.get("/api/insights")
+def insights():
+    from .insights import INSIGHTS
+    return json.loads(INSIGHTS.read_text()) if INSIGHTS.exists() else {}
+
+
 @app.get("/api/runs")
 def runs():
     return store.list_runs()

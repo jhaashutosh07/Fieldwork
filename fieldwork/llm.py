@@ -65,6 +65,7 @@ class LLM:
         return rec["answer"]
 
     def _call(self, key: str, system: str, user: str) -> dict:
+        t0 = time.perf_counter()
         for attempt in range(6):
             try:
                 resp = self._client.chat.completions.create(
@@ -83,7 +84,8 @@ class LLM:
             answer = {}
         rec = {"key": key, "model": self.model, "answer": answer, "tokens_in": usage.prompt_tokens,
                "tokens_out": usage.completion_tokens,
-               "cost_usd": round((usage.prompt_tokens * pin + usage.completion_tokens * pout) / 1e6, 6)}
+               "cost_usd": round((usage.prompt_tokens * pin + usage.completion_tokens * pout) / 1e6, 6),
+               "ms": round((time.perf_counter() - t0) * 1000, 1)}
         with self._lock:
             self._cache[key] = rec
             with CACHE.open("a", encoding="utf-8") as f:

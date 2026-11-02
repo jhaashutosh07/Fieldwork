@@ -1,0 +1,33 @@
+{
+ "id": "stale_headcount-Q1472929",
+ "created": "2026-11-02",
+ "from_run": "c87cde5eb288",
+ "signature": "stale_headcount",
+ "company": "Nasdaq, Inc.",
+ "detail": "source=crm as_of=2016-01-01",
+ "rows": [
+  {
+   "crm_id": "CRM-0173",
+   "account_name": "The NASDAQ OMX Group, Inc.",
+   "website": "www.business.nasdaq.com",
+   "employee_count": "4325",
+   "hq_country": "United States",
+   "last_updated": "2016-01-01"
+  }
+ ],
+ "expect": {
+  "company_id": "Q1472929",
+  "single_account": true,
+  "domain": [
+   "business.nasdaq.com"
+  ],
+  "employees": [
+   8809
+  ],
+  "country": [
+   "United States"
+  ],
+  "icp_fit": false,
+  "allow_review": false
+ }
+}

@@ -16,11 +16,13 @@ promoted into a regression test that CI enforces before the next version ships.
 
 | Version | What changed | Verified accuracy | Silent error rate | Sent to review | Regression cases |
 |---|---|---|---|---|---|
-| v1 | Match on name, trust CRM values, keyword ICP | 55.7% | 37.4% | 5.4% | 0/9 |
-| v2 | Resolve by website first; merge rows on the resolved company | 60.1% | 37.1% | 2.5% | 0/9 |
-| v3 | Reconcile fields by freshness, with provenance | 89.2% | 6.9% | 2.5% | 4/9 |
-| v4 | Guardrail: weak name-only matches go to human review; ICP rules from triage | 89.2% | 0.0% | 8.7% | 9/9 |
-| v5 | LLM resolves former names (registry-verified) and judges unknown industries | **95.6%** | **0.0%** | **3.7%** | 9/9 |
+| v1 | Match on name, trust CRM values, keyword ICP | 55.7% | 37.4% | 5.4% | 0/10 |
+| v2 | Resolve by website first; merge rows on the resolved company | 60.1% | 37.1% | 2.5% | 0/10 |
+| v3 | Reconcile fields by freshness, with provenance | 89.2% | 6.9% | 2.5% | 5/10 |
+| v4 | Guardrail: weak name-only matches go to human review; ICP rules from triage | 89.2% | 0.0% | 8.7% | 10/10 |
+| v5 ✅ shipped | LLM resolves former names (registry-verified) and judges unknown industries | **95.6%** | **0.0%** | **3.7%** | 10/10 |
+| v6 ❌ rejected | LLM names the company from its own knowledge; ticker + name must agree | 91.1% | 0.7% | 6.2% | 10/10 |
+| v7 ⏸ not shipped | Hybrid of v5 and v6 | 95.6% | 0.0% | 3.7% | 10/10 |
 
 v5 uses `openai/gpt-oss-120b` on Groq: 169 LLM calls across both splits, about **$0.02** in total, because rules run
 first and the model is only asked about the cases rules can't settle.
@@ -31,6 +33,22 @@ first and the model is only asked about the cases rules can't settle.
   number that decides whether an agent can run unattended.
 - Every fix was driven by failures triaged on the **dev** split; the table is the **test** split, which no fix was tuned
   on. The full story of each version is in [docs/CHANGELOG.md](docs/CHANGELOG.md).
+
+## Insights
+
+`fieldwork insights` turns the scores into answers to the questions that decide whether an agent can be trusted
+(`evals/insights.json`, rendered on the dashboard):
+
+| Question | Answer (held-out test) |
+|---|---|
+| **Is each gain real, or noise?** | Paired bootstrap on the same 158 companies: v3 **+29.1 pts [+22.1, +36.7]**, v5 over v4 **+6.3 pts [+2.5, +10.1]**, both significant. v4 adds no accuracy (+0.0, n.s.); its job was cutting silent errors to zero. |
+| **How sure is "0% silent errors"?** | 0 wrong out of 155 asserted accounts. A Wilson interval puts the true rate at **≤ 2.4%** (95%). A bootstrap would wrongly report [0, 0]. |
+| **How much can run unattended?** | v5 handles **96.3%** of rows automatically at **0%** error; forcing 100% automation would cost **3.1%** errors. That's the price of removing the review queue. |
+| **What if the CRM gets messier?** | With **every** website removed, v5 still verifies **93.7%** (rules-only v4: 82.9%). v1 *improves* as websites vanish (55.7% → 61.4%): its CRM websites were stale, so trusting old data was worse than having none. |
+| **What does it cost?** | v5: 293 LLM calls and **$0.039 per 1,000 CRM rows**, about **$0.00006 per verified account**; median live call 0.86 s. |
+| **Did every idea ship?** | No. **v6 was rejected by the CI gate** (−4.4 pts [−7.6, −1.3]): it looked better on dev but failed on held-out data (shared tickers, renamed subsidiaries). **v7 tied v5** (+0.0, n.s.) at 11% more LLM cost, so it wasn't shipped. |
+
+![Insights](docs/insights.png)
 
 ## The task
 
@@ -108,6 +126,7 @@ fieldwork triage <run_id>                  # failures grouped by cause, with ids
 fieldwork promote <failure_id>             # freeze a failure as a regression case
 fieldwork gate                             # what CI runs: held-out metrics + every case
 fieldwork history                          # evaluate every version -> evals/history.json
+fieldwork insights                         # CIs, significance, automation curve, cost, stress test
 fieldwork serve                            # dashboard at http://127.0.0.1:8000
 
 pytest -q
@@ -165,6 +184,7 @@ fieldwork/
   llm.py        provider client with record/replay cache
   evals.py      gold scoring, verified accuracy, silent errors, failure signatures
   flywheel.py   run, promote, regression check, CI gate, history
+  insights.py   bootstrap/Wilson intervals, paired significance, risk-coverage, cost, stress test
   store.py      trace store (SQLite or Postgres via FIELDWORK_DB)
   api.py        FastAPI service; static/index.html is the dashboard
   data/         snapshot builder and dataset generator
@@ -175,8 +195,10 @@ render.yaml                  Render blueprint (deploys only when checks pass)
 
 ## Limits and next steps
 
-- v4 buys 0% silent errors with an 8.7% review rate. Most of that queue is former names with no website, which is
-  exactly what v5 targets.
+- v5's review queue (3.7%) is mostly old names the model doesn't know (Totsuko = Sony, Valley Falls = Berkshire
+  Hathaway). Feeding reviewer decisions back as gold would turn that queue into training data.
+- With 158 test companies, "0 silent errors" bounds the true rate at 2.4%, not 0. Tighter claims need a bigger
+  held-out set.
 - ICP labels are one person's judgment of an industry taxonomy. A second labeller and an agreement score would make
   the ICP metrics sturdier.
 - Next: feed human review decisions back as new gold, so the review queue itself becomes training data for the flywheel.

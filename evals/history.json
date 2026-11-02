@@ -3,6 +3,7 @@
   "version": "v1",
   "summary": "Baseline: match on name, trust CRM values, keyword ICP",
   "uses_llm": false,
+  "status": "released",
   "dev": {
    "companies": 251,
    "rows": 360,
@@ -22,7 +23,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "77563e611d31",
+  "dev_run": "f16ff02ff1e2",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -45,13 +46,14 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "17b3dd38892d",
-  "regression_cases": "0/9"
+  "test_run": "4c38d52265f0",
+  "regression_cases": "0/10"
  },
  {
   "version": "v2",
   "summary": "Resolve by website first; merge rows on the resolved company",
   "uses_llm": false,
+  "status": "released",
   "dev": {
    "companies": 251,
    "rows": 360,
@@ -71,7 +73,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "8a0bf5f65e06",
+  "dev_run": "a813f9bf7c5f",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -94,13 +96,14 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "1d3148ea4ac0",
-  "regression_cases": "0/9"
+  "test_run": "bb7ad31b16a6",
+  "regression_cases": "0/10"
  },
  {
   "version": "v3",
   "summary": "Reconcile fields by freshness with provenance instead of trusting the CRM",
   "uses_llm": false,
+  "status": "released",
   "dev": {
    "companies": 251,
    "rows": 360,
@@ -120,7 +123,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "15fa9e95945d",
+  "dev_run": "dfce7c56592c",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -143,13 +146,14 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "4f01a0f0291a",
-  "regression_cases": "4/9"
+  "test_run": "62c21ceca3f9",
+  "regression_cases": "5/10"
  },
  {
   "version": "v4",
   "summary": "Guardrail: weak name-only matches go to human review; ICP rules fixed from triage",
   "uses_llm": false,
+  "status": "released",
   "dev": {
    "companies": 251,
    "rows": 360,
@@ -169,7 +173,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "6b5f0a7c2431",
+  "dev_run": "330dba39e231",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -192,13 +196,14 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "b461a8cdd325",
-  "regression_cases": "9/9"
+  "test_run": "4738f79c728c",
+  "regression_cases": "10/10"
  },
  {
   "version": "v5",
   "summary": "LLM resolves former names and ambiguous matches (registry-verified) and judges ICP industry",
   "uses_llm": true,
+  "status": "released",
   "dev": {
    "companies": 251,
    "rows": 360,
@@ -218,7 +223,7 @@
    "cost_usd": 0.01279,
    "llm_calls": 98
   },
-  "dev_run": "674685ba0a53",
+  "dev_run": "ade3edd1dbe2",
   "llm_mode": "replay",
   "model": "openai/gpt-oss-120b",
   "llm_recorded": true,
@@ -241,7 +246,107 @@
    "cost_usd": 0.00947,
    "llm_calls": 71
   },
-  "test_run": "f6dfebc5dee0",
-  "regression_cases": "9/9"
+  "test_run": "e4490a041f58",
+  "regression_cases": "10/10"
+ },
+ {
+  "version": "v6",
+  "summary": "LLM names the company from knowledge with a stated basis; ticker and name must agree in the registry",
+  "uses_llm": true,
+  "status": "experiment",
+  "dev": {
+   "companies": 251,
+   "rows": 360,
+   "accounts": 257,
+   "verified_accuracy": 0.9402,
+   "entity_accuracy": 0.9583,
+   "dedup_f1": 0.9695,
+   "domain_accuracy": 1.0,
+   "employees_accuracy": 1.0,
+   "country_accuracy": 1.0,
+   "icp_accuracy": 0.9959,
+   "icp_precision": 1.0,
+   "icp_recall": 0.9429,
+   "precision_at_25": 1.0,
+   "silent_error_rate": 0.0041,
+   "review_rate": 0.0417,
+   "cost_usd": 0.01496,
+   "llm_calls": 98
+  },
+  "dev_run": "12b931b24b58",
+  "llm_mode": "replay",
+  "model": "openai/gpt-oss-120b",
+  "llm_recorded": true,
+  "test": {
+   "companies": 158,
+   "rows": 242,
+   "accounts": 165,
+   "verified_accuracy": 0.9114,
+   "entity_accuracy": 0.9339,
+   "dedup_f1": 0.9255,
+   "domain_accuracy": 1.0,
+   "employees_accuracy": 1.0,
+   "country_accuracy": 1.0,
+   "icp_accuracy": 1.0,
+   "icp_precision": 1.0,
+   "icp_recall": 1.0,
+   "precision_at_25": 1.0,
+   "silent_error_rate": 0.0066,
+   "review_rate": 0.062,
+   "cost_usd": 0.01012,
+   "llm_calls": 71
+  },
+  "test_run": "32c326c6d107",
+  "regression_cases": "10/10"
+ },
+ {
+  "version": "v7",
+  "summary": "Hybrid: v5's candidate pick first; v6's verified knowledge proposal only when the pick finds nothing",
+  "uses_llm": true,
+  "status": "experiment",
+  "dev": {
+   "companies": 251,
+   "rows": 360,
+   "accounts": 256,
+   "verified_accuracy": 0.9522,
+   "entity_accuracy": 0.9667,
+   "dedup_f1": 0.9695,
+   "domain_accuracy": 1.0,
+   "employees_accuracy": 1.0,
+   "country_accuracy": 1.0,
+   "icp_accuracy": 0.9959,
+   "icp_precision": 1.0,
+   "icp_recall": 0.9429,
+   "precision_at_25": 1.0,
+   "silent_error_rate": 0.0081,
+   "review_rate": 0.0306,
+   "cost_usd": 0.01586,
+   "llm_calls": 107
+  },
+  "dev_run": "a1f6b85f4bfe",
+  "llm_mode": "replay",
+  "model": "openai/gpt-oss-120b",
+  "llm_recorded": true,
+  "test": {
+   "companies": 158,
+   "rows": 242,
+   "accounts": 162,
+   "verified_accuracy": 0.9557,
+   "entity_accuracy": 0.9628,
+   "dedup_f1": 0.9637,
+   "domain_accuracy": 1.0,
+   "employees_accuracy": 1.0,
+   "country_accuracy": 1.0,
+   "icp_accuracy": 1.0,
+   "icp_precision": 1.0,
+   "icp_recall": 1.0,
+   "precision_at_25": 1.0,
+   "silent_error_rate": 0.0,
+   "review_rate": 0.0372,
+   "cost_usd": 0.01055,
+   "llm_calls": 74
+  },
+  "test_run": "22711337153e",
+  "regression_cases": "10/10"
  }
 ]

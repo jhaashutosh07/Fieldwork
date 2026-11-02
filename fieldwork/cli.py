@@ -5,6 +5,7 @@
   fieldwork promote <failure_id>            freeze a failure as a regression case
   fieldwork gate [--update-baseline]        CI gate: held-out metrics + every regression case
   fieldwork history [--llm replay]          evaluate every version on dev and test -> evals/history.json
+  fieldwork insights [--llm replay]         uncertainty, significance, automation curve, cost, stress test
   fieldwork serve [--port 8000] [--bootstrap]   API + dashboard
 """
 from __future__ import annotations
@@ -44,6 +45,8 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--update-baseline", action="store_true")
     h = sub.add_parser("history")
     h.add_argument("--llm", default=None)
+    ins = sub.add_parser("insights")
+    ins.add_argument("--llm", default="replay")
     s = sub.add_parser("serve")
     s.add_argument("--port", type=int, default=8000)
     s.add_argument("--host", default="127.0.0.1")
@@ -80,6 +83,17 @@ def main(argv: list[str] | None = None) -> int:
             m = e["test"]
             print(f"{e['version']}  verified {m['verified_accuracy']:.1%}  silent errors {m['silent_error_rate']:.1%}  "
                   f"review {m['review_rate']:.1%}  cases {e['regression_cases']}  ({e['llm_mode']})  {e['summary']}")
+    elif a.cmd == "insights":
+        from . import insights
+        out = insights.build(a.llm)
+        for e in out["versions"]:
+            lo, hi = e["ci"]["verified_accuracy"]
+            d = e.get("vs_prev", {}).get("verified_accuracy")
+            print(f"{e['version']}  verified {e['verified_accuracy']:.1%} [{lo:.1%}, {hi:.1%}]"
+                  + (f"  vs prev {d['delta']:+.1%} (p={d['p']})" if d else ""))
+        for x in out["experiments"]:
+            print(f"{x['version']}  {x['decision']}: {x['reason']}")
+        print(f"written {insights.INSIGHTS} in {out['build_seconds']}s")
     elif a.cmd == "serve":
         import uvicorn
         if a.bootstrap and store.count_runs() == 0:

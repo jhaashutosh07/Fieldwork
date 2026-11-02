@@ -11,7 +11,7 @@ import json
 from dataclasses import asdict, dataclass, field
 
 from .llm import LLM
-from .tools import Tools, host, normalize
+from .tools import Tools, host, name_score, normalize
 from .trace import Trace
 
 ICP_TEXT = ("B2B technology vendors - companies that sell software, cloud, IT services, cybersecurity, data/analytics, "
@@ -32,6 +32,8 @@ class Policy:
     icp: str = "keywords_v1"          # "keywords_v1" | "keywords_v2" | "llm"
     llm_adjudicate: bool = False      # ask the model to pick a candidate, or name the current company, before abstaining
     country_rule: str = "field"       # "field": the account's country field; "listed": any country the profile lists
+    llm_resolve: str = "pick"         # "pick" among search candidates | "propose" from knowledge, verified |
+                                      # "pick_then_propose": propose only when the pick finds nothing
 
 
 VERSIONS = {
@@ -46,8 +48,14 @@ VERSIONS = {
     "v5": Policy("v5", "LLM resolves former names and ambiguous matches (registry-verified) and judges ICP industry",
                  resolve_by_domain=True, dedupe="entity", fields="freshest", guardrail=True, icp="llm",
                  llm_adjudicate=True, country_rule="listed"),
+    "v6": Policy("v6", "LLM names the company from knowledge with a stated basis; ticker and name must agree in the registry",
+                 resolve_by_domain=True, dedupe="entity", fields="freshest", guardrail=True, icp="llm",
+                 llm_adjudicate=True, country_rule="listed", llm_resolve="propose"),
+    "v7": Policy("v7", "Hybrid: v5's candidate pick first; v6's verified knowledge proposal only when the pick finds nothing",
+                 resolve_by_domain=True, dedupe="entity", fields="freshest", guardrail=True, icp="llm",
+                 llm_adjudicate=True, country_rule="listed", llm_resolve="pick_then_propose"),
 }
-LATEST = "v5"
+LATEST = "v5"   # shipped version; later entries are experiments that must beat it on held-out test to ship
 
 # v1 ICP heuristic: substring match on industry labels.
 KEYWORDS_V1 = ("software", "technology", "computer", "data", "semiconductor", "cloud", "internet", "network", "digital")
@@ -58,6 +66,10 @@ KEYWORDS_V2_IN = ("software", "computer", "semiconductor", "cloud", "information
                   "customer relationship", "video conference", "development and operations", "website builder")
 KEYWORDS_V2_OUT = ("medical", "financial", "telecommunications", "mobile phone", "consumer", "media", "e-commerce",
                    "game", "social", "streaming")
+
+
+def _acronym(name: str) -> str:
+    return "".join(w[0] for w in normalize(name).split())
 
 
 @dataclass
@@ -82,6 +94,8 @@ class Account:
     confidence: float = 0.0
     needs_review: bool = False
     review_reason: str = ""
+    guess_company_id: str | None = None   # best candidate behind an abstention (for risk-coverage analysis only)
+    guess_score: float = 0.0
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -96,6 +110,7 @@ class Agent:
     # ---------- entity resolution ----------
     def resolve(self, row: dict) -> tuple[str | None, float, str]:
         p, t = self.p, self.tools
+        self._guess = (None, 0.0)
         if p.resolve_by_domain and row.get("website"):
             hits = t.domain_lookup(row["website"])
             ids = {h["id"] for h in hits}
@@ -106,6 +121,7 @@ class Agent:
         if not hits:
             return None, 0.0, "no registry match"
         top = hits[0]
+        self._guess = (top["id"], top["score"])
         margin = top["score"] - (hits[1]["score"] if len(hits) > 1 else 0.0)
         if not p.guardrail:
             return (top["id"], top["score"], "name") if top["score"] >= 0.5 else (None, 0.0, "weak name match")
@@ -113,7 +129,12 @@ class Agent:
         if (top["score"] >= 0.95 and margin >= 0.05) or (top["score"] >= 0.8 and margin >= 0.15 and corroborated):
             return top["id"], 0.9, "name"
         if p.llm_adjudicate and self.llm.enabled:
-            pick, via = self._adjudicate(row, hits)
+            if p.llm_resolve == "propose":
+                pick, via = self._propose(row)
+            else:
+                pick, via = self._adjudicate(row, hits)
+                if not pick and p.llm_resolve == "pick_then_propose":
+                    pick, via = self._propose(row)
             if pick:
                 return pick, 0.85, via
         return None, top["score"], f"ambiguous name match (top {top['score']:.2f}, margin {margin:.2f})"
@@ -138,6 +159,38 @@ class Agent:
             if found and found[0]["score"] >= 0.9 and (len(found) == 1 or found[0]["score"] - found[1]["score"] >= 0.05):
                 self.trace.decision("llm_rewrite_verified", suggested=q, company_id=found[0]["id"])
                 return found[0]["id"], "llm_rewrite+registry"
+        return None, ""
+
+    def _propose(self, row: dict) -> tuple[str | None, str]:
+        """v6: the model names the company from its own knowledge (no candidate list to anchor on) and states how it
+        knows. Accepted only for a factual basis, and only when its ticker and its name identify the same registry
+        entry: two identifiers that must agree. "subsidiary" is not accepted: on dev it mapped trivago to Expedia and
+        AMI Semiconductor to Amkor, and a separately listed subsidiary is a different account anyway."""
+        system = ("You identify which publicly listed company a sales-CRM account refers to. The CRM name may be a "
+                  "former name, an abbreviation, a nickname or a subsidiary. Use what you know about company renames, "
+                  "abbreviations and acquisitions. Answer JSON {\"company\": <current listed company name or null>, "
+                  "\"ticker\": <its primary US ticker or null>, \"basis\": one of \"former_name\", "
+                  "\"abbreviation\", \"subsidiary\", \"same_name\", \"guess\", \"confidence\": <0..1>}. Use "
+                  "\"guess\" if you are inferring from the words in the name (e.g. an industry) rather than knowing.")
+        user = json.dumps({k: row[k] for k in ("account_name", "website", "hq_country")})
+        ans = self.llm.json(system, user, self.trace, "propose_company") or {}
+        basis, conf = ans.get("basis"), ans.get("confidence") or 0
+        ticker, company = ans.get("ticker"), ans.get("company")
+        if (basis not in ("former_name", "abbreviation", "same_name") or not isinstance(conf, (int, float))
+                or conf < 0.8 or not isinstance(ticker, str) or not isinstance(company, str)):
+            self.trace.decision("llm_proposal_rejected", reason="no factual basis or low confidence", answer=ans)
+            return None, ""
+        by_ticker = [h for h in self.tools.registry_search(ticker) if ticker.upper() in h["tickers"]]
+        by_name = self.tools.registry_search(company)
+        name_agrees = bool(by_ticker) and (
+            (bool(by_name) and by_name[0]["id"] == by_ticker[0]["id"] and by_name[0]["score"] >= 0.85)
+            or name_score(company, by_ticker[0]["name"]) >= 0.85
+            or _acronym(company) == normalize(by_ticker[0]["name"]).replace(" ", ""))   # "Advanced Micro Devices" = AMD
+        if len(by_ticker) == 1 and name_agrees:
+            self.trace.decision("llm_proposal_verified", company=company, ticker=ticker, company_id=by_ticker[0]["id"])
+            return by_ticker[0]["id"], f"llm_{basis}+registry"
+        self.trace.decision("llm_proposal_rejected", reason="ticker and name disagree in registry", answer=ans,
+                            ticker_hits=[h["id"] for h in by_ticker], name_top=by_name[0]["id"] if by_name else None)
         return None, ""
 
     # ---------- field reconciliation ----------
@@ -213,12 +266,14 @@ class Agent:
                     key = "name:" + normalize(row["account_name"])
                     if key not in groups:
                         cid, conf, via = self.resolve(row)
-                        groups[key] = Account(key, [], cid, via, conf)
+                        groups[key] = Account(key, [], cid, via, conf, guess_company_id=self._guess[0],
+                                              guess_score=self._guess[1])
                 else:
                     cid, conf, via = self.resolve(row)
                     key = f"co:{cid}" if cid else f"review:{row['crm_id']}"
                     if key not in groups:
-                        groups[key] = Account(key, [], cid, via, conf)
+                        groups[key] = Account(key, [], cid, via, conf, guess_company_id=self._guess[0],
+                                              guess_score=self._guess[1])
                     else:
                         groups[key].entity_confidence = max(groups[key].entity_confidence, conf)
                 self.trace.decision("resolve", company_id=groups[key].company_id, via=groups[key].resolved_via,

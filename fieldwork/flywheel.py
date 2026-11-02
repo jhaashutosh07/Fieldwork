@@ -23,11 +23,12 @@ HISTORY = ROOT / "evals" / "history.json"
 GATE_TOLERANCE = {"verified_accuracy": -0.01, "silent_error_rate": 0.005}
 
 
-def run(version: str = LATEST, split: str = "test", llm_mode: str | None = None, persist: bool = True) -> dict:
+def run(version: str = LATEST, split: str = "test", llm_mode: str | None = None, persist: bool = True,
+        rows: list[dict] | None = None) -> dict:
     policy = VERSIONS[version]
     llm = LLM(llm_mode)
     trace = Trace()
-    rows = rows_for(split)
+    rows = rows if rows is not None else rows_for(split)
     t0 = time.perf_counter()
     accts = Agent(policy, Tools(world(), trace), llm, trace).run(rows)
     duration = (time.perf_counter() - t0) * 1000
@@ -40,7 +41,7 @@ def run(version: str = LATEST, split: str = "test", llm_mode: str | None = None,
               "tool_calls": trace.tool_calls, "metrics": metrics}
     if persist:
         store.save_run(record, trace, accts, fails)
-    return {**record, "failures": fails, "accounts": accts}
+    return {**record, "failures": fails, "accounts": accts, "trace": trace, "rows": rows}
 
 
 def promote(failure_id: str) -> str:
@@ -121,7 +122,8 @@ def history(llm_mode: str | None = None) -> list[dict]:
     """Evaluate every released version on both splits and write evals/history.json (the README table)."""
     out = []
     for v, policy in VERSIONS.items():
-        entry = {"version": v, "summary": policy.summary, "uses_llm": policy.icp == "llm" or policy.llm_adjudicate}
+        entry = {"version": v, "summary": policy.summary, "uses_llm": policy.icp == "llm" or policy.llm_adjudicate,
+                 "status": "experiment" if list(VERSIONS).index(v) > list(VERSIONS).index(LATEST) else "released"}
         for split in ("dev", "test"):
             r = run(v, split, llm_mode if entry["uses_llm"] else "none")
             entry[split] = r["metrics"]
