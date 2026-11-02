@@ -8,14 +8,14 @@ from __future__ import annotations
 
 import json
 import time
-from pathlib import Path
 
 import requests
+from ..paths import ROOT
 
 ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {"User-Agent": "fieldwork/0.1 (open-source agent-eval portfolio project)"}
 EXCHANGES = "wd:Q13677 wd:Q82059"  # NYSE, NASDAQ
-OUT = Path(__file__).resolve().parents[2] / "data" / "snapshot"
+OUT = ROOT / "data" / "snapshot"
 
 
 def sparql(query: str) -> list[dict]:

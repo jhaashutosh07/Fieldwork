@@ -12,10 +12,9 @@ import csv
 import json
 import random
 import re
-from pathlib import Path
 from urllib.parse import urlparse
+from ..paths import ROOT
 
-ROOT = Path(__file__).resolve().parents[2]
 SNAP = ROOT / "data" / "snapshot"
 OUT = ROOT / "data" / "dataset"
 SEED = 7

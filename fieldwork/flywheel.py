@@ -8,7 +8,6 @@ from __future__ import annotations
 import json
 import time
 import uuid
-from pathlib import Path
 
 from . import store
 from .agent import LATEST, VERSIONS, Agent
@@ -16,8 +15,8 @@ from .evals import FIELDS, _field_ok, gold, rows_for, score
 from .llm import LLM
 from .tools import Tools, world
 from .trace import Trace
+from .paths import ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "evals" / "regressions"
 BASELINE = ROOT / "evals" / "baseline.json"
 HISTORY = ROOT / "evals" / "history.json"

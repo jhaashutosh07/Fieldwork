@@ -2,7 +2,7 @@
 
 FIELDWORK_LLM selects the mode:
   none    - no model; LLM-backed steps fall back to heuristics (default)
-  groq    - live calls to Groq (GROQ_API_KEY), recorded to data/llm_cache.jsonl
+  groq    - live calls to Groq (GROQ_API_KEY; FIELDWORK_MODEL overrides the model), recorded to data/llm_cache.jsonl
   openai  - live calls to OpenAI (OPENAI_API_KEY), recorded likewise
   replay  - answer only from the recorded cache; CI uses this, so evals are deterministic and free
 """
@@ -13,12 +13,12 @@ import json
 import os
 import threading
 import time
-from pathlib import Path
+from .paths import ROOT
 
-CACHE = Path(__file__).resolve().parents[1] / "data" / "llm_cache.jsonl"
+CACHE = ROOT / "data" / "llm_cache.jsonl"
 PROVIDERS = {
-    "groq": {"base_url": "https://api.groq.com/openai/v1", "key": "GROQ_API_KEY", "model": "llama-3.3-70b-versatile",
-             "usd_per_mtok": (0.59, 0.79)},
+    "groq": {"base_url": "https://api.groq.com/openai/v1", "key": "GROQ_API_KEY", "model": "openai/gpt-oss-120b",
+             "usd_per_mtok": (0.15, 0.75)},
     "openai": {"base_url": None, "key": "OPENAI_API_KEY", "model": "gpt-4o-mini", "usd_per_mtok": (0.15, 0.60)},
 }
 
@@ -38,7 +38,7 @@ class LLM:
             from openai import OpenAI
             cfg = PROVIDERS[self.mode]
             self._client = OpenAI(api_key=os.environ[cfg["key"]], base_url=cfg["base_url"])
-            self.model = cfg["model"]
+            self.model = os.environ.get("FIELDWORK_MODEL", cfg["model"])
         else:
             recorded = {r["model"] for r in self._cache.values()}
             self.model = next(iter(recorded)) if len(recorded) == 1 else "replay"

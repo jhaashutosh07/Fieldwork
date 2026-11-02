@@ -1,0 +1,15 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: fieldwork
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    autoDeployTrigger: checksPass   # deploy main only after the GitHub Actions checks pass
+    envVars:
+      - key: FIELDWORK_PUBLIC
+        value: "1"
+      - key: FIELDWORK_LLM
+        value: replay

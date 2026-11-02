@@ -5,7 +5,7 @@
   fieldwork promote <failure_id>            freeze a failure as a regression case
   fieldwork gate [--update-baseline]        CI gate: held-out metrics + every regression case
   fieldwork history [--llm replay]          evaluate every version on dev and test -> evals/history.json
-  fieldwork serve [--port 8000]             API + dashboard
+  fieldwork serve [--port 8000] [--bootstrap]   API + dashboard
 """
 from __future__ import annotations
 
@@ -47,6 +47,7 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("serve")
     s.add_argument("--port", type=int, default=8000)
     s.add_argument("--host", default="127.0.0.1")
+    s.add_argument("--bootstrap", action="store_true", help="evaluate every version first if the DB is empty")
     a = ap.parse_args(argv)
 
     if a.cmd == "run":
@@ -81,6 +82,9 @@ def main(argv: list[str] | None = None) -> int:
                   f"review {m['review_rate']:.1%}  cases {e['regression_cases']}  ({e['llm_mode']})  {e['summary']}")
     elif a.cmd == "serve":
         import uvicorn
+        if a.bootstrap and store.count_runs() == 0:
+            print("bootstrapping: evaluating every version (recorded LLM answers)...")
+            flywheel.history("replay")
         uvicorn.run("fieldwork.api:app", host=a.host, port=a.port)
     return 0
 

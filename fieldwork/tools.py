@@ -13,8 +13,9 @@ import unicodedata
 from functools import lru_cache
 from pathlib import Path
 from urllib.parse import urlparse
+from .paths import ROOT
 
-SNAP = Path(__file__).resolve().parents[1] / "data" / "snapshot"
+SNAP = ROOT / "data" / "snapshot"
 
 _SUFFIX = re.compile(r"\b(inc|incorporated|corp|corporation|co|company|ltd|limited|plc|llc|lp|nv|bv|sa|ag|se|gmbh|"
                      r"ab|asa|spa|oyj|kk|holdings?|group|the)\b")

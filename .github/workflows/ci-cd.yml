@@ -1,0 +1,56 @@
+name: ci-cd
+
+# Every push and PR: unit tests -> eval gate -> container build + smoke test.
+# Render is set to deploy main only after these checks pass (render.yaml: autoDeployTrigger: checksPass),
+# so a change that regresses the agent never reaches the live site.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: tests + eval gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: Unit tests
+        run: pytest -q
+      - name: Eval gate (held-out metrics + every regression case, recorded LLM answers)
+        run: fieldwork gate --llm replay | tee gate.txt
+      - name: Gate summary
+        if: always()
+        run: |
+          echo '### Eval gate' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat gate.txt >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+  container:
+    name: docker build + smoke test
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t fieldwork:ci .
+      - name: Boot and probe
+        run: |
+          docker run -d --name fw -p 8000:8000 fieldwork:ci
+          for i in $(seq 1 60); do curl -fs http://127.0.0.1:8000/healthz && break; sleep 2; done
+          curl -fs http://127.0.0.1:8000/api/history | python3 -c "import json,sys; h=json.load(sys.stdin); assert len(h) >= 4, h; print('history ok:', [e['version'] for e in h])"
+          curl -fs -X POST http://127.0.0.1:8000/api/runs -H 'content-type: application/json' -d '{"version":"v4","split":"dev","llm":"none"}' | python3 -c "import json,sys; r=json.load(sys.stdin); assert r['metrics']['verified_accuracy'] > 0.8, r; print('run ok:', r['metrics']['verified_accuracy'])"
+          curl -fs http://127.0.0.1:8000/ | grep -q "<title>Fieldwork</title>"
+      - name: Container logs
+        if: failure()
+        run: docker logs fw

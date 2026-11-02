@@ -18,4 +18,4 @@ services:
       FIELDWORK_DB: postgresql+psycopg://fieldwork:fieldwork@db:5432/fieldwork
     ports:
       - "8000:8000"
-    command: sh -c "fieldwork history --llm replay && fieldwork serve --host 0.0.0.0 --port 8000"
+

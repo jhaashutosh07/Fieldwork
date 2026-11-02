@@ -2,9 +2,12 @@
 from __future__ import annotations
 
 import json
+import os
+import threading
+import time
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -14,6 +17,9 @@ from .agent import LATEST, VERSIONS
 from .evals import clusters
 
 STATIC = Path(__file__).parent / "static"
+PUBLIC = os.environ.get("FIELDWORK_PUBLIC") == "1"   # hosted demo: one run at a time, bounded storage
+_run_lock = threading.Lock()
+_last_run: dict[str, float] = {}
 app = FastAPI(title="Fieldwork", version="0.5.0",
               description="Account-research agent with a trace-to-eval flywheel.")
 
@@ -22,6 +28,11 @@ class RunRequest(BaseModel):
     version: str = LATEST
     split: str = "test"
     llm: str = "replay"
+
+
+@app.get("/healthz")
+def healthz():
+    return {"ok": True, "runs": store.count_runs()}
 
 
 @app.get("/api/versions")
@@ -40,12 +51,25 @@ def runs():
 
 
 @app.post("/api/runs")
-def start_run(req: RunRequest):
+def start_run(req: RunRequest, request: Request):
     if req.version not in VERSIONS or req.split not in ("dev", "test", "all"):
         raise HTTPException(400, "unknown version or split")
     if req.llm not in ("none", "replay"):
         raise HTTPException(400, "the API only runs offline (none) or recorded (replay) LLM modes")
-    res = flywheel.run(req.version, req.split, req.llm)
+    if PUBLIC:
+        ip = request.client.host if request.client else "?"
+        if time.time() - _last_run.get(ip, 0) < 5:
+            raise HTTPException(429, "one run every 5 seconds, please")
+        _last_run[ip] = time.time()
+    if not _run_lock.acquire(timeout=30):
+        raise HTTPException(429, "busy, try again")
+    try:
+        res = flywheel.run(req.version, req.split, req.llm)
+        if PUBLIC:
+            protect = {e[k] for e in history() for k in ("dev_run", "test_run")}
+            store.prune_runs(keep=100, protect=protect)
+    finally:
+        _run_lock.release()
     return {"id": res["id"], "metrics": res["metrics"]}
 
 

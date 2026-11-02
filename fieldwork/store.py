@@ -3,12 +3,11 @@ from __future__ import annotations
 
 import json
 import os
-from pathlib import Path
 
-from sqlalchemy import (Column, Float, Integer, MetaData, String, Table, Text, create_engine, insert, select,
-                        update)
+from sqlalchemy import (Column, Float, Integer, MetaData, String, Table, Text, create_engine, delete, func, insert,
+                        select, update)
+from .paths import ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
 meta = MetaData()
 
 runs = Table("runs", meta,
@@ -107,3 +106,18 @@ def get_trace(run_id: str, account: str | None = None) -> list[dict]:
     with engine().connect() as c:
         rows = c.execute(q.order_by(events.c.seq)).all()
     return [json.loads(r[0]) for r in rows]
+
+
+def count_runs() -> int:
+    with engine().connect() as c:
+        return c.execute(select(func.count()).select_from(runs)).scalar_one()
+
+
+def prune_runs(keep: int, protect: set[str]) -> None:
+    """Delete the oldest runs beyond `keep`, never the ones in `protect` (the history runs the dashboard links to)."""
+    with engine().begin() as c:
+        ids = [r[0] for r in c.execute(select(runs.c.id).order_by(runs.c.started_at.desc()))]
+        doomed = [i for i in ids[keep:] if i not in protect]
+        for t in (events, accounts, failures):
+            c.execute(delete(t).where(t.c.run_id.in_(doomed)))
+        c.execute(delete(runs).where(runs.c.id.in_(doomed)))

@@ -12,12 +12,12 @@ import hashlib
 import json
 from collections import Counter, defaultdict
 from functools import lru_cache
-from pathlib import Path
 
 from .agent import Account
 from .tools import host, name_score, world
+from .paths import ROOT
 
-DATA = Path(__file__).resolve().parents[1] / "data" / "dataset"
+DATA = ROOT / "data" / "dataset"
 FIELDS = ("domain", "employees", "country")
 
 

@@ -1,5 +1,8 @@
 # Fieldwork
 
+[![ci-cd](https://github.com/jhaashutosh07/fieldwork/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/jhaashutosh07/fieldwork/actions/workflows/ci-cd.yml)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jhaashutosh07/fieldwork)
+
 **An account-research agent that cleans a messy CRM export into a verified, ICP-ranked account list, plus the eval
 flywheel that took it from 55.7% to 89.2% verified accuracy and from 37.4% to 0% silent errors.**
 
@@ -115,6 +118,24 @@ FIELDWORK_LLM=groq fieldwork history       # live calls, recorded to data/llm_ca
 fieldwork gate --llm replay --update-baseline
 ```
 
+## CI/CD and hosting
+
+```mermaid
+flowchart LR
+    Push[push / PR] --> T[pytest]
+    T --> G[eval gate<br/>held-out metrics + regression cases]
+    G --> D[docker build<br/>boot + API smoke test]
+    D -->|all checks green on main| R[Render deploys<br/>autoDeployTrigger: checksPass]
+```
+
+- `.github/workflows/ci-cd.yml` runs the tests, the eval gate (with recorded LLM answers, so it is free and
+  deterministic) and a container smoke test on every push and pull request. The gate result is written to the job
+  summary.
+- `render.yaml` deploys the Docker image to Render, but **only after those checks pass on `main`**. A change that
+  makes the agent worse fails the gate and never reaches the live site.
+- The hosted demo runs in public mode: runs use recorded LLM answers only (no live API spend), one run every 5 seconds
+  per visitor, and storage is capped. On boot it evaluates every version so the dashboard is populated.
+
 With Docker (Postgres trace store):
 
 ```bash
@@ -145,7 +166,8 @@ fieldwork/
   api.py        FastAPI service; static/index.html is the dashboard
   data/         snapshot builder and dataset generator
 evals/          regressions/*.json, baseline.json, history.json
-.github/workflows/eval-gate.yml
+.github/workflows/ci-cd.yml   tests -> eval gate -> docker smoke test
+render.yaml                  Render blueprint (deploys only when checks pass)
 ```
 
 ## Limits and next steps
