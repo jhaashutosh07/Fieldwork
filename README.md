@@ -4,7 +4,7 @@
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jhaashutosh07/fieldwork)
 
 **An account-research agent that cleans a messy CRM export into a verified, ICP-ranked account list, plus the eval
-flywheel that took it from 55.7% to 89.2% verified accuracy and from 37.4% to 0% silent errors.**
+flywheel that took it from 55.7% to 95.6% verified accuracy and from 37.4% to 0% silent errors.**
 
 Most agents demo well and fail quietly in production. Fieldwork is built around the loop that closes that gap:
 every run is traced, every miss is scored against real ground truth and clustered by cause, and any failure can be
@@ -19,8 +19,11 @@ promoted into a regression test that CI enforces before the next version ships.
 | v1 | Match on name, trust CRM values, keyword ICP | 55.7% | 37.4% | 5.4% | 0/9 |
 | v2 | Resolve by website first; merge rows on the resolved company | 60.1% | 37.1% | 2.5% | 0/9 |
 | v3 | Reconcile fields by freshness, with provenance | 89.2% | 6.9% | 2.5% | 4/9 |
-| v4 | Guardrail: weak name-only matches go to human review; ICP rules from triage | **89.2%** | **0.0%** | 8.7% | 9/9 |
-| v5 | LLM resolves former names (registry-verified) and judges unknown industries | *pending recording* | | | |
+| v4 | Guardrail: weak name-only matches go to human review; ICP rules from triage | 89.2% | 0.0% | 8.7% | 9/9 |
+| v5 | LLM resolves former names (registry-verified) and judges unknown industries | **95.6%** | **0.0%** | **3.7%** | 9/9 |
+
+v5 uses `openai/gpt-oss-120b` on Groq: 169 LLM calls across both splits, about **$0.02** in total, because rules run
+first and the model is only asked about the cases rules can't settle.
 
 - **Verified accuracy** counts a company only if exactly one asserted account covers all its CRM rows *and* the entity,
   website, headcount, country and ICP verdict are all correct. Plausible-looking output earns nothing.

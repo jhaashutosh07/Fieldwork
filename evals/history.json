@@ -22,7 +22,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "1b467bf8e542",
+  "dev_run": "77563e611d31",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -45,7 +45,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "6f3fc910dcfe",
+  "test_run": "17b3dd38892d",
   "regression_cases": "0/9"
  },
  {
@@ -71,7 +71,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "ff82b1de05ad",
+  "dev_run": "8a0bf5f65e06",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -94,7 +94,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "a24ff88de878",
+  "test_run": "1d3148ea4ac0",
   "regression_cases": "0/9"
  },
  {
@@ -120,7 +120,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "13ae7bb4df75",
+  "dev_run": "15fa9e95945d",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -143,7 +143,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "2ed184b825c3",
+  "test_run": "4f01a0f0291a",
   "regression_cases": "4/9"
  },
  {
@@ -169,7 +169,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "dev_run": "4e9049a33a03",
+  "dev_run": "6b5f0a7c2431",
   "llm_mode": "none",
   "model": null,
   "llm_recorded": false,
@@ -192,7 +192,7 @@
    "cost_usd": 0.0,
    "llm_calls": 0
   },
-  "test_run": "22b2adf2bbe5",
+  "test_run": "b461a8cdd325",
   "regression_cases": "9/9"
  },
  {
@@ -202,33 +202,33 @@
   "dev": {
    "companies": 251,
    "rows": 360,
-   "accounts": 260,
-   "verified_accuracy": 0.9203,
-   "entity_accuracy": 0.9417,
-   "dedup_f1": 0.9535,
+   "accounts": 257,
+   "verified_accuracy": 0.9442,
+   "entity_accuracy": 0.9611,
+   "dedup_f1": 0.9655,
    "domain_accuracy": 1.0,
    "employees_accuracy": 1.0,
    "country_accuracy": 1.0,
-   "icp_accuracy": 0.9958,
+   "icp_accuracy": 0.9959,
    "icp_precision": 1.0,
-   "icp_recall": 0.8857,
+   "icp_recall": 0.9143,
    "precision_at_25": 1.0,
-   "silent_error_rate": 0.0042,
-   "review_rate": 0.0583,
-   "cost_usd": 0.0,
-   "llm_calls": 0
+   "silent_error_rate": 0.0082,
+   "review_rate": 0.0361,
+   "cost_usd": 0.01279,
+   "llm_calls": 98
   },
-  "dev_run": "05f05fd01366",
+  "dev_run": "674685ba0a53",
   "llm_mode": "replay",
-  "model": "replay",
-  "llm_recorded": false,
+  "model": "openai/gpt-oss-120b",
+  "llm_recorded": true,
   "test": {
    "companies": 158,
    "rows": 242,
-   "accounts": 169,
-   "verified_accuracy": 0.8924,
-   "entity_accuracy": 0.9132,
-   "dedup_f1": 0.913,
+   "accounts": 162,
+   "verified_accuracy": 0.9557,
+   "entity_accuracy": 0.9628,
+   "dedup_f1": 0.9637,
    "domain_accuracy": 1.0,
    "employees_accuracy": 1.0,
    "country_accuracy": 1.0,
@@ -237,11 +237,11 @@
    "icp_recall": 1.0,
    "precision_at_25": 1.0,
    "silent_error_rate": 0.0,
-   "review_rate": 0.0868,
-   "cost_usd": 0.0,
-   "llm_calls": 0
+   "review_rate": 0.0372,
+   "cost_usd": 0.00947,
+   "llm_calls": 71
   },
-  "test_run": "6300fed56dc2",
+  "test_run": "f6dfebc5dee0",
   "regression_cases": "9/9"
  }
 ]

@@ -10,7 +10,7 @@ fix was tuned on. Each fixed failure was promoted into `evals/regressions/` so i
 | v2 | 60.1% | 37.1% | 2.5% | 0/9 |
 | v3 | 89.2% | 6.9% | 2.5% | 4/9 |
 | v4 | 89.2% | **0.0%** | 8.7% | 9/9 |
-| v5 | pending LLM recording | | | |
+| v5 | **95.6%** | **0.0%** | 3.7% | 9/9 |
 
 ## v1: baseline
 Match each CRM row to the registry on name alone, merge rows with identical normalized names, trust the values the
@@ -46,10 +46,16 @@ Promoted: `wrong_entity-Q5133094` (Cleveland-Cliffs), `wrong_entity-Q1645081` (N
 `icp_false_positive-Q2357515` (Stryker), `icp_false_negative-Q17460900` (Zoom), `icp_false_negative-Q691592`
 (GlobalFoundries).
 
-## v5: LLM where rules run out (pending recording)
+## v5: LLM where rules run out
 v4's review queue is now the biggest gap, and most of it is **former or alternate names with no website**
 ("Applied Molecular Genetics" = Amgen, "UberCab" = Uber, "Continental Oil Company" = ConocoPhillips). No string
 matcher can resolve these. v5 asks an LLM to pick a candidate or name the current company, and then **verifies the
 suggestion against the registry**: the model never asserts an entity on its own. Industry labels that no rule covers
-also go to the model. Run `FIELDWORK_LLM=groq fieldwork history` to record its answers; until then v5 falls back to
-v4's rules and the dashboard marks it as not recorded.
+also go to the model.
+Model: `openai/gpt-oss-120b` on Groq, temperature 0, answers recorded to `data/llm_cache.jsonl` and replayed in CI.
+Test: verified accuracy 89.2% → **95.6%**, review rate 8.7% → **3.7%**, silent errors still **0.0%**; 71 LLM calls,
+about $0.01.
+Dev surfaced one new silent error worth watching: `TELCO` (Tata Motors' old nickname) was resolved to Telefónica,
+because the model's suggestion matched a real listed company. Registry verification checks that the suggestion
+exists, not that it is the right company, so the next step is to require a second signal (country or ticker)
+before accepting a model-suggested name.
