@@ -10,18 +10,38 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from . import flywheel, store
-from .agent import LATEST, VERSIONS
+from .agent import LATEST, VERSIONS, Agent
 from .evals import clusters
+from .llm import LLM
+from .tools import Tools, world
+from .trace import Trace
 
 STATIC = Path(__file__).parent / "static"
 PUBLIC = os.environ.get("FIELDWORK_PUBLIC") == "1"   # hosted demo: one run at a time, bounded storage
 _run_lock = threading.Lock()
 _last_run: dict[str, float] = {}
+# Try-it: live LLM calls only when the operator opts in and provides a key; capped per day; never recorded.
+TRY_LIVE = os.environ.get("FIELDWORK_TRY_LIVE") == "1" and bool(os.environ.get("GROQ_API_KEY"))
+TRY_DAILY_CAP = int(os.environ.get("FIELDWORK_TRY_CAP", "300"))
+_try = {"day": "", "llm_calls": 0, "last": {}, "llm": {}}
 app = FastAPI(title="Fieldwork", version="0.5.0",
               description="Account-research agent with a trace-to-eval flywheel.")
+
+
+class TryRequest(BaseModel):
+    account_name: str = Field(min_length=1, max_length=120)
+    website: str = Field("", max_length=200)
+    hq_country: str = Field("", max_length=60)
+
+
+def _try_llm(live: bool) -> LLM:
+    mode = "groq" if live else "replay"
+    if mode not in _try["llm"]:
+        _try["llm"][mode] = LLM(mode, record=False, retries=2)
+    return _try["llm"][mode]
 
 
 class RunRequest(BaseModel):
@@ -33,6 +53,35 @@ class RunRequest(BaseModel):
 @app.get("/healthz")
 def healthz():
     return {"ok": True, "runs": store.count_runs()}
+
+
+@app.post("/api/try")
+def try_it(req: TryRequest, request: Request):
+    """Run the shipped agent on one CRM row typed by the visitor and return the account plus every step it took."""
+    ip = request.client.host if request.client else "?"
+    if time.time() - _try["last"].get(ip, 0) < 2:
+        raise HTTPException(429, "one try every 2 seconds, please")
+    _try["last"][ip] = time.time()
+    day = time.strftime("%Y-%m-%d")
+    if _try["day"] != day:
+        _try["day"], _try["llm_calls"] = day, 0
+    live = TRY_LIVE and _try["llm_calls"] < TRY_DAILY_CAP
+    row = {"crm_id": "TRY-1", "account_name": req.account_name.strip(), "website": req.website.strip(),
+           "hq_country": req.hq_country.strip(), "employee_count": "", "last_updated": ""}
+    note = ""
+    for attempt_live in ([True, False] if live else [False]):
+        trace = Trace()
+        try:
+            accts = Agent(VERSIONS[LATEST], Tools(world(), trace), _try_llm(attempt_live), trace).run([row])
+            break
+        except Exception:   # live model unavailable or rate limited: fall back to recorded answers
+            note = "live model unavailable; used recorded answers only"
+    if attempt_live:
+        _try["llm_calls"] += trace.llm_calls
+    a = accts[0]
+    return {"version": LATEST, "llm": "live" if attempt_live else "recorded only", "note": note,
+            "account": a.to_dict(), "steps": trace.events, "llm_calls": trace.llm_calls,
+            "tool_calls": trace.tool_calls}
 
 
 @app.get("/api/versions")

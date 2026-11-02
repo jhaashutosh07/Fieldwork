@@ -112,3 +112,20 @@ def test_stress_strip_rate_is_stable():
     assert all(r["website"] == "" for r in strip_websites(rows, 1.0))
     with_site = sum(1 for r in rows if r["website"])
     assert 0.3 * with_site < sum(1 for r in half if r["website"]) < 0.7 * with_site
+
+
+def test_try_endpoint_resolves_an_old_website_and_refuses_gibberish():
+    from fastapi.testclient import TestClient
+    from fieldwork.api import _try, app
+
+    c = TestClient(app)
+    r = c.post("/api/try", json={"account_name": "adobe", "website": "business.adobe.com", "hq_country": "United States"})
+    assert r.status_code == 200
+    acct = r.json()["account"]
+    assert acct["fields"]["domain"]["value"] == "adobe.com" and not acct["needs_review"]
+    assert r.json()["steps"]
+    _try["last"].clear()
+    r = c.post("/api/try", json={"account_name": "qzxwvplmk"})
+    assert r.json()["account"]["needs_review"]
+    _try["last"].clear()
+    assert c.post("/api/try", json={"account_name": ""}).status_code == 422

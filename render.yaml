@@ -13,3 +13,9 @@ services:
         value: "1"
       - key: FIELDWORK_LLM
         value: replay
+      # Optional: live LLM for the "Try the agent" box (capped per day, never written to the eval cache).
+      # Leave GROQ_API_KEY empty to serve recorded answers only.
+      - key: FIELDWORK_TRY_LIVE
+        value: "1"
+      - key: GROQ_API_KEY
+        sync: false

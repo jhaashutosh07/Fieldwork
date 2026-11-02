@@ -51,6 +51,7 @@ jobs:
           curl -fs http://127.0.0.1:8000/api/history | python3 -c "import json,sys; h=json.load(sys.stdin); assert len(h) >= 4, h; print('history ok:', [e['version'] for e in h])"
           curl -fs -X POST http://127.0.0.1:8000/api/runs -H 'content-type: application/json' -d '{"version":"v4","split":"dev","llm":"none"}' | python3 -c "import json,sys; r=json.load(sys.stdin); assert r['metrics']['verified_accuracy'] > 0.8, r; print('run ok:', r['metrics']['verified_accuracy'])"
           curl -fs http://127.0.0.1:8000/ | grep -q "<title>Fieldwork</title>"
+          curl -fs -X POST http://127.0.0.1:8000/api/try -H 'content-type: application/json' -d '{"account_name":"adobe","website":"business.adobe.com"}' | python3 -c "import json,sys; r=json.load(sys.stdin); assert r['account']['fields']['domain']['value'] == 'adobe.com', r; print('try ok')"
       - name: Container logs
         if: failure()
         run: docker logs fw

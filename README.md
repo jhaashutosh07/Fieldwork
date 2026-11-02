@@ -10,7 +10,19 @@ Most agents demo well and fail quietly in production. Fieldwork is built around 
 every run is traced, every miss is scored against real ground truth and clustered by cause, and any failure can be
 promoted into a regression test that CI enforces before the next version ships.
 
-![Fieldwork dashboard](docs/dashboard.png)
+![Fieldwork](docs/hero.png)
+
+## In 30 seconds
+
+| | |
+|---|---|
+| **Problem** | Sales CRMs are full of duplicates, old company names, stale headcounts and dead websites. Agents that "clean" them tend to be confidently wrong. |
+| **What it does** | Resolves each row to the real company, merges duplicates, fills current facts with source and date, scores fit, and sends anything uncertain to a human. |
+| **Proof** | Scored against real Wikidata ground truth on 158 held-out companies: **55.7% → 95.6%** verified (significant, paired bootstrap), **37.4% → 0%** silent errors (≤ 2.4% at 95%), **96.3%** of rows automated, **$0.04 per 1,000 rows**. |
+| **Engineering** | Tool-using agent with LLM fallback (Groq, `gpt-oss-120b`), record/replay LLM cache, trace store, failure clustering, regression suite, CI eval gate that blocked a regressing change, Docker, CI-gated deploys. |
+| **Try it** | The dashboard has a **Try the agent** box: type `UberCab` or `Facebook` and watch every step. Share a run with `/?try=UberCab&country=Netherlands`. |
+
+![Try the agent](docs/try.png)
 
 ## Results (held-out test split: 158 companies, 242 CRM rows)
 
@@ -33,6 +45,8 @@ first and the model is only asked about the cases rules can't settle.
   number that decides whether an agent can run unattended.
 - Every fix was driven by failures triaged on the **dev** split; the table is the **test** split, which no fix was tuned
   on. The full story of each version is in [docs/CHANGELOG.md](docs/CHANGELOG.md).
+
+![Dashboard: version history and failure explorer](docs/dashboard.png)
 
 ## Insights
 
@@ -168,6 +182,7 @@ docker compose up --build                  # http://localhost:8000
 
 | Method | Path | Purpose |
 |---|---|---|
+| `POST` | `/api/try` | run the shipped agent on one CRM row you type; returns the account and every step |
 | `POST` | `/api/runs` | run a version on a split (offline or replayed LLM) |
 | `GET` | `/api/runs/{id}` | metrics + failure clusters |
 | `GET` | `/api/runs/{id}/failures?signature=` | failures with expected vs got |

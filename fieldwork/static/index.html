@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fieldwork</title>
+<meta name="description" content="An AI agent that cleans a messy sales CRM and proves it: 55.7% to 95.6% verified accuracy, 0% silent errors, CI-gated releases.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
@@ -58,6 +59,49 @@
   .ev .head { font-weight: 600; } .ev pre { margin: 3px 0 0; white-space: pre-wrap; word-break: break-word; color: var(--muted); }
   .empty { color: var(--muted); padding: 10px 0; }
   canvas { max-height: 260px; }
+  html { scroll-behavior: smooth; }
+  .topnav { position: sticky; top: 0; z-index: 10; display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+            padding: 10px 28px; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--line); font-size: 13.5px; }
+  .topnav .brand { font-weight: 700; font-size: 15px; margin-right: 6px; color: var(--ink); text-decoration: none; }
+  .topnav a { color: var(--muted); text-decoration: none; }
+  .topnav a:hover { color: var(--ink); }
+  .topnav .right { margin-left: auto; display: flex; gap: 14px; }
+  .hero { display: block; padding: 34px 28px 8px; max-width: 1280px; }
+  .eyebrow { color: var(--accent); font-weight: 650; font-size: 12.5px; letter-spacing: .6px; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(24px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.6px; margin: 8px 0 12px; max-width: 900px; }
+  .lede { color: var(--muted); font-size: 16px; max-width: 860px; margin: 0; }
+  .bignums { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 22px 0 18px; }
+  .bignum { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .bignum .n { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.4px; }
+  .bignum .n .from { color: var(--muted); font-weight: 500; font-size: 18px; }
+  .bignum .l { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0 0 18px; counter-reset: st; }
+  .steps li { background: var(--chip); border-radius: 10px; padding: 10px 12px; font-size: 13px; color: var(--muted); counter-increment: st; }
+  .steps li b { display: block; color: var(--ink); font-size: 14px; margin-bottom: 2px; }
+  .steps li b::before { content: counter(st) ". "; color: var(--accent); }
+  .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .btn { display: inline-block; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink);
+         text-decoration: none; background: var(--panel); font-weight: 600; font-size: 14px; cursor: pointer; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .tryform { display: grid; grid-template-columns: 2fr 1.4fr 1fr auto; gap: 8px; }
+  @media (max-width: 760px) { .tryform { grid-template-columns: 1fr; } .topnav { padding: 10px 16px; } .hero { padding: 24px 16px 4px; } }
+  .tryform input { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+  .examples { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; align-items: center; }
+  .examples button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); border-radius: 999px; padding: 3px 10px; cursor: pointer; }
+  .examples button:hover { border-style: solid; border-color: var(--accent); }
+  .examples .why { color: var(--muted); }
+  .result { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; margin-top: 14px; }
+  @media (max-width: 900px) { .result { grid-template-columns: 1fr; } }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--bg); }
+  .card h3 { margin: 0 0 4px; font-size: 18px; }
+  .card .verdict { margin: 6px 0 10px; }
+  .kv { display: grid; grid-template-columns: 110px 1fr; gap: 5px 10px; font-size: 13.5px; }
+  .kv .k { color: var(--muted); }
+  .src { color: var(--muted); font-size: 12px; }
+  footer { max-width: 1280px; padding: 6px 28px 40px; color: var(--muted); font-size: 13px; }
+  footer a { color: var(--ink); }
+
   .note { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
   .note b { color: var(--ink); }
   .chip.ok { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
@@ -68,14 +112,44 @@
 </style>
 </head>
 <body>
-<header>
-  <h1>Fieldwork</h1>
-  <p>Account-research agent with a trace-to-eval flywheel. All results are scored against real Wikidata gold.</p>
+<nav class="topnav">
+  <a class="brand" href="#overview">Fieldwork</a>
+  <a href="#try">Try it</a><a href="#results">Results</a><a href="#insights">Insights</a><a href="#explorer">Explorer</a><a href="#tests">Regression tests</a>
+  <span class="right"><a href="https://github.com/jhaashutosh07/fieldwork" target="_blank" rel="noopener">GitHub ↗</a></span>
+</nav>
+<header class="hero" id="overview">
+  <div class="eyebrow">AI agent · evaluation · production reliability</div>
+  <h1>An AI agent that cleans a messy sales CRM, and proves it got it right.</h1>
+  <p class="lede">CRMs fill up with duplicates, old company names, stale headcounts and dead websites. Fieldwork resolves every
+    row to the real company, fills in current facts with their source and date, decides who is worth selling to, and hands
+    anything uncertain to a human instead of guessing. Every number on this page is scored against real ground truth
+    from Wikidata, on companies that were never used to tune the agent.</p>
+  <div class="bignums" id="bignums"></div>
+  <ol class="steps">
+    <li><b>Resolve</b>Website lookup first, then a registry of 3,598 listed companies</li>
+    <li><b>Merge</b>“adobe” and “ADBE” become one account</li>
+    <li><b>Reconcile</b>Newest dated value wins, with its source</li>
+    <li><b>Judge</b>Rules first; an LLM only for what rules can't settle</li>
+    <li><b>Guardrail</b>Not sure? Send it to a human, never guess</li>
+  </ol>
+  <div class="cta"><a class="btn primary" href="#try">Try it on a company →</a><a class="btn" href="#insights">See the evidence</a></div>
 </header>
 <main>
-  <div class="kpis" id="kpis"></div>
+  <section id="try">
+    <h2>Try the agent <span class="hint">type a CRM row the way a sales rep would; the shipped version resolves it and shows every step</span></h2>
+    <form class="tryform" id="tryForm">
+      <input id="tName" placeholder="Account name, e.g. UberCab" maxlength="120" required>
+      <input id="tSite" placeholder="Website (optional)" maxlength="200">
+      <input id="tCountry" placeholder="HQ country (optional)" maxlength="60">
+      <button class="btn primary" id="tBtn" type="submit">Run agent</button>
+    </form>
+    <div class="examples" id="examples"><span class="why">Examples:</span></div>
+    <div id="tryOut"></div>
+  </section>
 
-  <div class="grid2">
+  <div class="kpis" id="kpis" style="scroll-margin-top: 60px"></div>
+
+  <div class="grid2" id="results" style="scroll-margin-top: 60px">
     <section>
       <h2>Version history <span class="hint">held-out test split; every change was driven by failure clusters triaged on the dev split</span></h2>
       <canvas id="chart"></canvas>
@@ -86,7 +160,7 @@
     </section>
   </div>
 
-  <div class="grid2">
+  <div class="grid2" id="insights" style="scroll-margin-top: 60px">
     <section>
       <h2>Is each gain real? <span class="hint">paired bootstrap on the same held-out companies; silent errors use a Wilson interval</span></h2>
       <div class="scroll"><table id="sig"></table></div>
@@ -113,7 +187,7 @@
     </section>
   </div>
 
-  <section>
+  <section id="explorer" style="scroll-margin-top: 60px">
     <h2>Run explorer
       <select id="runSel"></select>
       <span class="hint">new run:</span>
@@ -144,11 +218,18 @@
     </section>
   </div>
 
-  <section>
+  <section id="tests" style="scroll-margin-top: 60px">
     <h2>Regression suite <span class="hint">every case must pass in CI before a version ships</span></h2>
     <div class="scroll"><table id="cases"></table></div>
   </section>
 </main>
+<footer>
+  Built by <b>Ashutosh Kumar Jha</b> ·
+  <a href="https://www.linkedin.com/in/ashutosh-kumar-jha-ab7929233/" target="_blank" rel="noopener">LinkedIn</a> ·
+  <a href="https://github.com/jhaashutosh07" target="_blank" rel="noopener">GitHub</a> ·
+  <a href="https://github.com/jhaashutosh07/fieldwork" target="_blank" rel="noopener">Source code</a> ·
+  Data: Wikidata (CC0)
+</footer>
 <script>
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -256,6 +337,81 @@ async function loadInsights() {
     `Rules run first, so the model only sees the cases they can't settle.`;
 }
 
+// ---------- hero numbers ----------
+function renderBig(hist, ins) {
+  const released = hist.filter((h) => h.status !== "experiment");
+  const first = released[0], last = [...released].reverse().find((h) => !h.uses_llm || h.llm_recorded);
+  if (!first || !last) return;
+  const shipped = ins && ins.risk_coverage && ins.risk_coverage[last.version];
+  const cost = ins && ins.versions ? ins.versions.find((v) => v.version === last.version) : null;
+  const big = (from, to, label) => `<div class="bignum"><div class="n">${from ? `<span class="from">${from} → </span>` : ""}${to}</div><div class="l">${label}</div></div>`;
+  $("bignums").innerHTML = [
+    big(pct(first.test.verified_accuracy), `<span class="good">${pct(last.test.verified_accuracy)}</span>`, "companies fully verified (entity, website, headcount, country, fit)"),
+    big(pct(first.test.silent_error_rate), `<span class="good">${pct(last.test.silent_error_rate)}</span>`, "silent errors: wrong answers nobody was warned about"),
+    shipped ? big("", pct(shipped.operating.coverage), "of CRM rows handled with no human, at 0% error") : "",
+    cost ? big("", "$" + cost.cost.usd_per_1k_rows.toFixed(2), "LLM cost per 1,000 CRM rows") : "",
+  ].join("");
+}
+
+// ---------- try it ----------
+const EXAMPLES = [
+  { n: "UberCab", c: "Netherlands", why: "former name" },
+  { n: "adobe", w: "business.adobe.com", c: "United States", why: "old website, stale data" },
+  { n: "Zoom Communications", w: "http://zoom.com", c: "United States", why: "target customer?" },
+  { n: "Facebook", why: "renamed company" },
+  { n: "Cliffs Natural Resources", c: "United States", why: "old name, look-alike trap" },
+  { n: "Totsuko", c: "Japan", why: "too obscure: watch it refuse to guess" },
+];
+function stepLabel(e) {
+  const a = e.args || {};
+  if (e.kind === "tool" && e.name === "domain_lookup") return `Looked up website <b>${esc(a.domain)}</b>`;
+  if (e.kind === "tool" && e.name === "registry_search") return `Searched the company registry for <b>“${esc(a.query)}”</b>`;
+  if (e.kind === "tool" && e.name === "company_profile") return `Fetched the company profile`;
+  if (e.kind === "llm") return `Asked the LLM: <b>${esc(e.name.replace(/_/g, " "))}</b> <span class="muted">(${e.replayed ? "recorded answer" : "live"})</span>`;
+  return `Decision: <b>${esc(e.name.replace(/_/g, " "))}</b>`;
+}
+function briefResult(e) {
+  const r = e.result;
+  if (Array.isArray(r) && e.name === "registry_search") return r.slice(0, 3).map((h) => `${h.name} (${h.score})`).join(" · ") || "no matches";
+  if (Array.isArray(r) && e.name === "domain_lookup") return r.map((h) => `${h.name} [${h.status} site]`).join(" · ") || "no company uses this website";
+  if (e.name === "company_profile" && r && typeof r === "object") return `${r.name}; ${(r.employees || []).length} dated headcounts; ${(r.websites || []).length} websites on record`;
+  return typeof r === "string" ? r : JSON.stringify(r);
+}
+function renderTry(res) {
+  const a = res.account, f = a.fields || {};
+  const fv = (k, fmt = (v) => v) => f[k] && f[k].value != null
+    ? `${esc(fmt(f[k].value))} <span class="src">from ${esc(f[k].source)}${f[k].as_of ? ", " + esc(f[k].as_of) : ""}</span>` : "<span class='muted'>unknown</span>";
+  const card = a.needs_review
+    ? `<div class="card"><h3>Sent to human review</h3><div class="verdict"><span class="chip meh">not sure, so it did not guess</span></div>
+         <div class="kv"><span class="k">Why</span><span>${esc(a.review_reason)}</span>
+         ${a.guess_company_id ? `<span class="k">Best guess</span><span class="muted">${esc(a.guess_company_id)} (score ${a.guess_score}), not good enough to assert</span>` : ""}</div></div>`
+    : `<div class="card"><h3>${esc(f.name && f.name.value)}</h3>
+         <div class="verdict"><span class="chip ${a.icp_fit ? "ok" : "no"}">${a.icp_fit ? "target customer" : "not a target customer"}</span>
+           <span class="chip">confidence ${a.confidence}</span> <span class="chip">via ${esc(a.resolved_via)}</span></div>
+         <div class="kv"><span class="k">Ticker</span><span>${fv("ticker")}</span>
+           <span class="k">Website</span><span>${fv("domain")}</span>
+           <span class="k">Employees</span><span>${fv("employees", (v) => Number(v).toLocaleString())}</span>
+           <span class="k">Country</span><span>${fv("country")}</span>
+           <span class="k">Industries</span><span>${esc((a.industries || []).join(", ") || "-")}</span>
+           <span class="k">Fit reason</span><span class="muted">${esc(a.icp_reason)}</span></div></div>`;
+  const steps = res.steps.map((e) => `<div class="ev ${e.kind}"><div class="head">${stepLabel(e)}${e.ms != null ? ` <span class="muted">· ${e.ms} ms</span>` : ""}</div><pre>${esc(briefResult(e))}</pre></div>`).join("");
+  $("tryOut").innerHTML = `<div class="result">${card}<div><div class="muted" style="margin-bottom:6px">What the agent did: ${res.steps.length} steps, ${res.tool_calls} tool calls, ${res.llm_calls} LLM calls (${esc(res.llm)}, ${esc(res.version)})${res.note ? " · " + esc(res.note) : ""}</div><div class="trace scroll">${steps}</div></div></div>`;
+}
+async function runTry(ev) {
+  if (ev) ev.preventDefault();
+  const body = { account_name: $("tName").value, website: $("tSite").value, hq_country: $("tCountry").value };
+  if (!body.account_name.trim()) return;
+  $("tBtn").disabled = true; $("tBtn").textContent = "Running…";
+  try { renderTry(await api("/api/try", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })); }
+  catch (e) { $("tryOut").innerHTML = `<div class="empty">${esc(String(e.message).slice(0, 200))}</div>`; }
+  finally { $("tBtn").disabled = false; $("tBtn").textContent = "Run agent"; }
+}
+$("tryForm").onsubmit = runTry;
+$("examples").innerHTML += EXAMPLES.map((x, i) => `<button type="button" data-i="${i}">${esc(x.n)} <span class="why">· ${esc(x.why)}</span></button>`).join("");
+document.querySelectorAll("#examples button").forEach((b) => b.onclick = () => {
+  const x = EXAMPLES[+b.dataset.i]; $("tName").value = x.n; $("tSite").value = x.w || ""; $("tCountry").value = x.c || ""; runTry();
+});
+
 async function loadRuns(select) {
   const runs = await api("/api/runs");
   $("runSel").innerHTML = runs.map((r) => `<option value="${r.id}">${r.version} · ${r.split} · ${pct(r.metrics.verified_accuracy)} · ${r.started_at.replace("T", " ")}</option>`).join("");
@@ -336,8 +492,14 @@ $("runBtn").onclick = async () => {
   const vs = await api("/api/versions");
   $("newVersion").innerHTML = vs.map((v) => `<option>${v.version}</option>`).join("");
   $("newVersion").value = vs[vs.length - 1].version;
+  const q = new URLSearchParams(location.search);
+  if (q.get("try")) {   // shareable link: /?try=UberCab&site=...&country=...
+    $("tName").value = q.get("try"); $("tSite").value = q.get("site") || ""; $("tCountry").value = q.get("country") || "";
+    runTry(); setTimeout(() => $("try").scrollIntoView(), 50);
+  }
   await loadHistory();
   await loadInsights();
+  try { renderBig(await api("/api/history"), await api("/api/insights")); } catch {}
   await loadRuns(new URLSearchParams(location.search).get("run"));
 })();
 </script>

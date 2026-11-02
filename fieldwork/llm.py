@@ -24,8 +24,10 @@ PROVIDERS = {
 
 
 class LLM:
-    def __init__(self, mode: str | None = None):
+    def __init__(self, mode: str | None = None, record: bool = True, retries: int = 6):
+        """record=False keeps new answers in memory only (the public try-it endpoint must not grow the eval cache)."""
         self.mode = (mode or os.environ.get("FIELDWORK_LLM", "none")).lower()
+        self.record, self.retries = record, retries
         self._lock = threading.Lock()
         self._cache: dict[str, dict] = {}
         if CACHE.exists():
@@ -66,14 +68,14 @@ class LLM:
 
     def _call(self, key: str, system: str, user: str) -> dict:
         t0 = time.perf_counter()
-        for attempt in range(6):
+        for attempt in range(self.retries):
             try:
                 resp = self._client.chat.completions.create(
                     model=self.model, temperature=0, response_format={"type": "json_object"},
                     messages=[{"role": "system", "content": system}, {"role": "user", "content": user}])
                 break
             except Exception:  # rate limits on free tiers: back off and retry
-                if attempt == 5:
+                if attempt == self.retries - 1:
                     raise
                 time.sleep(min(60, 4 * 2 ** attempt))
         usage = resp.usage
@@ -88,6 +90,7 @@ class LLM:
                "ms": round((time.perf_counter() - t0) * 1000, 1)}
         with self._lock:
             self._cache[key] = rec
-            with CACHE.open("a", encoding="utf-8") as f:
-                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            if self.record:
+                with CACHE.open("a", encoding="utf-8") as f:
+                    f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         return {**rec, "_fresh": True}
