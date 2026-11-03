@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import threading
 import time
@@ -20,6 +21,7 @@ from .tools import Tools, world
 from .trace import Trace
 
 STATIC = Path(__file__).parent / "static"
+log = logging.getLogger("uvicorn.error")
 PUBLIC = os.environ.get("FIELDWORK_PUBLIC") == "1"   # hosted demo: one run at a time, bounded storage
 _run_lock = threading.Lock()
 _last_run: dict[str, float] = {}
@@ -74,8 +76,9 @@ def try_it(req: TryRequest, request: Request):
         try:
             accts = Agent(VERSIONS[LATEST], Tools(world(), trace), _try_llm(attempt_live), trace).run([row])
             break
-        except Exception:   # live model unavailable or rate limited: fall back to recorded answers
-            note = "live model unavailable; used recorded answers only"
+        except Exception as exc:   # live model unavailable or rate limited: fall back to recorded answers
+            log.warning("try-it live LLM failed: %s: %s", type(exc).__name__, str(exc)[:300])
+            note = f"live model unavailable ({type(exc).__name__}); used recorded answers only"
     if attempt_live:
         _try["llm_calls"] += trace.llm_calls
     a = accts[0]
