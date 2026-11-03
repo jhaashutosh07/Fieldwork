@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 from contextlib import contextmanager
+from typing import Callable
 
 
 def _brief(obj, limit: int = 600):
@@ -11,12 +12,19 @@ def _brief(obj, limit: int = 600):
 
 
 class Trace:
-    def __init__(self):
+    def __init__(self, on_event: Callable[[dict], None] | None = None):
+        """on_event, if given, is called with each event as it happens (used to stream a run to the browser)."""
         self.events: list[dict] = []
         self.account: str | None = None
         self.cost_usd = 0.0
         self.llm_calls = 0
         self.tool_calls = 0
+        self._on_event = on_event
+
+    def _add(self, event: dict) -> None:
+        self.events.append(event)
+        if self._on_event:
+            self._on_event(event)
 
     @contextmanager
     def scope(self, account: str):
@@ -28,16 +36,16 @@ class Trace:
 
     def tool(self, name: str, args: dict, result, ms: float):
         self.tool_calls += 1
-        self.events.append({"kind": "tool", "account": self.account, "name": name, "args": args,
-                            "result": _brief(result), "ms": ms})
+        self._add({"kind": "tool", "account": self.account, "name": name, "args": args, "result": _brief(result),
+                   "ms": ms})
 
     def llm(self, purpose: str, model: str, tokens_in: int, tokens_out: int, cost: float, ms: float, cached: bool,
             answer):
         self.llm_calls += 1
         self.cost_usd += cost
-        self.events.append({"kind": "llm", "account": self.account, "name": purpose, "model": model,
-                            "tokens_in": tokens_in, "tokens_out": tokens_out, "cost_usd": cost, "ms": ms,
-                            "replayed": cached, "result": _brief(answer)})
+        self._add({"kind": "llm", "account": self.account, "name": purpose, "model": model, "tokens_in": tokens_in,
+                   "tokens_out": tokens_out, "cost_usd": cost, "ms": ms, "replayed": cached,
+                   "result": _brief(answer)})
 
     def decision(self, name: str, **detail):
-        self.events.append({"kind": "decision", "account": self.account, "name": name, "result": _brief(detail)})
+        self._add({"kind": "decision", "account": self.account, "name": name, "result": _brief(detail)})

@@ -129,3 +129,43 @@ def test_try_endpoint_resolves_an_old_website_and_refuses_gibberish():
     assert r.json()["account"]["needs_review"]
     _try["last"].clear()
     assert c.post("/api/try", json={"account_name": ""}).status_code == 422
+
+
+def test_try_stream_sends_steps_then_the_account():
+    from fastapi.testclient import TestClient
+    from fieldwork.api import _try, app
+
+    _try["last"].clear()
+    with TestClient(app).stream("POST", "/api/try/stream", json={"account_name": "adobe", "website": "business.adobe.com"}) as r:
+        body = "".join(r.iter_text())
+    assert r.status_code == 200 and r.headers["content-type"].startswith("text/event-stream")
+    assert body.count("event: step") >= 3
+    assert body.rstrip().splitlines()[-1].startswith("data:") and "event: done" in body
+    assert body.index("event: step") < body.index("event: done")
+
+
+def test_batch_merges_duplicates_and_flags_what_it_cannot_verify():
+    from fastapi.testclient import TestClient
+    from fieldwork.api import _try, app
+
+    _try["last"].clear()
+    csv_text = ("name,website,country\n"
+                "adobe,business.adobe.com,United States\n"
+                "ADBE,business.adobe.com,United States\n"
+                "qzxwvplmk,,\n")
+    d = TestClient(app).post("/api/batch", json={"csv": csv_text}).json()
+    assert d["summary"] == {**d["summary"], "rows": 3, "accounts": 2, "merged_rows": 1, "needs_review": 1}
+    adobe = next(a for a in d["accounts"] if not a["needs_review"])
+    assert adobe["domain"]["value"] == "adobe.com" and len(adobe["rows"]) == 2
+
+
+def test_batch_rejects_bad_input():
+    from fastapi.testclient import TestClient
+    from fieldwork.api import _try, app
+
+    c = TestClient(app)
+    _try["last"].clear()
+    assert c.post("/api/batch", json={"csv": "foo,bar\n1,2"}).status_code == 400
+    _try["last"].clear()
+    too_many = "name\n" + "\n".join(f"Company {i}" for i in range(60))
+    assert c.post("/api/batch", json={"csv": too_many}).status_code == 400

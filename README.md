@@ -23,9 +23,12 @@ promoted into a regression test that CI enforces before the next version ships.
 | **What it does** | Resolves each row to the real company, merges duplicates, fills current facts with source and date, scores fit, and sends anything uncertain to a human. |
 | **Proof** | Scored against real Wikidata ground truth on 158 held-out companies: **55.7% → 95.6%** verified (significant, paired bootstrap), **37.4% → 0%** silent errors (≤ 2.4% at 95%), **96.3%** of rows automated, **$0.04 per 1,000 rows**. |
 | **Engineering** | Tool-using agent with LLM fallback (Groq, `gpt-oss-120b`), record/replay LLM cache, trace store, failure clustering, regression suite, CI eval gate that blocked a regressing change, Docker, CI-gated deploys. |
-| **Try it** | The dashboard has a **Try the agent** box: type `UberCab` or `Facebook` and watch every step. Share a run with `/?try=UberCab&country=Netherlands`. |
+| **Try it** | **Watch it think:** type `UberCab` or `Facebook` and the agent's steps stream live while the pipeline (Resolve → Merge → Reconcile → Judge → Guardrail) lights up. Share a run with `/?try=UberCab&country=Netherlands`. |
+| **Use it** | **Clean your own CRM:** paste or upload a CSV (up to 50 rows) and download a cleaned file: duplicates merged, old names and stale data fixed, every value with its source and date, doubtful rows flagged. `/?clean=sample` runs a messy sample. |
 
 ![Try the agent](docs/try.png)
+
+![Clean your own CRM](docs/clean.png)
 
 ## Results (held-out test split: 158 companies, 242 CRM rows)
 
@@ -186,6 +189,8 @@ docker compose up --build                  # http://localhost:8000
 | Method | Path | Purpose |
 |---|---|---|
 | `POST` | `/api/try` | run the shipped agent on one CRM row you type; returns the account and every step |
+| `POST` | `/api/try/stream` | the same, streamed as server-sent events: one event per tool call, LLM call and decision |
+| `POST` | `/api/batch` | clean a CSV (≤ 50 rows): merged accounts with provenance, fit and review flags |
 | `POST` | `/api/runs` | run a version on a split (offline or replayed LLM) |
 | `GET` | `/api/runs/{id}` | metrics + failure clusters |
 | `GET` | `/api/runs/{id}/failures?signature=` | failures with expected vs got |

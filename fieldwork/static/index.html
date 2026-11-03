@@ -109,12 +109,38 @@
   .chip.meh { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
   .chartbox { position: relative; height: 270px; }
   .chartbox canvas { max-height: none; }
+  .pipe { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin: 14px 0 2px; }
+  .node { padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-weight: 650;
+          font-size: 13px; background: var(--panel); transition: all .25s ease; }
+  .node.active { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+                 animation: pulse 1s ease-in-out infinite; }
+  .node.done { border-color: var(--good); color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--panel)); }
+  .node.review { border-color: var(--warn); color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, var(--panel)); }
+  .pipe .arrow { color: var(--line); font-weight: 700; }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 6%, transparent); } }
+  @keyframes fadein { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .trace .ev { animation: fadein .25s ease; }
+  .working { color: var(--muted); display: flex; gap: 8px; align-items: center; }
+  .spinner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); border-top-color: var(--accent); animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .batchgrid { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 12px; }
+  @media (max-width: 760px) { .batchgrid { grid-template-columns: 1fr; } }
+  .batchgrid textarea { width: 100%; min-height: 220px; font: 12.5px/1.5 var(--mono); color: var(--ink); background: var(--bg);
+                        border: 1px solid var(--line); border-radius: 8px; padding: 10px; resize: vertical; }
+  .batchside { display: flex; flex-direction: column; gap: 8px; }
+  .batchside .btn { text-align: center; }
+  .summary { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 8px; }
+  .summary .stat { background: var(--chip); border-radius: 8px; padding: 6px 12px; font-size: 13px; }
+  .summary .stat b { font-size: 16px; margin-right: 4px; }
+  #bOut td .src { display: block; }
+  @media (prefers-reduced-motion: reduce) { .node.active, .spinner, .trace .ev { animation: none; } }
+
 </style>
 </head>
 <body>
 <nav class="topnav">
   <a class="brand" href="#overview">Fieldwork</a>
-  <a href="#try">Try it</a><a href="#results">Results</a><a href="#insights">Insights</a><a href="#explorer">Explorer</a><a href="#tests">Regression tests</a>
+  <a href="#try">Try it</a><a href="#batch">Clean a CSV</a><a href="#results">Results</a><a href="#insights">Insights</a><a href="#explorer">Explorer</a><a href="#tests">Regression tests</a>
   <span class="right"><a href="https://github.com/jhaashutosh07/Fieldwork" target="_blank" rel="noopener">GitHub ↗</a></span>
 </nav>
 <header class="hero" id="overview">
@@ -144,7 +170,25 @@
       <button class="btn primary" id="tBtn" type="submit">Run agent</button>
     </form>
     <div class="examples" id="examples"><span class="why">Examples:</span></div>
+    <div class="pipe" id="pipe"></div>
     <div id="tryOut"></div>
+  </section>
+
+  <section id="batch" style="scroll-margin-top: 60px">
+    <h2>Clean your own CRM <span class="hint">paste or upload a CSV (up to 50 rows): duplicates merged, old names and stale data fixed, doubtful rows flagged for a human</span></h2>
+    <div class="batchgrid">
+      <textarea id="bCsv" spellcheck="false" placeholder="account_name,website,hq_country,employee_count,last_updated"></textarea>
+      <div class="batchside">
+        <button class="btn" type="button" id="bSample">Load a messy sample</button>
+        <label class="btn" for="bFile">Upload CSV…</label>
+        <input type="file" id="bFile" accept=".csv,text/csv" hidden>
+        <button class="btn primary" type="button" id="bRun">Clean it</button>
+        <button class="btn" type="button" id="bDownload" disabled>Download cleaned CSV</button>
+        <div class="muted" style="font-size:12px">Columns: <code>account_name</code> (or <code>name</code>/<code>company</code>), optional <code>website</code>, <code>hq_country</code>, <code>employee_count</code>, <code>last_updated</code>.</div>
+      </div>
+    </div>
+    <div class="summary" id="bSummary"></div>
+    <div class="scroll" style="max-height:520px"><table id="bOut"></table></div>
   </section>
 
   <div class="kpis" id="kpis" style="scroll-margin-top: 60px"></div>
@@ -303,7 +347,7 @@ async function loadInsights() {
       <td>${v.vs_prev ? sigChip(v.vs_prev.verified_accuracy, false) : "<span class='muted'>baseline</span>"}</td>
       <td>${pct(v.silent_error_rate)} <span class="muted">[${pct(v.ci.silent_error_rate[0])}, ${pct(v.ci.silent_error_rate[1])}]</span></td></tr>`).join("");
   const shipped = ins.versions[ins.versions.length - 1];
-  $("sigNote").innerHTML = `${ins.companies} held-out companies, ${ins.bootstrap_resamples.toLocaleString()} bootstrap resamples. ` +
+  $("sigNote").innerHTML = `${ins.companies} held-out companies, ${ins.bootstrap_resamples.toLocaleString("en-US")} bootstrap resamples. ` +
     `${shipped.version} made <b>0 silent errors</b>; with this sample size the true rate is at most <b>${pct(shipped.ci.silent_error_rate[1])}</b> (95%).`;
 
   if (window.Chart) {
@@ -390,22 +434,151 @@ function renderTry(res) {
            <span class="chip">confidence ${a.confidence}</span> <span class="chip">via ${esc(a.resolved_via)}</span></div>
          <div class="kv"><span class="k">Ticker</span><span>${fv("ticker")}</span>
            <span class="k">Website</span><span>${fv("domain")}</span>
-           <span class="k">Employees</span><span>${fv("employees", (v) => Number(v).toLocaleString())}</span>
+           <span class="k">Employees</span><span>${fv("employees", (v) => Number(v).toLocaleString("en-US"))}</span>
            <span class="k">Country</span><span>${fv("country")}</span>
            <span class="k">Industries</span><span>${esc((a.industries || []).join(", ") || "-")}</span>
            <span class="k">Fit reason</span><span class="muted">${esc(a.icp_reason)}</span></div></div>`;
   const steps = res.steps.map((e) => `<div class="ev ${e.kind}"><div class="head">${stepLabel(e)}${e.ms != null ? ` <span class="muted">· ${e.ms} ms</span>` : ""}</div><pre>${esc(briefResult(e))}</pre></div>`).join("");
   $("tryOut").innerHTML = `<div class="result">${card}<div><div class="muted" style="margin-bottom:6px">What the agent did: ${res.steps.length} steps, ${res.tool_calls} tool calls, ${res.llm_calls} LLM calls (${esc(res.llm)}, ${esc(res.version)})${res.note ? " · " + esc(res.note) : ""}</div><div class="trace scroll">${steps}</div></div></div>`;
 }
+// ---------- live pipeline ----------
+const STAGES = ["Resolve", "Merge", "Reconcile", "Judge", "Guardrail"];
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+function stageOf(e) {
+  if (e.kind === "tool" && (e.name === "domain_lookup" || e.name === "registry_search")) return 0;
+  if (e.kind === "llm" && (e.name === "adjudicate_match" || e.name === "propose_company")) return 0;
+  if (e.kind === "decision" && e.name.startsWith("llm_")) return 0;
+  if (e.kind === "decision" && e.name === "resolve") return 1;
+  if ((e.kind === "tool" && e.name === "company_profile") || (e.kind === "decision" && e.name === "reconcile")) return 2;
+  if (e.kind === "llm" && e.name === "judge_icp_industry") return 3;
+  if (e.kind === "decision" && e.name === "account") return 3;
+  return null;
+}
+function drawPipe(active = -1, finalState = null) {
+  $("pipe").innerHTML = STAGES.map((name, i) => {
+    const cls = finalState ? (i === 4 ? finalState : "done") : i < active ? "done" : i === active ? "active" : "";
+    const label = finalState && i === 4 ? (finalState === "review" ? "Guardrail: human review" : "Guardrail: verified ✓") : name;
+    return `<span class="node ${cls}">${label}</span>`;
+  }).join('<span class="arrow">→</span>');
+}
+function stepHtml(e) {
+  return `<div class="ev ${e.kind}"><div class="head">${stepLabel(e)}${e.ms != null ? ` <span class="muted">· ${e.ms} ms</span>` : ""}</div><pre>${esc(briefResult(e))}</pre></div>`;
+}
 async function runTry(ev) {
   if (ev) ev.preventDefault();
   const body = { account_name: $("tName").value, website: $("tSite").value, hq_country: $("tCountry").value };
   if (!body.account_name.trim()) return;
   $("tBtn").disabled = true; $("tBtn").textContent = "Running…";
-  try { renderTry(await api("/api/try", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })); }
-  catch (e) { $("tryOut").innerHTML = `<div class="empty">${esc(String(e.message).slice(0, 200))}</div>`; }
-  finally { $("tBtn").disabled = false; $("tBtn").textContent = "Run agent"; }
+  drawPipe(0);
+  $("tryOut").innerHTML = `<div class="result"><div class="card"><div class="working"><span class="spinner"></span>The agent is working on “${esc(body.account_name)}”…</div></div>
+    <div><div class="muted" id="liveMeta" style="margin-bottom:6px">Streaming each step as it happens</div><div class="trace scroll" id="liveSteps"></div></div></div>`;
+  let stage = 0, final = null, failed = null;
+  try {
+    const res = await fetch("/api/try/stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (!res.ok || !res.body) throw new Error(await res.text());
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "", chain = Promise.resolve();
+    const handle = async (kind, data) => {
+      if (kind === "step") {
+        if (data.kind === "reset") { $("liveSteps").innerHTML = ""; $("liveMeta").textContent = data.note; stage = 0; drawPipe(0); return; }
+        const st = stageOf(data);
+        if (st != null && st >= stage) { stage = st; drawPipe(stage); }
+        $("liveSteps").insertAdjacentHTML("beforeend", stepHtml(data));
+        $("liveSteps").scrollTop = $("liveSteps").scrollHeight;
+        await sleep(170);   // pace the replay so each step is readable; real timings are shown on each step
+      } else if (kind === "done") { final = data; }
+      else if (kind === "error") { failed = data.error || "error"; }
+    };
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n\n")) >= 0) {
+        const block = buf.slice(0, i); buf = buf.slice(i + 2);
+        const kind = (block.match(/^event: (.*)$/m) || [])[1], data = (block.match(/^data: (.*)$/m) || [])[1];
+        if (kind && data) { const parsed = JSON.parse(data); chain = chain.then(() => handle(kind, parsed)); }
+      }
+    }
+    await chain;
+    if (failed) throw new Error(failed);
+    if (final) { await sleep(150); drawPipe(4, final.account.needs_review ? "review" : "done"); renderTry(final); }
+  } catch (e) {
+    try {   // older server without streaming: fall back to the plain endpoint
+      const r = await api("/api/try", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      drawPipe(4, r.account.needs_review ? "review" : "done"); renderTry(r);
+    } catch (e2) { drawPipe(-1); $("tryOut").innerHTML = `<div class="empty">${esc(String(e2.message || e.message).slice(0, 200))}</div>`; }
+  } finally { $("tBtn").disabled = false; $("tBtn").textContent = "Run agent"; }
 }
+drawPipe(-1);
+
+// ---------- clean your own CRM ----------
+const SAMPLE_CSV = `account_name,website,hq_country,employee_count,last_updated
+adobe,business.adobe.com,United States,11144,2012-01-01
+ADBE,business.adobe.com,United States,11847,2013-11-01
+Marvell,,United States,7000,2025-01-01
+MARVELL TECHNOLOGY,,United States,,2026-01-01
+GLOBALFOUNDRIES,http://gf.com,Cayman Islands,14600,2021-12-31
+globalfoundries,,United States,14600,2021-12-31
+UberCab,,Netherlands,12000,2017-12-01
+"Consolidated Edison, Inc.",,United States,15541,2010-01-01
+Zoom Communications,http://zoom.com,United States,2000,2019-01-01
+Cliffs Natural Resources,,United States,30000,2024-01-01
+Target Store,,,400000,2025-01-01
+Totsuko,,Japan,113000,2023-03-31`;
+let batchResult = null;
+const csvCell = (v) => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+function fieldCell(f, fmt = (v) => v) {
+  if (!f || f.value == null) return "<span class='muted'>-</span>";
+  return `${esc(fmt(f.value))}<span class="src">${esc(f.source)}${f.as_of ? " · " + esc(f.as_of) : ""}</span>`;
+}
+function renderBatch(d) {
+  const s = d.summary;
+  $("bSummary").innerHTML = [
+    `<span class="stat"><b>${s.rows}</b>CRM rows</span>`, `<span class="stat"><b>${s.accounts}</b>accounts</span>`,
+    `<span class="stat"><b>${s.merged_rows}</b>duplicates merged</span>`, `<span class="stat"><b>${s.target_customers}</b>target customers</span>`,
+    `<span class="stat"><b>${s.needs_review}</b>sent to review</span>`,
+    `<span class="stat muted">${s.llm_calls} LLM calls (${esc(d.llm)}) · ${s.tool_calls} tool calls · ${s.seconds}s</span>`,
+  ].join("") + (d.note ? `<span class="stat bad">${esc(d.note)}</span>` : "");
+  $("bOut").innerHTML = "<tr><th>From CRM rows</th><th>Company</th><th>Website</th><th>Employees</th><th>Country</th><th>Status</th></tr>" +
+    d.accounts.map((a) => `<tr><td>${a.rows.map((r) => esc(r.account_name)).join("<br>")}${a.rows.length > 1 ? ` <span class="chip">${a.rows.length} merged</span>` : ""}</td>
+      <td>${a.needs_review ? "<span class='muted'>?</span>" : `<b>${esc(a.name)}</b>${a.ticker ? ` <span class="muted">${esc(a.ticker)}</span>` : ""}`}</td>
+      <td>${a.needs_review ? "" : fieldCell(a.domain)}</td>
+      <td>${a.needs_review ? "" : fieldCell(a.employees, (v) => Number(v).toLocaleString("en-US"))}</td>
+      <td>${a.needs_review ? "" : fieldCell(a.country)}</td>
+      <td>${a.needs_review ? `<span class="chip meh">needs review</span><div class="muted" style="font-size:12px">${esc(a.review_reason)}</div>`
+          : a.icp_fit ? `<span class="chip ok">target customer</span>` : `<span class="chip">verified</span>`}</td></tr>`).join("");
+}
+function downloadBatch() {
+  if (!batchResult) return;
+  const head = ["crm_rows", "status", "company", "ticker", "website", "employees", "employees_as_of", "employees_source", "country", "target_customer", "review_reason"];
+  const lines = batchResult.accounts.map((a) => [a.rows.map((r) => r.account_name).join(" | "), a.needs_review ? "needs_review" : "verified",
+    a.name, a.ticker, a.domain && a.domain.value, a.employees && a.employees.value, a.employees && a.employees.as_of, a.employees && a.employees.source,
+    a.country && a.country.value, a.needs_review ? "" : a.icp_fit, a.review_reason].map(csvCell).join(","));
+  const blob = new Blob([[head.join(","), ...lines].join("\n")], { type: "text/csv" });
+  const link = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "fieldwork_cleaned.csv" });
+  link.click(); URL.revokeObjectURL(link.href);
+}
+$("bSample").onclick = () => { $("bCsv").value = SAMPLE_CSV; };
+$("bFile").onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  if (f.size > 60000) { $("bSummary").innerHTML = `<span class="stat bad">File too large for the demo (60 KB max)</span>`; return; }
+  $("bCsv").value = await f.text();
+};
+$("bDownload").onclick = downloadBatch;
+$("bRun").onclick = async () => {
+  if (!$("bCsv").value.trim()) $("bCsv").value = SAMPLE_CSV;
+  $("bRun").disabled = true; $("bRun").textContent = "Cleaning…";
+  $("bSummary").innerHTML = `<span class="working"><span class="spinner"></span>Resolving, merging and verifying…</span>`;
+  try {
+    batchResult = await api("/api/batch", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ csv: $("bCsv").value }) });
+    renderBatch(batchResult); $("bDownload").disabled = false;
+  } catch (e) {
+    let msg = String(e.message); try { msg = JSON.parse(msg).detail || msg; } catch {}
+    $("bSummary").innerHTML = `<span class="stat bad">${esc(String(msg).slice(0, 200))}</span>`; $("bOut").innerHTML = "";
+  } finally { $("bRun").disabled = false; $("bRun").textContent = "Clean it"; }
+};
+$("bCsv").value = SAMPLE_CSV;
 $("tryForm").onsubmit = runTry;
 $("examples").innerHTML += EXAMPLES.map((x, i) => `<button type="button" data-i="${i}">${esc(x.n)} <span class="why">· ${esc(x.why)}</span></button>`).join("");
 document.querySelectorAll("#examples button").forEach((b) => b.onclick = () => {
@@ -496,6 +669,8 @@ $("runBtn").onclick = async () => {
   if (q.get("try")) {   // shareable link: /?try=UberCab&site=...&country=...
     $("tName").value = q.get("try"); $("tSite").value = q.get("site") || ""; $("tCountry").value = q.get("country") || "";
     runTry(); setTimeout(() => $("try").scrollIntoView(), 50);
+  } else if (q.get("clean") === "sample") {   // shareable link: /?clean=sample runs the CSV cleaner on the sample
+    $("bRun").click(); setTimeout(() => $("batch").scrollIntoView(), 50);
   }
   await loadHistory();
   await loadInsights();

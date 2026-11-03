@@ -52,6 +52,9 @@ jobs:
           curl -fs -X POST http://127.0.0.1:8000/api/runs -H 'content-type: application/json' -d '{"version":"v4","split":"dev","llm":"none"}' | python3 -c "import json,sys; r=json.load(sys.stdin); assert r['metrics']['verified_accuracy'] > 0.8, r; print('run ok:', r['metrics']['verified_accuracy'])"
           curl -fs http://127.0.0.1:8000/ | grep -q "<title>Fieldwork</title>"
           curl -fs -X POST http://127.0.0.1:8000/api/try -H 'content-type: application/json' -d '{"account_name":"adobe","website":"business.adobe.com"}' | python3 -c "import json,sys; r=json.load(sys.stdin); assert r['account']['fields']['domain']['value'] == 'adobe.com', r; print('try ok')"
+          curl -fs -X POST http://127.0.0.1:8000/api/batch -H 'content-type: application/json' -d '{"csv":"name,website\nadobe,business.adobe.com\nADBE,business.adobe.com"}' | python3 -c "import json,sys; d=json.load(sys.stdin); assert d['summary']['accounts'] == 1, d; print('batch ok')"
+          sleep 2.5   # the public demo allows one try per client every 2 s
+          curl -fsN -X POST http://127.0.0.1:8000/api/try/stream -H 'content-type: application/json' -d '{"account_name":"UberCab","hq_country":"Netherlands"}' | grep "event: done" > /dev/null && echo "stream ok"
       - name: Container logs
         if: failure()
         run: docker logs fw
