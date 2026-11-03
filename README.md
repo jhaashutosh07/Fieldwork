@@ -1,7 +1,7 @@
 # Fieldwork
 
-[![ci-cd](https://github.com/jhaashutosh07/fieldwork/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/jhaashutosh07/fieldwork/actions/workflows/ci-cd.yml)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jhaashutosh07/fieldwork)
+[![ci-cd](https://github.com/jhaashutosh07/Fieldwork/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/jhaashutosh07/Fieldwork/actions/workflows/ci-cd.yml)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jhaashutosh07/Fieldwork)
 
 **An account-research agent that cleans a messy CRM export into a verified, ICP-ranked account list, plus the eval
 flywheel that took it from 55.7% to 95.6% verified accuracy and from 37.4% to 0% silent errors.**
