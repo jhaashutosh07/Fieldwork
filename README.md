@@ -3,6 +3,9 @@
 [![ci-cd](https://github.com/jhaashutosh07/Fieldwork/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/jhaashutosh07/Fieldwork/actions/workflows/ci-cd.yml)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jhaashutosh07/Fieldwork)
 
+**Live demo: https://fieldwork-ayde.onrender.com** · try it: [UberCab](https://fieldwork-ayde.onrender.com/?try=UberCab&country=Netherlands) · [Facebook](https://fieldwork-ayde.onrender.com/?try=Facebook) · [adobe + old website](https://fieldwork-ayde.onrender.com/?try=adobe&site=business.adobe.com&country=United%20States)
+(free hosting: the first visit can take ~1 minute to wake up)
+
 **An account-research agent that cleans a messy CRM export into a verified, ICP-ranked account list, plus the eval
 flywheel that took it from 55.7% to 95.6% verified accuracy and from 37.4% to 0% silent errors.**
 
