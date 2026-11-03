@@ -1,4 +1,8 @@
-"""FastAPI service: start runs, browse traces and failure clusters, promote failures, view eval history."""
+"""FastAPI service: try the agent, clean a CSV, browse eval runs, traces and failure clusters, view insights.
+
+Public-demo hardening (rate limits per real client, bounded concurrency and LLM spend, request-size limits,
+security headers, read-only writes) lives in security.py; SECURITY.md describes the threat model.
+"""
 from __future__ import annotations
 
 import csv
@@ -9,86 +13,103 @@ import os
 import queue
 import threading
 import time
-from pathlib import Path
+from pathlib import Path as FsPath
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Path, Request
 from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from . import flywheel, store
+from . import flywheel, security, store
 from .agent import LATEST, VERSIONS, Agent
 from .evals import clusters
 from .llm import LLM
+from .security import AgentSlot, limiter
 from .tools import Tools, world
 from .trace import Trace
 
-STATIC = Path(__file__).parent / "static"
+STATIC = FsPath(__file__).parent / "static"
 log = logging.getLogger("uvicorn.error")
-PUBLIC = os.environ.get("FIELDWORK_PUBLIC") == "1"   # hosted demo: one run at a time, bounded storage
-_run_lock = threading.Lock()
-_last_run: dict[str, float] = {}
-# Try-it: live LLM calls only when the operator opts in and provides a key; capped per day; never recorded.
+PUBLIC = os.environ.get("FIELDWORK_PUBLIC") == "1"   # hosted demo: read-only writes, bounded storage
+# Live LLM for visitor requests only when the operator opts in and provides a key; capped per request and per day;
+# answers are never written to the eval cache.
 TRY_LIVE = os.environ.get("FIELDWORK_TRY_LIVE") == "1" and bool(os.environ.get("GROQ_API_KEY"))
 TRY_DAILY_CAP = int(os.environ.get("FIELDWORK_TRY_CAP", "300"))
-_try = {"day": "", "llm_calls": 0, "last": {}, "llm": {}}
-app = FastAPI(title="Fieldwork", version="0.5.0",
-              description="Account-research agent with a trace-to-eval flywheel.")
+LLM_CALLS_PER_REQUEST = {"try": 4, "batch": 25}
+_llm_day = {"day": "", "fresh_calls": 0}
+_llm_lock = threading.Lock()
+_llms: dict[str, LLM] = {}
+_run_lock = threading.Lock()
+
+RUN_ID = Path(pattern=r"^[0-9a-f]{12}$")
+FAILURE_ID = Path(pattern=r"^[0-9a-f]{12}-[0-9]{3}$")
+
+app = FastAPI(title="Fieldwork", version="0.6.0", description="Account-research agent with a trace-to-eval flywheel.")
+app.middleware("http")(security.security_headers)
+app.add_middleware(security.BodyLimitMiddleware)
 
 
+# ---------- LLM budget ----------
+def _shared_llm(live: bool) -> LLM:
+    mode = "groq" if live else "replay"
+    if mode not in _llms:
+        _llms[mode] = LLM(mode, record=False, retries=2)
+    return _llms[mode]
+
+
+class BudgetedLLM:
+    """Per-request view of the shared client: recorded answers are free; new (paid) calls stop at the request's
+    budget and at the day's remaining cap, after which the agent falls back to rules and human review."""
+
+    def __init__(self, llm: LLM, budget: int):
+        self._llm, self.budget, self.fresh = llm, budget, 0
+        self.mode, self.model = llm.mode, llm.model
+
+    @property
+    def enabled(self) -> bool:
+        return self._llm.enabled
+
+    def json(self, system: str, user: str, trace=None, purpose: str = ""):
+        if not self._llm.is_recorded(system, user):
+            with _llm_lock:
+                if self.fresh >= self.budget or _llm_day["fresh_calls"] >= TRY_DAILY_CAP:
+                    return None
+                self.fresh += 1
+                _llm_day["fresh_calls"] += 1
+        return self._llm.json(system, user, trace, purpose)
+
+
+def _run_rows(rows: list[dict], kind: str, on_event=None) -> dict:
+    """Run the shipped agent on visitor rows inside a concurrency slot; live LLM if enabled, else (or on failure)
+    recorded answers only."""
+    day = time.strftime("%Y-%m-%d")
+    with _llm_lock:
+        if _llm_day["day"] != day:
+            _llm_day.update(day=day, fresh_calls=0)
+        live = TRY_LIVE and _llm_day["fresh_calls"] < TRY_DAILY_CAP
+    note = ""
+    with AgentSlot():
+        for attempt_live in ([True, False] if live else [False]):
+            trace = Trace(on_event)
+            llm = BudgetedLLM(_shared_llm(attempt_live), LLM_CALLS_PER_REQUEST[kind] if attempt_live else 0)
+            try:
+                accts = Agent(VERSIONS[LATEST], Tools(world(), trace), llm, trace).run([dict(r) for r in rows])
+                break
+            except Exception as exc:   # live model unavailable or rate limited: fall back to recorded answers
+                log.warning("live LLM failed: %s: %s", type(exc).__name__, str(exc)[:300])
+                note = f"live model unavailable ({type(exc).__name__}); used recorded answers only"
+                if on_event:
+                    on_event({"kind": "reset", "note": note})
+    if attempt_live and llm.fresh >= llm.budget:
+        note = note or f"live LLM budget for this request reached ({llm.budget} calls); the rest used rules"
+    return {"accounts": accts, "trace": trace, "llm": "live" if attempt_live else "recorded only", "note": note}
+
+
+# ---------- try the agent ----------
 class TryRequest(BaseModel):
     account_name: str = Field(min_length=1, max_length=120)
     website: str = Field("", max_length=200)
     hq_country: str = Field("", max_length=60)
-
-
-def _try_llm(live: bool) -> LLM:
-    mode = "groq" if live else "replay"
-    if mode not in _try["llm"]:
-        _try["llm"][mode] = LLM(mode, record=False, retries=2)
-    return _try["llm"][mode]
-
-
-class RunRequest(BaseModel):
-    version: str = LATEST
-    split: str = "test"
-    llm: str = "replay"
-
-
-@app.get("/healthz")
-def healthz():
-    return {"ok": True, "runs": store.count_runs()}
-
-
-def _client_ok(request: Request, bucket: str, gap: float) -> None:
-    ip = request.client.host if request.client else "?"
-    key = f"{bucket}:{ip}"
-    if time.time() - _try["last"].get(key, 0) < gap:
-        raise HTTPException(429, f"one request every {gap:g} seconds, please")
-    _try["last"][key] = time.time()
-
-
-def _run_rows(rows: list[dict], on_event=None) -> dict:
-    """Run the shipped agent; live LLM if enabled and under the daily cap, else (or on failure) recorded answers."""
-    day = time.strftime("%Y-%m-%d")
-    if _try["day"] != day:
-        _try["day"], _try["llm_calls"] = day, 0
-    live = TRY_LIVE and _try["llm_calls"] < TRY_DAILY_CAP
-    note = ""
-    for attempt_live in ([True, False] if live else [False]):
-        trace = Trace(on_event)
-        try:
-            accts = Agent(VERSIONS[LATEST], Tools(world(), trace), _try_llm(attempt_live), trace).run(
-                [dict(r) for r in rows])
-            break
-        except Exception as exc:   # live model unavailable or rate limited: fall back to recorded answers
-            log.warning("live LLM failed: %s: %s", type(exc).__name__, str(exc)[:300])
-            note = f"live model unavailable ({type(exc).__name__}); used recorded answers only"
-            if on_event:
-                on_event({"kind": "reset", "note": note})
-    if attempt_live:
-        _try["llm_calls"] += trace.llm_calls
-    return {"accounts": accts, "trace": trace, "llm": "live" if attempt_live else "recorded only", "note": note}
 
 
 def _try_row(req: TryRequest) -> dict:
@@ -102,33 +123,48 @@ def _try_payload(res: dict) -> dict:
             "steps": t.events, "llm_calls": t.llm_calls, "tool_calls": t.tool_calls}
 
 
+@app.get("/healthz")
+def healthz():
+    return {"ok": True}
+
+
+@app.get("/api/config")
+def config():
+    """What the browser may offer: write actions are hidden on the read-only public demo."""
+    return {"read_only": PUBLIC, "live_llm": TRY_LIVE, "version": LATEST, "batch_max_rows": BATCH_MAX_ROWS}
+
+
 @app.post("/api/try")
 def try_it(req: TryRequest, request: Request):
     """Run the shipped agent on one CRM row typed by the visitor and return the account plus every step it took."""
-    _client_ok(request, "try", 2)
-    return _try_payload(_run_rows([_try_row(req)]))
+    limiter.check(request, "try", per_minute=20, burst=5)
+    return _try_payload(_run_rows([_try_row(req)], "try"))
 
 
 @app.post("/api/try/stream")
 def try_stream(req: TryRequest, request: Request):
     """Same as /api/try, streamed as server-sent events: one `step` event per tool call, LLM call or decision as it
     happens, then a `done` event with the account."""
-    _client_ok(request, "try", 2)
-    q: queue.Queue = queue.Queue()
+    limiter.check(request, "try", per_minute=20, burst=5)
+    q: queue.Queue = queue.Queue(maxsize=1000)
     row = _try_row(req)
 
     def work():
         try:
-            q.put(("done", _try_payload(_run_rows([row], on_event=lambda e: q.put(("step", e))))))
-        except Exception as exc:   # surfaced to the client as an error event
-            q.put(("error", {"error": type(exc).__name__}))
+            q.put(("done", _try_payload(_run_rows([row], "try", on_event=lambda e: q.put(("step", e))))))
+        except HTTPException as exc:
+            q.put(("error", {"error": exc.detail}))
+        except Exception as exc:   # never leak internals to the client
+            log.warning("stream failed: %s", type(exc).__name__)
+            q.put(("error", {"error": "internal error"}))
 
     threading.Thread(target=work, daemon=True).start()
 
     def events():
+        deadline = time.monotonic() + 90
         while True:
             try:
-                kind, data = q.get(timeout=120)
+                kind, data = q.get(timeout=max(1.0, deadline - time.monotonic()))
             except queue.Empty:
                 yield 'event: error\ndata: {"error": "timeout"}\n\n'
                 return
@@ -140,6 +176,7 @@ def try_stream(req: TryRequest, request: Request):
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
 
+# ---------- clean a CSV ----------
 BATCH_MAX_ROWS = 50
 _HEADER_ALIASES = {"account_name": ("account_name", "account", "name", "company", "company_name"),
                    "website": ("website", "domain", "url", "site"),
@@ -153,26 +190,33 @@ class BatchRequest(BaseModel):
 
 
 def _parse_csv(text: str) -> list[dict]:
-    reader = csv.DictReader(io.StringIO(text.strip()))
-    if not reader.fieldnames:
-        raise HTTPException(400, "empty CSV")
-    cols = {h.strip().lower(): h for h in reader.fieldnames if h}
-    pick = {k: next((cols[a] for a in aliases if a in cols), None) for k, aliases in _HEADER_ALIASES.items()}
-    if not pick["account_name"]:
-        raise HTTPException(400, "the CSV needs a column named account_name, name or company")
+    try:
+        reader = csv.DictReader(io.StringIO(text.replace("\x00", "").strip()))
+        fieldnames = reader.fieldnames
+        if not fieldnames:
+            raise HTTPException(400, "empty CSV")
+        cols = {h.strip().lower(): h for h in fieldnames if h}
+        pick = {k: next((cols[a] for a in aliases if a in cols), None) for k, aliases in _HEADER_ALIASES.items()}
+        if not pick["account_name"]:
+            raise HTTPException(400, "the CSV needs a column named account_name, name or company")
 
-    def cell(r: dict, key: str, limit: int) -> str:
-        return (r.get(pick[key]) or "").strip()[:limit] if pick[key] else ""
+        def cell(r: dict, key: str, limit: int) -> str:
+            v = r.get(pick[key]) if pick[key] else ""
+            return (v if isinstance(v, str) else "").strip()[:limit]
 
-    rows = []
-    for i, r in enumerate(reader, 1):
-        name = cell(r, "account_name", 120)
-        if not name:
-            continue
-        emp = cell(r, "employee_count", 20).replace(",", "")
-        rows.append({"crm_id": f"ROW-{i:03d}", "account_name": name, "website": cell(r, "website", 200),
-                     "hq_country": cell(r, "hq_country", 60), "employee_count": emp if emp.isdigit() else "",
-                     "last_updated": cell(r, "last_updated", 10)})
+        rows = []
+        for i, r in enumerate(reader, 1):
+            if i > BATCH_MAX_ROWS + 1:
+                break
+            name = cell(r, "account_name", 120)
+            if not name:
+                continue
+            emp = cell(r, "employee_count", 20).replace(",", "")
+            rows.append({"crm_id": f"ROW-{i:03d}", "account_name": name, "website": cell(r, "website", 200),
+                         "hq_country": cell(r, "hq_country", 60), "employee_count": emp if emp.isdigit() else "",
+                         "last_updated": cell(r, "last_updated", 10)})
+    except csv.Error:
+        raise HTTPException(400, "could not parse the CSV")
     if not rows:
         raise HTTPException(400, "no rows with an account name")
     if len(rows) > BATCH_MAX_ROWS:
@@ -184,10 +228,10 @@ def _parse_csv(text: str) -> list[dict]:
 def batch(req: BatchRequest, request: Request):
     """Clean a small CRM export: merge duplicates, resolve each account, fill current facts with provenance, judge
     fit, and flag what needs a human. Returns one entry per account with the CRM rows it came from."""
-    _client_ok(request, "batch", 8 if PUBLIC else 0)
+    limiter.check(request, "batch", per_minute=4, burst=2)
     rows = _parse_csv(req.csv)
     t0 = time.perf_counter()
-    res = _run_rows(rows)
+    res = _run_rows(rows, "batch")
     by_id = {r["crm_id"]: r for r in rows}
     out = []
     for a in res["accounts"]:
@@ -206,6 +250,13 @@ def batch(req: BatchRequest, request: Request):
                         "target_customers": sum(1 for x in out if x["icp_fit"] and not x["needs_review"]),
                         "llm_calls": t.llm_calls, "tool_calls": t.tool_calls,
                         "seconds": round(time.perf_counter() - t0, 2)}}
+
+
+# ---------- evals ----------
+class RunRequest(BaseModel):
+    version: str = Field(LATEST, max_length=8)
+    split: str = Field("test", max_length=8)
+    llm: str = Field("replay", max_length=8)
 
 
 @app.get("/api/versions")
@@ -235,15 +286,12 @@ def start_run(req: RunRequest, request: Request):
         raise HTTPException(400, "unknown version or split")
     if req.llm not in ("none", "replay"):
         raise HTTPException(400, "the API only runs offline (none) or recorded (replay) LLM modes")
-    if PUBLIC:
-        ip = request.client.host if request.client else "?"
-        if time.time() - _last_run.get(ip, 0) < 5:
-            raise HTTPException(429, "one run every 5 seconds, please")
-        _last_run[ip] = time.time()
-    if not _run_lock.acquire(timeout=30):
-        raise HTTPException(429, "busy, try again")
+    limiter.check(request, "runs", per_minute=6, burst=2)
+    if not _run_lock.acquire(timeout=20):
+        raise HTTPException(503, "busy, try again", headers={"Retry-After": "5"})
     try:
-        res = flywheel.run(req.version, req.split, req.llm)
+        with AgentSlot():
+            res = flywheel.run(req.version, req.split, req.llm)
         if PUBLIC:
             protect = {e[k] for e in history() for k in ("dev_run", "test_run")}
             store.prune_runs(keep=100, protect=protect)
@@ -253,7 +301,7 @@ def start_run(req: RunRequest, request: Request):
 
 
 @app.get("/api/runs/{run_id}")
-def run_detail(run_id: str):
+def run_detail(run_id: str = RUN_ID):
     run = store.get_run(run_id)
     if run is None:
         raise HTTPException(404, "run not found")
@@ -261,22 +309,24 @@ def run_detail(run_id: str):
 
 
 @app.get("/api/runs/{run_id}/failures")
-def run_failures(run_id: str, signature: str | None = None):
-    return store.get_failures(run_id, signature)
+def run_failures(run_id: str = RUN_ID, signature: str | None = None):
+    return store.get_failures(run_id, signature[:64] if signature else None)
 
 
 @app.get("/api/runs/{run_id}/accounts")
-def run_accounts(run_id: str):
+def run_accounts(run_id: str = RUN_ID):
     return store.get_accounts(run_id)
 
 
 @app.get("/api/runs/{run_id}/trace")
-def run_trace(run_id: str, account: str | None = None):
-    return store.get_trace(run_id, account)
+def run_trace(run_id: str = RUN_ID, account: str | None = None):
+    return store.get_trace(run_id, account[:64] if account else None)
 
 
 @app.post("/api/failures/{failure_id}/promote")
-def promote(failure_id: str):
+def promote(request: Request, failure_id: str = FAILURE_ID):
+    if PUBLIC:
+        security.require_admin(request)
     try:
         return {"case": flywheel.promote(failure_id)}
     except KeyError:

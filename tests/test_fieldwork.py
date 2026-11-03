@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import tempfile
 
 os.environ.setdefault("FIELDWORK_DB", f"sqlite:///{tempfile.mkdtemp()}/test.db")
@@ -116,7 +117,8 @@ def test_stress_strip_rate_is_stable():
 
 def test_try_endpoint_resolves_an_old_website_and_refuses_gibberish():
     from fastapi.testclient import TestClient
-    from fieldwork.api import _try, app
+    from fieldwork.api import app
+    from fieldwork.security import limiter
 
     c = TestClient(app)
     r = c.post("/api/try", json={"account_name": "adobe", "website": "business.adobe.com", "hq_country": "United States"})
@@ -124,18 +126,19 @@ def test_try_endpoint_resolves_an_old_website_and_refuses_gibberish():
     acct = r.json()["account"]
     assert acct["fields"]["domain"]["value"] == "adobe.com" and not acct["needs_review"]
     assert r.json()["steps"]
-    _try["last"].clear()
+    limiter.reset()
     r = c.post("/api/try", json={"account_name": "qzxwvplmk"})
     assert r.json()["account"]["needs_review"]
-    _try["last"].clear()
+    limiter.reset()
     assert c.post("/api/try", json={"account_name": ""}).status_code == 422
 
 
 def test_try_stream_sends_steps_then_the_account():
     from fastapi.testclient import TestClient
-    from fieldwork.api import _try, app
+    from fieldwork.api import app
+    from fieldwork.security import limiter
 
-    _try["last"].clear()
+    limiter.reset()
     with TestClient(app).stream("POST", "/api/try/stream", json={"account_name": "adobe", "website": "business.adobe.com"}) as r:
         body = "".join(r.iter_text())
     assert r.status_code == 200 and r.headers["content-type"].startswith("text/event-stream")
@@ -146,9 +149,10 @@ def test_try_stream_sends_steps_then_the_account():
 
 def test_batch_merges_duplicates_and_flags_what_it_cannot_verify():
     from fastapi.testclient import TestClient
-    from fieldwork.api import _try, app
+    from fieldwork.api import app
+    from fieldwork.security import limiter
 
-    _try["last"].clear()
+    limiter.reset()
     csv_text = ("name,website,country\n"
                 "adobe,business.adobe.com,United States\n"
                 "ADBE,business.adobe.com,United States\n"
@@ -161,11 +165,91 @@ def test_batch_merges_duplicates_and_flags_what_it_cannot_verify():
 
 def test_batch_rejects_bad_input():
     from fastapi.testclient import TestClient
-    from fieldwork.api import _try, app
+    from fieldwork.api import app
+    from fieldwork.security import limiter
 
     c = TestClient(app)
-    _try["last"].clear()
+    limiter.reset()
     assert c.post("/api/batch", json={"csv": "foo,bar\n1,2"}).status_code == 400
-    _try["last"].clear()
+    limiter.reset()
     too_many = "name\n" + "\n".join(f"Company {i}" for i in range(60))
     assert c.post("/api/batch", json={"csv": too_many}).status_code == 400
+
+
+def test_security_headers_on_pages_and_api():
+    from fastapi.testclient import TestClient
+    from fieldwork.api import app
+
+    c = TestClient(app)
+    for path in ("/", "/api/versions", "/static/app.js"):
+        h = c.get(path).headers
+        assert "script-src 'self' https://cdnjs.cloudflare.com" in h["content-security-policy"]
+        assert "frame-ancestors 'none'" in h["content-security-policy"]
+        assert h["x-content-type-options"] == "nosniff" and h["x-frame-options"] == "DENY"
+    assert "'unsafe-inline'" not in c.get("/").headers["content-security-policy"].split("script-src")[1].split(";")[0]
+    assert c.get("/api/history").headers["cache-control"] == "no-store"
+
+
+def test_page_has_no_inline_script_and_pins_cdn_integrity():
+    from fieldwork.api import STATIC
+
+    html = (STATIC / "index.html").read_text(encoding="utf-8")
+    assert "<script>" not in html and "onclick=" not in html
+    assert 'integrity="sha512-' in html and 'crossorigin="anonymous"' in html
+
+
+def test_oversized_body_is_rejected():
+    from fastapi.testclient import TestClient
+    from fieldwork.api import app
+
+    r = TestClient(app).post("/api/batch", content=b"x" * (200 * 1024), headers={"content-type": "application/json"})
+    assert r.status_code == 413
+
+
+def test_promote_is_admin_only_on_the_public_demo(monkeypatch):
+    from fastapi.testclient import TestClient
+    from fieldwork import api, security
+
+    monkeypatch.setattr(api, "PUBLIC", True)
+    monkeypatch.setattr(security, "ADMIN_TOKEN", "s3cret-token")
+    c = TestClient(api.app)
+    assert c.post("/api/failures/0123456789ab-000/promote").status_code == 403
+    assert c.post("/api/failures/0123456789ab-000/promote", headers={"x-admin-token": "wrong"}).status_code == 403
+    assert c.post("/api/failures/0123456789ab-000/promote", headers={"x-admin-token": "s3cret-token"}).status_code == 404
+    assert c.post("/api/failures/../../etc/promote").status_code in (404, 422)
+
+
+def test_rate_limit_uses_rightmost_forwarded_ip(monkeypatch):
+    from fastapi.testclient import TestClient
+    from fieldwork import security
+    from fieldwork.api import app
+
+    monkeypatch.setattr(security, "TRUST_PROXY", True)
+    limiter = security.limiter
+    limiter.reset()
+    c = TestClient(app)
+    body = {"csv": "name\nadobe"}
+    # a client spoofing the left-most X-Forwarded-For value is still identified by the proxy-appended address
+    codes = [c.post("/api/batch", json=body, headers={"x-forwarded-for": f"1.1.1.{i}, 9.9.9.9"}).status_code for i in range(3)]
+    assert codes[:2] == [200, 200] and codes[2] == 429
+    assert c.post("/api/batch", json=body, headers={"x-forwarded-for": "9.9.9.10"}).status_code == 200
+    limiter.reset()
+
+
+def test_live_llm_budget_stops_paid_calls():
+    from fieldwork.api import BudgetedLLM
+
+    class Fake:
+        mode, model, enabled = "groq", "m", True
+        def is_recorded(self, s, u): return u == "known"
+        def json(self, s, u, trace=None, purpose=""): return {"ok": u}
+
+    b = BudgetedLLM(Fake(), budget=1)
+    assert b.json("s", "new-1") == {"ok": "new-1"}
+    assert b.json("s", "new-2") is None            # budget spent: no more paid calls
+    assert b.json("s", "known") == {"ok": "known"}  # recorded answers stay free
+
+
+def test_cleaned_csv_cells_are_formula_safe():
+    js = (Path(__file__).resolve().parents[1] / "fieldwork" / "static" / "app.js").read_text(encoding="utf-8")
+    assert r"/^[=+\-@\t\r]/" in js

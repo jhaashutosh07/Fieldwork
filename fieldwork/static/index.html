@@ -5,678 +5,189 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fieldwork</title>
 <meta name="description" content="An AI agent that cleans a messy sales CRM and proves it: 55.7% to 95.6% verified accuracy, 0% silent errors, CI-gated releases.">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-  :root {
-    --bg: #f6f7f9; --panel: #ffffff; --ink: #14171f; --muted: #5d6576; --line: #e3e6ec;
-    --accent: #2f5bea; --good: #138a52; --bad: #c2352b; --warn: #a86a00; --chip: #eef1f7;
-    --mono: ui-monospace, "Cascadia Code", Consolas, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #0e1117; --panel: #161a22; --ink: #e8ebf1; --muted: #98a1b3; --line: #262c38;
-            --accent: #7b9bff; --good: #3ccf8e; --bad: #ff7b72; --warn: #e3b341; --chip: #1f2531; }
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 "Segoe UI", system-ui, sans-serif; }
-  header { padding: 22px 28px 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; }
-  h1 { margin: 0; font-size: 22px; letter-spacing: -0.3px; }
-  header p { margin: 0; color: var(--muted); }
-  main { padding: 8px 28px 40px; display: grid; gap: 18px; max-width: 1280px; }
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
-  .kpi, section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
-  .kpi { padding: 14px 16px; }
-  .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
-  .kpi .value { font-size: 26px; font-weight: 650; margin-top: 2px; font-variant-numeric: tabular-nums; }
-  .kpi .sub { color: var(--muted); font-size: 12px; }
-  section { padding: 16px 18px; }
-  section h2 { margin: 0 0 12px; font-size: 15px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  section h2 .hint { color: var(--muted); font-weight: 400; font-size: 12.5px; }
-  .grid2 { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; }
-  @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } main, header { padding-left: 16px; padding-right: 16px; } }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; color: var(--muted); font-weight: 600; font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--line); }
-  td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  tr.click { cursor: pointer; } tr.click:hover td { background: var(--chip); }
-  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .chip { display: inline-block; background: var(--chip); border-radius: 999px; padding: 1px 8px; font-size: 12px; }
-  .good { color: var(--good); } .bad { color: var(--bad); } .muted { color: var(--muted); }
-  .bars { display: grid; gap: 6px; }
-  .bar { display: grid; grid-template-columns: 210px 1fr 40px; gap: 10px; align-items: center; cursor: pointer;
-         padding: 3px 6px; border-radius: 6px; }
-  .bar:hover, .bar.active { background: var(--chip); }
-  .bar .track { height: 10px; background: var(--chip); border-radius: 5px; overflow: hidden; }
-  .bar .fill { height: 100%; background: var(--accent); border-radius: 5px; }
-  .bar .name { font-family: var(--mono); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  select, button { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line);
-                   border-radius: 7px; padding: 5px 9px; }
-  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); cursor: pointer; }
-  button.small { padding: 2px 8px; font-size: 12px; cursor: pointer; }
-  button:disabled { opacity: .55; cursor: default; }
-  .scroll { max-height: 420px; overflow: auto; }
-  .trace { font-family: var(--mono); font-size: 12px; display: grid; gap: 6px; }
-  .ev { border-left: 3px solid var(--line); padding: 4px 10px; }
-  .ev.tool { border-color: var(--accent); } .ev.llm { border-color: var(--warn); } .ev.decision { border-color: var(--good); }
-  .ev .head { font-weight: 600; } .ev pre { margin: 3px 0 0; white-space: pre-wrap; word-break: break-word; color: var(--muted); }
-  .empty { color: var(--muted); padding: 10px 0; }
-  canvas { max-height: 260px; }
-  html { scroll-behavior: smooth; }
-  .topnav { position: sticky; top: 0; z-index: 10; display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
-            padding: 10px 28px; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--line); font-size: 13.5px; }
-  .topnav .brand { font-weight: 700; font-size: 15px; margin-right: 6px; color: var(--ink); text-decoration: none; }
-  .topnav a { color: var(--muted); text-decoration: none; }
-  .topnav a:hover { color: var(--ink); }
-  .topnav .right { margin-left: auto; display: flex; gap: 14px; }
-  .hero { display: block; padding: 34px 28px 8px; max-width: 1280px; }
-  .eyebrow { color: var(--accent); font-weight: 650; font-size: 12.5px; letter-spacing: .6px; text-transform: uppercase; }
-  .hero h1 { font-size: clamp(24px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.6px; margin: 8px 0 12px; max-width: 900px; }
-  .lede { color: var(--muted); font-size: 16px; max-width: 860px; margin: 0; }
-  .bignums { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 22px 0 18px; }
-  .bignum { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-  .bignum .n { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.4px; }
-  .bignum .n .from { color: var(--muted); font-weight: 500; font-size: 18px; }
-  .bignum .l { color: var(--muted); font-size: 13px; margin-top: 2px; }
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0 0 18px; counter-reset: st; }
-  .steps li { background: var(--chip); border-radius: 10px; padding: 10px 12px; font-size: 13px; color: var(--muted); counter-increment: st; }
-  .steps li b { display: block; color: var(--ink); font-size: 14px; margin-bottom: 2px; }
-  .steps li b::before { content: counter(st) ". "; color: var(--accent); }
-  .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
-  .btn { display: inline-block; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink);
-         text-decoration: none; background: var(--panel); font-weight: 600; font-size: 14px; cursor: pointer; }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .tryform { display: grid; grid-template-columns: 2fr 1.4fr 1fr auto; gap: 8px; }
-  @media (max-width: 760px) { .tryform { grid-template-columns: 1fr; } .topnav { padding: 10px 16px; } .hero { padding: 24px 16px 4px; } }
-  .tryform input { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0; }
-  .examples { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; align-items: center; }
-  .examples button { font: inherit; font-size: 12.5px; border: 1px dashed var(--line); background: transparent; color: var(--ink); border-radius: 999px; padding: 3px 10px; cursor: pointer; }
-  .examples button:hover { border-style: solid; border-color: var(--accent); }
-  .examples .why { color: var(--muted); }
-  .result { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; margin-top: 14px; }
-  @media (max-width: 900px) { .result { grid-template-columns: 1fr; } }
-  .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--bg); }
-  .card h3 { margin: 0 0 4px; font-size: 18px; }
-  .card .verdict { margin: 6px 0 10px; }
-  .kv { display: grid; grid-template-columns: 110px 1fr; gap: 5px 10px; font-size: 13.5px; }
-  .kv .k { color: var(--muted); }
-  .src { color: var(--muted); font-size: 12px; }
-  footer { max-width: 1280px; padding: 6px 28px 40px; color: var(--muted); font-size: 13px; }
-  footer a { color: var(--ink); }
-
-  .note { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
-  .note b { color: var(--ink); }
-  .chip.ok { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
-  .chip.no { background: color-mix(in srgb, var(--bad) 16%, transparent); color: var(--bad); }
-  .chip.meh { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
-  .chartbox { position: relative; height: 270px; }
-  .chartbox canvas { max-height: none; }
-  .pipe { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin: 14px 0 2px; }
-  .node { padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-weight: 650;
-          font-size: 13px; background: var(--panel); transition: all .25s ease; }
-  .node.active { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
-                 animation: pulse 1s ease-in-out infinite; }
-  .node.done { border-color: var(--good); color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--panel)); }
-  .node.review { border-color: var(--warn); color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, var(--panel)); }
-  .pipe .arrow { color: var(--line); font-weight: 700; }
-  @keyframes pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 6%, transparent); } }
-  @keyframes fadein { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-  .trace .ev { animation: fadein .25s ease; }
-  .working { color: var(--muted); display: flex; gap: 8px; align-items: center; }
-  .spinner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); border-top-color: var(--accent); animation: spin .8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .batchgrid { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 12px; }
-  @media (max-width: 760px) { .batchgrid { grid-template-columns: 1fr; } }
-  .batchgrid textarea { width: 100%; min-height: 220px; font: 12.5px/1.5 var(--mono); color: var(--ink); background: var(--bg);
-                        border: 1px solid var(--line); border-radius: 8px; padding: 10px; resize: vertical; }
-  .batchside { display: flex; flex-direction: column; gap: 8px; }
-  .batchside .btn { text-align: center; }
-  .summary { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 8px; }
-  .summary .stat { background: var(--chip); border-radius: 8px; padding: 6px 12px; font-size: 13px; }
-  .summary .stat b { font-size: 16px; margin-right: 4px; }
-  #bOut td .src { display: block; }
-  @media (prefers-reduced-motion: reduce) { .node.active, .spinner, .trace .ev { animation: none; } }
-
-</style>
+<link rel="stylesheet" href="/static/app.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+        integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+<script src="/static/app.js" defer></script>
 </head>
 <body>
-<nav class="topnav">
-  <a class="brand" href="#overview">Fieldwork</a>
-  <a href="#try">Try it</a><a href="#batch">Clean a CSV</a><a href="#results">Results</a><a href="#insights">Insights</a><a href="#explorer">Explorer</a><a href="#tests">Regression tests</a>
-  <span class="right"><a href="https://github.com/jhaashutosh07/Fieldwork" target="_blank" rel="noopener">GitHub ↗</a></span>
-</nav>
-<header class="hero" id="overview">
-  <div class="eyebrow">AI agent · evaluation · production reliability</div>
-  <h1>An AI agent that cleans a messy sales CRM, and proves it got it right.</h1>
-  <p class="lede">CRMs fill up with duplicates, old company names, stale headcounts and dead websites. Fieldwork resolves every
-    row to the real company, fills in current facts with their source and date, decides who is worth selling to, and hands
-    anything uncertain to a human instead of guessing. Every number on this page is scored against real ground truth
-    from Wikidata, on companies that were never used to tune the agent.</p>
-  <div class="bignums" id="bignums"></div>
-  <ol class="steps">
-    <li><b>Resolve</b>Website lookup first, then a registry of 3,598 listed companies</li>
-    <li><b>Merge</b>“adobe” and “ADBE” become one account</li>
-    <li><b>Reconcile</b>Newest dated value wins, with its source</li>
-    <li><b>Judge</b>Rules first; an LLM only for what rules can't settle</li>
-    <li><b>Guardrail</b>Not sure? Send it to a human, never guess</li>
-  </ol>
-  <div class="cta"><a class="btn primary" href="#try">Try it on a company →</a><a class="btn" href="#insights">See the evidence</a></div>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#overview"><span class="logo" aria-hidden="true">◆</span> Fieldwork</a>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <a role="tab" href="#overview" data-tab="overview">Overview</a>
+      <a role="tab" href="#clean" data-tab="clean">Clean a CSV</a>
+      <a role="tab" href="#results" data-tab="results">Results</a>
+      <a role="tab" href="#insights" data-tab="insights">Insights</a>
+      <a role="tab" href="#explorer" data-tab="explorer">Explorer</a>
+    </nav>
+    <a class="gh" href="https://github.com/jhaashutosh07/Fieldwork" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+  </div>
 </header>
-<main>
-  <section id="try">
-    <h2>Try the agent <span class="hint">type a CRM row the way a sales rep would; the shipped version resolves it and shows every step</span></h2>
-    <form class="tryform" id="tryForm">
-      <input id="tName" placeholder="Account name, e.g. UberCab" maxlength="120" required>
-      <input id="tSite" placeholder="Website (optional)" maxlength="200">
-      <input id="tCountry" placeholder="HQ country (optional)" maxlength="60">
-      <button class="btn primary" id="tBtn" type="submit">Run agent</button>
-    </form>
-    <div class="examples" id="examples"><span class="why">Examples:</span></div>
-    <div class="pipe" id="pipe"></div>
-    <div id="tryOut"></div>
-  </section>
 
-  <section id="batch" style="scroll-margin-top: 60px">
-    <h2>Clean your own CRM <span class="hint">paste or upload a CSV (up to 50 rows): duplicates merged, old names and stale data fixed, doubtful rows flagged for a human</span></h2>
-    <div class="batchgrid">
-      <textarea id="bCsv" spellcheck="false" placeholder="account_name,website,hq_country,employee_count,last_updated"></textarea>
-      <div class="batchside">
-        <button class="btn" type="button" id="bSample">Load a messy sample</button>
-        <label class="btn" for="bFile">Upload CSV…</label>
-        <input type="file" id="bFile" accept=".csv,text/csv" hidden>
-        <button class="btn primary" type="button" id="bRun">Clean it</button>
-        <button class="btn" type="button" id="bDownload" disabled>Download cleaned CSV</button>
-        <div class="muted" style="font-size:12px">Columns: <code>account_name</code> (or <code>name</code>/<code>company</code>), optional <code>website</code>, <code>hq_country</code>, <code>employee_count</code>, <code>last_updated</code>.</div>
+<main class="wrap">
+
+  <!-- ===== Overview ===== -->
+  <div class="view" id="view-overview" data-view="overview">
+    <section class="hero">
+      <div class="eyebrow">AI agent · evaluation · production reliability</div>
+      <h1>An AI agent that cleans a messy sales CRM, and proves it got it right.</h1>
+      <p class="lede">CRMs fill up with duplicates, old company names, stale headcounts and dead websites. Fieldwork
+        resolves every row to the real company, fills in current facts with their source and date, decides who is worth
+        selling to, and hands anything uncertain to a human instead of guessing. Every number here is scored against real
+        Wikidata ground truth, on companies never used to tune the agent.</p>
+      <div class="bignums" id="bignums"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Try the agent</h2>
+        <p>Type a CRM row the way a sales rep would. The shipped version resolves it live and shows every step it takes.</p>
       </div>
+      <form class="tryform" id="tryForm" autocomplete="off">
+        <input id="tName" placeholder="Account name, e.g. UberCab" maxlength="120" required aria-label="Account name">
+        <input id="tSite" placeholder="Website (optional)" maxlength="200" aria-label="Website">
+        <input id="tCountry" placeholder="HQ country (optional)" maxlength="60" aria-label="HQ country">
+        <button class="btn primary" id="tBtn" type="submit">Run agent</button>
+      </form>
+      <div class="examples" id="examples"><span class="muted">Try:</span></div>
+      <div class="pipe" id="pipe" aria-live="polite"></div>
+      <div id="tryOut"></div>
+    </section>
+
+    <section class="how">
+      <div class="how-item"><b><span class="n">1</span> Resolve</b><span>Website lookup first, then a registry of 3,598 listed companies</span></div>
+      <div class="how-item"><b><span class="n">2</span> Merge</b><span>“adobe” and “ADBE” become one account</span></div>
+      <div class="how-item"><b><span class="n">3</span> Reconcile</b><span>Newest dated value wins, with its source</span></div>
+      <div class="how-item"><b><span class="n">4</span> Judge</b><span>Rules first; an LLM only where rules can't settle it</span></div>
+      <div class="how-item"><b><span class="n">5</span> Guardrail</b><span>Not sure? Send it to a human, never guess</span></div>
+    </section>
+  </div>
+
+  <!-- ===== Clean a CSV ===== -->
+  <div class="view" id="view-clean" data-view="clean" hidden>
+    <div class="page-head">
+      <h2>Clean your own CRM</h2>
+      <p>Paste or upload a CSV (up to 50 rows). Duplicates are merged, old names and stale data fixed, every value gets
+        its source and date, and anything doubtful is flagged for a human.</p>
     </div>
+    <section class="panel">
+      <div class="batchgrid">
+        <textarea id="bCsv" spellcheck="false" aria-label="CSV input" placeholder="account_name,website,hq_country,employee_count,last_updated"></textarea>
+        <div class="batchside">
+          <button class="btn primary" type="button" id="bRun">Clean it</button>
+          <button class="btn" type="button" id="bSample">Load the messy sample</button>
+          <label class="btn" for="bFile">Upload CSV…</label>
+          <input type="file" id="bFile" accept=".csv,text/csv" hidden>
+          <button class="btn" type="button" id="bDownload" disabled>Download cleaned CSV</button>
+          <p class="fine">Columns: <code>account_name</code> (or <code>name</code> / <code>company</code>), optional
+            <code>website</code>, <code>hq_country</code>, <code>employee_count</code>, <code>last_updated</code>.</p>
+        </div>
+      </div>
+    </section>
     <div class="summary" id="bSummary"></div>
-    <div class="scroll" style="max-height:520px"><table id="bOut"></table></div>
-  </section>
-
-  <div class="kpis" id="kpis" style="scroll-margin-top: 60px"></div>
-
-  <div class="grid2" id="results" style="scroll-margin-top: 60px">
-    <section>
-      <h2>Version history <span class="hint">held-out test split; every change was driven by failure clusters triaged on the dev split</span></h2>
-      <canvas id="chart"></canvas>
-    </section>
-    <section>
-      <h2>Releases</h2>
-      <div class="scroll"><table id="versions"></table></div>
-    </section>
+    <section class="panel flush" id="bPanel" hidden><div class="tablewrap"><table id="bOut"></table></div></section>
   </div>
 
-  <div class="grid2" id="insights" style="scroll-margin-top: 60px">
-    <section>
-      <h2>Is each gain real? <span class="hint">paired bootstrap on the same held-out companies; silent errors use a Wilson interval</span></h2>
-      <div class="scroll"><table id="sig"></table></div>
-      <div class="note" id="sigNote"></div>
-    </section>
-    <section>
-      <h2>How much can run unattended? <span class="hint">automate the accounts the agent is surest about first</span></h2>
-      <div class="chartbox"><canvas id="riskChart"></canvas></div>
-      <div class="note" id="riskNote"></div>
-    </section>
-  </div>
-
-  <div class="grid2">
-    <section>
-      <h2>What if the CRM gets messier? <span class="hint">stress test: websites removed from a growing share of rows</span></h2>
-      <div class="chartbox"><canvas id="stressChart"></canvas></div>
-      <div class="note" id="stressNote"></div>
-    </section>
-    <section>
-      <h2>Experiments and cost <span class="hint">a new version ships only if it beats the shipped one on held-out test</span></h2>
-      <table id="experiments"></table>
-      <table id="cost" style="margin-top:16px"></table>
-      <div class="note" id="costNote"></div>
-    </section>
-  </div>
-
-  <section id="explorer" style="scroll-margin-top: 60px">
-    <h2>Run explorer
-      <select id="runSel"></select>
-      <span class="hint">new run:</span>
-      <select id="newVersion"></select>
-      <select id="newSplit"><option>test</option><option>dev</option></select>
-      <button class="primary" id="runBtn">Run</button>
-    </h2>
-    <div class="grid2">
-      <div>
-        <div class="muted" style="margin-bottom:8px">Failure clusters. Click one to see its failures.</div>
-        <div class="bars" id="clusters"></div>
-      </div>
-      <div>
-        <div class="muted" style="margin-bottom:8px">Run metrics</div>
-        <table id="runMetrics"></table>
-      </div>
+  <!-- ===== Results ===== -->
+  <div class="view" id="view-results" data-view="results" hidden>
+    <div class="page-head">
+      <h2>Results</h2>
+      <p>Held-out test split: 158 companies, 242 CRM rows that no fix was tuned on. Every change was driven by failures
+        triaged on a separate dev split.</p>
     </div>
-  </section>
-
-  <div class="grid2">
-    <section>
-      <h2 id="failTitle">Failures <span class="hint">promote a failure to freeze it as a regression test</span></h2>
-      <div class="scroll"><table id="failures"></table></div>
-    </section>
-    <section>
-      <h2 id="traceTitle">Trace <span class="hint">click a failure to replay what the agent did</span></h2>
-      <div class="scroll"><div class="trace" id="trace"><div class="empty">No failure selected.</div></div></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="grid2">
+      <section class="panel">
+        <div class="panel-head"><h3>Version history</h3><p>Accuracy up, silent errors to zero.</p></div>
+        <div class="chartbox"><canvas id="chart" aria-label="Version history chart"></canvas></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3>Releases</h3><p>Shipped versions and rejected experiments.</p></div>
+        <div class="tablewrap short"><table id="versions"></table></div>
+      </section>
+    </div>
+    <section class="panel">
+      <div class="panel-head"><h3>Is each gain real?</h3><p>Paired bootstrap on the same companies; silent errors use a Wilson interval.</p></div>
+      <div class="tablewrap"><table id="sig"></table></div>
+      <p class="note" id="sigNote"></p>
     </section>
   </div>
 
-  <section id="tests" style="scroll-margin-top: 60px">
-    <h2>Regression suite <span class="hint">every case must pass in CI before a version ships</span></h2>
-    <div class="scroll"><table id="cases"></table></div>
-  </section>
+  <!-- ===== Insights ===== -->
+  <div class="view" id="view-insights" data-view="insights" hidden>
+    <div class="page-head">
+      <h2>Insights</h2>
+      <p>The questions that decide whether an agent can run unattended.</p>
+    </div>
+    <div class="grid2">
+      <section class="panel">
+        <div class="panel-head"><h3>How much can run unattended?</h3><p>Automate the accounts the agent is surest about first.</p></div>
+        <div class="chartbox"><canvas id="riskChart" aria-label="Risk coverage chart"></canvas></div>
+        <p class="note" id="riskNote"></p>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3>What if the CRM gets messier?</h3><p>Stress test: websites removed from a growing share of rows.</p></div>
+        <div class="chartbox"><canvas id="stressChart" aria-label="Stress test chart"></canvas></div>
+        <p class="note" id="stressNote"></p>
+      </section>
+    </div>
+    <div class="grid2">
+      <section class="panel">
+        <div class="panel-head"><h3>Experiments</h3><p>A new version ships only if it beats the shipped one on held-out data.</p></div>
+        <div class="tablewrap"><table id="experiments"></table></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3>Cost</h3><p>Rules run first; the model only sees what they can't settle.</p></div>
+        <div class="tablewrap"><table id="cost"></table></div>
+        <p class="note" id="costNote"></p>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== Explorer ===== -->
+  <div class="view" id="view-explorer" data-view="explorer" hidden>
+    <div class="page-head">
+      <h2>Explorer</h2>
+      <p>Every eval run is traced. Pick a run, open a failure cluster, and replay exactly what the agent did.</p>
+    </div>
+    <section class="panel">
+      <div class="toolbar">
+        <label>Run <select id="runSel" aria-label="Run"></select></label>
+        <span class="spacer"></span>
+        <label>New run <select id="newVersion" aria-label="Version"></select></label>
+        <select id="newSplit" aria-label="Split"><option>test</option><option>dev</option></select>
+        <button class="btn primary small" id="runBtn" type="button">Run</button>
+      </div>
+      <div class="grid2 tight">
+        <div><h4>Failure clusters</h4><div class="bars" id="clusters"></div></div>
+        <div><h4>Run metrics</h4><table id="runMetrics" class="compact"></table></div>
+      </div>
+    </section>
+    <div class="grid2">
+      <section class="panel">
+        <div class="panel-head"><h3 id="failTitle">Failures</h3><p id="failSub">Click a failure to replay its trace.</p></div>
+        <div class="tablewrap"><table id="failures"></table></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h3 id="traceTitle">Trace</h3><p>Every tool call, LLM call and decision.</p></div>
+        <div class="trace tablewrap" id="trace"><p class="empty">No failure selected.</p></div>
+      </section>
+    </div>
+    <section class="panel">
+      <div class="panel-head"><h3>Regression suite</h3><p>Real failures frozen as tests; every case must pass in CI before a version ships.</p></div>
+      <div class="tablewrap short"><table id="cases"></table></div>
+    </section>
+  </div>
 </main>
-<footer>
-  Built by <b>Ashutosh Kumar Jha</b> ·
-  <a href="https://www.linkedin.com/in/ashutosh-kumar-jha-ab7929233/" target="_blank" rel="noopener">LinkedIn</a> ·
-  <a href="https://github.com/jhaashutosh07" target="_blank" rel="noopener">GitHub</a> ·
-  <a href="https://github.com/jhaashutosh07/Fieldwork" target="_blank" rel="noopener">Source code</a> ·
-  Data: Wikidata (CC0)
+
+<footer class="wrap foot">
+  <span>Built by <b>Ashutosh Kumar Jha</b></span>
+  <a href="https://www.linkedin.com/in/ashutosh-kumar-jha-ab7929233/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <a href="https://github.com/jhaashutosh07" target="_blank" rel="noopener noreferrer">GitHub</a>
+  <a href="https://github.com/jhaashutosh07/Fieldwork" target="_blank" rel="noopener noreferrer">Source</a>
+  <span class="muted">Data: Wikidata (CC0)</span>
 </footer>
-<script>
-const $ = (id) => document.getElementById(id);
-const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const pct = (x) => (x == null ? "-" : (100 * x).toFixed(1) + "%");
-const api = async (path, opts) => { const r = await fetch(path, opts); if (!r.ok) throw new Error(await r.text()); return r.json(); };
-const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-let state = { run: null, failures: [], trace: null, accounts: null, signature: null };
-
-async function loadHistory() {
-  const hist = await api("/api/history");
-  const cases = await api("/api/regressions");
-  const released = hist.filter((h) => h.status !== "experiment");
-  // headline = newest released version whose numbers are real (an LLM version counts once its answers are recorded)
-  const last = [...released].reverse().find((h) => !h.uses_llm || h.llm_recorded) || released[released.length - 1];
-  const first = hist[0];
-  state.defaultRun = last && last.test_run;
-  const kpi = (label, value, sub, cls = "") =>
-    `<div class="kpi"><div class="label">${label}</div><div class="value ${cls}">${value}</div><div class="sub">${sub}</div></div>`;
-  $("kpis").innerHTML = last ? [
-    kpi("Verified accuracy", pct(last.test.verified_accuracy), `${last.version} on held-out test; ${pct(first.test.verified_accuracy)} at ${first.version}`, "good"),
-    kpi("Silent error rate", pct(last.test.silent_error_rate), `wrong but unflagged; ${pct(first.test.silent_error_rate)} at ${first.version}`),
-    kpi("Sent to review", pct(last.test.review_rate), "rows the agent refused to guess"),
-    kpi("Regression cases", last.regression_cases, `${cases.length} promoted from real failures`),
-    kpi("ICP precision", pct(last.test.icp_precision), `recall ${pct(last.test.icp_recall)}`),
-  ].join("") : `<div class="kpi"><div class="label">No history yet</div><div class="sub">run: python -m fieldwork history</div></div>`;
-
-  $("versions").innerHTML = "<tr><th>Version</th><th>Change</th><th class='num'>Verified</th><th class='num'>Silent err.</th><th class='num'>Cases</th></tr>" +
-    hist.map((h) => `<tr><td><span class="chip">${h.version}</span>${h.status === "experiment" ? `<br><span class="chip meh" style="margin-top:3px">experiment</span>` : h.version === last.version ? `<br><span class="chip ok" style="margin-top:3px">shipped</span>` : ""}</td><td>${esc(h.summary)}${h.uses_llm ? (h.llm_recorded ? ` <span class="muted">(${esc(h.model)}, replayed)</span>` : ` <span class="bad">(LLM not recorded yet: rules fallback)</span>`) : ""}</td>
-      <td class="num">${pct(h.test.verified_accuracy)}</td><td class="num">${pct(h.test.silent_error_rate)}</td><td class="num">${h.regression_cases}</td></tr>`).join("");
-
-  if (window.Chart && released.length) {
-    new Chart($("chart"), {
-      type: "line",
-      data: { labels: released.map((h) => h.version), datasets: [
-        { label: "Verified accuracy", data: released.map((h) => 100 * h.test.verified_accuracy), borderColor: css("--good"), backgroundColor: css("--good"), tension: .25 },
-        { label: "Silent error rate", data: released.map((h) => 100 * h.test.silent_error_rate), borderColor: css("--bad"), backgroundColor: css("--bad"), tension: .25 },
-        { label: "Sent to review", data: released.map((h) => 100 * h.test.review_rate), borderColor: css("--warn"), backgroundColor: css("--warn"), borderDash: [4, 4], tension: .25 },
-      ]},
-      options: { responsive: true, maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-        scales: { y: { min: 0, max: 100, ticks: { callback: (v) => v + "%", color: css("--muted") }, grid: { color: css("--line") } },
-                  x: { ticks: { color: css("--muted") }, grid: { display: false } } },
-        plugins: { legend: { labels: { color: css("--ink") } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.y.toFixed(1)}%` } } } },
-    });
-    $("chart").parentElement.style.height = "300px";
-  }
-  $("cases").innerHTML = "<tr><th>Case</th><th>Company</th><th>Why it was promoted</th><th>Added</th></tr>" +
-    cases.map((c) => `<tr><td><span class="chip">${esc(c.signature)}</span></td><td>${esc(c.company)}</td><td class="muted">${esc(c.detail)}</td><td>${esc(c.created)}</td></tr>`).join("");
-}
-
-const pp = (x) => (x == null ? "-" : (x >= 0 ? "+" : "") + (100 * x).toFixed(1));
-const axes = (xLabel, yMin, yMax) => ({
-  x: { type: "linear", min: 0, max: 100, title: { display: true, text: xLabel, color: css("--muted") }, ticks: { callback: (v) => v + "%", color: css("--muted") }, grid: { color: css("--line") } },
-  y: { min: yMin, max: yMax, ticks: { callback: (v) => v + "%", color: css("--muted") }, grid: { color: css("--line") } } });
-const lineOpts = (xLabel, yMin, yMax, yName) => ({ responsive: true, maintainAspectRatio: false, interaction: { mode: "nearest", intersect: false },
-  scales: axes(xLabel, yMin, yMax),
-  plugins: { legend: { labels: { color: css("--ink") } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${yName} ${c.parsed.y.toFixed(1)}% at ${c.parsed.x.toFixed(0)}%` } } } });
-const palette = { v1: "--muted", v3: "--warn", v4: "--accent", v5: "--good" };
-
-async function loadInsights() {
-  let ins;
-  try { ins = await api("/api/insights"); } catch { return; }
-  if (!ins || !ins.versions) return;
-  const sigChip = (d, lowerIsBetter) => {
-    if (!d) return "";
-    const good = lowerIsBetter ? d.ci[1] < 0 : d.ci[0] > 0, bad = lowerIsBetter ? d.ci[0] > 0 : d.ci[1] < 0;
-    return `${pp(d.delta)} pts <span class="muted">[${pp(d.ci[0])}, ${pp(d.ci[1])}]</span> <span class="chip ${good ? "ok" : bad ? "no" : "meh"}">${good ? "real" : bad ? "worse" : "not significant"}</span>`;
-  };
-  $("sig").innerHTML = "<tr><th>Version</th><th>Verified (95% CI)</th><th>Gain vs previous</th><th>Silent errors (95% CI)</th></tr>" +
-    ins.versions.map((v) => `<tr><td><span class="chip">${v.version}</span></td>
-      <td>${pct(v.verified_accuracy)} <span class="muted">[${pct(v.ci.verified_accuracy[0])}, ${pct(v.ci.verified_accuracy[1])}]</span></td>
-      <td>${v.vs_prev ? sigChip(v.vs_prev.verified_accuracy, false) : "<span class='muted'>baseline</span>"}</td>
-      <td>${pct(v.silent_error_rate)} <span class="muted">[${pct(v.ci.silent_error_rate[0])}, ${pct(v.ci.silent_error_rate[1])}]</span></td></tr>`).join("");
-  const shipped = ins.versions[ins.versions.length - 1];
-  $("sigNote").innerHTML = `${ins.companies} held-out companies, ${ins.bootstrap_resamples.toLocaleString("en-US")} bootstrap resamples. ` +
-    `${shipped.version} made <b>0 silent errors</b>; with this sample size the true rate is at most <b>${pct(shipped.ci.silent_error_rate[1])}</b> (95%).`;
-
-  if (window.Chart) {
-    const rc = ins.risk_coverage;
-    new Chart($("riskChart"), { type: "line", data: { datasets: Object.entries(rc).map(([v, c]) => ({
-        label: v, data: c.points.map((p) => ({ x: 100 * p.coverage, y: 100 * p.error })), borderColor: css(palette[v]), backgroundColor: css(palette[v]),
-        pointRadius: c.points.map((p) => (c.operating && p.coverage === c.operating.coverage && p.error === c.operating.error ? 6 : 0)), tension: .15 })) },
-      options: lineOpts("rows handled automatically", 0, 12, "error") });
-    const cur = rc[shipped.version] || Object.values(rc).pop();
-    $("riskNote").innerHTML = `Dots mark where each version stops and hands off to review. <b>${shipped.version}</b> handles <b>${pct(cur.operating.coverage)}</b> of rows unattended at <b>${pct(cur.operating.error)}</b> error; ` +
-      `forcing 100% automation would cost <b>${pct(cur.full_automation_error)}</b> errors.`;
-
-    const st = ins.stress;
-    new Chart($("stressChart"), { type: "line", data: { datasets: Object.entries(st.series).map(([v, s]) => ({
-        label: v, data: s.verified_accuracy.map((y, i) => ({ x: 100 * st.rates[i], y: 100 * y })), borderColor: css(palette[v]), backgroundColor: css(palette[v]), tension: .2 })) },
-      options: lineOpts("CRM rows with the website removed", 40, 100, "verified") });
-    const s5 = st.series[shipped.version], s4 = st.series.v4, s1 = st.series.v1, n = st.rates.length - 1;
-    $("stressNote").innerHTML = `With every website removed, <b>${shipped.version} still verifies ${pct(s5.verified_accuracy[n])}</b> (rules-only v4: ${pct(s4.verified_accuracy[n])}) ` +
-      `with ${pct(s5.silent_error_rate[n])} silent errors. (v3 and v4 overlap: same accuracy, but v4 sends doubtful rows to review instead of getting them wrong.) v1 <i>improves</i> as websites disappear (${pct(s1.verified_accuracy[0])} → ${pct(s1.verified_accuracy[n])}): its CRM websites were often stale, so trusting old data was worse than having none.`;
-  }
-
-  $("experiments").innerHTML = "<tr><th>Experiment</th><th>Verified vs shipped</th><th>Decision</th></tr>" +
-    ins.experiments.map((x) => `<tr><td><span class="chip">${x.version}</span><div class="muted" style="font-size:12px;margin-top:3px">${esc(x.summary)}</div></td>
-      <td>${sigChip(x.vs_shipped.verified_accuracy, false)}</td>
-      <td><span class="chip ${x.decision === "ship" ? "ok" : x.decision === "rejected" ? "no" : "meh"}">${esc(x.decision)}</span><div class="muted" style="font-size:12px;margin-top:3px">${esc(x.reason)}</div></td></tr>`).join("");
-  const money = (x) => (x == null ? "-" : "$" + x.toFixed(x > 0 && x < 0.01 ? 5 : 3));
-  $("cost").innerHTML = "<tr><th>Version</th><th class='num'>LLM calls / 1k rows</th><th class='num'>$ / 1k rows</th><th class='num'>$ / verified account</th></tr>" +
-    ins.versions.filter((v) => ["v1", "v4", shipped.version].includes(v.version)).map((v) => `<tr><td><span class="chip">${v.version}</span></td>
-      <td class="num">${v.cost.llm_calls_per_1k_rows}</td><td class="num">${money(v.cost.usd_per_1k_rows)}</td><td class="num">${money(v.cost.usd_per_verified_account)}</td></tr>`).join("");
-  $("costNote").innerHTML = `LLM: <b>${esc(ins.llm.model)}</b>; median live call ${ins.llm.median_live_ms ? (ins.llm.median_live_ms / 1000).toFixed(2) + " s" : "-"} (${ins.llm.timed_calls} timed calls). ` +
-    `Rules run first, so the model only sees the cases they can't settle.`;
-}
-
-// ---------- hero numbers ----------
-function renderBig(hist, ins) {
-  const released = hist.filter((h) => h.status !== "experiment");
-  const first = released[0], last = [...released].reverse().find((h) => !h.uses_llm || h.llm_recorded);
-  if (!first || !last) return;
-  const shipped = ins && ins.risk_coverage && ins.risk_coverage[last.version];
-  const cost = ins && ins.versions ? ins.versions.find((v) => v.version === last.version) : null;
-  const big = (from, to, label) => `<div class="bignum"><div class="n">${from ? `<span class="from">${from} → </span>` : ""}${to}</div><div class="l">${label}</div></div>`;
-  $("bignums").innerHTML = [
-    big(pct(first.test.verified_accuracy), `<span class="good">${pct(last.test.verified_accuracy)}</span>`, "companies fully verified (entity, website, headcount, country, fit)"),
-    big(pct(first.test.silent_error_rate), `<span class="good">${pct(last.test.silent_error_rate)}</span>`, "silent errors: wrong answers nobody was warned about"),
-    shipped ? big("", pct(shipped.operating.coverage), "of CRM rows handled with no human, at 0% error") : "",
-    cost ? big("", "$" + cost.cost.usd_per_1k_rows.toFixed(2), "LLM cost per 1,000 CRM rows") : "",
-  ].join("");
-}
-
-// ---------- try it ----------
-const EXAMPLES = [
-  { n: "UberCab", c: "Netherlands", why: "former name" },
-  { n: "adobe", w: "business.adobe.com", c: "United States", why: "old website, stale data" },
-  { n: "Zoom Communications", w: "http://zoom.com", c: "United States", why: "target customer?" },
-  { n: "Facebook", why: "renamed company" },
-  { n: "Cliffs Natural Resources", c: "United States", why: "old name, look-alike trap" },
-  { n: "Totsuko", c: "Japan", why: "too obscure: watch it refuse to guess" },
-];
-function stepLabel(e) {
-  const a = e.args || {};
-  if (e.kind === "tool" && e.name === "domain_lookup") return `Looked up website <b>${esc(a.domain)}</b>`;
-  if (e.kind === "tool" && e.name === "registry_search") return `Searched the company registry for <b>“${esc(a.query)}”</b>`;
-  if (e.kind === "tool" && e.name === "company_profile") return `Fetched the company profile`;
-  if (e.kind === "llm") return `Asked the LLM: <b>${esc(e.name.replace(/_/g, " "))}</b> <span class="muted">(${e.replayed ? "recorded answer" : "live"})</span>`;
-  return `Decision: <b>${esc(e.name.replace(/_/g, " "))}</b>`;
-}
-function briefResult(e) {
-  const r = e.result;
-  if (Array.isArray(r) && e.name === "registry_search") return r.slice(0, 3).map((h) => `${h.name} (${h.score})`).join(" · ") || "no matches";
-  if (Array.isArray(r) && e.name === "domain_lookup") return r.map((h) => `${h.name} [${h.status} site]`).join(" · ") || "no company uses this website";
-  if (e.name === "company_profile" && r && typeof r === "object") return `${r.name}; ${(r.employees || []).length} dated headcounts; ${(r.websites || []).length} websites on record`;
-  return typeof r === "string" ? r : JSON.stringify(r);
-}
-function renderTry(res) {
-  const a = res.account, f = a.fields || {};
-  const fv = (k, fmt = (v) => v) => f[k] && f[k].value != null
-    ? `${esc(fmt(f[k].value))} <span class="src">from ${esc(f[k].source)}${f[k].as_of ? ", " + esc(f[k].as_of) : ""}</span>` : "<span class='muted'>unknown</span>";
-  const card = a.needs_review
-    ? `<div class="card"><h3>Sent to human review</h3><div class="verdict"><span class="chip meh">not sure, so it did not guess</span></div>
-         <div class="kv"><span class="k">Why</span><span>${esc(a.review_reason)}</span>
-         ${a.guess_company_id ? `<span class="k">Best guess</span><span class="muted">${esc(a.guess_company_id)} (score ${a.guess_score}), not good enough to assert</span>` : ""}</div></div>`
-    : `<div class="card"><h3>${esc(f.name && f.name.value)}</h3>
-         <div class="verdict"><span class="chip ${a.icp_fit ? "ok" : "no"}">${a.icp_fit ? "target customer" : "not a target customer"}</span>
-           <span class="chip">confidence ${a.confidence}</span> <span class="chip">via ${esc(a.resolved_via)}</span></div>
-         <div class="kv"><span class="k">Ticker</span><span>${fv("ticker")}</span>
-           <span class="k">Website</span><span>${fv("domain")}</span>
-           <span class="k">Employees</span><span>${fv("employees", (v) => Number(v).toLocaleString("en-US"))}</span>
-           <span class="k">Country</span><span>${fv("country")}</span>
-           <span class="k">Industries</span><span>${esc((a.industries || []).join(", ") || "-")}</span>
-           <span class="k">Fit reason</span><span class="muted">${esc(a.icp_reason)}</span></div></div>`;
-  const steps = res.steps.map((e) => `<div class="ev ${e.kind}"><div class="head">${stepLabel(e)}${e.ms != null ? ` <span class="muted">· ${e.ms} ms</span>` : ""}</div><pre>${esc(briefResult(e))}</pre></div>`).join("");
-  $("tryOut").innerHTML = `<div class="result">${card}<div><div class="muted" style="margin-bottom:6px">What the agent did: ${res.steps.length} steps, ${res.tool_calls} tool calls, ${res.llm_calls} LLM calls (${esc(res.llm)}, ${esc(res.version)})${res.note ? " · " + esc(res.note) : ""}</div><div class="trace scroll">${steps}</div></div></div>`;
-}
-// ---------- live pipeline ----------
-const STAGES = ["Resolve", "Merge", "Reconcile", "Judge", "Guardrail"];
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-function stageOf(e) {
-  if (e.kind === "tool" && (e.name === "domain_lookup" || e.name === "registry_search")) return 0;
-  if (e.kind === "llm" && (e.name === "adjudicate_match" || e.name === "propose_company")) return 0;
-  if (e.kind === "decision" && e.name.startsWith("llm_")) return 0;
-  if (e.kind === "decision" && e.name === "resolve") return 1;
-  if ((e.kind === "tool" && e.name === "company_profile") || (e.kind === "decision" && e.name === "reconcile")) return 2;
-  if (e.kind === "llm" && e.name === "judge_icp_industry") return 3;
-  if (e.kind === "decision" && e.name === "account") return 3;
-  return null;
-}
-function drawPipe(active = -1, finalState = null) {
-  $("pipe").innerHTML = STAGES.map((name, i) => {
-    const cls = finalState ? (i === 4 ? finalState : "done") : i < active ? "done" : i === active ? "active" : "";
-    const label = finalState && i === 4 ? (finalState === "review" ? "Guardrail: human review" : "Guardrail: verified ✓") : name;
-    return `<span class="node ${cls}">${label}</span>`;
-  }).join('<span class="arrow">→</span>');
-}
-function stepHtml(e) {
-  return `<div class="ev ${e.kind}"><div class="head">${stepLabel(e)}${e.ms != null ? ` <span class="muted">· ${e.ms} ms</span>` : ""}</div><pre>${esc(briefResult(e))}</pre></div>`;
-}
-async function runTry(ev) {
-  if (ev) ev.preventDefault();
-  const body = { account_name: $("tName").value, website: $("tSite").value, hq_country: $("tCountry").value };
-  if (!body.account_name.trim()) return;
-  $("tBtn").disabled = true; $("tBtn").textContent = "Running…";
-  drawPipe(0);
-  $("tryOut").innerHTML = `<div class="result"><div class="card"><div class="working"><span class="spinner"></span>The agent is working on “${esc(body.account_name)}”…</div></div>
-    <div><div class="muted" id="liveMeta" style="margin-bottom:6px">Streaming each step as it happens</div><div class="trace scroll" id="liveSteps"></div></div></div>`;
-  let stage = 0, final = null, failed = null;
-  try {
-    const res = await fetch("/api/try/stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-    if (!res.ok || !res.body) throw new Error(await res.text());
-    const reader = res.body.getReader(), dec = new TextDecoder();
-    let buf = "", chain = Promise.resolve();
-    const handle = async (kind, data) => {
-      if (kind === "step") {
-        if (data.kind === "reset") { $("liveSteps").innerHTML = ""; $("liveMeta").textContent = data.note; stage = 0; drawPipe(0); return; }
-        const st = stageOf(data);
-        if (st != null && st >= stage) { stage = st; drawPipe(stage); }
-        $("liveSteps").insertAdjacentHTML("beforeend", stepHtml(data));
-        $("liveSteps").scrollTop = $("liveSteps").scrollHeight;
-        await sleep(170);   // pace the replay so each step is readable; real timings are shown on each step
-      } else if (kind === "done") { final = data; }
-      else if (kind === "error") { failed = data.error || "error"; }
-    };
-    for (;;) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      let i;
-      while ((i = buf.indexOf("\n\n")) >= 0) {
-        const block = buf.slice(0, i); buf = buf.slice(i + 2);
-        const kind = (block.match(/^event: (.*)$/m) || [])[1], data = (block.match(/^data: (.*)$/m) || [])[1];
-        if (kind && data) { const parsed = JSON.parse(data); chain = chain.then(() => handle(kind, parsed)); }
-      }
-    }
-    await chain;
-    if (failed) throw new Error(failed);
-    if (final) { await sleep(150); drawPipe(4, final.account.needs_review ? "review" : "done"); renderTry(final); }
-  } catch (e) {
-    try {   // older server without streaming: fall back to the plain endpoint
-      const r = await api("/api/try", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      drawPipe(4, r.account.needs_review ? "review" : "done"); renderTry(r);
-    } catch (e2) { drawPipe(-1); $("tryOut").innerHTML = `<div class="empty">${esc(String(e2.message || e.message).slice(0, 200))}</div>`; }
-  } finally { $("tBtn").disabled = false; $("tBtn").textContent = "Run agent"; }
-}
-drawPipe(-1);
-
-// ---------- clean your own CRM ----------
-const SAMPLE_CSV = `account_name,website,hq_country,employee_count,last_updated
-adobe,business.adobe.com,United States,11144,2012-01-01
-ADBE,business.adobe.com,United States,11847,2013-11-01
-Marvell,,United States,7000,2025-01-01
-MARVELL TECHNOLOGY,,United States,,2026-01-01
-GLOBALFOUNDRIES,http://gf.com,Cayman Islands,14600,2021-12-31
-globalfoundries,,United States,14600,2021-12-31
-UberCab,,Netherlands,12000,2017-12-01
-"Consolidated Edison, Inc.",,United States,15541,2010-01-01
-Zoom Communications,http://zoom.com,United States,2000,2019-01-01
-Cliffs Natural Resources,,United States,30000,2024-01-01
-Target Store,,,400000,2025-01-01
-Totsuko,,Japan,113000,2023-03-31`;
-let batchResult = null;
-const csvCell = (v) => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-function fieldCell(f, fmt = (v) => v) {
-  if (!f || f.value == null) return "<span class='muted'>-</span>";
-  return `${esc(fmt(f.value))}<span class="src">${esc(f.source)}${f.as_of ? " · " + esc(f.as_of) : ""}</span>`;
-}
-function renderBatch(d) {
-  const s = d.summary;
-  $("bSummary").innerHTML = [
-    `<span class="stat"><b>${s.rows}</b>CRM rows</span>`, `<span class="stat"><b>${s.accounts}</b>accounts</span>`,
-    `<span class="stat"><b>${s.merged_rows}</b>duplicates merged</span>`, `<span class="stat"><b>${s.target_customers}</b>target customers</span>`,
-    `<span class="stat"><b>${s.needs_review}</b>sent to review</span>`,
-    `<span class="stat muted">${s.llm_calls} LLM calls (${esc(d.llm)}) · ${s.tool_calls} tool calls · ${s.seconds}s</span>`,
-  ].join("") + (d.note ? `<span class="stat bad">${esc(d.note)}</span>` : "");
-  $("bOut").innerHTML = "<tr><th>From CRM rows</th><th>Company</th><th>Website</th><th>Employees</th><th>Country</th><th>Status</th></tr>" +
-    d.accounts.map((a) => `<tr><td>${a.rows.map((r) => esc(r.account_name)).join("<br>")}${a.rows.length > 1 ? ` <span class="chip">${a.rows.length} merged</span>` : ""}</td>
-      <td>${a.needs_review ? "<span class='muted'>?</span>" : `<b>${esc(a.name)}</b>${a.ticker ? ` <span class="muted">${esc(a.ticker)}</span>` : ""}`}</td>
-      <td>${a.needs_review ? "" : fieldCell(a.domain)}</td>
-      <td>${a.needs_review ? "" : fieldCell(a.employees, (v) => Number(v).toLocaleString("en-US"))}</td>
-      <td>${a.needs_review ? "" : fieldCell(a.country)}</td>
-      <td>${a.needs_review ? `<span class="chip meh">needs review</span><div class="muted" style="font-size:12px">${esc(a.review_reason)}</div>`
-          : a.icp_fit ? `<span class="chip ok">target customer</span>` : `<span class="chip">verified</span>`}</td></tr>`).join("");
-}
-function downloadBatch() {
-  if (!batchResult) return;
-  const head = ["crm_rows", "status", "company", "ticker", "website", "employees", "employees_as_of", "employees_source", "country", "target_customer", "review_reason"];
-  const lines = batchResult.accounts.map((a) => [a.rows.map((r) => r.account_name).join(" | "), a.needs_review ? "needs_review" : "verified",
-    a.name, a.ticker, a.domain && a.domain.value, a.employees && a.employees.value, a.employees && a.employees.as_of, a.employees && a.employees.source,
-    a.country && a.country.value, a.needs_review ? "" : a.icp_fit, a.review_reason].map(csvCell).join(","));
-  const blob = new Blob([[head.join(","), ...lines].join("\n")], { type: "text/csv" });
-  const link = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "fieldwork_cleaned.csv" });
-  link.click(); URL.revokeObjectURL(link.href);
-}
-$("bSample").onclick = () => { $("bCsv").value = SAMPLE_CSV; };
-$("bFile").onchange = async (e) => {
-  const f = e.target.files[0]; if (!f) return;
-  if (f.size > 60000) { $("bSummary").innerHTML = `<span class="stat bad">File too large for the demo (60 KB max)</span>`; return; }
-  $("bCsv").value = await f.text();
-};
-$("bDownload").onclick = downloadBatch;
-$("bRun").onclick = async () => {
-  if (!$("bCsv").value.trim()) $("bCsv").value = SAMPLE_CSV;
-  $("bRun").disabled = true; $("bRun").textContent = "Cleaning…";
-  $("bSummary").innerHTML = `<span class="working"><span class="spinner"></span>Resolving, merging and verifying…</span>`;
-  try {
-    batchResult = await api("/api/batch", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ csv: $("bCsv").value }) });
-    renderBatch(batchResult); $("bDownload").disabled = false;
-  } catch (e) {
-    let msg = String(e.message); try { msg = JSON.parse(msg).detail || msg; } catch {}
-    $("bSummary").innerHTML = `<span class="stat bad">${esc(String(msg).slice(0, 200))}</span>`; $("bOut").innerHTML = "";
-  } finally { $("bRun").disabled = false; $("bRun").textContent = "Clean it"; }
-};
-$("bCsv").value = SAMPLE_CSV;
-$("tryForm").onsubmit = runTry;
-$("examples").innerHTML += EXAMPLES.map((x, i) => `<button type="button" data-i="${i}">${esc(x.n)} <span class="why">· ${esc(x.why)}</span></button>`).join("");
-document.querySelectorAll("#examples button").forEach((b) => b.onclick = () => {
-  const x = EXAMPLES[+b.dataset.i]; $("tName").value = x.n; $("tSite").value = x.w || ""; $("tCountry").value = x.c || ""; runTry();
-});
-
-async function loadRuns(select) {
-  const runs = await api("/api/runs");
-  $("runSel").innerHTML = runs.map((r) => `<option value="${r.id}">${r.version} · ${r.split} · ${pct(r.metrics.verified_accuracy)} · ${r.started_at.replace("T", " ")}</option>`).join("");
-  const pick = [select, state.defaultRun].find((id) => id && runs.some((r) => r.id === id)) || (runs[0] && runs[0].id);
-  if (pick) { $("runSel").value = pick; await openRun(pick); }
-}
-
-async function openRun(id) {
-  const run = await api(`/api/runs/${id}`);
-  state = { ...state, run, failures: await api(`/api/runs/${id}/failures`), trace: null, accounts: null, signature: null };
-  const m = run.metrics;
-  const rows = [["Verified accuracy", pct(m.verified_accuracy)], ["Silent error rate", pct(m.silent_error_rate)],
-    ["Sent to review", pct(m.review_rate)], ["Entity accuracy", pct(m.entity_accuracy)], ["Dedup F1", pct(m.dedup_f1)],
-    ["ICP precision / recall", `${pct(m.icp_precision)} / ${pct(m.icp_recall)}`], ["Precision@25", pct(m.precision_at_25)],
-    ["LLM calls / cost", `${m.llm_calls} / $${(m.cost_usd || 0).toFixed(4)}`], ["Tool calls / wall time", `${run.tool_calls} / ${Math.round(run.duration_ms)} ms`]];
-  $("runMetrics").innerHTML = rows.map(([k, v]) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`).join("");
-  const max = Math.max(1, ...run.clusters.map((c) => c.count));
-  $("clusters").innerHTML = run.clusters.length ? run.clusters.map((c) =>
-    `<div class="bar" data-sig="${esc(c.signature)}"><span class="name" title="${esc(c.signature)}">${esc(c.signature)}</span>
-     <span class="track"><span class="fill" style="display:block;width:${(100 * c.count / max).toFixed(1)}%"></span></span><span class="num">${c.count}</span></div>`).join("")
-    : `<div class="empty">No failures in this run.</div>`;
-  document.querySelectorAll(".bar").forEach((b) => b.onclick = () => showFailures(b.dataset.sig));
-  showFailures(run.clusters[0]?.signature);
-}
-
-function showFailures(sig) {
-  state.signature = sig;
-  document.querySelectorAll(".bar").forEach((b) => b.classList.toggle("active", b.dataset.sig === sig));
-  const list = state.failures.filter((f) => f.signature === sig);
-  $("failTitle").innerHTML = `Failures <span class="chip">${esc(sig || "none")}</span> <span class="hint">promote a failure to freeze it as a regression test</span>`;
-  $("failures").innerHTML = "<tr><th>Company</th><th>CRM rows</th><th>Expected → got</th><th></th></tr>" + list.map((f, i) =>
-    `<tr class="click" data-i="${i}"><td>${esc(f.company)}</td><td class="muted">${f.rows.map((r) => esc(r.account_name)).join("<br>")}</td>
-     <td>${f.field ? `<span class="good">${esc(JSON.stringify(f.expected))}</span> → <span class="bad">${esc(JSON.stringify(f.got))}</span>` : `<span class="muted">${esc(f.detail)}</span>`}</td>
-     <td>${f.promoted_case ? `<span class="chip">case</span>` : `<button class="small" data-promote="${f.id}">Promote</button>`}</td></tr>`).join("");
-  document.querySelectorAll("#failures tr.click").forEach((tr) => tr.onclick = (e) => {
-    if (e.target.dataset.promote) return promote(e.target);
-    showTrace(list[+tr.dataset.i]);
-  });
-}
-
-async function promote(btn) {
-  btn.disabled = true;
-  const res = await api(`/api/failures/${btn.dataset.promote}/promote`, { method: "POST" });
-  const f = state.failures.find((x) => x.id === btn.dataset.promote); f.promoted_case = res.case;
-  btn.outerHTML = `<span class="chip">case</span>`;
-  loadCases();
-}
-
-async function loadCases() {
-  const cases = await api("/api/regressions");
-  $("cases").innerHTML = "<tr><th>Case</th><th>Company</th><th>Why it was promoted</th><th>Added</th></tr>" +
-    cases.map((c) => `<tr><td><span class="chip">${esc(c.signature)}</span></td><td>${esc(c.company)}</td><td class="muted">${esc(c.detail)}</td><td>${esc(c.created)}</td></tr>`).join("");
-}
-
-async function showTrace(f) {
-  const id = state.run.id;
-  state.trace = state.trace || await api(`/api/runs/${id}/trace`);
-  state.accounts = state.accounts || await api(`/api/runs/${id}/accounts`);
-  const keys = new Set(f.crm_ids);
-  state.accounts.filter((a) => a.crm_ids.some((c) => keys.has(c))).forEach((a) => keys.add(a.key));
-  const evs = state.trace.filter((e) => keys.has(e.account));
-  $("traceTitle").innerHTML = `Trace <span class="chip">${esc(f.company)}</span> <span class="hint">${evs.length} steps</span>`;
-  $("trace").innerHTML = evs.length ? evs.map((e) =>
-    `<div class="ev ${e.kind}"><div class="head">${e.kind} · ${esc(e.name)} <span class="muted">${esc(e.account)}${e.ms != null ? " · " + e.ms + " ms" : ""}</span></div>
-     ${e.args ? `<pre>args ${esc(JSON.stringify(e.args))}</pre>` : ""}<pre>${esc(typeof e.result === "string" ? e.result : JSON.stringify(e.result))}</pre></div>`).join("")
-    : `<div class="empty">No trace events for this failure.</div>`;
-}
-
-$("runSel").onchange = (e) => openRun(e.target.value);
-$("runBtn").onclick = async () => {
-  $("runBtn").disabled = true; $("runBtn").textContent = "Running…";
-  try { const r = await api("/api/runs", { method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ version: $("newVersion").value, split: $("newSplit").value, llm: "replay" }) });
-        await loadRuns(r.id); }
-  finally { $("runBtn").disabled = false; $("runBtn").textContent = "Run"; }
-};
-(async () => {
-  const vs = await api("/api/versions");
-  $("newVersion").innerHTML = vs.map((v) => `<option>${v.version}</option>`).join("");
-  $("newVersion").value = vs[vs.length - 1].version;
-  const q = new URLSearchParams(location.search);
-  if (q.get("try")) {   // shareable link: /?try=UberCab&site=...&country=...
-    $("tName").value = q.get("try"); $("tSite").value = q.get("site") || ""; $("tCountry").value = q.get("country") || "";
-    runTry(); setTimeout(() => $("try").scrollIntoView(), 50);
-  } else if (q.get("clean") === "sample") {   // shareable link: /?clean=sample runs the CSV cleaner on the sample
-    $("bRun").click(); setTimeout(() => $("batch").scrollIntoView(), 50);
-  }
-  await loadHistory();
-  await loadInsights();
-  try { renderBig(await api("/api/history"), await api("/api/insights")); } catch {}
-  await loadRuns(new URLSearchParams(location.search).get("run"));
-})();
-</script>
 </body>
 </html>

@@ -147,7 +147,7 @@ def strip_websites(rows: list[dict], rate: float) -> list[dict]:
     """Blank the website on a stable `rate` share of rows (by hash of the CRM id): the CRM gets messier."""
     out = []
     for r in rows:
-        h = int(hashlib.md5(r["crm_id"].encode()).hexdigest(), 16) % 10_000 / 10_000
+        h = int(hashlib.md5(r["crm_id"].encode(), usedforsecurity=False).hexdigest(), 16) % 10_000 / 10_000
         out.append({**r, "website": "" if h < rate else r["website"]})
     return out
 

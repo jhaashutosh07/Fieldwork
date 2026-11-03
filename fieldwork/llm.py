@@ -16,6 +16,7 @@ import time
 from .paths import ROOT
 
 CACHE = ROOT / "data" / "llm_cache.jsonl"
+MAX_COMPLETION_TOKENS = 1536   # bounds cost and latency per call; reasoning models need headroom for their thinking
 PROVIDERS = {
     "groq": {"base_url": "https://api.groq.com/openai/v1", "key": "GROQ_API_KEY", "model": "openai/gpt-oss-120b",
              "usd_per_mtok": (0.15, 0.75)},
@@ -49,11 +50,18 @@ class LLM:
     def enabled(self) -> bool:
         return self.mode != "none"
 
+    @staticmethod
+    def _key(system: str, user: str) -> str:
+        return hashlib.sha256(f"{system}\n---\n{user}".encode()).hexdigest()[:24]
+
+    def is_recorded(self, system: str, user: str) -> bool:
+        return self._key(system, user) in self._cache
+
     def json(self, system: str, user: str, trace=None, purpose: str = "") -> dict | None:
         """Return the model's JSON answer, or None when no model or recording is available."""
         if not self.enabled:
             return None
-        key = hashlib.sha256(f"{system}\n---\n{user}".encode()).hexdigest()[:24]
+        key = self._key(system, user)
         rec = self._cache.get(key)
         t0 = time.perf_counter()
         if rec is None:
@@ -72,6 +80,7 @@ class LLM:
             try:
                 resp = self._client.chat.completions.create(
                     model=self.model, temperature=0, response_format={"type": "json_object"},
+                    max_completion_tokens=MAX_COMPLETION_TOKENS,
                     messages=[{"role": "system", "content": system}, {"role": "user", "content": user}])
                 break
             except Exception:  # rate limits on free tiers: back off and retry

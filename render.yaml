@@ -13,6 +13,12 @@ services:
         value: "1"
       - key: FIELDWORK_LLM
         value: replay
+      # Real client IP = right-most X-Forwarded-For entry appended by Render's proxy (used for rate limiting).
+      - key: FIELDWORK_TRUST_PROXY
+        value: "1"
+      # Write endpoints (promote a failure) need this token on the public demo; Render generates a random value.
+      - key: FIELDWORK_ADMIN_TOKEN
+        generateValue: true
       # Optional: live LLM for the "Try the agent" box (capped per day, never written to the eval cache).
       # Leave GROQ_API_KEY empty to serve recorded answers only.
       - key: FIELDWORK_TRY_LIVE

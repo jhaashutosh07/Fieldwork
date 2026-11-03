@@ -34,7 +34,7 @@ def crm_rows() -> tuple[dict, ...]:
 
 def split_of(company_id: str) -> str:
     """60/40 dev/test split by company, stable across runs. Triage and fixes use dev; headline numbers use test."""
-    return "dev" if int(hashlib.md5(company_id.encode()).hexdigest(), 16) % 10 < 6 else "test"
+    return "dev" if int(hashlib.md5(company_id.encode(), usedforsecurity=False).hexdigest(), 16) % 10 < 6 else "test"
 
 
 def rows_for(split: str) -> list[dict]:

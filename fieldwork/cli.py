@@ -99,7 +99,9 @@ def main(argv: list[str] | None = None) -> int:
         if a.bootstrap and store.count_runs() == 0:
             print("bootstrapping: evaluating every version (recorded LLM answers)...")
             flywheel.history("replay")
-        uvicorn.run("fieldwork.api:app", host=a.host, port=a.port)
+        # no Server header; shed load with 503 beyond 64 concurrent connections instead of queueing without bound
+        uvicorn.run("fieldwork.api:app", host=a.host, port=a.port, server_header=False, limit_concurrency=64,
+                    timeout_keep_alive=5)
     return 0
 
 

@@ -70,6 +70,14 @@ first and the model is only asked about the cases rules can't settle.
 
 ![Insights](docs/insights.png)
 
+## Security
+
+The live demo is public, so it is built to be safe to leave running: per-client rate limits that work behind the
+proxy, bounded concurrency and request sizes, a capped LLM budget per request and per day, a strict
+Content-Security-Policy with no inline scripts, Subresource Integrity on the CDN script, read-only writes without an
+admin token, formula-safe CSV export, and `pip-audit` + `bandit` in CI. The threat model and every control are in
+[SECURITY.md](SECURITY.md).
+
 ## The task
 
 A sales team exports its CRM: 602 rows for 409 real US-listed companies. Like every real CRM, it is messy:
