@@ -16,7 +16,7 @@ dependencies = [
   "sqlalchemy>=2.0",
   "pydantic>=2.6",
   "requests>=2.31",
-  "openai>=1.30",
+  "openai>=3.42.0",
   "langgraph>=0.5",
 ]
 
