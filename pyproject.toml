@@ -13,7 +13,7 @@ authors = [{ name = "Ashutosh Kumar Jha" }]
 dependencies = [
   "fastapi>=0.110",
   "uvicorn>=0.29",
-  "sqlalchemy>=2.0",
+  "sqlalchemy>=2.1.6",
   "pydantic>=2.6",
   "requests>=2.31",
   "openai>=1.30",
