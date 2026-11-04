@@ -70,6 +70,77 @@ first and the model is only asked about the cases rules can't settle.
 
 ![Insights](docs/insights.png)
 
+## Human review that learns
+
+The guardrail sends anything uncertain to a person. The **Review** tab is that person's queue: each item shows the CRM
+row, why the agent stopped, and registry candidates (or a search box). A decision becomes **agent memory** keyed by
+(account name, HQ country), so the same row never comes back. Hard evidence still wins: if a row's website maps to
+a company, a remembered decision can't override it.
+
+Measured on next month's export (every month-1 row comes back, plus 41 new rows; held-out companies), with a
+reviewer's decisions from month 1 versus without them:
+
+| Next month's export | Without memory | With memory |
+|---|---|---|
+| Questions the reviewer already answered last month | 9 | **4** |
+| Rows sent to review | 10 | **5** |
+| Verified accuracy | 95.6% | **98.1%** (+2.5 pts [+0.6, +5.1], p = 0.04) |
+| Silent errors | 0.0% | 0.0% |
+
+The 4 that still come back are companies with no country or website on record: memory fixes *which* company it is, not
+missing data. On the public demo every browser has its own random session, so one visitor's decisions can never
+change another visitor's results (`fieldwork learn` reproduces the experiment).
+
+![Review queue](docs/review.png)
+
+## Framework comparison: pipeline vs autonomous agent
+
+Should this be an autonomous agent that decides its own tool calls, or a structured pipeline? Both were built on
+**LangGraph** and scored by the same eval on the same 60 randomly sampled held-out companies (98 CRM rows,
+`openai/gpt-oss-120b`):
+
+| | Pipeline (v5) | Pipeline on LangGraph | Autonomous tool-calling agent |
+|---|---|---|---|
+| Verified accuracy | **91.7%** | 91.7% (identical) | 75.0% (**−16.7 pts** [−26.7, −8.3], p = 0.001) |
+| Silent errors | **0.0%** | 0.0% | 5.7% |
+| Sent to review | 7.1% | 7.1% | 16.3% |
+| LLM calls / row | 0.24 | 0.24 | 3.06 (13×) |
+| Tokens / row | 94 | 94 | 2,518 (27×) |
+| $ / 1,000 rows | $0.03 | $0.03 | $0.74 (23×) |
+
+- **The LangGraph port** (`resolve_rules → [resolve_llm] → merge → enrich → judge → guardrail`, with a conditional
+  edge to the LLM step) reproduces the pipeline exactly; a test enforces it. The framework is a packaging choice.
+- **The autonomous agent** (a LangGraph `model ⇄ tools` loop over the same registry, website and profile tools, with a
+  `submit_answer` tool) was worse on every axis: it asserted wrong facts without flagging them (an old Philips
+  domain, Fiserv judged a tech vendor, Logitech judged out of scope), sent more rows to review, and cost 23× more.
+- Building it surfaced a real model quirk: `gpt-oss-120b` tried to "call" a non-existent `json` tool to deliver its
+  final answer, which the API rejects. A dedicated `submit_answer` tool fixed it.
+
+![Framework comparison](docs/frameworks.png)
+
+The conclusion for this task: put the LLM where rules run out, behind verification and a guardrail, not in charge of
+the whole loop. `fieldwork frameworks` reproduces the comparison from recorded answers.
+
+## Observability
+
+- **Live monitoring tab** and `GET /api/metrics`: requests, p50/p95 latency, CRM rows processed, review rate, live vs
+  recorded LLM calls and spend, per minute over the last 24 hours. `GET /metrics` serves the same counters in
+  Prometheus format.
+- **OpenTelemetry traces** of every agent run: a root span per run and a child span per tool call, LLM call and
+  decision, with the GenAI semantic attributes (`gen_ai.request.model`, `gen_ai.usage.input_tokens`, ...). Point it at
+  any OTLP backend, Langfuse included:
+
+  ```bash
+  pip install ".[otel]"
+  export OTEL_EXPORTER_OTLP_ENDPOINT=https://cloud.langfuse.com/api/public/otel
+  export OTEL_EXPORTER_OTLP_HEADERS="Authorization=Basic <base64 of public_key:secret_key>"
+  fieldwork serve
+  ```
+
+  Spans are built after each run from timings the agent already records, so tracing never slows the agent down.
+
+![Live monitoring](docs/monitoring.png)
+
 ## Security
 
 The live demo is public, so it is built to be safe to leave running: per-client rate limits that work behind the

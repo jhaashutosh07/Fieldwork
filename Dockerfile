@@ -4,7 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONIOENCODING=utf-8 FIELDWOR
     FIELDWORK_LLM=replay FIELDWORK_PUBLIC=1 PORT=8000
 COPY pyproject.toml README.md ./
 COPY fieldwork ./fieldwork
-RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir ".[postgres]"
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir ".[postgres,otel]"
 COPY data ./data
 COPY evals ./evals
 RUN useradd -m app && chown -R app /app

@@ -253,3 +253,97 @@ def test_live_llm_budget_stops_paid_calls():
 def test_cleaned_csv_cells_are_formula_safe():
     js = (Path(__file__).resolve().parents[1] / "fieldwork" / "static" / "app.js").read_text(encoding="utf-8")
     assert r"/^[=+\-@\t\r]/" in js
+
+
+def test_langgraph_pipeline_matches_the_shipped_pipeline_exactly():
+    from fieldwork.agent import VERSIONS, Agent
+    from fieldwork.graph_agent import PipelineGraph
+    from fieldwork.llm import LLM
+    from fieldwork.tools import Tools
+    from fieldwork.trace import Trace
+
+    def sig(accts):
+        return sorted((a.key, tuple(a.crm_ids), a.company_id, a.needs_review, a.icp_fit,
+                       tuple((k, str(v.value)) for k, v in sorted(a.fields.items()))) for a in accts)
+
+    rows, llm = rows_for("test"), LLM("replay")
+    t1, t2 = Trace(), Trace()
+    plain = Agent(VERSIONS[LATEST], Tools(world(), t1), llm, t1).run(rows)
+    graph = PipelineGraph(VERSIONS[LATEST], Tools(world(), t2), llm, t2).run(rows)
+    assert sig(plain) == sig(graph) and t1.llm_calls == t2.llm_calls
+
+
+def test_review_memory_is_private_per_session_and_teaches_the_agent():
+    import uuid
+    from fastapi.testclient import TestClient
+    from fieldwork.api import app
+    from fieldwork.security import limiter
+
+    limiter.reset()
+    c = TestClient(app)
+    me, other = {"x-fieldwork-session": str(uuid.uuid4())}, {"x-fieldwork-session": str(uuid.uuid4())}
+    r = c.post("/api/try", json={"account_name": "Totsuko", "hq_country": "Japan"}, headers=me).json()
+    assert r["account"]["needs_review"] and r["queued_for_review"] == 1
+    item = next(i for i in c.get("/api/review", headers=me).json()["items"] if i["row"]["account_name"] == "Totsuko")
+    sony = next(h["id"] for h in c.get("/api/companies?q=Sony", headers=me).json() if h["name"].startswith("Sony"))
+    assert c.post(f"/api/review/{item['id']}/decide", json={"company_id": sony}, headers=other).status_code == 404
+    assert c.post(f"/api/review/{item['id']}/decide", json={"company_id": "Q0"}, headers=me).status_code == 400
+    assert c.post(f"/api/review/{item['id']}/decide", json={"company_id": sony}, headers=me).status_code == 200
+    limiter.reset()
+    mine = c.post("/api/try", json={"account_name": "Totsuko", "hq_country": "Japan"}, headers=me).json()["account"]
+    assert mine["company_id"] == sony and mine["resolved_via"] == "review_memory"
+    limiter.reset()
+    theirs = c.post("/api/try", json={"account_name": "Totsuko", "hq_country": "Japan"}, headers=other).json()["account"]
+    assert theirs["needs_review"]   # another visitor's agent did not learn from my decision
+    assert c.get("/api/review", headers={"x-fieldwork-session": "not-a-uuid"}).status_code == 400
+
+
+def test_website_evidence_beats_review_memory():
+    from fieldwork.agent import VERSIONS, Agent, memory_key
+    from fieldwork.llm import LLM
+    from fieldwork.tools import Tools
+    from fieldwork.trace import Trace
+
+    row = {"crm_id": "X", "account_name": "adobe", "website": "adobe.com", "hq_country": "United States",
+           "employee_count": "", "last_updated": ""}
+    t = Trace()
+    wrong = {memory_key(row): "Q312"}   # a bad decision in memory must not override the website match
+    cid, _, via = Agent(VERSIONS[LATEST], Tools(world(), t), LLM("replay"), t, memory=wrong).resolve(row)
+    assert via.startswith("domain") and cid != "Q312"
+
+
+def test_learning_from_review_reduces_repeat_questions():
+    from fieldwork.learning import experiment
+
+    r = experiment("test", "replay")
+    r.pop("_outcomes")
+    a, b = r["month2_without_memory"], r["month2_with_memory"]
+    assert b["repeat_questions"] < a["repeat_questions"] and b["review_rows"] < a["review_rows"]
+    assert b["verified_accuracy"] >= a["verified_accuracy"] and b["silent_error_rate"] <= a["silent_error_rate"]
+
+
+def test_metrics_endpoints_report_traffic():
+    from fastapi.testclient import TestClient
+    from fieldwork.api import app
+    from fieldwork.security import limiter
+
+    limiter.reset()
+    c = TestClient(app)
+    c.post("/api/batch", json={"csv": "name\nadobe\nqzxwvplmk"})
+    m = c.get("/api/metrics?minutes=5").json()
+    assert m["window"]["rows"] >= 2 and m["window"]["review_rows"] >= 1 and m["window"]["requests"] >= 1
+    assert "fieldwork_rows_total" in c.get("/metrics").text
+
+
+def test_tool_agent_answers_are_scored_like_the_pipeline():
+    from fieldwork.graph_agent import _parse_final, accounts_from_answers
+    from fieldwork.tools import Tools
+    from fieldwork.trace import Trace
+
+    rows = rows_for("test")[:2]
+    g = gold()
+    good = {"company_id": g["rows"][rows[0]["crm_id"]], "domain": None, "employees": None, "country": None,
+            "icp_fit": False, "needs_review": False, "reason": ""}
+    accts = accounts_from_answers(rows, [good, {"company_id": "nonsense", "needs_review": False}], Tools(world(), Trace()))
+    assert sum(a.needs_review for a in accts) == 1   # an unknown company id is never asserted
+    assert _parse_final('noise {"company_id": null, "needs_review": true} tail') == {"company_id": None, "needs_review": True}

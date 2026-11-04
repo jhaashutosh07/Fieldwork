@@ -19,12 +19,21 @@ async function api(path, opts) {
   }
   return r.json();
 }
-const postJSON = (path, body) => api(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+// A random id per browser keeps this visitor's review queue and agent memory private (never shared with others).
+const SESSION = (() => {
+  const make = () => (crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g,
+    (c) => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)));
+  try { let id = localStorage.getItem("fieldwork.session"); if (!id) { id = make(); localStorage.setItem("fieldwork.session", id); } return id; }
+  catch { return make(); }
+})();
+const HDRS = { "Content-Type": "application/json", "X-Fieldwork-Session": SESSION };
+const postJSON = (path, body) => api(path, { method: "POST", headers: HDRS, body: JSON.stringify(body) });
+const getS = (path) => api(path, { headers: { "X-Fieldwork-Session": SESSION } });
 
 const state = { config: { read_only: true }, history: [], insights: null, run: null, failures: [], trace: null, accounts: null, chartsDone: {} };
 
 // ---------- tabs ----------
-const TABS = ["overview", "clean", "results", "insights", "explorer"];
+const TABS = ["overview", "clean", "review", "results", "insights", "monitoring", "explorer"];
 const LEGACY = { try: "overview", batch: "clean", tests: "explorer" };
 function currentTab() {
   const h = location.hash.replace("#", "");
@@ -39,6 +48,8 @@ function showTab(tab, effects = true) {
   if (!effects) return;   // first paint happens before the data has loaded
   if (tab === "results") drawResultsCharts();
   if (tab === "insights") drawInsightsCharts();
+  if (tab === "review") loadReview();
+  if (tab === "monitoring") startMonitoring(); else stopMonitoring();
   if (tab === "explorer" && !state.runsRequested) {
     state.runsRequested = true;
     loadRuns(new URLSearchParams(location.search).get("run")).catch((e) => { $("clusters").innerHTML = `<p class="empty">${esc(e.message)}</p>`; });
@@ -162,7 +173,7 @@ async function runTry(ev) {
     <div><div class="meta" id="liveMeta">Streaming each step as it happens</div><div class="trace tablewrap" id="liveSteps"></div></div></div>`;
   let stage = 0, final = null, failed = null;
   try {
-    const res = await fetch("/api/try/stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const res = await fetch("/api/try/stream", { method: "POST", headers: HDRS, body: JSON.stringify(body) });
     if (!res.ok || !res.body) {
       let msg = `${res.status}`; try { msg = (await res.json()).detail || msg; } catch { /* not JSON */ }
       throw Object.assign(new Error(msg), { status: res.status });
@@ -193,7 +204,10 @@ async function runTry(ev) {
     }
     await chain;
     if (failed) throw new Error(failed);
-    if (final) { await sleep(120); drawPipe(4, final.account.needs_review ? "review" : "done"); renderTry(final); }
+    if (final) {
+      await sleep(120); drawPipe(4, final.account.needs_review ? "review" : "done"); renderTry(final);
+      if (final.queued_for_review) noteQueued(final.queued_for_review);
+    }
   } catch (e) {
     drawPipe(-1);
     $("tryOut").innerHTML = `<p class="empty">${esc(String(e.message).slice(0, 200))}</p>`;
@@ -265,6 +279,7 @@ async function runBatch() {
   try {
     batchResult = await postJSON("/api/batch", { csv: $("bCsv").value });
     renderBatch(batchResult); $("bDownload").disabled = false;
+    if (batchResult.queued_for_review) noteQueued(batchResult.queued_for_review);
   } catch (e) {
     $("bSummary").innerHTML = `<span class="stat bad">${esc(String(e.message).slice(0, 200))}</span>`;
     $("bPanel").hidden = true;
@@ -281,6 +296,135 @@ function setupBatch() {
   $("bDownload").addEventListener("click", downloadBatch);
   $("bRun").addEventListener("click", runBatch);
 }
+
+// ---------- review queue ----------
+function noteQueued(n) {
+  const b = $("reviewBadge"); b.hidden = false; b.textContent = String((Number(b.textContent) || 0) + n);
+  state.reviewStale = true;
+}
+function renderLearning() {
+  const L = state.insights && state.insights.learning; if (!L) return;
+  const a = L.month2_without_memory, b = L.month2_with_memory;
+  const kpi = (label, from, to, sub) => `<div class="kpi"><div class="label">${esc(label)}</div><div class="value good"><span class="from">${esc(from)} → </span>${esc(to)}</div><span class="sub">${esc(sub)}</span></div>`;
+  $("learnKpis").innerHTML = [
+    kpi("Repeat questions to reviewers", a.repeat_questions, b.repeat_questions, "rows a human already answered last month"),
+    kpi("Rows sent to review", a.review_rows, b.review_rows, `of ${L.month2_rows} rows next month`),
+    kpi("Verified accuracy", pct(a.verified_accuracy), pct(b.verified_accuracy), L.vs_without_memory ? `${pp(L.vs_without_memory.verified_accuracy.delta)} pts [${pp(L.vs_without_memory.verified_accuracy.ci[0])}, ${pp(L.vs_without_memory.verified_accuracy.ci[1])}]` : ""),
+    kpi("Silent errors", pct(a.silent_error_rate), pct(b.silent_error_rate), "memory never overrides a website match"),
+  ].join("");
+  $("learnNote").innerHTML = `A reviewer resolved the ${esc(L.reviewed_rows)} rows the agent sent to review this month; those decisions became ${esc(L.memory_entries)} memory entries. Next month's export (${esc(L.month2_rows)} rows: last month's rows plus new ones) hit memory ${esc(L.memory_hits)} times. The ${esc(b.repeat_questions)} questions that still come back are companies with no country or website on record: memory fixes <i>which</i> company it is, not missing data.`;
+}
+async function loadReview(force = false) {
+  if (state.reviewLoading || (state.reviewLoaded && !force && !state.reviewStale)) return;
+  state.reviewLoading = true;
+  try {
+    const q = await getS("/api/review");
+    state.review = q; state.reviewLoaded = true; state.reviewStale = false;
+    $("reviewBadge").hidden = true; $("reviewBadge").textContent = "";
+    renderQueue();
+  } catch (e) { $("queue").innerHTML = `<p class="empty">${esc(e.message)}</p>`; }
+  finally { state.reviewLoading = false; }
+}
+function renderQueue() {
+  const items = state.review.items;
+  const pending = items.filter((i) => i.status === "pending"), decided = items.filter((i) => i.status === "decided");
+  $("reviewCounts").innerHTML = `${chip(pending.length + " to review", pending.length ? "meh" : "ok")} ${chip(decided.length + " decided")} ${chip(state.review.memory_entries + " in agent memory", "ok")}`;
+  $("rerunBtn").disabled = !decided.length;
+  if (!items.length) { $("queue").innerHTML = `<p class="empty">Nothing to review. Try a company the agent can't place, e.g. “Totsuko”.</p>`; return; }
+  $("queue").innerHTML = items.map((i) => {
+    const r = i.row;
+    const head = `<div class="qhead"><b>${esc(r.account_name)}</b><span class="qrow">${r.website ? esc(r.website) + " · " : ""}${r.hq_country ? esc(r.hq_country) : "no country"}</span>${chip(i.source === "eval" ? "from the eval" : "from your " + i.source, "")}</div>`;
+    if (i.status !== "pending") {
+      return `<div class="qitem done">${head}<div>${i.status === "decided" ? `${chip("resolved", "ok")} ${esc(i.company && i.company.name)}` : chip("skipped")}</div></div>`;
+    }
+    const cands = (i.candidates || []).map((c) => `<button type="button" class="cand" data-item="${esc(i.id)}" data-company="${esc(c.id)}">${esc(c.name)} <span class="muted">${esc([c.ticker, c.country].filter(Boolean).join(" · "))}</span></button>`).join("");
+    return `<div class="qitem">${head}<div class="qrow">${chip("agent unsure", "meh")} ${esc(i.reason)}</div>
+      <div class="cands">${cands || `<span class="muted">No candidates; search below.</span>`}</div>
+      <div class="qsearch"><input type="search" placeholder="Search the registry, e.g. Sony" data-search="${esc(i.id)}" aria-label="Search companies"><button type="button" class="btn small" data-skip="${esc(i.id)}">Skip</button></div>
+      <div class="cands" data-results="${esc(i.id)}"></div></div>`;
+  }).join("");
+}
+async function decide(itemId, companyId) {
+  try { await postJSON(`/api/review/${encodeURIComponent(itemId)}/decide`, { company_id: companyId }); }
+  catch (e) { alert(e.message); return; }
+  state.reviewStale = true; await loadReview(true);
+}
+function setupReview() {
+  $("queue").addEventListener("click", (e) => {
+    const c = e.target.closest(".cand[data-company]"); if (c) return decide(c.dataset.item, c.dataset.company);
+    const sk = e.target.closest("button[data-skip]"); if (sk) return decide(sk.dataset.skip, null);
+  });
+  let timer = null;
+  $("queue").addEventListener("input", (e) => {
+    const inp = e.target.closest("input[data-search]"); if (!inp) return;
+    clearTimeout(timer);
+    timer = setTimeout(async () => {
+      const box = document.querySelector(`[data-results="${CSS.escape(inp.dataset.search)}"]`);
+      if (inp.value.trim().length < 2) { box.innerHTML = ""; return; }
+      try {
+        const hits = await getS(`/api/companies?q=${encodeURIComponent(inp.value.trim())}`);
+        box.innerHTML = hits.map((c) => `<button type="button" class="cand" data-item="${esc(inp.dataset.search)}" data-company="${esc(c.id)}">${esc(c.name)} <span class="muted">${esc([c.ticker, c.country].filter(Boolean).join(" · "))}</span></button>`).join("") || `<span class="muted">No match.</span>`;
+      } catch (err) { box.innerHTML = `<span class="muted">${esc(err.message)}</span>`; }
+    }, 250);
+  });
+  $("rerunBtn").addEventListener("click", async () => {
+    $("rerunBtn").disabled = true; $("rerunBtn").textContent = "Re-running…";
+    try {
+      const r = await postJSON("/api/review/rerun", {});
+      $("rerunOut").innerHTML = `<div class="tablewrap short"><table><thead><tr><th>CRM row</th><th>Now resolves to</th><th>How</th></tr></thead><tbody>` +
+        r.results.map((x) => `<tr><td>${esc(x.row.account_name)}</td><td>${x.company_id ? `<b>${esc(x.name)}</b>` : `<span class="muted">-</span>`}${x.needs_review ? `<span class="sub">${chip("still needs review", "meh")} ${esc(x.review_reason)}</span>` : ""}</td>
+          <td>${x.via === "review_memory" ? chip("learned from your review", "ok") : chip(x.via || "-")}</td></tr>`).join("") + "</tbody></table></div>";
+    } catch (e) { $("rerunOut").innerHTML = `<p class="empty">${esc(e.message)}</p>`; }
+    finally { $("rerunBtn").disabled = false; $("rerunBtn").textContent = "Re-run decided rows"; }
+  });
+}
+
+// ---------- monitoring ----------
+const monCharts = {};
+function countChart(id, labels, datasets) {
+  if (!window.Chart) return;
+  if (monCharts[id]) { const c = monCharts[id]; c.data.labels = labels; datasets.forEach((d, i) => { c.data.datasets[i].data = d.data; }); c.update("none"); return; }
+  const grid = { color: css("--line") };
+  monCharts[id] = new Chart($(id), { type: "line", data: { labels, datasets: datasets.map((d) => ({ ...d, backgroundColor: d.borderColor, pointRadius: 0, borderWidth: 2, tension: .3, spanGaps: true })) },
+    options: { responsive: true, maintainAspectRatio: false, animation: false, interaction: { mode: "index", intersect: false },
+      scales: { x: { ticks: { color: css("--muted"), maxTicksLimit: 6 }, grid: { display: false } }, y: { beginAtZero: true, ticks: { color: css("--muted"), precision: 0 }, grid } },
+      plugins: { legend: { labels: { color: css("--ink"), boxWidth: 10, boxHeight: 10 } } } } });
+}
+async function loadMonitoring() {
+  const m = await api(`/api/metrics?minutes=${encodeURIComponent($("monWindow").value)}`);
+  const w = m.window, up = m.uptime_s;
+  const kpi = (label, value, sub) => `<div class="kpi"><div class="label">${esc(label)}</div><div class="value">${esc(value)}</div><span class="sub">${esc(sub)}</span></div>`;
+  $("monKpis").innerHTML = [
+    kpi("Requests", w.requests, `${w.errors} errors (${w.error_rate == null ? "-" : pct(w.error_rate)})`),
+    kpi("p95 latency", w.p95_ms == null ? "-" : `${Math.round(w.p95_ms)} ms`, `p50 ${w.p50_ms == null ? "-" : Math.round(w.p50_ms) + " ms"}`),
+    kpi("CRM rows processed", w.rows, "by visitors in this window"),
+    kpi("Review rate", w.review_rate == null ? "-" : pct(w.review_rate), `${w.review_rows} rows sent to a human`),
+    kpi("LLM calls", w.llm_live + w.llm_recorded, `${w.llm_live} live · $${Number(w.cost_usd).toFixed(4)} spent`),
+  ].join("");
+  $("monMeta").textContent = `up ${up >= 3600 ? Math.floor(up / 3600) + "h " : ""}${Math.floor((up % 3600) / 60)}m · tracing: ${m.tracing}`;
+  const step = m.series.length > 180 ? Math.ceil(m.series.length / 120) : 1;   // downsample long windows
+  const S = [];
+  for (let i = 0; i < m.series.length; i += step) {
+    const chunk = m.series.slice(i, i + step);
+    const sum = (k) => chunk.reduce((a, b) => a + (b[k] || 0), 0);
+    const p95 = chunk.map((b) => b.p95_ms).filter((x) => x != null);
+    S.push({ t: chunk[0].t, requests: sum("requests"), errors: sum("errors"), rows: sum("rows"), review_rows: sum("review_rows"),
+             llm_live: sum("llm_live"), llm_recorded: sum("llm_recorded"), p95_ms: p95.length ? Math.max(...p95) : null });
+  }
+  const labels = S.map((b) => new Date(b.t * 1000).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }));
+  countChart("monReq", labels, [{ label: "requests", data: S.map((b) => b.requests), borderColor: css("--accent") }, { label: "errors", data: S.map((b) => b.errors), borderColor: css("--bad") }]);
+  countChart("monLat", labels, [{ label: "p95 ms", data: S.map((b) => b.p95_ms), borderColor: css("--warn") }]);
+  countChart("monRows", labels, [{ label: "rows", data: S.map((b) => b.rows), borderColor: css("--accent") }, { label: "sent to review", data: S.map((b) => b.review_rows), borderColor: css("--warn") }]);
+  countChart("monLlm", labels, [{ label: "live", data: S.map((b) => b.llm_live), borderColor: css("--good") }, { label: "recorded", data: S.map((b) => b.llm_recorded), borderColor: css("--muted") }]);
+  $("monEndpoints").innerHTML = "<thead><tr><th>Endpoint</th><th class='num'>Requests</th></tr></thead><tbody>" +
+    (Object.entries(m.endpoints).map(([k, v]) => `<tr><td><code>${esc(k)}</code></td><td class="num">${esc(v)}</td></tr>`).join("") || `<tr><td colspan="2" class="muted">No traffic yet. Try the agent on the Overview tab, then come back.</td></tr>`) + "</tbody>";
+}
+function startMonitoring() {
+  if (state.monTimer) return;
+  const tick = () => loadMonitoring().catch((e) => { $("monMeta").textContent = e.message; });
+  tick(); state.monTimer = setInterval(() => { if (!document.hidden) tick(); }, 10000);
+}
+function stopMonitoring() { clearInterval(state.monTimer); state.monTimer = null; }
 
 // ---------- results ----------
 function renderResults() {
@@ -309,6 +453,7 @@ function renderResults() {
   }
 }
 function sigChip(d) {
+  if (d.delta === 0 && d.ci[0] === 0 && d.ci[1] === 0) return `${pp(0)} pts ${chip("identical", "ok")}`;
   const good = d.ci[0] > 0, bad = d.ci[1] < 0;
   return `${pp(d.delta)} pts <span class="muted">[${pp(d.ci[0])}, ${pp(d.ci[1])}]</span> ${chip(good ? "real" : bad ? "worse" : "not significant", good ? "ok" : bad ? "no" : "meh")}`;
 }
@@ -341,6 +486,22 @@ function renderInsights() {
       <td class="num">${money(v.cost.usd_per_1k_rows)}</td><td class="num">${money(v.cost.usd_per_verified_account)}</td></tr>`).join("") + "</tbody>";
   $("costNote").innerHTML = `Model: <b>${esc(ins.llm.model)}</b>; median live call ${ins.llm.median_live_ms ? (ins.llm.median_live_ms / 1000).toFixed(2) + " s" : "-"}.`;
 }
+function renderFrameworks() {
+  const fw = state.frameworks; if (!fw || !fw.systems) return;
+  $("fwSub").textContent = `${fw.sample_companies} randomly sampled held-out companies (${fw.sample_rows} CRM rows), scored by the same eval. Model: ${fw.model}.`;
+  const money = (x) => "$" + Number(x).toFixed(3);
+  $("frameworks").innerHTML = "<thead><tr><th>System</th><th class='num'>Verified</th><th>vs pipeline</th><th class='num'>Silent errors</th><th class='num'>Review</th><th class='num'>LLM calls / row</th><th class='num'>Tokens / row</th><th class='num'>$ / 1k rows</th></tr></thead><tbody>" +
+    fw.systems.map((r) => `<tr><td><b>${esc(r.system)}</b></td><td class="num">${pct(r.verified_accuracy)}</td>
+      <td>${r.vs_pipeline ? sigChip(r.vs_pipeline.verified_accuracy) : `<span class="muted">baseline</span>`}</td>
+      <td class="num">${pct(r.silent_error_rate)} <span class="muted">[≤ ${pct(r.silent_error_ci[1])}]</span></td><td class="num">${pct(r.review_rate)}</td>
+      <td class="num">${esc(r.llm_calls_per_row)}</td><td class="num">${num(r.tokens_per_row)}</td><td class="num">${money(r.usd_per_1k_rows)}</td></tr>`).join("") + "</tbody>";
+  const tool = fw.systems[fw.systems.length - 1], pipe = fw.systems[0], graph = fw.systems[1];
+  const types = Object.entries(tool.failure_types || {}).filter(([k]) => k !== "sent_to_review").map(([k, v]) => `${esc(k)} (${esc(v)})`).join(", ");
+  $("fwNote").innerHTML = `The LangGraph port reproduces the pipeline exactly (${pct(graph.verified_accuracy)}), so the framework is a packaging choice. ` +
+    `The autonomous agent decides its own tool calls: ${pct(tool.verified_accuracy)} verified with ${pct(tool.silent_error_rate)} silent errors, at ${esc(tool.llm_calls_per_row)} LLM calls and ${num(tool.tokens_per_row)} tokens per row ` +
+    `(pipeline: ${esc(pipe.llm_calls_per_row)} calls, ${num(pipe.tokens_per_row)} tokens). ${types ? "Where it went wrong without saying so: " + types + "." : ""}`;
+}
+
 function drawInsightsCharts() {
   const ins = state.insights;
   if (state.chartsDone.insights || !ins || !ins.versions) return;
@@ -432,7 +593,8 @@ function setupExplorer() {
 
 // ---------- boot ----------
 (async () => {
-  setupTry(); setupBatch(); setupExplorer();
+  setupTry(); setupBatch(); setupExplorer(); setupReview();
+  $("monWindow").addEventListener("change", () => loadMonitoring().catch(() => {}));
   const q = new URLSearchParams(location.search);
   if (q.get("clean") === "sample" && !location.hash) location.hash = "#clean";
   if (q.get("run") && !location.hash) location.hash = "#explorer";
@@ -441,13 +603,13 @@ function setupExplorer() {
     $("tName").value = q.get("try").slice(0, 120); $("tSite").value = (q.get("site") || "").slice(0, 200); $("tCountry").value = (q.get("country") || "").slice(0, 60);
     runTry();
   } else if (q.get("clean") === "sample") runBatch();
-  const [config, history, insights, versions] = await Promise.all([
+  const [config, history, insights, versions, frameworks] = await Promise.all([
     api("/api/config").catch(() => ({ read_only: true })), api("/api/history").catch(() => []),
-    api("/api/insights").catch(() => null), api("/api/versions").catch(() => []),
+    api("/api/insights").catch(() => null), api("/api/versions").catch(() => []), api("/api/frameworks").catch(() => null),
   ]);
-  Object.assign(state, { config, history, insights });
+  Object.assign(state, { config, history, insights, frameworks });
   $("newVersion").innerHTML = versions.map((v) => `<option>${esc(v.version)}</option>`).join("");
   if (versions.length) $("newVersion").value = (shippedEntry() || versions[versions.length - 1]).version;
-  renderBig(); renderResults(); renderInsights();
+  renderBig(); renderResults(); renderInsights(); renderFrameworks(); renderLearning();
   showTab(currentTab());
 })();

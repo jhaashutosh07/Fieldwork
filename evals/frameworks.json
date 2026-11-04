@@ -1,0 +1,129 @@
+{
+ "generated": "2026-11-04",
+ "sample_companies": 60,
+ "sample_rows": 98,
+ "model": "openai/gpt-oss-120b",
+ "systems": [
+  {
+   "system": "Pipeline (v5)",
+   "verified_accuracy": 0.9167,
+   "silent_error_rate": 0.0,
+   "silent_error_ci": [
+    0.0,
+    0.0621
+   ],
+   "review_rate": 0.0714,
+   "entity_accuracy": 0.9286,
+   "icp_precision": 1.0,
+   "icp_recall": 1.0,
+   "llm_calls_per_row": 0.24,
+   "tokens_per_row": 94,
+   "usd_per_1k_rows": 0.0324,
+   "compute_ms_per_row": 2.2
+  },
+  {
+   "system": "Pipeline on LangGraph (v5)",
+   "verified_accuracy": 0.9167,
+   "silent_error_rate": 0.0,
+   "silent_error_ci": [
+    0.0,
+    0.0621
+   ],
+   "review_rate": 0.0714,
+   "entity_accuracy": 0.9286,
+   "icp_precision": 1.0,
+   "icp_recall": 1.0,
+   "llm_calls_per_row": 0.24,
+   "tokens_per_row": 94,
+   "usd_per_1k_rows": 0.0324,
+   "compute_ms_per_row": 1.3,
+   "vs_pipeline": {
+    "verified_accuracy": {
+     "delta": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "p": 1.0
+    },
+    "silent_error_rate": {
+     "delta": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "p": 1.0
+    }
+   }
+  },
+  {
+   "system": "Autonomous tool-calling agent",
+   "verified_accuracy": 0.75,
+   "silent_error_rate": 0.0566,
+   "silent_error_ci": [
+    0.0194,
+    0.1537
+   ],
+   "review_rate": 0.1633,
+   "entity_accuracy": 0.8367,
+   "icp_precision": 0.9,
+   "icp_recall": 0.9,
+   "llm_calls_per_row": 3.06,
+   "tokens_per_row": 2518,
+   "usd_per_1k_rows": 0.739,
+   "compute_ms_per_row": 15.6,
+   "vs_pipeline": {
+    "verified_accuracy": {
+     "delta": -0.1667,
+     "ci": [
+      -0.2667,
+      -0.0833
+     ],
+     "p": 0.001
+    },
+    "silent_error_rate": {
+     "delta": 0.0566,
+     "ci": [
+      0.0,
+      0.1228
+     ],
+     "p": 0.1
+    }
+   },
+   "failure_types": {
+    "sent_to_review": 14,
+    "icp_false_positive": 1,
+    "old_domain": 1,
+    "icp_false_negative": 1
+   },
+   "steps_per_row": 3.06,
+   "median_live_ms_per_call": 4345.2
+  }
+ ],
+ "tool_agent_wrong_examples": [
+  {
+   "company": "Fiserv",
+   "signature": "icp_false_positive",
+   "rows": [
+    "fiserv"
+   ],
+   "detail": "industries=['financial services'] reason=Registry search returned Fiserv with perfect match; company profile shows United States headquarters, current domain fi"
+  },
+  {
+   "company": "Koninklijke Philips NV",
+   "signature": "old_domain",
+   "rows": [
+    "Koninklijke Philips"
+   ],
+   "detail": "source=llm as_of=None"
+  },
+  {
+   "company": "Logitech",
+   "signature": "icp_false_negative",
+   "rows": [
+    "LOGITECH"
+   ],
+   "detail": "industries=['software industry', 'electronics industry', 'consumer electronics industry', 'computer hardware industry'] reason=Identified as Logitech (Q223127) "
+  }
+ ]
+}

@@ -6,6 +6,8 @@
   fieldwork gate [--update-baseline]        CI gate: held-out metrics + every regression case
   fieldwork history [--llm replay]          evaluate every version on dev and test -> evals/history.json
   fieldwork insights [--llm replay]         uncertainty, significance, automation curve, cost, stress test
+  fieldwork frameworks [--llm replay]       pipeline vs LangGraph port vs autonomous tool-calling agent
+  fieldwork learn [--llm replay]            next month's export with and without memory of human review
   fieldwork serve [--port 8000] [--bootstrap]   API + dashboard
 """
 from __future__ import annotations
@@ -47,6 +49,10 @@ def main(argv: list[str] | None = None) -> int:
     h.add_argument("--llm", default=None)
     ins = sub.add_parser("insights")
     ins.add_argument("--llm", default="replay")
+    fw = sub.add_parser("frameworks")
+    fw.add_argument("--llm", default="replay")
+    lr = sub.add_parser("learn")
+    lr.add_argument("--llm", default="replay")
     s = sub.add_parser("serve")
     s.add_argument("--port", type=int, default=8000)
     s.add_argument("--host", default="127.0.0.1")
@@ -94,6 +100,18 @@ def main(argv: list[str] | None = None) -> int:
         for x in out["experiments"]:
             print(f"{x['version']}  {x['decision']}: {x['reason']}")
         print(f"written {insights.INSIGHTS} in {out['build_seconds']}s")
+    elif a.cmd == "frameworks":
+        from . import frameworks
+        out = frameworks.run(a.llm)
+        for r in out["systems"]:
+            print(f"{r['system']:<34} verified {r['verified_accuracy']:.1%}  silent {r['silent_error_rate']:.1%}  "
+                  f"review {r['review_rate']:.1%}  llm/row {r['llm_calls_per_row']}  $/1k rows {r['usd_per_1k_rows']}")
+    elif a.cmd == "learn":
+        from . import learning
+        for split in ("dev", "test"):
+            r = learning.experiment(split, a.llm)
+            r.pop("_outcomes")
+            print(split, r["month2_without_memory"], "->", r["month2_with_memory"])
     elif a.cmd == "serve":
         import uvicorn
         if a.bootstrap and store.count_runs() == 0:

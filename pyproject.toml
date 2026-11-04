@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fieldwork"
-version = "0.5.0"
+version = "0.7.0"
 description = "Account-research agent with a trace-to-eval flywheel, scored against real Wikidata gold."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -17,10 +17,12 @@ dependencies = [
   "pydantic>=2.6",
   "requests>=2.31",
   "openai>=1.30",
+  "langgraph>=0.5",
 ]
 
 [project.optional-dependencies]
 postgres = ["psycopg[binary]>=3.1"]
+otel = ["opentelemetry-sdk>=1.25", "opentelemetry-exporter-otlp-proto-http>=1.25"]
 dev = ["pytest>=8", "httpx>=0.27"]
 
 [project.scripts]

@@ -67,32 +67,48 @@ class LLM:
         if rec is None:
             if self._client is None:
                 return None
-            rec = self._call(key, system, user)
+            rec = self._complete(key, {"response_format": {"type": "json_object"},
+                                       "messages": [{"role": "system", "content": system},
+                                                    {"role": "user", "content": user}]}, _parse_json)
+        return self._answer(rec, trace, purpose, t0)
+
+    def chat(self, messages: list[dict], tools: list[dict], trace=None, purpose: str = "") -> dict | None:
+        """One turn of a tool-calling conversation: returns {"content", "tool_calls": [{id, name, arguments}]}.
+        Recorded like json(), keyed by the full conversation so far, so a whole agent episode replays exactly."""
+        if not self.enabled:
+            return None
+        key = "chat:" + self._key(json.dumps(tools, sort_keys=True),
+                                  json.dumps(messages, sort_keys=True, ensure_ascii=False))
+        rec = self._cache.get(key)
+        t0 = time.perf_counter()
+        if rec is None:
+            if self._client is None:
+                return None
+            rec = self._complete(key, {"messages": messages, "tools": tools}, _parse_chat)
+        return self._answer(rec, trace, purpose, t0)
+
+    def _answer(self, rec: dict, trace, purpose: str, t0: float):
         if trace is not None:
             trace.llm(purpose, rec["model"], rec["tokens_in"], rec["tokens_out"], rec["cost_usd"],
                       round((time.perf_counter() - t0) * 1000, 2), cached=rec.get("_fresh") is None, answer=rec["answer"])
         rec.pop("_fresh", None)
         return rec["answer"]
 
-    def _call(self, key: str, system: str, user: str) -> dict:
+    def _complete(self, key: str, request: dict, parse) -> dict:
         t0 = time.perf_counter()
         for attempt in range(self.retries):
             try:
-                resp = self._client.chat.completions.create(
-                    model=self.model, temperature=0, response_format={"type": "json_object"},
-                    max_completion_tokens=MAX_COMPLETION_TOKENS,
-                    messages=[{"role": "system", "content": system}, {"role": "user", "content": user}])
+                resp = self._client.chat.completions.create(model=self.model, temperature=0,
+                                                            max_completion_tokens=MAX_COMPLETION_TOKENS, **request)
                 break
-            except Exception:  # rate limits on free tiers: back off and retry
-                if attempt == self.retries - 1:
+            except Exception as exc:  # retry rate limits, server errors and network failures; not bad requests
+                status = getattr(exc, "status_code", None)
+                if attempt == self.retries - 1 or (status is not None and status not in (408, 409, 429) and status < 500):
                     raise
                 time.sleep(min(60, 4 * 2 ** attempt))
         usage = resp.usage
         pin, pout = PROVIDERS[self.mode]["usd_per_mtok"]
-        try:
-            answer = json.loads(resp.choices[0].message.content)
-        except (json.JSONDecodeError, TypeError):
-            answer = {}
+        answer = parse(resp.choices[0].message)
         rec = {"key": key, "model": self.model, "answer": answer, "tokens_in": usage.prompt_tokens,
                "tokens_out": usage.completion_tokens,
                "cost_usd": round((usage.prompt_tokens * pin + usage.completion_tokens * pout) / 1e6, 6),
@@ -103,3 +119,16 @@ class LLM:
                 with CACHE.open("a", encoding="utf-8") as f:
                     f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         return {**rec, "_fresh": True}
+
+
+def _parse_json(message) -> dict:
+    try:
+        return json.loads(message.content)
+    except (json.JSONDecodeError, TypeError):
+        return {}
+
+
+def _parse_chat(message) -> dict:
+    return {"content": message.content or "",
+            "tool_calls": [{"id": tc.id, "name": tc.function.name, "arguments": tc.function.arguments}
+                           for tc in (message.tool_calls or [])]}

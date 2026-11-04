@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-03",
+ "generated": "2026-11-04",
  "split": "test",
  "shipped": "v5",
  "companies": 158,
@@ -30,7 +30,7 @@
     "llm_calls_per_1k_rows": 0.0,
     "usd_per_1k_rows": 0.0,
     "usd_per_verified_account": 0.0,
-    "compute_ms_per_1k_rows": 2111.2
+    "compute_ms_per_1k_rows": 2999.2
    }
   },
   {
@@ -57,7 +57,7 @@
     "llm_calls_per_1k_rows": 0.0,
     "usd_per_1k_rows": 0.0,
     "usd_per_verified_account": 0.0,
-    "compute_ms_per_1k_rows": 906.2
+    "compute_ms_per_1k_rows": 1202.9
    },
    "vs_prev": {
     "verified_accuracy": {
@@ -102,7 +102,7 @@
     "llm_calls_per_1k_rows": 0.0,
     "usd_per_1k_rows": 0.0,
     "usd_per_verified_account": 0.0,
-    "compute_ms_per_1k_rows": 843.8
+    "compute_ms_per_1k_rows": 1376.0
    },
    "vs_prev": {
     "verified_accuracy": {
@@ -147,7 +147,7 @@
     "llm_calls_per_1k_rows": 0.0,
     "usd_per_1k_rows": 0.0,
     "usd_per_verified_account": 0.0,
-    "compute_ms_per_1k_rows": 998.8
+    "compute_ms_per_1k_rows": 1226.4
    },
    "vs_prev": {
     "verified_accuracy": {
@@ -192,7 +192,7 @@
     "llm_calls_per_1k_rows": 293.4,
     "usd_per_1k_rows": 0.0391,
     "usd_per_verified_account": 6.3e-05,
-    "compute_ms_per_1k_rows": 879.8
+    "compute_ms_per_1k_rows": 1305.0
    },
    "vs_prev": {
     "verified_accuracy": {
@@ -836,11 +836,59 @@
    }
   }
  },
+ "learning": {
+  "split": "test",
+  "month1_rows": 242,
+  "month2_rows": 283,
+  "reviewed_rows": 9,
+  "memory_entries": 7,
+  "memory_hits": 8,
+  "month1": {
+   "verified_accuracy": 0.9557,
+   "silent_error_rate": 0.0,
+   "review_rate": 0.0372,
+   "entity_accuracy": 0.9628
+  },
+  "month2_without_memory": {
+   "verified_accuracy": 0.9557,
+   "silent_error_rate": 0.0,
+   "review_rate": 0.0353,
+   "entity_accuracy": 0.9647,
+   "review_rows": 10,
+   "repeat_questions": 9
+  },
+  "month2_with_memory": {
+   "verified_accuracy": 0.981,
+   "silent_error_rate": 0.0,
+   "review_rate": 0.0177,
+   "entity_accuracy": 0.9823,
+   "review_rows": 5,
+   "repeat_questions": 4
+  },
+  "vs_without_memory": {
+   "verified_accuracy": {
+    "delta": 0.0253,
+    "ci": [
+     0.0063,
+     0.0506
+    ],
+    "p": 0.04
+   },
+   "review_rate": {
+    "delta": -0.0177,
+    "ci": [
+     -0.0341,
+     -0.0035
+    ],
+    "p": 0.011
+   }
+  }
+ },
  "llm": {
   "model": "openai/gpt-oss-120b",
-  "recorded_calls": 181,
-  "median_live_ms": 859.2,
-  "timed_calls": 11
+  "recorded_calls": 269,
+  "median_live_ms": 2830.6,
+  "timed_calls": 99
  },
- "build_seconds": 15.0
+ "build_seconds": 31.2
 }

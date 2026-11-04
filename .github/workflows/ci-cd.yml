@@ -31,6 +31,8 @@ jobs:
         run: pytest -q
       - name: Eval gate (held-out metrics + every regression case, recorded LLM answers)
         run: fieldwork gate --llm replay | tee gate.txt
+      - name: Experiments reproduce from recorded answers (learning from review, framework comparison)
+        run: fieldwork learn --llm replay && fieldwork frameworks --llm replay
       - name: Gate summary
         if: always()
         run: |

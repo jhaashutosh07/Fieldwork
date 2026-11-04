@@ -9,7 +9,7 @@ import json
 import time
 import uuid
 
-from . import store
+from . import store, telemetry
 from .agent import LATEST, VERSIONS, Agent
 from .evals import FIELDS, _field_ok, gold, rows_for, score
 from .llm import LLM
@@ -29,7 +29,7 @@ def run(version: str = LATEST, split: str = "test", llm_mode: str | None = None,
     llm = LLM(llm_mode)
     trace = Trace()
     rows = rows if rows is not None else rows_for(split)
-    t0 = time.perf_counter()
+    t0, started_ns = time.perf_counter(), time.time_ns()
     accts = Agent(policy, Tools(world(), trace), llm, trace).run(rows)
     duration = (time.perf_counter() - t0) * 1000
     metrics, fails = score(accts, rows)
@@ -41,6 +41,10 @@ def run(version: str = LATEST, split: str = "test", llm_mode: str | None = None,
               "tool_calls": trace.tool_calls, "metrics": metrics}
     if persist:
         store.save_run(record, trace, accts, fails)
+    telemetry.export_run("eval.run", trace, {"fieldwork.version": version, "fieldwork.split": split,
+                                             "fieldwork.verified_accuracy": metrics["verified_accuracy"],
+                                             "fieldwork.silent_error_rate": metrics["silent_error_rate"]},
+                         started_ns, time.time_ns())
     return {**record, "failures": fails, "accounts": accts, "trace": trace, "rows": rows}
 
 

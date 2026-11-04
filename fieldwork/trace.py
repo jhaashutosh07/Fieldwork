@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import time
 from contextlib import contextmanager
 from typing import Callable
 
@@ -22,6 +23,7 @@ class Trace:
         self._on_event = on_event
 
     def _add(self, event: dict) -> None:
+        event["t_ns"] = time.time_ns()   # end time; with "ms" it gives the span's start for OpenTelemetry export
         self.events.append(event)
         if self._on_event:
             self._on_event(event)

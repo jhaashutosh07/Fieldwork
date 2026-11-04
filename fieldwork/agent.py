@@ -103,12 +103,26 @@ class Account:
         return d
 
 
+def memory_key(row: dict) -> str:
+    """Reviewer decisions are remembered per (normalized account name, HQ country) as typed in the CRM."""
+    return f"{normalize(row.get('account_name', ''))}|{(row.get('hq_country') or '').strip().lower()}"
+
+
 class Agent:
-    def __init__(self, policy: Policy, tools: Tools, llm: LLM, trace: Trace):
+    def __init__(self, policy: Policy, tools: Tools, llm: LLM, trace: Trace, memory: dict[str, str] | None = None):
+        """memory: reviewer decisions {memory_key(row): company_id}. Consulted after the website lookup, so hard
+        evidence (a website that maps to a company) always beats a remembered decision."""
         self.p, self.tools, self.llm, self.trace = policy, tools, llm, trace
+        self.memory = memory or {}
 
     # ---------- entity resolution ----------
     def resolve(self, row: dict) -> tuple[str | None, float, str]:
+        decided, ctx = self.resolve_rules(row)
+        return decided if decided is not None else self.resolve_with_llm(row, ctx)
+
+    def resolve_rules(self, row: dict) -> tuple[tuple | None, dict | None]:
+        """Deterministic resolution. Returns (decision, None), or (None, ctx) when only the LLM step could still
+        settle the row; ctx carries the search hits for that step."""
         p, t = self.p, self.tools
         self._guess = (None, 0.0)
         if p.resolve_by_domain and row.get("website"):
@@ -116,28 +130,38 @@ class Agent:
             ids = {h["id"] for h in hits}
             if len(ids) == 1:
                 h = hits[0]
-                return h["id"], (0.95 if h["status"] == "current" else 0.85), f"domain:{h['status']}"
+                return (h["id"], (0.95 if h["status"] == "current" else 0.85), f"domain:{h['status']}"), None
+        if self.memory:
+            remembered = self.memory.get(memory_key(row))
+            if remembered and remembered in t.w.registry:
+                self.trace.decision("review_memory_hit", key=memory_key(row), company_id=remembered)
+                return (remembered, 0.97, "review_memory"), None
         hits = t.registry_search(row["account_name"])
         if not hits:
-            return None, 0.0, "no registry match"
+            return (None, 0.0, "no registry match"), None
         top = hits[0]
         self._guess = (top["id"], top["score"])
         margin = top["score"] - (hits[1]["score"] if len(hits) > 1 else 0.0)
         if not p.guardrail:
-            return (top["id"], top["score"], "name") if top["score"] >= 0.5 else (None, 0.0, "weak name match")
+            return ((top["id"], top["score"], "name") if top["score"] >= 0.5 else (None, 0.0, "weak name match")), None
         corroborated = bool(row.get("hq_country")) and row["hq_country"] == top["country"]
         if (top["score"] >= 0.95 and margin >= 0.05) or (top["score"] >= 0.8 and margin >= 0.15 and corroborated):
-            return top["id"], 0.9, "name"
-        if p.llm_adjudicate and self.llm.enabled:
-            if p.llm_resolve == "propose":
+            return (top["id"], 0.9, "name"), None
+        ambiguous = (None, top["score"], f"ambiguous name match (top {top['score']:.2f}, margin {margin:.2f})")
+        if not (p.llm_adjudicate and self.llm.enabled):
+            return ambiguous, None
+        return None, {"hits": hits, "ambiguous": ambiguous, "guess": self._guess}
+
+    def resolve_with_llm(self, row: dict, ctx: dict) -> tuple[str | None, float, str]:
+        p = self.p
+        self._guess = ctx["guess"]
+        if p.llm_resolve == "propose":
+            pick, via = self._propose(row)
+        else:
+            pick, via = self._adjudicate(row, ctx["hits"])
+            if not pick and p.llm_resolve == "pick_then_propose":
                 pick, via = self._propose(row)
-            else:
-                pick, via = self._adjudicate(row, hits)
-                if not pick and p.llm_resolve == "pick_then_propose":
-                    pick, via = self._propose(row)
-            if pick:
-                return pick, 0.85, via
-        return None, top["score"], f"ambiguous name match (top {top['score']:.2f}, margin {margin:.2f})"
+        return (pick, 0.85, via) if pick else ctx["ambiguous"]
 
     def _adjudicate(self, row: dict, hits: list[dict]) -> tuple[str | None, str]:
         """Ask the model, then verify: a candidate pick must be one we offered, and a suggested current name must
@@ -283,29 +307,45 @@ class Agent:
 
         for key, acct in groups.items():
             with self.trace.scope(key):
-                if acct.company_id is None:
-                    acct.needs_review, acct.review_reason = True, acct.resolved_via or "unresolved"
-                    continue
-                prof = self.tools.company_profile(acct.company_id)
-                self.reconcile(acct, rows_by_key[key], prof)
-                acct.industries = prof["industries"]
-                emp = acct.fields["employees"].value
-                in_country = (ICP_COUNTRY in prof["countries"] if self.p.country_rule == "listed"
-                              else acct.fields["country"].value == ICP_COUNTRY)
-                if in_country and emp and ICP_MIN <= emp <= ICP_MAX:   # cheap checks first; judge industry last
-                    ind_fit, reason = self.judge_icp(prof["industries"])
-                else:
-                    ind_fit, reason = False, "outside ICP country or headcount band"
-                acct.icp_fit = bool(ind_fit)
-                acct.icp_reason = reason
-                missing = [k for k, v in acct.fields.items() if v.value is None]
-                acct.confidence = round(min([acct.entity_confidence] + [v.confidence for v in acct.fields.values()
-                                                                        if v.value is not None]), 3)
-                if self.p.guardrail and (missing or acct.confidence < 0.8):
-                    acct.needs_review = True
-                    acct.review_reason = f"low confidence {acct.confidence}" + (f"; missing {missing}" if missing else "")
-                self.trace.decision("account", icp_fit=acct.icp_fit, icp_reason=reason, confidence=acct.confidence,
-                                    needs_review=acct.needs_review)
+                if self.enrich(acct, rows_by_key[key]):
+                    self.judge(acct)
+                    self.guardrail(acct)
+        return self.rank(groups)
+
+    # ---------- account stages (also the nodes of the LangGraph version, see graph_agent.py) ----------
+    def enrich(self, acct: Account, rows: list[dict]) -> bool:
+        """Profile lookup and field reconciliation. False when the account has no resolved company."""
+        if acct.company_id is None:
+            acct.needs_review, acct.review_reason = True, acct.resolved_via or "unresolved"
+            return False
+        acct._profile = self.tools.company_profile(acct.company_id)
+        self.reconcile(acct, rows, acct._profile)
+        acct.industries = acct._profile["industries"]
+        return True
+
+    def judge(self, acct: Account) -> None:
+        prof = acct._profile
+        emp = acct.fields["employees"].value
+        in_country = (ICP_COUNTRY in prof["countries"] if self.p.country_rule == "listed"
+                      else acct.fields["country"].value == ICP_COUNTRY)
+        if in_country and emp and ICP_MIN <= emp <= ICP_MAX:   # cheap checks first; judge industry last
+            ind_fit, reason = self.judge_icp(prof["industries"])
+        else:
+            ind_fit, reason = False, "outside ICP country or headcount band"
+        acct.icp_fit, acct.icp_reason = bool(ind_fit), reason
+
+    def guardrail(self, acct: Account) -> None:
+        missing = [k for k, v in acct.fields.items() if v.value is None]
+        acct.confidence = round(min([acct.entity_confidence] + [v.confidence for v in acct.fields.values()
+                                                                if v.value is not None]), 3)
+        if self.p.guardrail and (missing or acct.confidence < 0.8):
+            acct.needs_review = True
+            acct.review_reason = f"low confidence {acct.confidence}" + (f"; missing {missing}" if missing else "")
+        self.trace.decision("account", icp_fit=acct.icp_fit, icp_reason=acct.icp_reason, confidence=acct.confidence,
+                            needs_review=acct.needs_review)
+
+    @staticmethod
+    def rank(groups: dict[str, Account]) -> list[Account]:
         out = list(groups.values())
         out.sort(key=lambda a: (a.needs_review, not a.icp_fit, -a.confidence,
                                 -(a.fields["employees"].value or 0) if "employees" in a.fields else 0))

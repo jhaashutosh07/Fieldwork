@@ -70,12 +70,40 @@ def rep_spelling(name: str, rng: random.Random) -> str:
     return rng.choice([base, base, base.upper(), base.lower(), name])
 
 
+def crm_row(c: dict, current: set, old: set, heads: set, as_of, countries: list, older: list,
+            rng: random.Random) -> dict:
+    """One CRM row as a rep would have typed it: a real alias or spelling, maybe a retired website, maybe an older
+    real headcount."""
+    aliases = [a for a in c.get("aliases", []) if len(a) > 2]
+    r = rng.random()
+    name = rng.choice(aliases) if aliases and r < 0.30 else rep_spelling(c["name"], rng)
+    r = rng.random()
+    if old and r < 0.40:
+        site = rng.choice(sorted(old))
+    elif r < 0.55:
+        site = ""
+    else:
+        d = rng.choice(sorted(current))
+        site = rng.choice([d, "www." + d, "https://www." + d + "/", "http://" + d])
+    r = rng.random()
+    if older and r < 0.60:
+        e = rng.choice(older)
+        emp, updated = str(e["value"]), e["as_of"]
+    elif r < 0.80:
+        emp, updated = str(next(iter(heads))), as_of
+    else:
+        emp, updated = "", (as_of or "2020-01-01")
+    country = rng.choice(countries) if countries and rng.random() < 0.8 else ""
+    return {"account_name": name, "website": site, "employee_count": emp, "hq_country": country,
+            "last_updated": updated or "", "_gold": c["id"]}
+
+
 def main() -> None:
     rng = random.Random(SEED)
     companies = json.loads((SNAP / "companies.json").read_text(encoding="utf-8"))
     OUT.mkdir(parents=True, exist_ok=True)
 
-    gold_companies, rows = {}, []
+    gold_companies, rows, profiles = {}, [], {}
     for c in companies:
         current, old = current_and_old_hosts(c.get("websites", []))
         heads, as_of = latest_headcount(c.get("employees", []))
@@ -91,30 +119,10 @@ def main() -> None:
             "countries": countries, "industries": industries, "icp_fit": fit,
         }
         older = [e for e in c["employees"] if e["as_of"] and e["as_of"] != as_of and e["value"] not in heads]
+        profiles[c["id"]] = (c, current, old, heads, as_of, countries, older)
         n_rows = rng.choices([1, 2, 3], weights=[62, 28, 10])[0]
         for k in range(n_rows):
-            aliases = [a for a in c.get("aliases", []) if len(a) > 2]
-            r = rng.random()
-            name = rng.choice(aliases) if aliases and r < 0.30 else rep_spelling(c["name"], rng)
-            r = rng.random()
-            if old and r < 0.40:
-                site = rng.choice(sorted(old))
-            elif r < 0.55:
-                site = ""
-            else:
-                d = rng.choice(sorted(current))
-                site = rng.choice([d, "www." + d, "https://www." + d + "/", "http://" + d])
-            r = rng.random()
-            if older and r < 0.60:
-                e = rng.choice(older)
-                emp, updated = str(e["value"]), e["as_of"]
-            elif r < 0.80:
-                emp, updated = str(next(iter(heads))), as_of
-            else:
-                emp, updated = "", (as_of or "2020-01-01")
-            country = rng.choice(countries) if countries and rng.random() < 0.8 else ""
-            rows.append({"account_name": name, "website": site, "employee_count": emp, "hq_country": country,
-                         "last_updated": updated or "", "_gold": c["id"]})
+            rows.append(crm_row(c, current, old, heads, as_of, countries, older, rng))
 
     rng.shuffle(rows)
     gold_rows = {}
@@ -126,11 +134,27 @@ def main() -> None:
             crm_id = f"CRM-{i:04d}"
             gold_rows[crm_id] = r.pop("_gold")
             w.writerow({"crm_id": crm_id, **r})
+    # Next month's export: a CRM sync re-exports the same accounts (every month-1 row comes back) and reps add
+    # new rows for some companies. Month 1 is untouched; this drives the learning-from-review experiment.
+    rng2 = random.Random(SEED + 100)
+    m2 = [{**r, "_gold": gold_rows[f"CRM-{i:04d}"]} for i, r in enumerate(rows, 1)]
+    for cid in sorted(profiles):
+        if rng2.random() < 0.25:
+            m2.append(crm_row(*profiles[cid], rng2))
+    rng2.shuffle(m2)
+    with (OUT / "crm_export_m2.csv").open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["crm_id", "account_name", "website", "employee_count", "hq_country",
+                                          "last_updated"])
+        w.writeheader()
+        for i, r in enumerate(m2, 1):
+            crm_id = f"M2-{i:04d}"
+            gold_rows[crm_id] = r.pop("_gold")
+            w.writerow({"crm_id": crm_id, **r})
     gold = {"rows": gold_rows, "companies": gold_companies,
             "icp": {"industries": sorted(ICP_INDUSTRIES), "country": ICP_COUNTRY, "min": ICP_MIN, "max": ICP_MAX}}
     (OUT / "gold.json").write_text(json.dumps(gold, indent=1, ensure_ascii=False), encoding="utf-8")
     fits = sum(g["icp_fit"] for g in gold_companies.values())
-    print(f"{len(rows)} CRM rows -> {len(gold_companies)} companies ({fits} fit the ICP)")
+    print(f"{len(rows)} CRM rows -> {len(gold_companies)} companies ({fits} fit the ICP); next month: {len(m2)} rows")
 
 
 if __name__ == "__main__":

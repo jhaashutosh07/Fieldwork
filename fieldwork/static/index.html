@@ -18,8 +18,10 @@
     <nav class="tabs" role="tablist" aria-label="Sections">
       <a role="tab" href="#overview" data-tab="overview">Overview</a>
       <a role="tab" href="#clean" data-tab="clean">Clean a CSV</a>
+      <a role="tab" href="#review" data-tab="review">Review <span class="badge" id="reviewBadge" hidden></span></a>
       <a role="tab" href="#results" data-tab="results">Results</a>
       <a role="tab" href="#insights" data-tab="insights">Insights</a>
+      <a role="tab" href="#monitoring" data-tab="monitoring">Monitoring</a>
       <a role="tab" href="#explorer" data-tab="explorer">Explorer</a>
     </nav>
     <a class="gh" href="https://github.com/jhaashutosh07/Fieldwork" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
@@ -90,6 +92,30 @@
     <section class="panel flush" id="bPanel" hidden><div class="tablewrap"><table id="bOut"></table></div></section>
   </div>
 
+  <!-- ===== Review ===== -->
+  <div class="view" id="view-review" data-view="review" hidden>
+    <div class="page-head">
+      <h2>Review queue</h2>
+      <p>The agent refuses to guess. Answer its questions once and it remembers: the next time the same CRM row shows
+        up, it resolves on its own. Your queue and memory are private to this browser.</p>
+    </div>
+    <section class="panel">
+      <div class="panel-head"><h3>Does it really learn?</h3><p id="learnSub">Next month's CRM export, with and without
+        the reviewer's decisions from this month (held-out companies).</p></div>
+      <div class="kpis four" id="learnKpis"></div>
+      <p class="note" id="learnNote"></p>
+    </section>
+    <section class="panel">
+      <div class="toolbar">
+        <div class="counts" id="reviewCounts"></div>
+        <span class="spacer"></span>
+        <button class="btn primary small" id="rerunBtn" type="button" disabled>Re-run decided rows</button>
+      </div>
+      <div id="rerunOut"></div>
+      <div class="queue" id="queue"><p class="empty">Loading your queue…</p></div>
+    </section>
+  </div>
+
   <!-- ===== Results ===== -->
   <div class="view" id="view-results" data-view="results" hidden>
     <div class="page-head">
@@ -133,6 +159,12 @@
         <p class="note" id="stressNote"></p>
       </section>
     </div>
+    <section class="panel">
+      <div class="panel-head"><h3>Framework comparison: pipeline vs autonomous agent</h3>
+        <p id="fwSub">The same held-out companies, scored by the same eval.</p></div>
+      <div class="tablewrap"><table id="frameworks"></table></div>
+      <p class="note" id="fwNote"></p>
+    </section>
     <div class="grid2">
       <section class="panel">
         <div class="panel-head"><h3>Experiments</h3><p>A new version ships only if it beats the shipped one on held-out data.</p></div>
@@ -144,6 +176,33 @@
         <p class="note" id="costNote"></p>
       </section>
     </div>
+  </div>
+
+  <!-- ===== Monitoring ===== -->
+  <div class="view" id="view-monitoring" data-view="monitoring" hidden>
+    <div class="page-head">
+      <h2>Live monitoring</h2>
+      <p>Traffic on this server since it last started, refreshed every 10 seconds. Every agent run is also traced with
+        OpenTelemetry and exports to Langfuse, Grafana Tempo or any OTLP backend when configured.</p>
+    </div>
+    <div class="toolbar">
+      <label>Window <select id="monWindow" aria-label="Window"><option value="60">last hour</option>
+        <option value="360">last 6 hours</option><option value="1440">last 24 hours</option></select></label>
+      <span class="spacer"></span><span class="muted" id="monMeta"></span>
+    </div>
+    <div class="kpis" id="monKpis"></div>
+    <div class="grid2">
+      <section class="panel"><div class="panel-head"><h3>Requests per minute</h3><p>All API traffic; errors are 5xx responses.</p></div>
+        <div class="chartbox small"><canvas id="monReq" aria-label="Requests chart"></canvas></div></section>
+      <section class="panel"><div class="panel-head"><h3>p95 latency (ms)</h3><p>Includes live LLM calls when the agent needs one.</p></div>
+        <div class="chartbox small"><canvas id="monLat" aria-label="Latency chart"></canvas></div></section>
+      <section class="panel"><div class="panel-head"><h3>Rows and review</h3><p>CRM rows processed, and how many went to a human.</p></div>
+        <div class="chartbox small"><canvas id="monRows" aria-label="Rows chart"></canvas></div></section>
+      <section class="panel"><div class="panel-head"><h3>LLM calls</h3><p>Live (paid) calls vs answers served from the recording.</p></div>
+        <div class="chartbox small"><canvas id="monLlm" aria-label="LLM chart"></canvas></div></section>
+    </div>
+    <section class="panel"><div class="panel-head"><h3>Endpoints</h3><p>Requests in the window.</p></div>
+      <div class="tablewrap short"><table id="monEndpoints"></table></div></section>
   </div>
 
   <!-- ===== Explorer ===== -->

@@ -178,3 +178,26 @@ tr.click { cursor: pointer; } tr.click:hover td { background: var(--soft); }
   .bar { grid-template-columns: minmax(0, 1fr) 80px 30px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* review + monitoring */
+.badge { display: inline-block; min-width: 18px; padding: 0 6px; margin-left: 4px; border-radius: 999px; background: var(--accent);
+         color: var(--accent-ink); font-size: 11px; font-weight: 700; line-height: 18px; text-align: center; }
+.kpis.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.kpi .from { color: var(--muted); font-size: 15px; font-weight: 500; }
+.counts { display: flex; gap: 8px; flex-wrap: wrap; }
+.queue { display: grid; gap: 10px; margin-top: 14px; }
+.qitem { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: var(--bg); display: grid; gap: 10px; }
+.qitem.done { opacity: .75; }
+.qhead { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; }
+.qhead b { font-size: 15px; }
+.qrow { color: var(--muted); font-size: 13px; }
+.cands { display: flex; flex-wrap: wrap; gap: 6px; }
+.cand { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px;
+        padding: 5px 10px; cursor: pointer; text-align: left; }
+.cand:hover { border-color: var(--accent); color: var(--accent); }
+.cand .muted { font-size: 12px; }
+.qsearch { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.qsearch input { flex: 1 1 220px; }
+.chartbox.small { height: 210px; }
+@media (max-width: 980px) { .kpis.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .kpis.four { grid-template-columns: 1fr; } }

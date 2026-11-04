@@ -11,17 +11,18 @@ import json
 import logging
 import os
 import queue
+import re
 import threading
 import time
 from pathlib import Path as FsPath
 
 from fastapi import FastAPI, HTTPException, Path, Request
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, PlainTextResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from . import flywheel, security, store
-from .agent import LATEST, VERSIONS, Agent
+from . import flywheel, security, store, telemetry
+from .agent import LATEST, VERSIONS, Agent, memory_key
 from .evals import clusters
 from .llm import LLM
 from .security import AgentSlot, limiter
@@ -42,11 +43,29 @@ _llms: dict[str, LLM] = {}
 _run_lock = threading.Lock()
 
 RUN_ID = Path(pattern=r"^[0-9a-f]{12}$")
+SESSION_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+COMPANY_RE = re.compile(r"^Q[0-9]{1,12}$")
 FAILURE_ID = Path(pattern=r"^[0-9a-f]{12}-[0-9]{3}$")
 
 app = FastAPI(title="Fieldwork", version="0.6.0", description="Account-research agent with a trace-to-eval flywheel.")
 app.middleware("http")(security.security_headers)
 app.add_middleware(security.BodyLimitMiddleware)
+telemetry.init_tracing()
+
+
+@app.middleware("http")
+async def record_traffic(request: Request, call_next):
+    t0 = time.perf_counter()
+    status = 500
+    try:
+        response = await call_next(request)
+        status = response.status_code
+        return response
+    finally:
+        route = request.scope.get("route")
+        path = getattr(route, "path", None) or ("/static" if request.url.path.startswith("/static") else "other")
+        if path not in ("/healthz", "/static", "/api/metrics", "/metrics"):   # monitoring must not count itself
+            telemetry.monitor.record_request(f"{request.method} {path}", status, (time.perf_counter() - t0) * 1000)
 
 
 # ---------- LLM budget ----------
@@ -79,7 +98,24 @@ class BudgetedLLM:
         return self._llm.json(system, user, trace, purpose)
 
 
-def _run_rows(rows: list[dict], kind: str, on_event=None) -> dict:
+def session_scope(request: Request) -> str | None:
+    """Each browser gets a random session id (X-Fieldwork-Session); its review queue and memory are private to it,
+    so one visitor's decisions can never change another visitor's results."""
+    sid = request.headers.get("x-fieldwork-session", "").lower()
+    return f"s:{sid}" if SESSION_RE.match(sid) else None
+
+
+def _queue_reviews(scope: str | None, rows: list[dict], accts: list, source: str) -> int:
+    if not scope:
+        return 0
+    by_id = {r["crm_id"]: r for r in rows}
+    items = [{"key": memory_key(by_id[cid]), "reason": a.review_reason or "needs review",
+              "row": {k: by_id[cid].get(k, "") for k in ("account_name", "website", "hq_country")}}
+             for a in accts if a.needs_review for cid in a.crm_ids]
+    return store.add_review_items(scope, items, source)
+
+
+def _run_rows(rows: list[dict], kind: str, on_event=None, scope: str | None = None) -> dict:
     """Run the shipped agent on visitor rows inside a concurrency slot; live LLM if enabled, else (or on failure)
     recorded answers only."""
     day = time.strftime("%Y-%m-%d")
@@ -88,12 +124,14 @@ def _run_rows(rows: list[dict], kind: str, on_event=None) -> dict:
             _llm_day.update(day=day, fresh_calls=0)
         live = TRY_LIVE and _llm_day["fresh_calls"] < TRY_DAILY_CAP
     note = ""
+    started_ns = time.time_ns()
     with AgentSlot():
         for attempt_live in ([True, False] if live else [False]):
             trace = Trace(on_event)
             llm = BudgetedLLM(_shared_llm(attempt_live), LLM_CALLS_PER_REQUEST[kind] if attempt_live else 0)
             try:
-                accts = Agent(VERSIONS[LATEST], Tools(world(), trace), llm, trace).run([dict(r) for r in rows])
+                accts = Agent(VERSIONS[LATEST], Tools(world(), trace), llm, trace,
+                              memory=store.get_memory(scope) if scope else None).run([dict(r) for r in rows])
                 break
             except Exception as exc:   # live model unavailable or rate limited: fall back to recorded answers
                 log.warning("live LLM failed: %s: %s", type(exc).__name__, str(exc)[:300])
@@ -102,7 +140,21 @@ def _run_rows(rows: list[dict], kind: str, on_event=None) -> dict:
                     on_event({"kind": "reset", "note": note})
     if attempt_live and llm.fresh >= llm.budget:
         note = note or f"live LLM budget for this request reached ({llm.budget} calls); the rest used rules"
-    return {"accounts": accts, "trace": trace, "llm": "live" if attempt_live else "recorded only", "note": note}
+    _observe(f"agent.{kind}", rows, accts, trace, started_ns)
+    queued = _queue_reviews(scope, rows, accts, kind)
+    return {"accounts": accts, "trace": trace, "llm": "live" if attempt_live else "recorded only", "note": note,
+            "queued_for_review": queued}
+
+
+def _observe(name: str, rows: list[dict], accts: list, trace: Trace, started_ns: int) -> None:
+    live = [e for e in trace.events if e["kind"] == "llm" and not e.get("replayed")]
+    review_rows = sum(len(a.crm_ids) for a in accts if a.needs_review)
+    telemetry.monitor.record_agent(rows=len(rows), review_rows=review_rows, llm_live=len(live),
+                                   llm_recorded=trace.llm_calls - len(live),
+                                   cost_usd=sum(e.get("cost_usd", 0.0) for e in live), tool_calls=trace.tool_calls)
+    telemetry.export_run(name, trace, {"fieldwork.version": LATEST, "fieldwork.rows": len(rows),
+                                       "fieldwork.review_rows": review_rows, "fieldwork.llm_calls": trace.llm_calls},
+                         started_ns, time.time_ns())
 
 
 # ---------- try the agent ----------
@@ -120,12 +172,24 @@ def _try_row(req: TryRequest) -> dict:
 def _try_payload(res: dict) -> dict:
     t = res["trace"]
     return {"version": LATEST, "llm": res["llm"], "note": res["note"], "account": res["accounts"][0].to_dict(),
-            "steps": t.events, "llm_calls": t.llm_calls, "tool_calls": t.tool_calls}
+            "steps": t.events, "llm_calls": t.llm_calls, "tool_calls": t.tool_calls,
+            "queued_for_review": res.get("queued_for_review", 0)}
 
 
 @app.get("/healthz")
 def healthz():
     return {"ok": True}
+
+
+@app.get("/api/metrics")
+def metrics(minutes: int = 60):
+    """Live traffic since the last restart: requests, latency, agent rows, review rate, LLM calls and spend."""
+    return telemetry.monitor.snapshot(minutes)
+
+
+@app.get("/metrics", response_class=PlainTextResponse)
+def prometheus():
+    return telemetry.monitor.prometheus()
 
 
 @app.get("/api/config")
@@ -138,7 +202,7 @@ def config():
 def try_it(req: TryRequest, request: Request):
     """Run the shipped agent on one CRM row typed by the visitor and return the account plus every step it took."""
     limiter.check(request, "try", per_minute=20, burst=5)
-    return _try_payload(_run_rows([_try_row(req)], "try"))
+    return _try_payload(_run_rows([_try_row(req)], "try", scope=session_scope(request)))
 
 
 @app.post("/api/try/stream")
@@ -147,11 +211,11 @@ def try_stream(req: TryRequest, request: Request):
     happens, then a `done` event with the account."""
     limiter.check(request, "try", per_minute=20, burst=5)
     q: queue.Queue = queue.Queue(maxsize=1000)
-    row = _try_row(req)
+    row, scope = _try_row(req), session_scope(request)
 
     def work():
         try:
-            q.put(("done", _try_payload(_run_rows([row], "try", on_event=lambda e: q.put(("step", e))))))
+            q.put(("done", _try_payload(_run_rows([row], "try", on_event=lambda e: q.put(("step", e)), scope=scope))))
         except HTTPException as exc:
             q.put(("error", {"error": exc.detail}))
         except Exception as exc:   # never leak internals to the client
@@ -231,7 +295,7 @@ def batch(req: BatchRequest, request: Request):
     limiter.check(request, "batch", per_minute=4, burst=2)
     rows = _parse_csv(req.csv)
     t0 = time.perf_counter()
-    res = _run_rows(rows, "batch")
+    res = _run_rows(rows, "batch", scope=session_scope(request))
     by_id = {r["crm_id"]: r for r in rows}
     out = []
     for a in res["accounts"]:
@@ -244,12 +308,109 @@ def batch(req: BatchRequest, request: Request):
                     "resolved_via": a.resolved_via})
     t = res["trace"]
     return {"version": LATEST, "llm": res["llm"], "note": res["note"], "accounts": out,
+            "queued_for_review": res.get("queued_for_review", 0),
             "summary": {"rows": len(rows), "accounts": len(out),
                         "merged_rows": sum(len(x["rows"]) - 1 for x in out if len(x["rows"]) > 1),
                         "needs_review": sum(1 for x in out if x["needs_review"]),
                         "target_customers": sum(1 for x in out if x["icp_fit"] and not x["needs_review"]),
                         "llm_calls": t.llm_calls, "tool_calls": t.tool_calls,
                         "seconds": round(time.perf_counter() - t0, 2)}}
+
+
+# ---------- human review queue ----------
+def _require_scope(request: Request) -> str:
+    scope = session_scope(request)
+    if not scope:
+        raise HTTPException(400, "missing or invalid X-Fieldwork-Session header")
+    return scope
+
+
+def _candidates(row: dict) -> list[dict]:
+    t = Tools(world(), Trace())
+    hits = t.registry_search(row["account_name"], limit=5)
+    if row.get("website"):
+        seen = {h["id"] for h in hits}
+        hits += [{"id": d["id"], "name": d["name"], "tickers": world().registry[d["id"]]["tickers"],
+                  "country": world().registry[d["id"]]["country"], "score": None}
+                 for d in t.domain_lookup(row["website"]) if d["id"] not in seen]
+    return [{"id": h["id"], "name": h["name"], "ticker": (h.get("tickers") or [None])[0], "country": h.get("country"),
+             "score": h.get("score")} for h in hits]
+
+
+@app.get("/api/review")
+def review_queue(request: Request):
+    """This session's review queue. A new session starts with the items the shipped version refused to guess on
+    the held-out eval, so there is always something to review."""
+    scope = _require_scope(request)
+    limiter.check(request, "review_read", per_minute=60, burst=20)
+    items = store.list_review(scope)
+    if not items:
+        run_id = next((h["test_run"] for h in history() if h["version"] == LATEST), None)
+        if run_id:
+            seed = [{"key": memory_key(r), "reason": f.get("detail") or "needs review",
+                     "row": {k: r.get(k, "") for k in ("account_name", "website", "hq_country")}}
+                    for f in store.get_failures(run_id, "sent_to_review") for r in f["rows"]]
+            store.add_review_items(scope, seed, "eval")
+            items = store.list_review(scope)
+    reg = world().registry
+    out = []
+    for i in items:
+        entry = {"id": i["id"], "row": i["row"], "reason": i["reason"], "source": i["source"], "status": i["status"],
+                 "company": ({"id": i["company_id"], "name": reg[i["company_id"]]["name"]}
+                             if i["company_id"] in reg else None)}
+        if i["status"] == "pending":
+            entry["candidates"] = _candidates(i["row"])
+        out.append(entry)
+    return {"items": out, "memory_entries": len(store.get_memory(scope))}
+
+
+class DecideRequest(BaseModel):
+    company_id: str | None = Field(None, max_length=16)
+
+
+@app.post("/api/review/{item_id}/decide")
+def review_decide(req: DecideRequest, request: Request, item_id: int = Path(ge=1, le=10**12)):
+    """Resolve an item to a company (it becomes this session's agent memory) or skip it (company_id null)."""
+    scope = _require_scope(request)
+    limiter.check(request, "review_write", per_minute=60, burst=20)
+    if req.company_id is not None and (not COMPANY_RE.match(req.company_id) or req.company_id not in world().registry):
+        raise HTTPException(400, "unknown company")
+    if store.decide_review(scope, item_id, req.company_id) is None:
+        raise HTTPException(404, "review item not found")
+    return {"ok": True, "memory_entries": len(store.get_memory(scope))}
+
+
+@app.get("/api/companies")
+def company_search(request: Request, q: str = ""):
+    """Registry search for reviewers who need a company the candidates missed."""
+    limiter.check(request, "search", per_minute=60, burst=20)
+    q = q.strip()[:80]
+    if len(q) < 2:
+        return []
+    hits = Tools(world(), Trace()).registry_search(q, limit=8)
+    return [{"id": h["id"], "name": h["name"], "ticker": (h["tickers"] or [None])[0], "country": h["country"]}
+            for h in hits]
+
+
+@app.post("/api/review/rerun")
+def review_rerun(request: Request):
+    """Re-run the agent on every row this session has decided, with its memory: the proof that it learned."""
+    scope = _require_scope(request)
+    limiter.check(request, "batch", per_minute=4, burst=2)
+    decided = [i for i in store.list_review(scope) if i["status"] == "decided"][:BATCH_MAX_ROWS]
+    if not decided:
+        raise HTTPException(400, "decide at least one item first")
+    rows = [{"crm_id": f"R-{i['id']}", **i["row"], "employee_count": "", "last_updated": ""} for i in decided]
+    res = _run_rows(rows, "batch", scope=scope)
+    by_row = {cid: a for a in res["accounts"] for cid in a.crm_ids}
+    results = []
+    for r, i in zip(rows, decided):
+        a = by_row[r["crm_id"]]
+        results.append({"row": {k: r[k] for k in ("account_name", "website", "hq_country")},
+                        "expected": i["company_id"], "company_id": a.company_id,
+                        "name": a.fields["name"].value if "name" in a.fields else None, "via": a.resolved_via,
+                        "needs_review": a.needs_review, "review_reason": a.review_reason})
+    return {"llm": res["llm"], "results": results}
 
 
 # ---------- evals ----------
@@ -273,6 +434,12 @@ def history():
 def insights():
     from .insights import INSIGHTS
     return json.loads(INSIGHTS.read_text()) if INSIGHTS.exists() else {}
+
+
+@app.get("/api/frameworks")
+def frameworks():
+    from .frameworks import OUT
+    return json.loads(OUT.read_text()) if OUT.exists() else {}
 
 
 @app.get("/api/runs")

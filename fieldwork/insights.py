@@ -21,7 +21,7 @@ import time
 
 from . import flywheel
 from .agent import LATEST, VERSIONS
-from .evals import FIELDS, _field_ok, gold
+from .evals import FIELDS, _field_ok, gold, score
 from .llm import LLM
 from .paths import ROOT
 
@@ -219,12 +219,19 @@ def build(llm_mode: str = "replay") -> dict:
                 series[k].append(res["metrics"][k])
         stress["series"][v] = series
 
+    from . import learning
+    learn = learning.experiment("test", llm_mode)
+    base_accts, mem_accts, m2_rows = learn.pop("_outcomes")
+    o_base = outcomes({"accounts": base_accts, "failures": score(base_accts, m2_rows)[1], "rows": m2_rows})
+    o_mem = outcomes({"accounts": mem_accts, "failures": score(mem_accts, m2_rows)[1], "rows": m2_rows})
+    learn["vs_without_memory"] = {k: paired_delta(o_base, o_mem, k) for k in ("verified_accuracy", "review_rate")}
+
     llm = LLM("replay")
     live_ms = [r["ms"] for r in llm._cache.values() if r.get("ms")]
     out = {"generated": time.strftime("%Y-%m-%d"), "split": "test", "shipped": LATEST,
            "companies": results[LATEST]["metrics"]["companies"], "rows": results[LATEST]["metrics"]["rows"],
            "bootstrap_resamples": BOOT, "versions": versions, "experiments": experiments,
-           "risk_coverage": curves, "stress": stress,
+           "risk_coverage": curves, "stress": stress, "learning": learn,
            "llm": {"model": llm.model, "recorded_calls": len(llm._cache),
                    "median_live_ms": round(statistics.median(live_ms), 1) if live_ms else None,
                    "timed_calls": len(live_ms)},

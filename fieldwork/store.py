@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import time
 import os
 
 from sqlalchemy import (Column, Float, Integer, MetaData, String, Table, Text, create_engine, delete, func, insert,
@@ -27,6 +28,18 @@ failures = Table("failures", meta,
                  Column("signature", String(64), index=True), Column("company_id", String(32)),
                  Column("company", String(256)), Column("field", String(32)), Column("payload", Text),
                  Column("promoted_case", String(64)))
+
+# Human review: items the agent refused to guess, and the decisions reviewers made (the agent's memory).
+# `scope` isolates visitors on the public demo ("s:<session uuid>"); "global" is the operator's memory.
+review_items = Table("review_items", meta,
+                     Column("id", Integer, primary_key=True, autoincrement=True), Column("scope", String(48), index=True),
+                     Column("key", String(200)), Column("row", Text), Column("reason", String(300)),
+                     Column("source", String(16)), Column("status", String(12)), Column("company_id", String(32)),
+                     Column("created", Float))
+memory = Table("memory", meta,
+               Column("id", Integer, primary_key=True, autoincrement=True), Column("scope", String(48), index=True),
+               Column("key", String(200)), Column("company_id", String(32)), Column("created", Float))
+REVIEW_PER_SCOPE, MEMORY_PER_SCOPE, REVIEW_TOTAL = 200, 500, 50_000
 
 _engine = None
 
@@ -121,3 +134,57 @@ def prune_runs(keep: int, protect: set[str]) -> None:
         for t in (events, accounts, failures):
             c.execute(delete(t).where(t.c.run_id.in_(doomed)))
         c.execute(delete(runs).where(runs.c.id.in_(doomed)))
+
+
+def add_review_items(scope: str, items: list[dict], source: str) -> int:
+    """Queue rows for review, skipping keys already queued or decided in this scope. Returns how many were added."""
+    with engine().begin() as c:
+        seen = {r[0] for r in c.execute(select(review_items.c.key).where(review_items.c.scope == scope))}
+        room = REVIEW_PER_SCOPE - len(seen)
+        fresh = []
+        for i in items:   # one item per key, even when the same CRM row appears several times
+            if i["key"] not in seen:
+                seen.add(i["key"])
+                fresh.append(i)
+        fresh = fresh[:max(0, room)]
+        if fresh:
+            c.execute(insert(review_items), [{"scope": scope, "key": i["key"], "row": json.dumps(i["row"], ensure_ascii=False),
+                                              "reason": i["reason"][:300], "source": source, "status": "pending",
+                                              "company_id": None, "created": time.time()} for i in fresh])
+        total = c.execute(select(func.count()).select_from(review_items)).scalar_one()
+        if total > REVIEW_TOTAL:   # bounded storage on the public demo: drop the oldest items
+            cutoff = c.execute(select(review_items.c.id).order_by(review_items.c.id.desc()).offset(REVIEW_TOTAL)
+                               .limit(1)).scalar()
+            if cutoff:
+                c.execute(delete(review_items).where(review_items.c.id <= cutoff))
+    return len(fresh)
+
+
+def list_review(scope: str) -> list[dict]:
+    with engine().connect() as c:
+        rows = c.execute(select(review_items).where(review_items.c.scope == scope)
+                         .order_by(review_items.c.id)).mappings().all()
+    return [{**r, "row": json.loads(r["row"])} for r in rows]
+
+
+def decide_review(scope: str, item_id: int, company_id: str | None) -> dict | None:
+    """Resolve an item. With a company, the decision is also written to this scope's memory."""
+    with engine().begin() as c:
+        item = c.execute(select(review_items).where(review_items.c.id == item_id, review_items.c.scope == scope)
+                         ).mappings().first()
+        if item is None:
+            return None
+        c.execute(update(review_items).where(review_items.c.id == item_id)
+                  .values(status="decided" if company_id else "skipped", company_id=company_id))
+        if company_id:
+            c.execute(delete(memory).where(memory.c.scope == scope, memory.c.key == item["key"]))
+            n = c.execute(select(func.count()).select_from(memory).where(memory.c.scope == scope)).scalar_one()
+            if n < MEMORY_PER_SCOPE:
+                c.execute(insert(memory).values(scope=scope, key=item["key"], company_id=company_id, created=time.time()))
+    return {**item, "row": json.loads(item["row"])}
+
+
+def get_memory(scope: str) -> dict[str, str]:
+    with engine().connect() as c:
+        rows = c.execute(select(memory.c.key, memory.c.company_id).where(memory.c.scope == scope)).all()
+    return {k: v for k, v in rows}

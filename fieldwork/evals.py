@@ -26,9 +26,11 @@ def gold() -> dict:
     return json.loads((DATA / "gold.json").read_text(encoding="utf-8"))
 
 
-@lru_cache(maxsize=1)
-def crm_rows() -> tuple[dict, ...]:
-    with (DATA / "crm_export.csv").open(encoding="utf-8") as f:
+@lru_cache(maxsize=2)
+def crm_rows(export: str = "m1") -> tuple[dict, ...]:
+    """m1: the CRM export every version is scored on; m2: next month's export (same rows plus new ones), used to
+    measure learning from human review."""
+    with (DATA / ("crm_export.csv" if export == "m1" else "crm_export_m2.csv")).open(encoding="utf-8") as f:
         return tuple(csv.DictReader(f))
 
 
@@ -37,9 +39,9 @@ def split_of(company_id: str) -> str:
     return "dev" if int(hashlib.md5(company_id.encode(), usedforsecurity=False).hexdigest(), 16) % 10 < 6 else "test"
 
 
-def rows_for(split: str) -> list[dict]:
+def rows_for(split: str, export: str = "m1") -> list[dict]:
     g = gold()["rows"]
-    return [dict(r) for r in crm_rows() if split == "all" or split_of(g[r["crm_id"]]) == split]
+    return [dict(r) for r in crm_rows(export) if split == "all" or split_of(g[r["crm_id"]]) == split]
 
 
 def _field_ok(field: str, value, gc: dict) -> bool:
